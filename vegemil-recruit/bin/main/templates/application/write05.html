@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				
+
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="sidebar fixedsticky w350 f-left">
+							<p class="f23 fw600">지원서 작성</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<ul class="mt70 writeList">
+								<li class="w-after"><a href="write01.html">개인정보</a></li>
+								<li class="w-after"><a href="write02.html">학력정보</a></li>
+								<li class="w-after"><a href="write03.html">어학/자격/기타</a></li>
+								<li class="w-after"><a href="write04.html">경력사항</a></li>
+								<li class="w-ing" ><a href="write05.html">자기소개</a></li>
+							</ul>
+							<p class="btn_type02 mt30"><a href="reView.html">미리보기</a></p>
+							<p class="btn_type03 mt10"><a href="#">임시저장</a></p>
+						</div>
+						<script>
+							$(document).ready(function(){
+								$( '.sidebar' ).fixedsticky();
+							});
+						</script>
+						<div class="wrap860 f-right" >
+							<!-- (1)성장과정 -->
+							<p class="f23 fw600 pr">성장과정을 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+							<!-- (2)성격 -->
+							<p class="f23 fw600 pr mt80">성격의 장, 단점을 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+							<!-- (3)성격 -->
+							<p class="f23 fw600 pr mt80">성격의 장, 단점을 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+							<!-- (4)핵심역량 -->
+							<p class="f23 fw600 pr mt80">차별화되는 본인만의 핵심역량은 무엇인지 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+							<!-- (5)도전했던 경험과 이를 통해 얻는 성취는 무엇인지 서술하여 주시기 바랍니다. -->
+							<p class="f23 fw600 pr mt80">도전했던 경험과 이를 통해 얻는 성취는 무엇인지 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+							<!-- (6)협업, 팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다. -->
+							<p class="f23 fw600 pr mt80">협업, 팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<textarea class="areaType02" placeholder="500자 이내로 작성해 주세요."></textarea>
+										<div class="mt10 f14 gray f_right">(0/200)</div>
+									</div>
+								</div>
+							</div>
+
+
+
+							
+							<div class="w100 mt30">
+								<a href="write04.html"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="다음" /> 경력사항</p></a>
+								<a href="#"><p class="f_right f20"><img th:src="@{/img/btn_send.jpg" alt="제출" /></p></a>
+							</div>
+						</div><!-- //wrap860 -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+
+
+	<!-- ================================ 
+				Popup 
+	================================ -->
+	<!-- popup -->
+	<div id="pop_dropOut"  style="display:none;">
+		<div class="popBasePW" cellspacing="0"  summary="타이틀">
+	
+			<p class="f23 fw600">학교검색</p>
+			
+			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<p class="f14 fw400 mt40">학교명</p>
+			<div class="search_school ">
+				<fieldset class="search">
+                <legend>검색</legend>
+                   <input type="text" class="ss_inType mt20" placeholder="학교명을 2자 이상 입력해주세요."><a href="javascript:fnSearch();" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="학교명 검색"></a>
+                </fieldset>
+				<ul class="ss_ul mt10">
+					<li><a href="">건국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경기대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 경영대학원 - 서울(서울)</a></li>
+					<li><a href="">경희대학교 일반대학원 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">남서울대학교(충남)</a></li>
+					<li><a href="">남서울대학교 대학원(충남)</a></li>
+					<li><a href="">남서울대학교 일반대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(산업대)(충남)</a></li>
+					<li><a href="">남서울대학교(산업대)(충남)</a></li>
+					<li><a href="">남서울예술종합학교(해외)</a></li>
+					<li><a href="">단국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동서울대학 평생교육원(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">디지털서울문화예술대학교(서울)</a></li>
+					<li><a href="">상명대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">서울과학기술대학교(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(산업대)(서울)</a></li>
+				</ul>
+				<p class="f14 mt30">찾으시는 결과가 없나요? <b>직접입력</b></p>
+				<input type="text" class="ss_inType mt10" >
+				<p class="mt40 btn_type05"><a href="#">등록</a></p>
+			</div>
+			
+		</div>
+	</div>
+	<!-- //popup -->
+
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); //회원탈퇴주의사항
+	</script>
+	<!-- //팝업 script -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				
+
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="sidebar fixedsticky w350 f-left">
+							<p class="f23 fw600 ">지원서 작성</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<ul class="mt70 writeList">
+								<li class="w-after"><a href="write01.html">개인정보</a></li>
+								<li class="w-after"><a href="write02.html">학력정보</a></li>
+								<li class="w-after"><a href="write03.html">어학/자격/기타</a></li>
+								<li class="w-ing"><a href="write04.html">경력사항</a></li>
+								<li class="w-before"><a href="write05.html">자기소개</a></li>
+							</ul>
+							<p class="btn_type02 mt30"><a href="reView.html">미리보기</a></p>
+							<p class="btn_type03 mt10"><a href="#">임시저장</a></p>
+						</div>
+						<script>
+							$(document).ready(function(){
+								$( '.sidebar' ).fixedsticky();
+							});
+						</script>
+						<div class="wrap860 f-right" >
+							<!-- (1)인턴경력 -->
+							<p class="f23 fw600 pr">인턴경력 <input type="image" class="selPlus" value=" 추가 " onclick="add_item1()" th:src="@{/img/ico_plus.png}"></p>
+							<div id="field1"> 
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">근무기간</li>
+												<li>
+													<div class="custom-sel-------- scroll w80">
+													 <select class="base">
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml20 mr20"> - </li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base ">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml30 checkStyle">
+													<a href="#"><input type="checkbox" id="wk01" name="wk01" /><label for="wk01"><span></span>재직중</label></a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">직장명</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">담당업무</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div><!-- field1 -->
+							<!-- (1)인턴 COPY -->
+							<div id="pre_set1" style="display:none">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">근무기간</li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="년도">년도</option>
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml20 mr20"> - </li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="년도">년도</option>
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base ">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml30 checkStyle">
+													<a href="#"><input type="checkbox" id="wk_copy" name="wk_copy" /><label for="wk_copy"><span></span>재직중</label></a>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">직장명</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">담당업무</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<input class="inputDel3" type="image" value="삭제" onclick="remove_item1(this)" th:src="@{/img/ico_inputDel2.png}" >
+							</div>	
+							<!-- //(1)인턴 COPY -->
+
+
+
+							<!-- (2)근무경력 -->
+							<p class="f23 fw600 pr mt80">근무경력 <input type="image" class="selPlus" value=" 추가 " onclick="add_item2()" th:src="@{/img/ico_plus.png}"></p>
+							<div id="field2"> 
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">근무기간</li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml20 mr20"> - </li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="년도">년도</option>
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base ">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml30 checkStyle"><a href="#"><input type="checkbox" id="wk02" name="wk02" /><label for="wk02"><span></span>재직중</label></a></li>
+												
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">직장명</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">담당업무</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">(월)평균급여</li>
+												<li>
+													<input type="text" class="inType01 w180 text-right"  > <span class="gray f14">만원</span>
+												</li>
+											</ul>
+										</div>
+										
+									</div>
+									<div class="row">
+										<div class="col-lg-12 mt10">
+											<ul class="s-d-2">
+												<li class="f14">주요업무</li>
+												<li>
+													<textarea type="text" class="areaType01"  placeholder="200자 이내로 작성해 주세요." ></textarea>
+													<div class="mt10 f14 gray f_right mr40">(0/200)</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div><!-- field2 -->
+							<!-- (2)근무경력 COPY -->
+							<div id="pre_set2" style="display:none">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">근무기간</li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="년도">년도</option>
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+														<option value="2018">2015</option>
+														<option value="2018">2014</option>
+														<option value="2018">2013</option>
+														<option value="2018">2012</option>
+														<option value="2018">2011</option>
+														<option value="2018">2010</option>
+														<option value="2018">2009</option>
+														<option value="2018">2008</option>
+														<option value="2018">2007</option>
+														<option value="2018">2006</option>
+														<option value="2018">2005</option>
+														<option value="2018">2004</option>
+														<option value="2018">2003</option>
+														<option value="2018">2002</option>
+														<option value="2018">2001</option>
+														<option value="2018">2000</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml20 mr20"> - </li>
+												<li>
+													<div class="custom-sel------- scroll w80">
+													 <select class="base">
+														<option value="년도">년도</option>
+														<option value="2022">2022</option>
+														<option value="2021">2021</option>
+														<option value="2020">2020</option>
+														<option value="2019">2019</option>
+														<option value="2018">2018</option>
+														<option value="2018">2017</option>
+														<option value="2018">2016</option>
+													  </select>
+													</div>
+												</li>
+												<li>
+													<div class="custom-sel------- scroll w70">
+														<select class="base ">
+															<option value="월">월</option>
+															<option value="12">12</option>
+															<option value="11">11</option>
+															<option value="10">10</option>
+															<option value="09">09</option>
+															<option value="08">08</option>
+															<option value="07">07</option>
+															<option value="06">06</option>
+															<option value="05">05</option>
+															<option value="04">04</option>
+															<option value="03">03</option>
+															<option value="02">02</option>
+															<option value="01">01</option>
+														</select>
+													</div>
+												</li>
+												<li class="ml30 checkStyle"><a href="#"><input type="checkbox" id="wk02_copy" name="wk02_copy" /><label for="wk01"><span></span>재직중</label></a></li>
+												
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">직장명</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">담당업무</li>
+												<li>
+													<input type="text" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">(월)평균급여</li>
+												<li>
+													<input type="text" class="inType01 w180 text-right"  > <span class="gray f14">만원</span>
+												</li>
+											</ul>
+										</div>
+										
+									</div>
+									<div class="row">
+										<div class="col-lg-12 mt10">
+											<ul class="s-d-2">
+												<li class="f14">주요업무</li>
+												<li>
+													<textarea type="text" class="areaType01"  placeholder="200자 이내로 작성해 주세요." ></textarea>
+													<div class="mt10 f14 gray f_right mr40">(0/200)</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<input class="inputDel3" type="image" value="삭제" onclick="remove_item2(this)" th:src="@{/img/ico_inputDel2.png}" >
+							</div>	
+							<!-- //(2)근무경력 COPY -->
+
+							<!-- (3)포트폴리오 -->
+							<p class="f23 fw600 pr mt80">포트폴리오(디자인)</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<ul class="s-d-2">
+											<li class="f14">URL</li>
+											<li>
+												<input type="text" class="inType01 w580" placeholder="http:// 제외한 URL 주소를 입력해 주세요." >
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-12 mt10">
+										<ul class="s-d-2">
+											<li class="f14">파일업로드</li>
+											<li>
+												
+												<div class="filebox w600">
+													<input class="upload-name" value="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재" placeholder="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재">
+													<label for="file">파일선택</label> <input type="file" id="file">
+
+
+													<!-- ================================ 
+														Input File명이 노출되도록
+													================================ -->
+													<script>
+														$("#file").on('change',function(){
+														  var fileName = $("#file").val();
+														  $(".upload-name").val(fileName);
+														});
+													</script>
+
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- 포트폴리오 -->
+
+							<div class="w100 mt30">
+								<a href="write03.html"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="다음" /> 어학/자격/기타</p></a>
+								<a href="write05.html"><p class="f_right f20">자기소개 <img th:src="@{/img/btn_next.png}" alt="다음" /></p></a>
+							</div>
+						</div><!-- //wrap860 -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+
+
+	<!-- ================================ 
+				Popup 
+	================================ -->
+	<!-- popup -->
+	<div id="pop_dropOut"  style="display:none;">
+		<div class="popBasePW" cellspacing="0"  summary="타이틀">
+	
+			<p class="f23 fw600">학교검색</p>
+			
+			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<p class="f14 fw400 mt40">학교명</p>
+			<div class="search_school ">
+				<fieldset class="search">
+                <legend>검색</legend>
+                   <input type="text" class="ss_inType mt20" placeholder="학교명을 2자 이상 입력해주세요."><a href="javascript:fnSearch();" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="학교명 검색"></a>
+                </fieldset>
+				<ul class="ss_ul mt10">
+					<li><a href="">건국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경기대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 경영대학원 - 서울(서울)</a></li>
+					<li><a href="">경희대학교 일반대학원 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">남서울대학교(충남)</a></li>
+					<li><a href="">남서울대학교 대학원(충남)</a></li>
+					<li><a href="">남서울대학교 일반대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(산업대)(충남)</a></li>
+					<li><a href="">남서울대학교(산업대)(충남)</a></li>
+					<li><a href="">남서울예술종합학교(해외)</a></li>
+					<li><a href="">단국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동서울대학 평생교육원(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">디지털서울문화예술대학교(서울)</a></li>
+					<li><a href="">상명대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">서울과학기술대학교(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(산업대)(서울)</a></li>
+				</ul>
+				<p class="f14 mt30">찾으시는 결과가 없나요? <b>직접입력</b></p>
+				<input type="text" class="ss_inType mt10" >
+				<p class="mt40 btn_type05"><a href="#">등록</a></p>
+			</div>
+			
+		</div>
+	</div>
+	<!-- //popup -->
+
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); //회원탈퇴주의사항
+	</script>
+	<!-- //팝업 script -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

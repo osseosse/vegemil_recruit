@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+	<!-- add css -->
+	<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"><!-- aos animation -->
+	<!-- add js -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><!-- aos animation -->
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+
+		<!-- ================================ 
+				Content
+		================================ -->
+		<section>
+			<div class="container100 subTop600 bgSky">
+				<div class="container1300 center ">
+					<div data-aos="fade-right" data-aos-delay="1200" data-aos-duration="800">
+						<p class="work_ani01"><img th:src="@{/img/worktop01.png}" alt="빨간네모"/></p>
+					</div>
+					<div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800">
+						<p class="work_ani02"><img th:src="@{/img/worktop02.png}" alt="파란공"/></p>
+					</div>
+					<div data-aos="fade-left" data-aos-delay="500" data-aos-duration="800">
+						<p class="work_ani03"><img th:src="@{/img/worktop06.png}" alt="사람"/></p>
+					</div>
+					<div data-aos="fade-left" data-aos-delay="1500" data-aos-duration="800">
+						<p class="work_ani04"><img th:src="@{/img/worktop04.png}" alt="파란공"/></p>
+					</div>
+
+					<div data-aos="fade-left" data-aos-delay="1100" data-aos-duration="800">
+						<p class="work_ani05"><img th:src="@{/img/worktop03.png}" alt="녹색세모"/></p>
+					</div>
+					<div data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
+						<p class="work_ani06"><img th:src="@{/img/worktop05.png}" alt="업무내용"/></p>
+					</div>
+					
+
+
+					<div data-aos="fade-right" data-aos-delay="200" data-aos-duration="800">
+						<p class="work_ani07 f44 fw600 line-height130">
+						창의적 인재양성, 합리적 인사평가로<br>
+						모든 직원이 만족과 보람을<br>
+						느낄 수 있도록 최선의 노력을 다하겠습니다.  
+						</p>
+					</div>
+					<script>
+					  AOS.init();
+					</script>
+				</div>
+			</div>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">채용안내</span></a>
+					</div>
+				</div>
+				
+
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="tab_rc">
+									<ul>
+										<li class="hvr-underline-from-center"><a href="info.html" >채용절차</a></li>
+										<li class="active hvr-underline-from-center"><a href="work.html" >인사제도</a></li>
+										<li class="hvr-underline-from-center"><a href="benefit.html" >복지제도</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">						
+								<div class="bell">
+									<p class="title_bell"><img th:src="@{/img/title_bell.png}" alt="벨" /></p>
+									<ul class=""><li></li><li>표준직급체계</li><li></li></ul>
+								</div>
+							</div>
+							<div class="col-lg-12 mt80">					
+								<div class="text-center">
+									<ul class="ht f16 fw600 ">
+										<li>#채용</li><li>#문화</li><li>#정식품</li>
+									</ul>
+									<p class="f44 fw600 line-height140 mt80">능력 우수자에게 조기 승진의 기회를 <br>부여하고 있습니다.</p>
+									<p class="f20 fw400 mt50">인재육성과 업무능력 및 업적 향상을 위한 직급체계를 운영하고 있습니다.</p>									
+									<p class="mt50"><img th:src="@{/img/work01.png}" alt="벨" /></p>
+								</div>
+							</div>
+							<div class="col-lg-12 mt100">		
+								<div class="bell mt70">
+									<p class="title_bell"><img th:src="@{/img/title_bell.png}" alt="벨" /></p>
+									<ul><li></li><li>인사평가제도 HRE</li><li></li></ul>
+								</div>
+								<p class="mt70 text-center"><img th:src="@{/img/work02.png}" alt="실적 능력 태도" /></p>								
+							</div>
+						</div><!-- //row -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+				<div class="bgSky2" >
+					<div class="container1300 center" >
+						<div class="pt50 pb50">
+							<div class="row">
+								<div class="col-lg-12">						
+									<div class="bell_w mt70">
+										<p class="title_bell"><img th:src="@{/img/title_bell.png}" alt="벨" /></p>
+										<ul><li></li><li>교육훈련제도 HRD</li><li></li></ul>
+									</div>
+									<p class="mt70 text-center"><img th:src="@{/img/work03.png}" alt="실적 능력 태도" /></p>			
+								</div>
+							</div>
+						</div>
+					</div><!-- //container1300 -->
+				</div><!-- //bgSky2 -->
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="row">
+							<div class="col-lg-12">						
+								<div class="bell mt70">
+									<p class="title_bell"><img th:src="@{/img/title_bell.png}" alt="벨" /></p>
+									<ul><li></li><li>순환근무제도</li><li></li></ul>
+								</div>
+							</div>
+							<div class="col-lg-12 mt80">
+								<div class="qBox">
+									<ul class="workGray">
+										<li><img th:src="@{/img/ico_workQ.png}" alt="물음표" /> <span class="r-w">순환근무제도란 ?</span></li>
+										<li class="f16 line-height160">직무변경 등의 사유로 근무지를 옮기는 것으로 당사는 면접 및 면담을 통하여<br>
+											개인의 능력을 최대한 발휘할 수 있도록 적재적소에 배치함을 원칙으로 하며,<br>
+											입사 후 순환근무제도를 운영하고 있습니다.
+										</li>
+									</ul>
+									<p class="workImg"><img th:src="@{/img/work04.png}" alt="손가락" /> </p>
+								</div>
+							</div>
+						</div><!-- //row -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+
+
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ 
+		Footer
+================================ -->
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

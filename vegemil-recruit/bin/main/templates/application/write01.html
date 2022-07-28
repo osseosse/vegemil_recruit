@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+						
+					</div>
+				</div>
+
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						
+						<div class="sidebar fixedsticky w350 f-left">
+							<p class="f23 fw600">지원서 작성</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<ul class="mt70 writeList">
+								<li class="w-ing"><a href="write01.html">개인정보</a></li>
+								<li class="w-before"><a href="write02.html">학력정보</a></li>
+								<li class="w-before"><a href="write03.html">어학/자격/기타</a></li>
+								<li class="w-before"><a href="write04.html">경력사항</a></li>
+								<li class="w-before"><a href="write05.html">자기소개</a></li>
+							</ul>
+							<p class="btn_type02 mt30"><a href="reView.html">미리보기</a></p>
+							<p class="btn_type03 mt10"><a href="#">임시저장</a></p>
+						</div>
+						<script>
+							$(document).ready(function(){
+								$( '.sidebar' ).fixedsticky();
+							});
+						</script>
+						<div class="wrap860 f-right" >
+							<!-- (1)최종 (예정) 학력 -->
+							<p class="f23 fw600">지원분야<span class="abs-r f14 fw400 red">*는 필수 입력 사항입니다.</span></p>
+							<div class="r-box mt20">
+								<ul class="s-d-2">
+									<li class="f14"><span class="red">*</span>지원회사</li>
+									<li>
+										<div class="custom-sel w230">
+										  <select>
+											<option value="0">선택해 주세요</option>
+											<option value="1">정식품</option>
+											<option value="2">자연과사람들</option>
+											<option value="3">오쎄</option>
+											<option value="4">넬보스코</option>
+										  </select>
+										</div>
+									</li>
+								</ul>
+								<ul class="s-d-2 mt10">
+									<li class="f14"><span class="red">*</span>섬영</li>
+									<li>
+										<div class="custom-sel w230">
+										  <select>
+											<option value="선택해 주세요1">선택해 주세요</option>
+											<option value="영업1">영업</option>
+											<option value="마케팅1">마케팅</option>
+											<option value="총무인사1">총무인사</option>
+											<option value="해외영업1">해외영업</option>
+										  </select>
+										</div>
+									</li>
+								</ul>
+								<ul class="s-d-2 mt10">
+									<li class="f14"><span class="red">*</span>지원부문</li>
+									<li>
+										<div class="custom-sel w230">
+										  <select>
+											<option value="선택해 주세요2">선택해 주세요</option>
+											<option value="영업2">영업</option>
+											<option value="마케팅2">마케팅</option>
+											<option value="총무인사2">총무인사</option>
+											<option value="해외영업2">해외영업</option>
+										  </select>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<!-- //(1)최종 (예정) 학력 -->
+							<!-- (2)인적사항 -->
+							<p class="f23 fw600 mt80">인적사항</p>
+							<div class="r-box mt20">
+								<div class="row">
+									<div class="col-lg-4" >
+										<div class="photoBox">
+											<!--<div class="in-img"><img th:src="@{/img/ico_photo.png}" onclick="document.getElementById('file').click();" /></div> -->
+											 <div class="IDpicture"><img th:src="@{/img/photo_sample.jpg" onclick="document.getElementById('file').click();" /></div>
+											<input type="file"  id="file" style="display:none;" onchange="document.getElementById('txt').value=this.value;" />
+										</div>
+										<p class="f12 mt10 gray">사진사이즈 : 120px X 160px </p>
+									</div>
+									<div class="col-lg-8" >
+										<ul class="s-d-2">
+											<li class="f14"><span class="red">*</span>이름</li>
+											<li>
+												<input class="readonly w230" type="readonly" value="김지언">
+											</li>
+										</ul>
+										<ul class="s-d-2 mt10">
+											<li class="f14 "><span class="red"></span>한문이름</li>
+											<li>
+												<input class="inType01 w180" >
+											</li>
+										</ul>
+										<ul class="s-d-2 mt10">
+											<li class="f14"><span class="red">*</span>영문이름</li>
+											<li>
+												<input class="inType01 w180"  >
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 mt50" >
+										<ul class="s-d-2">
+											<li class="f14 v-top"><span class="red">*</span>주소 (현 거주지)</li>
+											<li>
+												<input class="inType01 w80" readonly  type="text" value="065478" alt="우편번호" ><span class="btn_type04 "><a href="#">우편번호찾기</a> </span>
+												<input class="inType01 w400 ml6 add" readonly  type="text" value="성동구 아차산로 121"  alt="주소">
+
+												<input class="inType01 mt10 w600" type="text" value="세부주소">
+											</li>
+										</ul>
+										<ul class="s-d-2 mt10">
+											<li class="f14"><span class="red">*</span>휴대전화</li>
+											<li>
+												<input class="readonly w230" type="readonly" value="010-9454-9254">
+											</li>
+										</ul>
+										<ul class="s-d-2 mt10">
+											<li class="f14"><span class="red">*</span>이메일</li>
+											<li>
+												<input class="readonly w230" type="readonly" value="hahaha@naver.com">
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- //(2)인적사항 -->
+
+							<!-- (3)가족사항 -->
+							<p class="f23 fw600 mt80 pr">가족사항 <input type="image" class="selPlus" value=" 추가 " onclick="add_item1()" th:src="@{/img/ico_plus.png}"></p>
+							<div class="r-box mt20">
+								<div id="field1"> 
+									<div class="row">
+										<div class="col-lg-3" >
+											<ul class="s-d-2s">
+												<li class="f14"><span class="red">*</span>관계</li>
+												<li>
+													<div class="custom-sel w80">
+													  <select>
+														<option value="0">선택</option>
+														<option value="1">부</option>
+														<option value="2">모</option>
+														<option value="3">형</option>
+														<option value="4">자</option>
+														<option value="4">매</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-3">
+											<ul class="s-d-2s">
+												<li class="f14">성명</li>
+												<li><input type="text" class="inType01 w110" ></li>
+											</ul>
+										</div>
+										<div class="col-lg-4" >
+											<ul class="s-d-2s">
+												<li class="f14">연령(만)</li>
+												<li class="ml10"><input type="text" class="inType01 w80" ></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- copy -->
+								<div id="pre_set1" style="display:none">
+									<div class="row mt10">
+										<div class="col-lg-3">
+											<ul class="s-d-2s">
+												<li class="f14"><span class="red">*</span>관계</li>
+												<li>
+
+													<div class="custom-sel------- w80">
+													  <select class="base">
+														<option value="0" class="optionItem">선택</option>
+														<option value="1"  class="optionItem">부</option>
+														<option value="2"  class="optionItem">모</option>
+														<option value="3"  class="optionItem">형</option>
+														<option value="4"  class="optionItem">자</option>
+														<option value="5"  class="optionItem">매</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-3">
+											<ul class="s-d-2s">
+												<li class="f14">성명</li>
+												<li><input type="text" class="inType01 w110" ></li>
+											</ul>
+										</div>
+										<div class="col-lg-6" >
+											<ul class="s-d-2s">
+												<li class="f14">연령(만)</li>
+												<li class="ml10"><input type="text" class="inType01 w80" ></li>
+											</ul>
+										</div>
+									</div>
+									<!-- //copy -->
+									<input class="inputDel" type="image" value="삭제" onclick="remove_item1(this)" th:src="@{/img/ico_inputDel.png}" >
+								</div>									
+							</div>									
+							
+							<!-- //(3)가족사항 -->
+
+							<!-- (4)개인신상 및 기타 -->
+							<p class="f23 fw600 mt80 pr">개인신상 및 기타</p> 
+							<div class="r-box mt20">
+								<div class="row bottom_line pb30">
+									<div class="col-lg-6">
+										<ul class="s-d-2">
+											<li class="f14"><span class="red">*</span>보훈대상여부</li>
+											<li class="btn-acc">
+												<button>비대상</button>
+												<button>대상</button>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-6">
+										<ul class="s-d-2">
+											<li class="f14">보훈대상번호</li>
+											<li>
+												<input type="text"class="inType01 w180"  >
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="row  pt30 pb30 bottom_line">
+									<div class="col-lg-12">
+										<ul class="s-d-2">
+											<li class="f14"><span class="red">*</span>장애여부</li>
+											<li class="btn-acc">
+												<button>비대상</button>
+												<button>대상</button>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="row  pt30 pd30">
+									<div class="col-lg-12">
+										<ul class="s-d-2">
+											<li class="f14"><span class="red">*</span>병역사항</li>
+											<li class="btn-acc">
+												<button>비대상</button>
+												<button>군필</button>
+												<button>미필</button>
+												<button>면제</button>
+												<button>복무중</button>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-6 mt20">
+										<ul class="s-d-2">
+											<li class="f14">군별</li>
+											<li>
+												<div class="custom-sel w180">
+												  <select>
+													<option value="선택해 주세요2">선택해 주세요</option>
+													<option value="육군">육군</option>
+													<option value="해군">해군</option>
+												  </select>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-6 mt20">
+										<ul class="s-d-2">
+											<li class="f14">병과</li>
+											<li>
+												<div class="custom-sel w180">
+												  <select>
+													<option value="선택해 주세요2">선택해 주세요</option>
+													<option value="행정">행정</option>
+													<option value="특수">특수</option>
+												  </select>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-6 mt20">
+										<ul class="s-d-2">
+											<li class="f14">계급</li>
+											<li>
+												<div class="custom-sel w180">
+												  <select>
+													<option value="선택해 주세요2">선택해 주세요</option>
+													<option value="이병">이병</option>
+													<option value="일병">일병</option>
+													<option value="상병">상병</option>
+													<option value="병장">병장</option>
+													<option value="하사">하사</option>
+												  </select>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-12 mt20">
+										<ul class="s-d-2">
+											<li class="f14">복무기간</li>
+											<li>
+												<div class="custom-sel scroll w90">
+												  <select>
+													<option value="년도">년도</option>
+													<option value="2022">2022</option>
+													<option value="2021">2021</option>
+													<option value="2020">2020</option>
+													<option value="2019">2019</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+												  </select>
+												</div>
+											</li>
+											<li>
+												<div class="custom-sel scroll w85">
+													<select>
+														<option value="년도">일</option>
+														<option value="31">31</option>
+														<option value="30">30</option>
+														<option value="29">29</option>
+														<option value="28">28</option>
+														<option value="27">27</option>
+														<option value="26">26</option>
+														<option value="25">25</option>
+														<option value="24">24</option>
+														<option value="23">23</option>
+														<option value="22">22</option>
+														<option value="21">21</option>
+														<option value="20">20</option>
+													</select>
+												</div>
+											</li>
+											<li class="ml10 mr10"> - </li>
+											<li>
+												<div class="custom-sel scroll w90">
+												  <select>
+													<option value="년도">년도</option>
+													<option value="2022">2022</option>
+													<option value="2021">2021</option>
+													<option value="2020">2020</option>
+													<option value="2019">2019</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+													<option value="2018">2018</option>
+												  </select>
+												</div>
+											</li>
+											<li>
+												<div class="custom-sel scroll w85">
+													<select>
+														<option value="년도">일</option>
+														<option value="31">31</option>
+														<option value="30">30</option>
+														<option value="29">29</option>
+														<option value="28">28</option>
+														<option value="27">27</option>
+														<option value="26">26</option>
+														<option value="25">25</option>
+														<option value="24">24</option>
+														<option value="23">23</option>
+														<option value="22">22</option>
+														<option value="21">21</option>
+														<option value="20">20</option>
+													</select>
+												</div>
+											</li>
+
+										</ul>
+									</div>
+									<div class="col-lg-12 mt20">
+										<ul class="s-d-2">
+											<li class="f14">제대구분</li>
+											<li>
+												<div class="custom-sel w180">
+												  <select>
+													<option value="선택해 주세요2">선택해 주세요</option>
+													<option value="만기제대">만기제대</option>
+													<option value="복무중">복무중</option>
+												  </select>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- //(4)개인신상 및 기타 -->
+							<div class="w100 mt30">
+								<a href="write02.html"><p class="f_right f20">학력정보 <img th:src="@{/img/btn_next.png}" alt="다음" /></p></a>
+							</div>
+						</div><!-- //wrap860 -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

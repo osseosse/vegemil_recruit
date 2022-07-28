@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				<div class="container1660 center" >
+					<div class="memberWrap">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<p class="f36 fw600">로그인</p>
+								<!-- 입력 error시 -->
+								<p class="mt60"><input class="memType01 error" type="text" placeholder="이름"></p>
+								<p class="error"><img th:src="@{/img/error.png}"> 항목명을 정확히 입력해 주세요</p>
+								<!-- //입력 error시 -->
+								<p class="mt10"><input class="memType01" type="text" placeholder="이메일"></p>
+								<p class="mt10"><input class="memType01 pw" type="password" placeholder="비밀번호" ></p>
+								<div class="btnType01 mt20"><a href="mypage_list.html">로그인</a></div>
+								<!-- 개발확인 -->
+								
+								<div class="btnType01 active mt20"><a href="mypage_list.html">로그인</a></div>
+								<p style="border:2px dashed red;padding:10px; background:yellow; text-align:left; line-height:140%">[전산] 이름, 이메일, 비밀번호 입력시 active 버튼 적용해주세요</p>
+								<p class="memInfo">비밀번호를 잊어버리셨나요? <a href="/account/password"><span>비밀번호 찾기</span></a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ 
+				// Content
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

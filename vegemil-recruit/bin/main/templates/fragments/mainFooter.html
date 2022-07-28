@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<footer id="footer" th:fragment="footerFragment">
+<div class="container1660 center">
+	<div class="f_left">
+		<ul class="f_person">
+			<li><p><a href="/main/"><img th:src="@{/img/footer_logo.png}" alt="정식품로고" /></a></p></li>
+			<li>
+				<a href="/main/member/privacy.aspx">개인정보처리방침</a> <a href="/main/member/policy.aspx">이용약관</a>
+				<p class="ac">&copy 2022 Dr.CHUNG'S FOOD Co., Ltd. All Right Reserved.</p>  
+			</li>
+		</ul>
+	</div>
+	<div class="f_right">
+		<ul class="f_sns">
+			<li><a href="#"><img th:src="@{/img/sns01.png}" alt="페이스북" /></a></li>
+			<li><a href="#"><img th:src="@{/img/sns02.png}" alt="인스타그램" /></a></li>
+			<li><a href="#"><img th:src="@{/img/sns03.png}" alt="유튜브" /></a></li>
+		</ul>
+		<div class="dropdown">
+		  <button onclick="myFunction()" class="dropbtn">관련사 사이트</button>
+		  <div id="myDropdown" class="dropdown-content">
+			<a href="https://nelbosco.co.kr/" target="_blank">넬보스코</a>
+			<a href="https://www.innp.co.kr//kr/Default.aspx" target="_blank">자연과사람들</a>
+			<a href="https://www.osse.co.kr/main/kr/default.aspx" target="_blank">오쎄</a>
+			<a href="https://www.edaymall.com/index.do" target="_blank">이데이몰</a>
+		  </div>
+		</div>
+	</div>
+</div>
+</footer>
+</html>

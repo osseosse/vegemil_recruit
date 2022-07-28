@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>정식품 채용</title>
+    <head th:replace="fragments/head :: headFragment"></head>
+</head>
+<body>
+	<div class="wrap bg_01 vh100">
+		<!-- ================================ Header ================================ -->
+		<header id="header">
+			<div class="header">
+				<div class="container1660 center">
+					<ul class="h_menu text-left">
+						<li class="h_logo ac"><a href="/" ><img th:src="@{/img/logo.png}" alt="정식품"/><span class="fw700">Careers</span></a></li>
+						<li><a href="/information/info">채용안내</a></li>
+						<li><a href="/application/write01">입사지원</a></li>
+						<li><a href="/account/login">입사지원 수정</a></li>
+						<li><a href="/account/result02">합격여부 확인</a></li>
+					</ul>
+					<div class="faceBox">
+						<!-- 로그아웃
+						<a href="#"><div class="face">로그인<img src="./img/ico_face.png" /></div></a> 
+					
+						<!-- 로그인 -->
+						<a href="#"><div class="face"><span>김지언님</span><img th:src="@{/img/photo_sample.jpg}" alt="지원자증명사진"/></div></a>
+					
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100 topLine">
+				<div class="container1660 center">
+					<div class="row">
+						<div class="col-lg-6 text-left">
+							<p class="mt120 speech f16 fw500"><img th:src="@{/img/ico03.png}" alt="확성기"/> 
+								<span>#인류건강문화</span> &nbsp;&nbsp;&nbsp;
+								<span>#믿음 &nbsp;&nbsp;&nbsp;</span>
+								<span>#생명존중</span>
+							</p>
+							<div class="ani">
+								<p class="ac f85 white text-left  line-height110 mt30 fw700">
+									<span class="bottomLine">Draw</span> <span>Your Life</span><br><span class="mt20">Dr. Chung's Food</span>
+								</p>
+							</div>
+							<ul class="ico_box mt100">
+								<li><a href="/application/noticelist"><img th:src="@{/img/ico01.png}" alt="지원하기"/><p class="mt10">지원하기</p></a></li>
+								<li><a href="/application/apllcantList"><img th:src="@{/img/ico02.png}" alt="지원서 수정"/><p class="mt10">지원서 수정</p></a></li>
+							</ul>
+							<p class="btn_type01 f16 mt50"><a href="/account/checkResult">합격 여부 보러가기</a></p>
+						</div>
+						<div class="col-lg-6">
+							<div class="main_right">
+								<div class="">
+									<p class="f20 fw400 white text-left mt100">채용공고</p>
+									<!-- 공고가 1개일때 노출방법 -->
+									<div class="roundType01 mt30">
+										<ul>
+											<li>
+												<p class="f15 ac gray fw400">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
+												<p class="mt10 f23 fw700"><span class="ac mr10 blue">D-16</span> 2023년 상반기 신입사원 정기채용</p>
+												<p class="mt20 btn_type11"><a href="#">공고 보러가기</a></p>
+												<p class="mt20 f20 fw600 number ml5"><span class="ac">08</span> <span class="f16 fw600 ">건</span></p> 
+											</li>
+										</ul>
+									</div>
+									<!-- //공고가 1개일때 노출방법 -->
+									<!-- 공고가 2개일때 노출방법 
+									<div class="roundType01 mt30">
+										<a href="">
+											<ul>
+												<li>
+													<p class="f15 ac gray fw400">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
+													<p class="mt10 f23 fw700"><span class="ac mr10">D-16</span> 2023년 상반기 신입사원 정기채용</p>
+												</li>
+												<li><div class="roundType02 ac">5</div></li>
+											</ul>
+										</a>
+									</div>
+									
+									<div class="roundType01 mt20">
+										<a href="">
+											<ul>
+												<li>
+													<p class="f15 ac gray2 fw400 ">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
+													<p class="mt10 f23 fw700"><span class="mr10 gray2">지원마감</span> <span class="gray2">경력사원 모집</span></p>
+												</li>
+												<li><div class="roundType02 ac gray2">1</div></li>
+											</ul>
+										</a>
+									</div>
+									<!-- //공고가 2개일때 노출방법 -->
+								
+								</div>
+								<ul class="info_ul mt20">
+									<li class="mr30"><img th:src="@{/img/ico04.png}" alt="연락처"/></li>
+									<li class="roundType03 mt30">
+										<dl>
+											<dt class="f16 fw600">채용문의</dt>
+											<dd class="f16 fw400 gray ac ml10"><span class="mr10">doublej0910@vegemil.co.kr</span><span>02.3484.9416</span></dd>
+										</dl>
+									</li>
+								</ul>
+								<p class="f20 fw400 white text-left mt150">채용안내</p>
+								<ul class="info_ps mt20">
+									<li class="mr30"><a href="/information/info">채용 프로세스</a></li>
+									<li class="mr30"><a href="/information/work">복지제도</a></li>
+									<li class="mr30"><a href="/information/benefit">인사제도</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ // Content ================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+
+</body>
+</html>

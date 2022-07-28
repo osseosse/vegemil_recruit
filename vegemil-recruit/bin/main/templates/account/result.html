@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">입사지원</span></a>
+					</div>
+				</div>
+
+				<div class="container100" >
+					<div class="memberWrapBase text-center">
+
+						<p class="mt50"><img th:src="@{/img/ico_result01.png}"/></p>
+						<p class="f36 fw600 mt80">지언님의 채용결과 입니다.</p>
+						<p class="f18 fw400  line-height160 mt50">
+						안녕하십니까? (주)정식품 채용담당자입니다.<br>
+						귀하께서는 금번 채용 결과 불합격하셨음을 알려드립니다.<br><br>
+
+						귀하께서는 훌륭한 자질을 갖추었으나 코로나라는 시대적 상황 속에서<br>
+						당사의 한정된 채용 규모로 인하여 함께 일할 수 있는 기회를 갖지 못하게 된 점<br>
+						채용담당자로서 매우 안타깝고 죄송하게 생각합니다.<br><br>
+
+						하지만, 지금과 같은 열정과 역량을 보여주신다면<br>
+						더 좋은 미래를 만들어 가실 수 있을 것이라 생각합니다.<br><br>
+
+						마지막으로 정말 수고하셨다는 말씀을 드리고 싶습니다.<br>
+						귀하의 앞날에 항상 건강과 행복이 가득하시길 기원합니다.<br><br>
+
+						감사합니다.
+						</p>
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+
+
+	<!-- ================================ 
+				Popup 
+	================================ -->
+	<!-- popup -->
+	<div id="pop_dropOut"  style="display:none;">
+		<div class="popBasePW" cellspacing="0"  summary="타이틀">
+	
+			<p class="f23 fw600">학교검색</p>
+			
+			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<p class="f14 fw400 mt40">학교명</p>
+			<div class="search_school ">
+				<fieldset class="search">
+                <legend>검색</legend>
+                   <input type="text" class="ss_inType mt20" placeholder="학교명을 2자 이상 입력해주세요."><a href="javascript:fnSearch();" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="학교명 검색"></a>
+                </fieldset>
+				<ul class="ss_ul mt10">
+					<li><a href="">건국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경기대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">경희대학교 경영대학원 - 서울(서울)</a></li>
+					<li><a href="">경희대학교 일반대학원 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">남서울대학교(충남)</a></li>
+					<li><a href="">남서울대학교 대학원(충남)</a></li>
+					<li><a href="">남서울대학교 일반대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(충남)</a></li>
+					<li><a href="">남서울대학교 특수대학원(산업대)(충남)</a></li>
+					<li><a href="">남서울대학교(산업대)(충남)</a></li>
+					<li><a href="">남서울예술종합학교(해외)</a></li>
+					<li><a href="">단국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동국대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">동서울대학 평생교육원(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">동서울대학교(경기)</a></li>
+					<li><a href="">디지털서울문화예술대학교(서울)</a></li>
+					<li><a href="">상명대학교 - 서울캠퍼스(서울)</a></li>
+					<li><a href="">서울과학기술대학교(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
+					<li><a href="">서울과학기술대학교 IT정책전문대학원(산업대)(서울)</a></li>
+				</ul>
+				<p class="f14 mt30">찾으시는 결과가 없나요? <b>직접입력</b></p>
+				<input type="text" class="ss_inType mt10" >
+				<p class="mt40 btn_type05"><a href="#">등록</a></p>
+			</div>
+			
+		</div>
+	</div>
+	<!-- //popup -->
+
+
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); //회원탈퇴주의사항
+	</script>
+	<!-- //팝업 script -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

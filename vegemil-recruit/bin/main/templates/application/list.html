@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment"></head>
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"><!-- aos animation -->
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><!-- aos animation -->
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100 subTop">
+				<div class="container1300 center">
+					<div data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000"><p class="subtop01"><img th:src="@{/img/subtop01.png}" alt="건강한 미래를 함께 할"/></p></div>
+					<div data-aos="fade-left" data-aos-delay="800" data-aos-duration="1000"><p class="subtop02"><img th:src="@{/img/subtop02.png}" alt="최고의 인재를 기다립니다."/></p></div>
+					<div data-aos="fade-left" data-aos-delay="1300" data-aos-duration="1000"><p  class="subtop03"><img th:src="@{/img/subtop03.png}" alt="종이비행기..."/></p></div>
+					<script>
+					  AOS.init();
+					</script>
+				</div>
+			</div>
+			<script>
+				$(document).ready(function(){
+					$( '.sidebar' ).fixedsticky();
+				});
+			</script>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="/"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">입사지원</span></a>
+					</div>
+				</div>
+
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						
+						<div class="sidebar fixedsticky w350 f-left">
+
+							<p class="f23 fw600">채용방식</p>
+							<div class="btn_listBox">
+								<!-- 클릭시 노출되게 -->
+								<ul class="blbType02 radioStyle1">
+									<li><input type="radio" id="r1" name="rr" value="공채" /><label for="r1"><span></span>공채</label></li>
+									<li><input type="radio" id="r2" name="rr" value="수시" /><label for="r2"><span></span>수시</label></li>
+								</ul>
+							</div>
+
+							<p class="f23 fw600 mt40">직무</p>
+							<div class="btn_listBox">
+								<ul class="blbType02 checkStyle3">
+									<li><input type="checkbox" name="rr" id="#1" value="영업" > <label for="#1"><span></span>영업</label></li>
+									<li><input type="checkbox" name="rr" id="#2" value="경영지원" > <label for="#2"><span></span>경영지원</label></li>
+									<li><input type="checkbox" name="rr" id="#3" value="홍보" > <label for="#3"><span></span>홍보</label></li>
+									<li><input type="checkbox" name="rr" id="#4" value="기획" > <label for="#4"><span></span>기획</label></li>
+									<li><input type="checkbox" name="rr" id="#5" value="연구" > <label for="#5"><span></span>연구</label></li>
+									<li><input type="checkbox" name="rr" id="#6" value="생산" > <label for="#6"><span></span>생산</label></li>
+									<li><input type="checkbox" name="rr" id="#7" value="디자인" > <label for="#7"><span></span>디자인</label></li>
+									<li><input type="checkbox" name="rr" id="#8" value="전산" > <label for="#8"><span></span>전산</label></li>
+								</ul>
+							</div>
+							
+							<p class="f23 fw600 mt40">지원회사</p>
+							<div class="btn_listBox">
+								<ul class="blbType02 checkStyle3">
+									<li><input type="checkbox" name="rr" id="#9" value="정식품" > <label for="#9"><span></span>정식품</label></li>
+									<li><input type="checkbox" name="rr" id="#10" value="넬보스코" > <label for="#10"><span></span>넬보스코</label></li>
+									<li><input type="checkbox" name="rr" id="#11" value="자연과사람들" > <label for="#11"><span></span>자연과사람들</label></li>
+									<li><input type="checkbox" name="rr" id="#12" value="오쎄" > <label for="#12"><span></span>오쎄</label></li>
+								</ul>
+							</div>
+						</div>
+						<div class="wrap860 f-right" >
+							<div class="f16 fw600">
+								<ul class="blbType02 radioStyle2">
+									<li><input type="radio" id="t1" name="rr" value="" /><label for="t1"><span></span>전체</label></li>
+									<li><input type="radio" id="t2" name="rr" value="신입" /><label for="t2"><span></span>신입</label></li>
+									<li><input type="radio" id="t3" name="rr" value="경력" /><label for="t3"><span></span>경력</label></li>
+									<span class="abs-r f14 fw400 gray"><span class="black" th:text="|총 ${recruitCount}건|"></span> 의 공고가 기다리고 있어요</span>
+								</ul>
+								
+							</div>
+							<div id="recruitList">
+							<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
+								<a th:href="|@{/application/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sCategory}/${recruit.sCategory2}|" >
+									<div class="r-box mt20">
+										<input type="hidden"  />
+										<div class="info01">
+											<th:block th:unless="${#strings.isEmpty( recruit.sCategory )}">
+												<span class="r-blue" th:text="${recruit.sCategory}"></span>
+												<!-- <span class="r-blue">신입</span> -->
+											</th:block>
+											<span class="r-black" th:text="|D-${recruit.sDday}|"></span>
+										</div>
+										<!-- <div class="r-g-line ac">8</div> -->
+										<div class="info02 mt20 pb0 line-height140">
+											<span class="f20 fw600 " th:text="${recruit.sTitle}"></span>
+										</div>
+										<div class="info03">
+											<p class="gray f16 text-left pt20 ac" th:text="|${#dates.format( recruit.sStartdate, 'yyyy.MM.dd' )} - ${#dates.format( recruit.sEnddate, 'MM.dd' )}|"></p>
+										</div>
+									</div>
+								</a>
+							</th:block>
+							<th:block th:unless="${not #lists.isEmpty( recruitList )}">
+								<div class="r-box mt20">
+									<div class="tex-center f16 pt40 pb40 gray">진행중인 채용이 없습니다.</div>
+								</div>
+							</th:block>
+							</div>
+						</div><!-- //wrap860 -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+<script th:inline="javascript">
+$(document).ready(function(){
+	//카테고리 소팅 category sorting
+	$("input[name='rr']").on("click", function () {
+	   const value = $(this).val().toLowerCase();
+	   if(!$(this).is(":checked")) {
+		$(this).prop("checked", false);
+			$("#recruitList a").filter(function() {
+		     $(this).toggle()
+		   });
+	   } else {
+		$(this).prop("checked", true);
+			$("#recruitList a").filter(function() {
+		     $(this).toggle($(this).attr('name').toLowerCase().indexOf(value) > -1)
+		   });
+	   }
+	   
+	 });
+});
+</script>
+</body>
+</html>
