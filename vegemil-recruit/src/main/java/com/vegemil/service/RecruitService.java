@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.vegemil.domain.RecruitDTO;
 
-public interface ApplicationService {
+public interface RecruitService {
 	
 	public int getRecruitCount(RecruitDTO params);
 	

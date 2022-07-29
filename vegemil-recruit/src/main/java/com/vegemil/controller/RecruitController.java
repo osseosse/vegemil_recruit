@@ -22,20 +22,20 @@ import org.springframework.web.multipart.MultipartFile;
 import com.vegemil.constant.Method;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.RecruitDTO;
-import com.vegemil.service.ApplicationService;
+import com.vegemil.service.RecruitService;
 import com.vegemil.util.UiUtils;
 
 @Controller
-public class ApplicationController extends UiUtils {
+public class RecruitController extends UiUtils {
 
 	@Autowired
-	private ApplicationService ApplicationService;
+	private RecruitService RecruitService;
 	
 	@GetMapping(value = "/application/recruitList")
 	public String openBabyInfoList(@ModelAttribute("params") RecruitDTO params, Model model) {
 		
-		List<RecruitDTO> recruitList = ApplicationService.getRecruitList(params);
-		int recruitCount = ApplicationService.getRecruitCount(params);
+		List<RecruitDTO> recruitList = RecruitService.getRecruitList(params);
+		int recruitCount = RecruitService.getRecruitCount(params);
 		
 		model.addAttribute("recruitList", recruitList);
 		model.addAttribute("recruitCount", recruitCount);
@@ -53,7 +53,7 @@ public class ApplicationController extends UiUtils {
 			out.flush();
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "application/recruitList", Method.GET, null, model);
 		}
-		RecruitDTO recruit = ApplicationService.getRecruitDetail(sTh);
+		RecruitDTO recruit = RecruitService.getRecruitDetail(sTh);
 		if (recruit == null) {
 			out.println("<script>alert('이미 종료된 채용입니다.'); history.go(-1);</script>");
 			out.flush();
@@ -74,7 +74,7 @@ public class ApplicationController extends UiUtils {
 			out.flush();
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "application/recruitList", Method.GET, null, model);
 		}
-		RecruitDTO recruit = ApplicationService.getRecruitDetail(sTh);
+		RecruitDTO recruit = RecruitService.getRecruitDetail(sTh);
 		if (recruit == null) {
 			out.println("<script>alert('이미 종료된 채용입니다.'); history.back();</script>");
 			out.flush();
@@ -102,7 +102,7 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("올바르지 않은 접근입니다.", "application/recruitList", Method.GET, null, model);
 			}
-			RecruitDTO recruit = ApplicationService.getRecruitDetail(sTh);
+			RecruitDTO recruit = RecruitService.getRecruitDetail(sTh);
 			if (recruit == null) {
 				out.println("<script>alert('이미 종료된 채용입니다.'); history.go(-1);</script>");
 				out.flush();

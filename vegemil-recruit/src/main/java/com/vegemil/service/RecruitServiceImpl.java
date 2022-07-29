@@ -7,18 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vegemil.domain.RecruitDTO;
-import com.vegemil.mapper.ApplicationMapper;
+import com.vegemil.mapper.RecruitMapper;
 import com.vegemil.paging.PaginationInfo;
 
 @Service
-public class ApplicationServiceImpl implements ApplicationService {
+public class RecruitServiceImpl implements RecruitService {
 
 	@Autowired
-	private ApplicationMapper ApplicationMapper;
+	private RecruitMapper RecruitMapper;
 	
 	@Override
 	public int getRecruitCount(RecruitDTO params) {
-		int recruitTotalCount = ApplicationMapper.selectRecruitTotalCount(params);
+		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount(params);
 		
 		if(recruitTotalCount < 0 ) {
 			recruitTotalCount = 0;
@@ -31,7 +31,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public List<RecruitDTO> getRecruitList(RecruitDTO params) {
 		List<RecruitDTO> recruitList = Collections.emptyList();
 
-		int recruitTotalCount = ApplicationMapper.selectRecruitTotalCount(params);
+		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount(params);
 
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(recruitTotalCount);
@@ -39,7 +39,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 		params.setPaginationInfo(paginationInfo);
 
 		if (recruitTotalCount > 0) {
-			recruitList = ApplicationMapper.selectRecruitList(params);
+			recruitList = RecruitMapper.selectRecruitList(params);
 		}
 
 		return recruitList;
@@ -50,9 +50,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 		int queryResult = 0;
 
 		if (params.getSTh() == null) {
-			queryResult = ApplicationMapper.insertRecruit(params);
+			queryResult = RecruitMapper.insertRecruit(params);
 		} else {
-			queryResult = ApplicationMapper.updateRecruit(params);
+			queryResult = RecruitMapper.updateRecruit(params);
 		}
 
 		return (queryResult == 1) ? true : false;
@@ -60,7 +60,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	
 	@Override
 	public RecruitDTO getRecruitDetail(Long sTh) {
-		return ApplicationMapper.selectRecruitDetail(sTh);
+		return RecruitMapper.selectRecruitDetail(sTh);
 	}
 	
 }

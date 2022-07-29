@@ -10,8 +10,10 @@ import com.vegemil.domain.MemberDTO;
 public interface MemberMapper {
 
 	public int insertMember(MemberDTO params);
+	
+	public int updateMember(MemberDTO params);
 
-	public MemberDTO selectMemberDetail(Long custNo);
+	public MemberDTO selectMemberDetail(String memId);
 
 	public int updateMemPwd(MemberDTO params);
 

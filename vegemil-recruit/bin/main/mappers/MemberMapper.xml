@@ -4,37 +4,23 @@
 <mapper namespace="com.vegemil.mapper.MemberMapper">
 
 	<sql id="memberColumns">
-		idx, setup_th, joinNum, joinDate, joinOk, joinPwd, joinType, joinField1, joinField2, joinArea1, joinArea2
-	, memNameK, memNameH, memNameE, memJumin, memAge, memPhoto, memZip1, memAddr11, memAddr12, memZip2, memAddr21
-	, memAddr22, memTel, memHp, memEmail, memBohun, memMarry, memFamMem1, memFamMem2, memFamMem3, memReligion
-	, memAbility, memLike, memHandicap, schGrad1, schEnterYM1, schGradYM1, schName1, schAdmis1, schMajor1, schSite1
-	, schNight1, schPointMax1, schPointEvg1, schGrad2, schEnterYM2, schGradYM2, schName2, schAdmis2, schMajor2, schSite2, schNight2
-	, schPointMax2, schPointEvg2, schGrad3, schEnterYM3, schGradYM3, schName3, schAdmis3, schMajor3, schSite3, schNight3, schPointMax3
-	, schPointEvg3, schGrad4, schEnterYM4, schGradYM4, schName4, schAdmis4, schMajor4, schSite4, schNight4, schPointMax4, schPointEvg4
-	, schGrad5, schEnterYM5, schGradYM5, schName5, schAdmis5, schMajor5, schSite5, schNight5, schPointMax5, schPointEvg5, schGrad6
-	, schEnterYM6, schGradYM6, schName6, schAdmis6, schMajor6, schSite6, schNight6, schPointMax6, schPointEvg6, langName1, langPoint1
-	, langLv1, langGet1, langTalk1, langMake1, langRead1, langName2, langPoint2, langLv2, langGet2, langTalk2, langMake2, langRead2
-	, langName3, langPoint3, langLv3, langGet3, langTalk3, langMake3, langRead3, swName1, swLv1, swName2, swLv2, swName3, swLv3
-	, swName4, swLv4, swName5, swLv5, swName6, swLv6, medalName1, medalDate1, medalContent1, medalName2, medalDate2, medalContent2
-	, medalName3, medalDate3, medalContent3, forState1, forSDate1, forEDate1, forName1, forContent1, forState2, forSDate2, forEDate2
-	, forName2, forContent2, hisCoName1, hisSDate1, hisEDate1, hisLv1, hisDuty1, hisPay1, hisCoName2, hisSDate2, hisEDate2, hisLv2
-	, hisDuty2, hisPay2, hisCoName3, hisSDate3, hisEDate3, hisLv3, hisDuty3, hisPay3, licName1, licGetDate1, licPub1, licName2, licGetDate2
-	, licPub2, licName3, licGetDate3, licPub3, licName4, licGetDate4, licPub4, milClass, milReason, milType, milLv, milArm, milMCount
-	, milTicket, milSDate, milEDate, famCon1, famName1, famAge1, famJob1, famJobLv1, famTo1, famCon2, famName2, famAge2, famJob2, famJobLv2
-	, famTo2, famCon3, famName3, famAge3, famJob3, famJobLv3, famTo3, famCon4, famName4, famAge4, famJob4, famJobLv4, famTo4, famCon5
-	, famName5, famAge5, famJob5, famJobLv5, famTo5, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6, dirsch
-	, dirsch1, sub1schAdmis4, sub1schMajor4, sub1schSite4, sub1schNight4, sub1schPointMax4, sub1schPointEvg4, sub2schAdmis4, sub2schMajor4
-	, sub2schSite4, sub2schNight4, sub2schPointMax4, sub2schPointEvg4, langLicNum1, langLicNum2, langLicNum3, langName4, langPoint4
-	, langLv4, langLicNum4, langGet4, langTalk4, langMake4, langRead4, langName5, langPoint5, langLv5, langLicNum5, langGet5, langTalk5
-	, langMake5, langRead5, licNum1, licNum2, licNum3, licNum4, licName5, licNum5, licGetDate5, licPub5, univ_idx, major4Jumsu
-	, sub1Major4Jumsu, sub2Major4Jumsu, sub1schName, sub2schName, forState3, forSDate3, forEDate3, forName3, forContent3, forState4
-	, forSDate4, forEDate4, forName4, forContent4, licName6, licNum6, licGetDate6, licPub6, schAccount, joinCareer, famCon6, famName6
-	, famAge6, txt_memFamMemd, schGradAB, schEnterYMAB, schGradYMAB, schNameAB, schAdmisAB, schMajorAB, schSiteAB, schNightAB, schPointMaxAB
-	, schPointEvgAB, joinCompany1, joinCompany2, r_portFile, r_portUrl, introduce7, introduce8, introduce9, introduce10, introduce11
-	, introduce12, introduce13, introduce14, introduce15, introduce16, introduce17, hisCoName4, hisSDate4, hisEDate4, hisLv4, hisDuty4
-	, hisPay4, hisCoName5, hisSDate5, hisEDate5, hisLv5, hisDuty5, hisPay5, hisCoName6, hisSDate6, hisEDate6, hisLv6, hisDuty6, hisPay6
-	, hisCoName7, hisSDate7, hisEDate7, hisLv7, hisDuty7, hisPay7, hisCoName8, hisSDate8, hisEDate8, hisLv8, hisDuty8, hisPay8, hisCoName9
-	, hisSDate9, hisEDate9, hisLv9, hisDuty9, hisPay9, hisCoName10, hisSDate10, hisEDate10, hisLv10, hisDuty10, hisPay10
+		  mem_no
+		, mem_name
+		, sex
+		, birthday
+		, mem_id
+		, password
+		, active
+		, email_addr
+		, email_yn
+		, sms_yn
+		, phone_no
+		, pwd_modify_date
+		, last_login_date
+		, active_date
+		, di_key
+		, sleep_yn
+		, ad_agree_date
 	</sql>
 
 	<insert id="insertMember" parameterType="com.vegemil.domain.MemberDTO" useGeneratedKeys="true" keyProperty="memNo">
@@ -45,18 +31,16 @@
 			, #{memName}
 			, #{sex}
 			, #{birthday}
-			, #{empYn}
-			, #{empNo}
 			, #{memId}
 			, #{password}
-			, #{compName}
-			, #{compDeptName}
+			, IFNULL(#{active}, '0')
 			, #{emailAddr}
 			, IFNULL(#{emailYn}, '1')
 			, IFNULL(#{smsYn}, '1')
 			, #{phoneNo}
 			, NOW()
 			, NOW()
+			, null
 			, #{diKey}
 			, #{sleepYn}
 			, NOW()
@@ -73,6 +57,16 @@
 		AND
 			mem_no = #{memNo}
 	</select>
+	
+	<update id="updateMember" parameterType="com.vegemil.domain.MemberDTO">
+		UPDATE tb_member
+		SET
+			  active_date = NOW()
+			, active 	  = 1 
+			, password 	  = #{password}
+		WHERE
+			mem_no = #{memNo}
+	</update>
 
 	<update id="updateMemPwd" parameterType="com.vegemil.domain.MemberDTO">
 		UPDATE tb_member

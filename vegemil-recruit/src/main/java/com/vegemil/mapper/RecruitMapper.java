@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.vegemil.domain.RecruitDTO;
 
 @Mapper
-public interface ApplicationMapper {
+public interface RecruitMapper {
 
 	public int insertRecruit(RecruitDTO params);
 
