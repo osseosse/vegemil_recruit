@@ -8,41 +8,37 @@
 		, mem_name
 		, sex
 		, birthday
-		, mem_id
 		, password
 		, active
 		, email_addr
-		, email_yn
-		, sms_yn
 		, phone_no
+		, sleep_yn
+		, join_date
 		, pwd_modify_date
 		, last_login_date
 		, active_date
-		, di_key
-		, sleep_yn
 		, ad_agree_date
+		, sleep_date
 	</sql>
 
 	<insert id="insertMember" parameterType="com.vegemil.domain.MemberDTO" useGeneratedKeys="true" keyProperty="memNo">
-		INSERT INTO tb_member (
-			<include refid="memberColumns" />
+		INSERT INTO m_recruit_member (
+			  mem_name
+			, birthday
+			, password
+			, active
+			, email_addr
+			, phone_no
+			, sleep_yn
+			, join_date
 		) VALUES (
-			  #{memNo}
-			, #{memName}
-			, #{sex}
+			  #{memName}
 			, #{birthday}
-			, #{memId}
 			, #{password}
-			, IFNULL(#{active}, '0')
+			, 0
 			, #{emailAddr}
-			, IFNULL(#{emailYn}, '1')
-			, IFNULL(#{smsYn}, '1')
 			, #{phoneNo}
-			, NOW()
-			, NOW()
-			, null
-			, #{diKey}
-			, #{sleepYn}
+			, 0
 			, NOW()
 		)
 	</insert>
@@ -51,37 +47,37 @@
 		SELECT
 			<include refid="memberColumns" />
 		FROM
-			tb_member
+			m_recruit_member
 		WHERE
 			SLEEP_YN = '0'
 		AND
-			mem_no = #{memNo}
+			email_addr = #{emailAddr}
 	</select>
 	
 	<update id="updateMember" parameterType="com.vegemil.domain.MemberDTO">
-		UPDATE tb_member
+		UPDATE m_recruit_member
 		SET
 			  active_date = NOW()
 			, active 	  = 1 
 			, password 	  = #{password}
 		WHERE
-			mem_no = #{memNo}
+			email_addr = #{emailAddr}
 	</update>
 
 	<update id="updateMemPwd" parameterType="com.vegemil.domain.MemberDTO">
-		UPDATE tb_member
+		UPDATE m_recruit_member
 		SET
 			  pwd_modify_date = NOW()
 			, password = #{password}
 		WHERE
-			mem_no = #{memNo}
+			email_addr = #{emailAddr}
 	</update>
 
 	<select id="selectMemberList" parameterType="com.vegemil.domain.MemberDTO" resultType="com.vegemil.domain.MemberDTO">
 		SELECT
 			<include refid="memberColumns" />
 		FROM
-			tb_member
+			m_recruit_member
 		WHERE
 			SLEEP_YN = '0'
 		<include refid="CommonMapper.search" />
@@ -89,12 +85,22 @@
 			INSERT_DATE ASC
 		<include refid="CommonMapper.paging" />
 	</select>
+	
+	<select id="selectMemberCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			m_recruit_member
+		WHERE
+			email_addr = #{emailAddr}
+		<include refid="CommonMapper.search" />
+	</select>
 
 	<select id="selectMemberTotalCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
-			tb_member
+			m_recruit_member
 		WHERE
 			SLEEP_YN = '0'
 		<include refid="CommonMapper.search" />

@@ -20,5 +20,7 @@ public interface MemberMapper {
 	public List<MemberDTO> selectMemberList(MemberDTO params);
 
 	public int selectMemberTotalCount(MemberDTO params);
+	
+	public int selectMemberCount(MemberDTO params);
 
 }

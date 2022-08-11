@@ -1,12 +1,20 @@
 package com.vegemil.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.vegemil.service.MailService;
+import com.vegemil.domain.MailDTO;
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	MailService mailService;
 
 	@RequestMapping(value = "/")
 	public String index() {
@@ -30,10 +38,10 @@ public class MainController {
 		return "/information/"+viewName;
     }
 	
-	@RequestMapping(value = "/account/{viewName}")
-    public String moveAccount(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+	@RequestMapping(value = "/member/{viewName}")
+    public String moveMember(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
 		
-		return "/account/"+viewName;
+		return "/member/"+viewName;
     }
 	
 	@RequestMapping(value = "/application/{viewName}")
@@ -45,6 +53,11 @@ public class MainController {
 	@GetMapping("/mail")
     public String dispMail() {
         return "/utils/mail";
+    }
+	
+	@PostMapping("/sendAuthmail")
+	public void sendAuthmail(MailDTO mailDto) {
+        mailService.mailSend(mailDto);
     }
 	
 }
