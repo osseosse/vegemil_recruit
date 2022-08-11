@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.RecruitMapper">
+
+	<sql id="RecruitColumns">
+		  s_th
+		, s_title
+		, s_company
+		, s_type
+		, s_startdate
+		, s_enddate
+		, s_1
+		, s_2
+		, s_3
+		, s_category
+		, s_category2
+		, s_collect
+		, s_close
+		, s_insertdate
+		, s_modifydate
+		, DATEDIFF(NOW(), s_insertdate) as s_dday
+	</sql>
+
+	<insert id="insertRecruit" parameterType="com.vegemil.domain.RecruitDTO" useGeneratedKeys="true" keyProperty="memNo">
+		INSERT INTO R_Setup (
+			<include refid="RecruitColumns" />
+		) VALUES (
+			  #{sTh}
+			, #{sTitle}
+			, #{sType}
+			, #{sCompany}
+			, #{sStartdate}
+			, #{sEnddate}
+			, #{s1}
+			, #{s2}
+			, #{s3}
+			, #{sClose}
+			, #{sCategory}
+			, #{sCategory2}
+			, #{sCollect}
+			, #{sinsertDate}
+			, #{smodifyDate}
+		)
+	</insert>
+
+	<select id="selectRecruitDetail" parameterType="long" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			<include refid="RecruitColumns" />
+		FROM
+			R_Setup
+		WHERE
+			S_CLOSE = '1'
+		AND
+			S_TH = #{sTh}
+	</select>
+
+	<update id="updateRecruit" parameterType="com.vegemil.domain.RecruitDTO">
+		UPDATE R_Setup
+		SET
+			  s_title 		= #{sTitle}
+			, s_type 		= #{sType}
+			, s_startdate 	= #{sStartdate}
+			, s_enddate 	= #{sEnddate}
+			, s_1 			= #{s1}
+			, s_2 			= #{s2}
+			, s_3 			= #{s3}
+			, s_close 		= #{sClose}
+			, s_ modifydate = #{modifyDate}
+		WHERE
+			S_TH = #{sTh}
+	</update>
+
+	<select id="selectRecruitList" parameterType="com.vegemil.domain.RecruitDTO" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			<include refid="RecruitColumns" />
+		FROM
+			R_Setup
+		WHERE
+			S_CLOSE = '1'
+			<if test="searchKeyword != null and searchKeyword != ''">
+				<choose>
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'company'.equals(searchType)">
+							AND s_company LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'type'.equals(searchType)">
+							AND s_type LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'category'.equals(searchType)">
+							AND s_category LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'category2'.equals(searchType)">
+							AND s_category2 LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'collect'.equals(searchType)">
+							AND s_collect LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+					</choose>
+				</when>
+				</choose>
+			</if>
+		<include refid="CommonMapper.search" />
+		ORDER BY
+			s_insertdate ASC
+		<!-- <include refid="CommonMapper.paging" /> -->
+	</select>
+
+	<select id="selectRecruitTotalCount" parameterType="com.vegemil.domain.RecruitDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			R_Setup
+		WHERE
+			S_CLOSE = '1'
+		<include refid="CommonMapper.search" />
+	</select>
+
+</mapper>
