@@ -12,6 +12,8 @@ public interface MemberService {
 	
 	public boolean registerMember(MemberDTO params);
 	
+	public boolean activeMember(MemberDTO params);
+	
 	public MemberDTO getMemberDetail(String memId);
 	
 }

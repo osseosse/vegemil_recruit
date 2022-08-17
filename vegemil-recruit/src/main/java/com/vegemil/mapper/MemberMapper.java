@@ -12,6 +12,8 @@ public interface MemberMapper {
 	public int insertMember(MemberDTO params);
 	
 	public int updateMember(MemberDTO params);
+	
+	public int activeMember(MemberDTO params);
 
 	public MemberDTO selectMemberDetail(String memId);
 

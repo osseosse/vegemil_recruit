@@ -39,8 +39,8 @@
 						<div class="mt30">
 							<input type="hidden" th:field="*{emailAddr}" />
 							<input type="hidden" th:field="*{memNo}" />
-							<button type="submit" class="btn_type13 mt30 w230 mr5" >인증메일 재전송</button><!-- 로그인 통해서 고객정보 던진후 메일발송 -->
-							<a class="btn_type14 mt30 w230 ml5" href="/member/login">로그인</a>
+							<button type="button" onclick="/member/sendAuthmail" class="btn_type13 mt30 w230 mr5" >인증메일 재전송</button><!-- 로그인 통해서 고객정보 던진후 메일발송 -->
+							<button class="btn_type14 mt30 w230 ml5" onclick="/member/login">로그인</button>
 						</div>
 					</form>
 					</div><!-- //memberWrapBase -->
@@ -55,5 +55,14 @@
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
+<script type="text/javascript">
+    window.addEventListener('beforeunload', (event) => {
+    	
+    	//새로고침시 메인페이지로 이동
+        location.href='/';
+        // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+        event.returnValue = '/member/login';
+    });
+</script>
 </body>
 </html>

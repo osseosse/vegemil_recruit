@@ -26,6 +26,8 @@ public class MemberController extends UiUtils {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
 	private MailService mailService;
 	
 	@GetMapping(value = "/member/recruitList")
@@ -80,7 +82,7 @@ public class MemberController extends UiUtils {
 			
 			boolean isRegistered = memberService.registerMember(member);
 			if (isRegistered == false) {
-				out.println("<script>alert('신규입사자 등록에 실패하였습니다.'); history.go(-1);</script>");
+				out.println("<script>alert('이미 등록된 이메일입니다.'); history.go(-1);</script>");
 				out.flush();
 			}
 			mailService.sendActiveEmail(member);
@@ -149,23 +151,29 @@ public class MemberController extends UiUtils {
 	
 	
 	//회원 활성화
-	@PostMapping(value = "/member/infoActive")
-	public void changeActive(@ModelAttribute("member") final MemberDTO member, HttpServletResponse response) throws Exception {
+	@GetMapping(value = "/member/infoActive")
+	public String changeActive(@ModelAttribute("authToken") final String authToken, Model model, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		if (member == null) {
+		MemberDTO member = null;
+		if (authToken == null) {
 			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
 			out.flush();
 		}
-		boolean isRegistered = memberService.registerMember(member);
+		String emailAddr = mailService.verifyEmail(authToken);
+		if (emailAddr == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+		}
+		member = new MemberDTO();
+		member.setEmailAddr(emailAddr);
+		boolean isRegistered = memberService.activeMember(member);
 		if (isRegistered == false) {
-			out.println("<script>alert('육아정보 진열 변경에 실패하였습니다.'); window.location='/admin/baby/babyInfoList';</script>");
+			out.println("<script>alert('이메일인증에 실패하였습니다.'); window.location='/';</script>");
 			out.flush();
 		}
 		
-		out.println("<script>window.open='/member/joinConfirm';</script>");
-		out.flush();
-		
+		return showMessageWithRedirect("이메일 인증이 완료되었습니다.", "/member/login", Method.GET, null, model);
 	}
 	
 	@GetMapping(value = "/member/infoCheck")

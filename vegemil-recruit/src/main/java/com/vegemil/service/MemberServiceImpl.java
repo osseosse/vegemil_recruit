@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vegemil.domain.MemberDTO;
@@ -17,8 +17,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	//@Autowired
-    //private PasswordEncoder passwordEncoder;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public int getMemberCount(MemberDTO params) {
@@ -53,13 +53,26 @@ public class MemberServiceImpl implements MemberService {
 	public boolean registerMember(MemberDTO member) {
 		
 		int queryResult = 0;
-		queryResult = memberMapper.selectMemberCount(member);
-		//member.setPassword(passwordEncoder.encode(member.getPassword()));
+		int memCount = 0;
 		
-		if (queryResult == 0) {
+		memCount = memberMapper.selectMemberCount(member);
+		member.setPassword(passwordEncoder.encode(member.getPassword()));
+		
+		if (memCount == 0) {
 			queryResult = memberMapper.insertMember(member);
-		} else {
-			queryResult = memberMapper.updateMember(member);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	@Override
+	public boolean activeMember(MemberDTO member) {
+		
+		int queryResult = 0;
+		queryResult = memberMapper.selectMemberCount(member);
+		
+		if (queryResult != 0) {
+			queryResult = memberMapper.activeMember(member);
 		}
 
 		return (queryResult == 1) ? true : false;

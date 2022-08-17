@@ -400,6 +400,9 @@ button.btn_type10 { border:1px solid #333333;background:#333; font-weight:600; t
 .btn_type12 a {color:#fff;  display:inline-block; width:100%;  }
 
 
+button.btn_type13 {background:#333333; font-weight:500; text-align:center; display:inline-block;border-radius:0px; font-size:16px; padding:28px 0px; color:#fff}
+button.btn_type14 {background:#0F93E1; font-weight:500; text-align:center; display:inline-block;border-radius:0px; font-size:16px; padding:28px 0px; color:#fff }
+
 .number {border-radius:50px; border:3px solid #ECECEC; padding:14px 0px; text-align:center; width:90px; display:inline-block}
 /*================================ 
     main  
@@ -478,7 +481,7 @@ button.btnType01.active {color:#fff; padding:25px 0;width:400px; background:#333
 .mt40 {margin-top:40px}
 .mt50 {margin-top:50px}
 
-.memInfo {position:relative; color:#aaa; text-align:left; margin-top:10px; font-size:14px}
+.memInfo {position:relative; color:#aaa; text-align:left; margin-top:10px; font-size:14px; line-height:140%}
 .memInfo span {color:#333333}
 .memInfo span:hover {text-decoration:underline}
 .error{position:relative; text-align:left; margin-top:7px; color:#FF3A3A; font-size:14px; padding-left:20px; }
@@ -841,6 +844,8 @@ textarea.areaType04.border0 {border:0}
 .sendUL li dl {position:relative; text-align:left; }
 .sendUL li dl dt {color:#333; font-weight:600; font-size:16px; text-align:left; display:inline-block; width:70px}
 .sendUL li dl dd {color:#333; font-weight:400; font-size:16px; text-align:left; display:inline-block}
+
+.sendUL2 {position:relative ;background:#fff; border-radius:50px; padding:15px 30px; margin:0 auto; margin-top:50px; display:inline-block}
 
 .resultStep {position:relative;  width:100%  }
 .resultStep li {display:inline-block; margin:0 20px}

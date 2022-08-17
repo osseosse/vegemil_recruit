@@ -54,7 +54,7 @@
 			email_addr = #{emailAddr}
 	</select>
 	
-	<update id="updateMember" parameterType="com.vegemil.domain.MemberDTO">
+	<update id="activeMember" parameterType="com.vegemil.domain.MemberDTO">
 		UPDATE m_recruit_member
 		SET
 			  active_date = NOW()
