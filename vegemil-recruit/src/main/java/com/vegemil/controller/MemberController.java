@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,32 +44,13 @@ public class MemberController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/member/join")
-	public String openMemberList(Model model) {
+	public String moveJoin(Model model) {
 		
 		model.addAttribute("member", new MemberDTO());
 
 		return "member/join";
 	}
 	
-	@PostMapping("/member/sendAuthmail")
-	public void execAuthmail(MemberDTO member, HttpServletResponse response) throws Exception {
-		
-		PrintWriter out = response.getWriter();
-		
-        try {
-        	
-        	if (member == null) {
-    			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
-    			out.flush();
-    		}
-			mailService.sendActiveEmail(member);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
-			out.flush();
-		}
-    }
 	
 	@PostMapping(value = "/member/register")
 	public String registerMember(
@@ -102,16 +84,21 @@ public class MemberController extends UiUtils {
 		return "member/joinConfirm";
 	}
 	
+	@GetMapping(value = "/member/login")
+	public String moveLogin() {
+		return "member/login";
+	}
+	
 	@GetMapping(value = "/member/detail")
-	public String openMemberDetail(@ModelAttribute("params") MemberDTO params, @RequestParam(value = "sTh", required = false) String memId, Model model, HttpServletResponse response) throws Exception {
+	public String openMemberDetail(@ModelAttribute("params") MemberDTO params, @RequestParam(value = "sTh", required = false) String emailAddr, Model model, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		if (memId == null) {
+		if (emailAddr == null) {
 			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
 			out.flush();
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "member/memberList", Method.GET, null, model);
 		}
-		MemberDTO member = memberService.getMemberDetail(memId);
+		MemberDTO member = memberService.loadUserByUsername(emailAddr);
 		if (member == null) {
 			out.println("<script>alert('이미 종료된 채용입니다.'); history.go(-1);</script>");
 			out.flush();
@@ -149,43 +136,16 @@ public class MemberController extends UiUtils {
 		return showMessageWithRedirect("게시글 수정이 완료되었습니다.", "/admin/baby/babyInfoList", Method.GET, null, model);
 	}
 	
-	
-	//회원 활성화
-	@GetMapping(value = "/member/infoActive")
-	public String changeActive(@ModelAttribute("authToken") final String authToken, Model model, HttpServletResponse response) throws Exception {
+	@GetMapping(value = "/member/infoCheck")
+	public void changeCheck(@RequestParam(value = "memId", required = false) String emailAddr, @RequestParam(value = "active", required = false) int active, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		MemberDTO member = null;
-		if (authToken == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
-			out.flush();
-		}
-		String emailAddr = mailService.verifyEmail(authToken);
 		if (emailAddr == null) {
 			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
 			out.flush();
 		}
-		member = new MemberDTO();
+		MemberDTO member = memberService.loadUserByUsername(emailAddr);
 		member.setEmailAddr(emailAddr);
-		boolean isRegistered = memberService.activeMember(member);
-		if (isRegistered == false) {
-			out.println("<script>alert('이메일인증에 실패하였습니다.'); window.location='/';</script>");
-			out.flush();
-		}
-		
-		return showMessageWithRedirect("이메일 인증이 완료되었습니다.", "/member/login", Method.GET, null, model);
-	}
-	
-	@GetMapping(value = "/member/infoCheck")
-	public void changeCheck(@RequestParam(value = "memId", required = false) String memId, @RequestParam(value = "active", required = false) int active, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (memId == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
-			out.flush();
-		}
-		MemberDTO member = memberService.getMemberDetail(memId);
-		member.setMemId(memId);
 		member.setActive(active);
 		boolean isRegistered = memberService.registerMember(member);
 		if (isRegistered == false) {

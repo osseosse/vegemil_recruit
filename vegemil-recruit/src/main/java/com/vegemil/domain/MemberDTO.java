@@ -1,19 +1,27 @@
 package com.vegemil.domain;
 
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
 import lombok.Setter;
 
+
+@SuppressWarnings("serial")
 @Getter
 @Setter
-public class MemberDTO extends CommonDTO {
+public class MemberDTO extends CommonDTO implements UserDetails {
 
 	private Long   memNo;		/** 번호 (PK) */
 	private String memName;		/** 고객명 */
 	private String sex;			/** 성별 */
 	private String birthday;	/** 생일 */
-	private String memId;		/** 고객ID */
+	private String auth;		/** 인증 */
 	private int    active;		/** 활성화 체크 */
 	private String password;	/** 비밀번호 */
 	private String regidentNo;	/** 주민번호 */
@@ -31,4 +39,46 @@ public class MemberDTO extends CommonDTO {
 	private Timestamp sleepDate;/** 휴면처리날짜 */
 	private Timestamp adAgreeDate;/** 마케팅 수신동의 날짜 */
 
+	 @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(this.auth));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    // 시큐리티의 userName
+    // -> 따라서 얘는 인증할 때 id를 봄
+    @Override
+    public String getUsername() {
+        return this.emailAddr;
+    }
+
+    // Vo의 userName !
+    public String getUserName(){
+        return this.memName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+	
 }

@@ -10,6 +10,7 @@
 		, birthday
 		, password
 		, active
+		, auth
 		, email_addr
 		, phone_no
 		, sleep_yn
@@ -21,12 +22,13 @@
 		, sleep_date
 	</sql>
 
-	<insert id="insertMember" parameterType="com.vegemil.domain.MemberDTO" useGeneratedKeys="true" keyProperty="memNo">
+	<insert id="saveMember" parameterType="com.vegemil.domain.MemberDTO" useGeneratedKeys="true" keyProperty="memNo">
 		INSERT INTO m_recruit_member (
 			  mem_name
 			, birthday
 			, password
 			, active
+			, auth
 			, email_addr
 			, phone_no
 			, sleep_yn
@@ -36,6 +38,7 @@
 			, #{birthday}
 			, #{password}
 			, 0
+			, #{auth}
 			, #{emailAddr}
 			, #{phoneNo}
 			, 0
@@ -43,7 +46,7 @@
 		)
 	</insert>
 
-	<select id="selectMemberDetail" parameterType="long" resultType="com.vegemil.domain.MemberDTO">
+	<select id="getMemberAccount" parameterType="String" resultType="com.vegemil.domain.MemberDTO">
 		SELECT
 			<include refid="memberColumns" />
 		FROM
