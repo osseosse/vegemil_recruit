@@ -3,12 +3,10 @@ package com.vegemil.configuration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.vegemil.interceptor.CertificationInterceptor;
 import com.vegemil.interceptor.LoggerInterceptor;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })

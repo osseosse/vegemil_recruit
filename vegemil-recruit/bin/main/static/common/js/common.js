@@ -116,79 +116,68 @@ window.onload = function(){
 
 
 /*================================ 
-    ÀÔ·ÂÆû COPY  
+    ï¿½Ô·ï¿½ï¿½ï¿½ COPY  
 ================================*/
   
-//°¡Á·, ¾îÇÐ, ÀÎÅÏ
+//ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½
 function add_item1(){
-	  // pre_set ¿¡ ÀÖ´Â ³»¿ëÀ» ÀÐ¾î¿Í¼­ Ã³¸®..
+	  // pre_set ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ Ã³ï¿½ï¿½..
 	  var div = document.createElement('div');
 	  div.innerHTML = document.getElementById('pre_set1').innerHTML;
 	  document.getElementById('field1').appendChild(div);
  }
  function remove_item1(obj){
-	  // obj.parentNode ¸¦ ÀÌ¿ëÇÏ¿© »èÁ¦
+	  // obj.parentNode ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  document.getElementById('field1').removeChild(obj.parentNode);
  }
 
 
- //´ëÇÐ±³, IT´É·Â
+ //ï¿½ï¿½ï¿½Ð±ï¿½, ITï¿½É·ï¿½
 function add_item2(){
-	  // pre_set ¿¡ ÀÖ´Â ³»¿ëÀ» ÀÐ¾î¿Í¼­ Ã³¸®..
+	  // pre_set ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ Ã³ï¿½ï¿½..
 	  var div = document.createElement('div');
 	  div.innerHTML = document.getElementById('pre_set2').innerHTML;
 	  document.getElementById('field2').appendChild(div);
  }
  function remove_item2(obj){
-	  // obj.parentNode ¸¦ ÀÌ¿ëÇÏ¿© »èÁ¦
+	  // obj.parentNode ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  document.getElementById('field2').removeChild(obj.parentNode);
  }
 
 
-//´ëÇÐ¿ø, ÀÚ°Ý ¹× ¸éÇã
+//ï¿½ï¿½ï¿½Ð¿ï¿½, ï¿½Ú°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 function add_item3(){
-	  // pre_set ¿¡ ÀÖ´Â ³»¿ëÀ» ÀÐ¾î¿Í¼­ Ã³¸®..
+	  // pre_set ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ Ã³ï¿½ï¿½..
 	  var div = document.createElement('div');
 	  div.innerHTML = document.getElementById('pre_set3').innerHTML;
 	  document.getElementById('field3').appendChild(div);
  }
  function remove_item3(obj){
-	  // obj.parentNode ¸¦ ÀÌ¿ëÇÏ¿© »èÁ¦
+	  // obj.parentNode ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  document.getElementById('field3').removeChild(obj.parentNode);
  }    
  
- //¹Ú»ç, ¼ö»ó°æ·Â
+ //ï¿½Ú»ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 function add_item4(){
-	  // pre_set ¿¡ ÀÖ´Â ³»¿ëÀ» ÀÐ¾î¿Í¼­ Ã³¸®..
+	  // pre_set ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ Ã³ï¿½ï¿½..
 	  var div = document.createElement('div');
 	  div.innerHTML = document.getElementById('pre_set4').innerHTML;
 	  document.getElementById('field4').appendChild(div);
  }
  function remove_item4(obj){
-	  // obj.parentNode ¸¦ ÀÌ¿ëÇÏ¿© »èÁ¦
+	  // obj.parentNode ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  document.getElementById('field4').removeChild(obj.parentNode);
  }   
 
- //ÇØ¿Ü¿¬¼ö/´ë¿ÜÈ°µ¿
+ //ï¿½Ø¿Ü¿ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½È°ï¿½ï¿½
 function add_item5(){
-	  // pre_set ¿¡ ÀÖ´Â ³»¿ëÀ» ÀÐ¾î¿Í¼­ Ã³¸®..
+	  // pre_set ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ Ã³ï¿½ï¿½..
 	  var div = document.createElement('div');
 	  div.innerHTML = document.getElementById('pre_set5').innerHTML;
 	  document.getElementById('field5').appendChild(div);
  }
  function remove_item5(obj){
-	  // obj.parentNode ¸¦ ÀÌ¿ëÇÏ¿© »èÁ¦
+	  // obj.parentNode ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 	  document.getElementById('field5').removeChild(obj.parentNode);
  }   
-
-
-
-
-/*================================ 
-    °íÁ¤¸Þ´º
-================================*/
-$( '.sidebar' ).fixedsticky();
-
-
-
 

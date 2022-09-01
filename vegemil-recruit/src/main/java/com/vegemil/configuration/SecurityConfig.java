@@ -22,8 +22,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                //.antMatchers("/member/**").authenticated()
+                //.antMatchers("/application/**").authenticated()
+            	.antMatchers("/member/login").permitAll()
                 .antMatchers("/member/**").hasAuthority("USER") // user 권한의 유저만  접근가능
+                .antMatchers("/application/**").hasAuthority("USER") // user 권한의 유저만  접근가능
+                .antMatchers("/**").permitAll()
             .anyRequest()
                 .authenticated()
                 .and().csrf().disable()

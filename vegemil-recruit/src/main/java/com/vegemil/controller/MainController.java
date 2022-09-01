@@ -22,7 +22,10 @@ public class MainController {
 	@RequestMapping(value = "/")
 	public String index(Model model, Authentication authentication) {
 		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+		MemberDTO member = null;
+		if(authentication != null)
+        member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+		
         if(member != null) {
 	        if(member.getActive() != 1) {
 	        	return "member/joinConfirm";

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -54,7 +55,7 @@ public class MemberController extends UiUtils {
 	
 	@PostMapping(value = "/member/register")
 	public String registerMember(
-			@ModelAttribute("member") final MemberDTO member,
+			@ModelAttribute("member") final @Valid MemberDTO member,
 			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		
 		response.setContentType("text/html; charset=UTF-8");

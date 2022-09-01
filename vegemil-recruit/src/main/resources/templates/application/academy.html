@@ -26,18 +26,18 @@
 
 				<div class="container1300 center" >
 					<div class="memberWrapBase">
-						<div class="sidebar fixedsticky w350 f-left">
+						<div class="sidebar fixedsticky w350 f-left" >
 							<p class="f23 fw600">지원서 작성</p>
 							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
 							<ul class="mt70 writeList">
-								<li class="w-after"><a href="write01.html">개인정보</a></li>
-								<li class="w-ing"><a href="write02.html">학력정보</a></li>
-								<li class="w-before"><a href="write03.html">어학/자격/기타</a></li>
-								<li class="w-before"><a href="write04.html">경력사항</a></li>
-								<li class="w-before"><a href="write05.html">자기소개</a></li>
+								<li class="w-ing"><a href="/application/personalInfo">개인정보</a></li>
+								<li class="w-before"><a href="/application/academy">학력정보</a></li>
+								<li class="w-before"><a href="/application/qualification">어학/자격/기타</a></li>
+								<li class="w-before"><a href="/application/career">경력사항</a></li>
+								<li class="w-before"><a href="/application/introduce">자기소개</a></li>
 							</ul>
-							<p class="btn_type02 mt30"><a href="reView.html">미리보기</a></p>
-							<p class="btn_type03 mt10"><a href="#">임시저장</a></p>
+							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
+							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${application.idx} ]])">임시저장</a></p>
 						</div>
 						<script>
 							$(document).ready(function(){
