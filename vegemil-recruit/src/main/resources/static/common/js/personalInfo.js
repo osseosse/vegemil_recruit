@@ -98,17 +98,21 @@ function execPostcode() {
       //리피터
       $(function () {
    	  'use strict';
-   	  window.id = 0;
-
-   	  // form repeater jquery
+   	  window.id = $('#famCount').val();
+   	  
    	  $('.fam-repeater').repeater({
    		defaultValues: {
             'id': window.id,
         },
    	    show: function () {
-   	      $(this).slideDown();
-   	      window.id++;
-   	      $('#famCount').val(window.id);
+   	      if(window.id < 4) {
+	   	      $(this).slideDown();
+	   	      window.id++;
+	   	      $('#famCount').val(window.id);
+   	      } else {
+   	      	alert("가족은 4명까지 입력 가능합니다.");
+   	      	return false;
+   	      }
    	    },
    	    hide: function (deleteElement) {
    	      if (confirm('삭제하시겠습니까?')) {

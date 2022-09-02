@@ -1,19 +1,14 @@
 package com.vegemil.controller;
 
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,14 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vegemil.constant.Method;
-import com.vegemil.domain.ApplicationDTO;
+import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.MemberDTO;
+import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.service.ApplicationService;
 import com.vegemil.util.UiUtils;
 
@@ -38,16 +33,46 @@ public class ApplicationController extends UiUtils {
 	@Autowired
 	private ApplicationService applicationService;
 	
-	@GetMapping(value = "/application/list")
-	public String openApplicationList(@ModelAttribute("params") ApplicationDTO params, Model model) {
-		List<ApplicationDTO> applicationList = applicationService.getApplicationList(params);
-		model.addAttribute("applicationList", applicationList);
-
+	@GetMapping(value = "/application/personalInfo")
+	public String openPersonalInfo(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		PersonalInfoDTO application = new PersonalInfoDTO();
+		
+		if (idx == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+		}
+		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+	        
+	        application = applicationService.selectPersonalInfo(idx, member.getMemNo());
+			if (application == null) {
+				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+			}
+			application.setIdx(idx);
+			application.setEmailAddr(member.getEmailAddr());
+	        application.setMemName(member.getMemName());
+	        application.setPhoneNo(member.getPhoneNo());
+	        
+			model.addAttribute("app", application);
+	        
+        }
+		
 		return "application/personalInfo";
 	}
 	
 	@PostMapping(value = "/application/registerPersonalInfo")
-	public String registerPersonalInfo(@ModelAttribute("application") final ApplicationDTO application, 
+	public String registerPersonalInfo(@ModelAttribute("app") final PersonalInfoDTO application, 
 			BindingResult bindingResult, @RequestParam("fileName") MultipartFile fileName, Model model, 
 			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
@@ -77,7 +102,7 @@ public class ApplicationController extends UiUtils {
 		        application.setMemNo(member.getMemNo());
 		        application.setPhoneNo(member.getPhoneNo());
 		        
-				boolean isRegistered = applicationService.registerApplication(application);
+				boolean isRegistered = applicationService.registerPersonalInfo(application);
 				if (isRegistered == false) {
 					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
 					out.flush();
@@ -87,31 +112,29 @@ public class ApplicationController extends UiUtils {
 		} catch (DataAccessException e) {
 			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/application/applicationList", Method.GET, null, model);
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 
 		} catch (Exception e) {
 			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/application/applicationList", Method.GET, null, model);
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 		}
-		
-		out.println("<script>alert('지원서 저장이 완료되었습니다.'); window.location='/application/applicationList';</script>");
-		out.flush();
 
-		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/applicationList", Method.GET, null, model);
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/academy?idx="+application.getIdx(), Method.GET, null, model);
 	}
 	
-	@GetMapping(value = "/application/personalInfo")
-	public String openPersonalInfo(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+	
+	@GetMapping(value = "/application/academy")
+	public String openAcademy(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		ApplicationDTO application = new ApplicationDTO();
+		AcademyInfoDTO application = new AcademyInfoDTO();
 		
 		if (idx == null) {
 			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("올바르지 않은 접근입니다.", "application/applicationList", Method.GET, null, model);
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
 		}
 		
 		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
@@ -121,11 +144,11 @@ public class ApplicationController extends UiUtils {
 	        	return "member/joinConfirm";
 	        }
 	        
-	        application = applicationService.getApplicationDetail(idx, member.getMemNo());
+	        application = applicationService.selectAcademy(idx, member.getMemNo());
 			if (application == null) {
 				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
 				out.flush();
-				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "application/applicationList", Method.GET, null, model);
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
@@ -133,47 +156,52 @@ public class ApplicationController extends UiUtils {
 	        application.setPhoneNo(member.getPhoneNo());
 	        
 			model.addAttribute("application", application);
+			model.addAttribute("idx", idx);
 	        
         }
 		
-		return "application/personalInfo";
+		return "application/academy";
 	}
 	
-	@PostMapping(value = "/application/personalInfoUpdate")
-	public String updatePersonalInfo(@ModelAttribute("application") final ApplicationDTO application, @RequestParam("fileName") MultipartFile fileName, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+	@PostMapping(value = "/application/registerAcademyInfo")
+	public String registerAcademyInfo(@ModelAttribute("app") final AcademyInfoDTO application, 
+			BindingResult bindingResult, Model model, 
+			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
 		try {
-				if(!fileName.getOriginalFilename().equals("")) {
-					String originalName = fileName.getOriginalFilename();
-					String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
-					String uuid = UUID.randomUUID().toString();
-					String savefileName = uuid + "_" + file;
-					Path savePath = Paths.get(request.getSession().getServletContext().getRealPath("/..") + "/WEB-INF/classes/static/upload/applicationInfo/" + savefileName);
-					
-					fileName.transferTo(savePath);
-					application.setPhoto(savefileName);
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+			
+		        application.setEmailAddr(member.getEmailAddr());
+		        application.setMemName(member.getMemName());
+		        application.setMemNo(member.getMemNo());
+		        application.setPhoneNo(member.getPhoneNo());
+		        
+				boolean isRegistered = applicationService.registerAcademyInfo(application);
+				if (isRegistered == false) {
+					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
 				}
-			boolean isRegistered = applicationService.registerApplication(application);
-			if (isRegistered == false) {
-				out.println("<script>alert('지원서 수정에 실패하였습니다.'); history.go(-1);</script>");
-				out.flush();
+				
 			}
 		} catch (DataAccessException e) {
 			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/application/list", Method.GET, null, model);
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 
 		} catch (Exception e) {
 			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/application/list", Method.GET, null, model);
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 		}
-		
-		out.println("<script>alert('지원서 수정이 완료되었습니다.'); window.location='/application/list';</script>");
-		out.flush();
 
-		return showMessageWithRedirect("지원서 수정이 완료되었습니다.", "/application/list", Method.GET, null, model);
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/language?idx="+application.getIdx(), Method.GET, null, model);
 	}
 	
 	/*

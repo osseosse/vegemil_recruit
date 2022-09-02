@@ -5,13 +5,23 @@
 
 	<sql id="informationColumns">
 		idx, setup_th, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, join_type, join_company, join_field1, join_area1
-		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, marry, religion
-		, ability, hobby, handicap, fam_mem1, fam_mem2, fam_mem3, fam_con1, fam_name1, fam_age1
+		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, handicap, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
-		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, DATE_FORMAT(mil_s_date,'%Y-%m') as mil_s_date, DATE_FORMAT(mil_e_date,'%Y-%m') as mil_e_date
+		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
+	</sql>
+	<sql id="academyColumns">
+		idx, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
+		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_max1, sch_point_evg1
+    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_max2, sch_point_evg2
+    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_max3, sch_point_evg3
+    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_max4, sch_point_evg4
+    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_max5, sch_point_evg5
+    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
+    	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3, sch_sub_admis4, sch_sub_major4, sch_sub_point_evg4, sch_sub_admis5, sch_sub_major5
+    	, sch_sub_point_evg5
 	</sql>
 
-	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.ApplicationDTO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO R_Recruit (
 			setup_th, join_num, join_date, join_ok, join_type, join_company, join_field1, join_area1
 			, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, marry, religion
@@ -21,31 +31,59 @@
 		) VALUES (
 			  #{setupTh}, #{joinNum}, NOW(), #{joinOk}, #{joinType}, #{joinField1}, #{joinArea1}
 			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{marry}, #{religion}
-			, #{ability}, #{like}, #{handicap}, #{famMem1}, #{famMem2}, #{famMem3}, #{famCon1}, #{famName1}, #{famAge1}
+			, #{ability}, #{like}, #{handicap}, #{famCount}, #{famCon1}, #{famName1}, #{famAge1}
 			, #{famCon2}, #{famName2}, #{famAge2}, #{famCon3}, #{famName3}, #{famAge3}, #{famCon4}, #{famName4}, #{famAge4}
 			, #{milClass}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate}
 		)
 	</insert>
 	
-	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.ApplicationDTO">
+	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO">
 		UPDATE R_Recruit
 		SET
 			  join_company= #{joinCompany}, join_type = #{joinType}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}, name_han = #{nameHan}
 			, sex = #{sex}, name_eng = #{nameEng}, photo = #{photo}, zip1 = #{zip1}, addr11 = #{addr11}, addr12 = #{addr12}
-			, bohun = #{bohun}, marry = #{marry}, religion = #{religion}, ability = #{ability}, hobby = #{hobby}
-			, handicap = #{handicap}, fam_mem1 = #{famMem1}, fam_mem2 = #{famMem2}, fam_mem3 = #{famMem3}
+			, bohun = #{bohun}, handicap = #{handicap}, fam_count = #{famCount}
 			, fam_con1 = #{famCon1}, fam_name1 = #{famName1}, fam_age1 = #{famAge1}, fam_con2 = #{famCon2}
 			, fam_name2 = #{famName2}, fam_age2 = #{famAge2}, fam_con3 = #{famCon3}, fam_name3 = #{famName3}
 			, fam_age3 = #{famAge3}, fam_con4 = #{famCon4}, fam_name4 = #{famName4}, fam_age4 = #{famAge4}
 			, mil_class = #{milClass}, mil_type = #{milType}, mil_lv = #{milLv}, mil_arm = #{milArm} 
-			, mil_ticket = #{milTicket}, mil_s_date = #{milSDate}, mil_e_date = #{milEdate}
+			, mil_ticket = #{milTicket}, mil_s_date = #{milSDate}, mil_e_date = #{milEdate}, update_date = NOW()
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</update>
+	
+	<update id="updateAcademy" parameterType="com.vegemil.domain.AcademyInfoDTO">
+		UPDATE R_Recruit
+		SET
+			  last_academy = #{lastAcademy}, sch_grad1 = #{sch_grad1}, sch_enter_ym1 = #{sch_enter_ym1}, sch_grad_ym1 = #{sch_grad_ym1}, sch_name1 = #{sch_name1}
+			, sch_admis1 = #{sch_admis1}, sch_major1 = #{sch_major1}, sch_site1 = #{sch_site1}, sch_night1 = #{sch_night1}, sch_point_evg1 = #{sch_point_evg1}
+			, sch_grad2 = #{sch_grad2}, sch_enter_ym2 = #{sch_enter_ym2}, sch_grad_ym2 = #{sch_grad_ym2}, sch_name2 = #{sch_name2}, sch_admis2 = #{sch_admis2}
+			, sch_major2 = #{sch_major2}, sch_site2 = #{sch_site2}, sch_night2 = #{sch_night2}, sch_point_evg2 = #{sch_point_evg2}, sch_grad3 = #{sch_grad3}
+			, sch_enter_ym3 = #{sch_enter_ym3}, sch_grad_ym3 = #{sch_grad_ym3}, sch_name3 = #{sch_name3}, sch_admis3 = #{sch_admis3}, sch_major3 = #{sch_major3}
+			, sch_site3 = #{sch_site3}, sch_night3 = #{sch_night3}, sch_point_evg3 = #{sch_point_evg3}, sch_grad4 = #{sch_grad4}, sch_enter_ym4 = #{sch_enter_ym4}
+			, sch_grad_ym4 = #{sch_grad_ym4}, sch_name4 = #{sch_name4}, sch_admis4 = #{sch_admis4}, sch_major4 = #{sch_major4}, sch_site4 = #{sch_site4}
+			, sch_night4 = #{sch_night4}, sch_point_evg4 = #{sch_point_evg4}, sch_grad5 = #{sch_grad5}, sch_enter_ym5 = #{sch_enter_ym5}, sch_grad_ym5 = #{sch_grad_ym5}
+			, sch_name5 = #{sch_name5}, sch_admis5 = #{sch_admis5}, sch_major5 = #{sch_major5}, sch_site5 = #{sch_site5}, sch_night5 = #{sch_night5}
+			, sch_point_evg5 = #{sch_point_evg5}, sch_sub_admis3 = #{sch_sub_admis3}, sch_sub_major3 = #{sch_sub_major3}, sch_sub_point_evg3 = #{sch_sub_point_evg3}
+			, sch_sub_admis4 = #{sch_sub_admis4}, sch_sub_major4 = #{sch_sub_major4}, sch_sub_point_evg4 = #{sch_sub_point_evg4}, sch_sub_admis5 = #{sch_sub_admis5}
+			, sch_sub_major5 = #{sch_sub_major5}, sch_sub_point_evg5 = #{sch_sub_point_evg5}, sch_dep_type2 = #{schDepType2}, sch_dep_type3 = #{schDepType3}
+			, sch_dep_type4 = #{schDepType4}, sch_dep_type5 = #{schDepType5}, sch_transfer3 = #{schTransfer3}, update_date = NOW()
 		WHERE
 			idx = #{idx} and mem_no= #{memNo}
 	</update>
 
-	<select id="selectApplicationByIdx" parameterType="map" resultType="com.vegemil.domain.ApplicationDTO">
+	<select id="selectPersonalInfo" parameterType="map" resultType="com.vegemil.domain.PersonalInfoDTO">
 		SELECT
 			<include refid="informationColumns" />
+		FROM
+			R_Recruit
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</select>
+	
+	<select id="selectAcademy" parameterType="map" resultType="com.vegemil.domain.AcademyInfoDTO">
+		SELECT
+			<include refid="academyColumns" />
 		FROM
 			R_Recruit
 		WHERE
@@ -64,14 +102,13 @@
 		<include refid="CommonMapper.paging" />
 	</select>
 
-	<select id="selectApplicationCount" parameterType="long" resultType="int">
+	<select id="selectApplicationCount" parameterType="map" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			R_Recruit
 		WHERE
-			mem_no= #{memNo}
-		<include refid="CommonMapper.search" />
+			idx = #{idx} and mem_no= #{memNo}
 	</select>
 
 </mapper>

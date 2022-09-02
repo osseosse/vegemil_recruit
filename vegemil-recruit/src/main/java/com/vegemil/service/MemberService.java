@@ -35,11 +35,6 @@ public class MemberService implements UserDetailsService  {
 
 		int memberTotalCount = memberMapper.selectMemberTotalCount(params);
 
-		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalRecordCount(memberTotalCount);
-
-		params.setPaginationInfo(paginationInfo);
-
 		if (memberTotalCount > 0) {
 			memberList = memberMapper.selectMemberList(params);
 		}

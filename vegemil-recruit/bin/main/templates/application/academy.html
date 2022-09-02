@@ -8,6 +8,11 @@
 <!-- add js -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+<script>
+	$(document).ready(function(){
+		$( '.sidebar' ).fixedsticky();
+	});
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -30,8 +35,8 @@
 							<p class="f23 fw600">지원서 작성</p>
 							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
 							<ul class="mt70 writeList">
-								<li class="w-ing"><a href="/application/personalInfo">개인정보</a></li>
-								<li class="w-before"><a href="/application/academy">학력정보</a></li>
+								<li class="w-before"><a th:href="|@{/application/personalInfo}?idx=${idx}|">개인정보</a></li>
+								<li class="w-ing"><a th:href="|@{/application/academy}?idx=${idx}|">학력정보</a></li>
 								<li class="w-before"><a href="/application/qualification">어학/자격/기타</a></li>
 								<li class="w-before"><a href="/application/career">경력사항</a></li>
 								<li class="w-before"><a href="/application/introduce">자기소개</a></li>
@@ -39,14 +44,10 @@
 							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${application.idx} ]])">임시저장</a></p>
 						</div>
-						<script>
-							$(document).ready(function(){
-								$( '.sidebar' ).fixedsticky();
-							});
-						</script>
 						<div class="wrap860 f-right" >
+						<form class="fam-repeater" th:action="@{/application/registerAcademy}" th:object="${application}" method="post" >
 							<!-- (1)최종 (예정) 학력 -->
-
+							
 							<!-- 개발시 노출범위 확인해주세요!
 								//고등학교 선택시 노출범위 :고등학교
 								//전문대학 선택시 노출범위 :고등학고 + 전문대학
@@ -54,14 +55,15 @@
 								//석사 선택시 노출범위 :고등학고 + 전문대학 + 대학교 + 석사
 								//박사 선택시 노출범위 :고등학고 + 전문대학 + 대학교 + 석사 + 박사
 							-->
+							<input type="hidden" th:field="*{idx}" />
 							<p class="f23 fw600">최종 (예정) 학력<span class="abs-r f14 fw400 red">*는 필수 입력 사항입니다.</span></p>
 							<div class="r-box mt20">
 								<ul class="s-d-2">
 									<li class="f14"><span class="red">*</span>최종학력</li>
 									<li>
 										<div class="custom-sel w230">
-										  <select>
-											<option value="선택해 주세요">선택해 주세요</option>
+										  <select th:field="*{lastAcademy}">
+											<option value="">선택해 주세요</option>
 											<option value="고등학교">고등학교</option>
 											<option value="전문대학">전문대학</option>
 											<option value="대학교">대학교</option>
@@ -82,8 +84,8 @@
 											<li class="f14"><span class="red">*</span>졸업구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요2">선택해 주세요</option>
+												  <select th:field="*{schGrad1}">
+													<option value="">선택해 주세요</option>
 													<option value="졸업">졸업</option>
 													<option value="예정">예정</option>
 												  </select>
@@ -95,7 +97,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>학교명</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schName1}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -103,7 +105,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>소재지</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schSite1}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -114,7 +116,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>계열</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schAdmis1}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -123,8 +125,8 @@
 											<li class="f14"><span class="red">*</span>주간/야간</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schNight1}">
+													<option value="">선택해 주세요</option>
 													<option value="주간">주간</option>
 													<option value="야간">야간</option>
 												  </select>
@@ -138,91 +140,11 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>재학기간</li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												  <input type="text" id="schEnterYm1" th:field="*{schEnterYm1}" class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 											<li class="ml10 mr10"> - </li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												  <input type="text" id="schGradYm1" th:field="*{schGradYm1}" class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 										</ul>
 									</div>
@@ -237,8 +159,8 @@
 											<li class="f14">졸업구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요2">선택해 주세요</option>
+												  <select th:field="*{schGrad2}">
+													<option value="">선택해 주세요</option>
 													<option value="졸업">졸업</option>
 													<option value="예정">예정</option>
 												  </select>
@@ -250,7 +172,7 @@
 										<ul class="s-d-2">
 											<li class="f14">학교명</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schName2}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -258,7 +180,7 @@
 										<ul class="s-d-2">
 											<li class="f14">소재지</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schSite2}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -269,7 +191,7 @@
 										<ul class="s-d-2">
 											<li class="f14">계열</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schAdmis2}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -278,8 +200,8 @@
 											<li class="f14">주간/야간</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schNight2}">
+													<option value="">선택해 주세요</option>
 													<option value="주간">주간</option>
 													<option value="야간">야간</option>
 												  </select>
@@ -288,100 +210,69 @@
 										</ul>
 									</div>
 								</div>
-								<div class="row  mt10">
+								<div class="row  mt10 pb30 bottom_line ">
 									<div class="col-lg-12">
-										<ul class="s-d-2">
+										<ul class="s-d-2 ">
 											<li class="f14">재학기간</li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
+												<input type="text" id="schEnterYm2" th:field="*{schEnterYm2}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
+											<li class="ml10 mr10"> ~ </li>
 											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
-											</li>
-											<li class="ml10 mr10"> - </li>
-											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												<input type="text" id="schGradYm2" th:field="*{schGradYm2}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 										</ul>
 									</div>
 								</div>
+								<div class="row  mt30 ">
+									<div class="col-lg-6 ">
+										<ul class="s-d-2 ">
+											<li class="f14"><span class="red">*</span>학과계열</li>
+											<li>
+												<div class="custom-sel w180">
+												  <select th:field="*{schDepType2}">
+													<option value="">선택해 주세요</option>
+													<option value="상경">상경</option>
+													<option value="법정">법정</option>
+													<option value="식품">식품</option>
+													<option value="사회과학">사회과학</option>
+													<option value="인문">인문</option>
+													<option value="어문">어문</option>
+													<option value="자연">자연</option>
+													<option value="이공">이공</option>
+													<option value="자연과학">자연과학</option>
+													<option value="교육">교육</option>
+													<option value="예체능">예체능</option>
+													<option value="기타">기타</option>
+												  </select>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="col-lg-6 ">
+										<ul class="s-d-2 ">
+											<li class="f14"><span class="red">*</span>전공</li>
+											<li>
+												<input type="text" th:field="*{schMajor2}" class="inType01 w180"  >
+											</li>
+										</ul>
+									</div>
+									
+									<div class="col-lg-12 mt10">
+										<ul class="s-d-2 ">
+											<li class="f14"><span class="red">*</span>평점</li>
+											<li>
+												<input type="text" th:field="*{schPointEvg2}" class="inType01 w70 text-right"  >
+											</li>
+											
+											<li class="ml10 mr10"> / </li>
+											<li>
+												4.5
+											</li>
+											<p class="gray f14 mt10 ">*평점은 4.5 만점으로 환산하여 입력해주세요.</p>
+										</ul>
+									</div>
+								</div>	
 							</div>
 							<!-- (4)대학교 -->
 							<p class="f23 fw600 mt80 pr">대학교</p> 
@@ -393,8 +284,8 @@
 											<li class="f14"><span class="red">*</span>입학구분</li>
 											<li>
 												<div class="custom-sel w180 error">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schTransfer3}">
+													<option value="">선택해 주세요</option>
 													<option value="일반">일반</option>
 													<option value="편입">편입</option>
 												  </select>
@@ -407,8 +298,8 @@
 											<li class="f14"><span class="red">*</span>졸업구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요2">선택해 주세요</option>
+												  <select th:field="*{schGrad3}">
+													<option value="">선택해 주세요</option>
 													<option value="졸업">졸업</option>
 													<option value="예정">예정</option>
 												  </select>
@@ -422,7 +313,7 @@
 											<li>
 												<fieldset class="search">
 													<legend>학교검색</legend>
-													<input type="text" value="" title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
+													<input type="text" th:field="*{schGrad3}"title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
 												</fieldset>
 											</li>
 										</ul>
@@ -431,7 +322,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>소재지</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schSite3}" class="inType01 w180"  >
 											</li> 
 										</ul>
 									</div>
@@ -441,7 +332,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>계열</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schAdmis3}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -450,8 +341,8 @@
 											<li class="f14"><span class="red">*</span>주간/야간</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schNight3}">
+													<option value="">선택해 주세요</option>
 													<option value="주간">주간</option>
 													<option value="야간">야간</option>
 												  </select>
@@ -465,91 +356,11 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>재학기간</li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
+												<input type="text" id="schEnterYm3" th:field="*{schEnterYm3}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
+											<li class="ml10 mr10"> ~ </li>
 											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
-											</li>
-											<li class="ml10 mr10"> - </li>
-											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												<input type="text" id="schGradYm3" th:field="*{schGradYm3}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 										</ul>
 									</div>
@@ -560,10 +371,20 @@
 											<li class="f14"><span class="red">*</span>학과계열</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schDepType3}">
+													<option value="">선택해 주세요</option>
 													<option value="상경">상경</option>
+													<option value="법정">법정</option>
+													<option value="식품">식품</option>
+													<option value="사회과학">사회과학</option>
 													<option value="인문">인문</option>
+													<option value="어문">어문</option>
+													<option value="자연">자연</option>
+													<option value="이공">이공</option>
+													<option value="자연과학">자연과학</option>
+													<option value="교육">교육</option>
+													<option value="예체능">예체능</option>
+													<option value="기타">기타</option>
 												  </select>
 												</div>
 											</li>
@@ -573,7 +394,7 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>전공</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schMajor3}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -582,9 +403,8 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>평점</li>
 											<li>
-												<input type="text" class="inType01 w70 text-right"  >
+												<input type="text" th:field="*{schSubPointEvg3}" class="inType01 w70 text-right"  >
 											</li>
-											
 											<li class="ml10 mr10"> / </li>
 											<li>
 												4.5
@@ -654,8 +474,8 @@
 											<li class="f14"><span class="red">*</span>졸업구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요2">선택해 주세요</option>
+												  <select th:field="*{schGrad4}">
+													<option value="">선택해 주세요</option>
 													<option value="졸업">졸업</option>
 													<option value="예정">예정</option>
 												  </select>
@@ -670,7 +490,7 @@
 											<li>
 												<fieldset class="search">
 													<legend>학교검색</legend>
-													<input type="text" value="" title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
+													<input type="text" th:field="*{schName4}" title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
 												</fieldset>
 											</li>
 										</ul>
@@ -679,7 +499,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>소재지</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schSite4}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -689,7 +509,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>계열</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schAdmis4}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -698,8 +518,8 @@
 											<li class="f14"><span class="red">*</span>주간/야간</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schNight4}">
+													<option value="">선택해 주세요</option>
 													<option value="주간">주간</option>
 													<option value="야간">야간</option>
 												  </select>
@@ -713,91 +533,11 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>재학기간</li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
+												<input type="text" id="schEnterYm4" th:field="*{schEnterYm4}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
+											<li class="ml10 mr10"> ~ </li>
 											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
-											</li>
-											<li class="ml10 mr10"> - </li>
-											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												<input type="text" id="schGradYm4" th:field="*{schGradYm4}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 										</ul>
 									</div>
@@ -808,10 +548,20 @@
 											<li class="f14"><span class="red">*</span>학과계열</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schDepType4}">
+													<option value="">선택해 주세요</option>
 													<option value="상경">상경</option>
+													<option value="법정">법정</option>
+													<option value="식품">식품</option>
+													<option value="사회과학">사회과학</option>
 													<option value="인문">인문</option>
+													<option value="어문">어문</option>
+													<option value="자연">자연</option>
+													<option value="이공">이공</option>
+													<option value="자연과학">자연과학</option>
+													<option value="교육">교육</option>
+													<option value="예체능">예체능</option>
+													<option value="기타">기타</option>
 												  </select>
 												</div>
 											</li>
@@ -821,7 +571,7 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>전공</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schMajor4}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -830,7 +580,7 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>평점</li>
 											<li>
-												<input type="text" class="inType01 w70 text-right"  >
+												<input type="text" th:field="*{schSubPointEvg4}" class="inType01 w70 text-right"  >
 											</li>
 											
 											<li class="ml10 mr10"> / </li>
@@ -848,50 +598,6 @@
 										<input type="image" value=" 추가 " onclick="add_item3()" th:src="@{/img/ico_plus.png}">
 									</p>
 								</div>
-								<div id="field3"></div>
-								<div id="pre_set3" style="display:none">
-									<div class="row  mt50 ">
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>학과계열</li>
-												<li>
-													<div class="custom-sel------- w180">
-													  <select class="base w180">
-														<option value="선택해 주세요">선택해 주세요</option>
-														<option value="상경">상경</option>
-														<option value="인문">인문</option>
-													  </select>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>전공</li>
-												<li>
-													<input type="text" class="inType01 w180"  >
-												</li>
-											</ul>
-										</div>
-										
-										<div class="col-lg-12 mt10">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>평점</li>
-												<li>
-													<input type="text" class="inType01 w70 text-right"  >
-												</li>
-												
-												<li class="ml10 mr10"> / </li>
-												<li>
-													4.5
-												</li>
-												<p class="gray f14 mt10 ">*평점은 4.5 만점으로 환산하여 입력해주세요.</p>
-											</ul>
-										</div>
-									</div>	
-									<input class="inputDel2" type="image" value="삭제" onclick="remove_item3(this)" th:src="@{/img/ico_inputDel2.png}" >
-								</div>	
-								<!-- //전공COPY -->
 							</div>
 							<!-- (6)박사 -->
 							<p class="f23 fw600 mt80 pr">박사</p> 
@@ -902,8 +608,8 @@
 											<li class="f14"><span class="red">*</span>졸업구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요2">선택해 주세요</option>
+												  <select th:field="*{schGrad5}">
+													<option value="">선택해 주세요</option>
 													<option value="졸업">졸업</option>
 													<option value="예정">예정</option>
 												  </select>
@@ -917,7 +623,7 @@
 											<li>
 												<fieldset class="search">
 													<legend>학교검색</legend>
-													<input type="text" value="" title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
+													<input type="text" th:field="*{schName5}" title='입학대학교명 입력' placeholder="서울대학교"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_dropOut" title="팝업띄움" class="ico_search"><span class="btn_Type06">검색</span></a>
 												</fieldset>
 											</li>
 										</ul>
@@ -926,7 +632,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>소재지</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schSite5}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -936,7 +642,7 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>계열</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schAdmis5}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -945,8 +651,8 @@
 											<li class="f14"><span class="red">*</span>주간/야간</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schNight5}">
+													<option value="">선택해 주세요</option>
 													<option value="주간">주간</option>
 													<option value="야간">야간</option>
 												  </select>
@@ -960,91 +666,11 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>재학기간</li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												<input type="text" id="schEnterYm5" th:field="*{schEnterYm5}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 											<li class="ml10 mr10"> - </li>
 											<li>
-												<div class="custom-sel scroll w90">
-												  <select>
-													<option value="년도">년도</option>
-													<option value="2022">2022</option>
-													<option value="2021">2021</option>
-													<option value="2020">2020</option>
-													<option value="2019">2019</option>
-													<option value="2018">2018</option>
-													<option value="2018">2017</option>
-													<option value="2018">2016</option>
-													<option value="2018">2015</option>
-													<option value="2018">2014</option>
-													<option value="2018">2013</option>
-													<option value="2018">2012</option>
-													<option value="2018">2011</option>
-													<option value="2018">2010</option>
-													<option value="2018">2009</option>
-													<option value="2018">2008</option>
-													<option value="2018">2007</option>
-													<option value="2018">2006</option>
-												  </select>
-												</div>
-											</li>
-											<li>
-												<div class="custom-sel scroll w85">
-													<select>
-														<option value="년도">월</option>
-														<option value="12">12</option>
-														<option value="11">11</option>
-														<option value="10">10</option>
-														<option value="09">09</option>
-														<option value="08">08</option>
-														<option value="07">07</option>
-														<option value="06">06</option>
-														<option value="05">05</option>
-														<option value="04">04</option>
-														<option value="03">03</option>
-														<option value="02">02</option>
-														<option value="01">01</option>
-													</select>
-												</div>
+												<input type="text" id="schGradYm5" th:field="*{schGradYm5}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
 											</li>
 										</ul>
 									</div>
@@ -1055,10 +681,20 @@
 											<li class="f14"><span class="red">*</span>학과계열</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select>
-													<option value="선택해 주세요">선택해 주세요</option>
+												  <select th:field="*{schDepType5}">
+													<option value="">선택해 주세요</option>
 													<option value="상경">상경</option>
+													<option value="법정">법정</option>
+													<option value="식품">식품</option>
+													<option value="사회과학">사회과학</option>
 													<option value="인문">인문</option>
+													<option value="어문">어문</option>
+													<option value="자연">자연</option>
+													<option value="이공">이공</option>
+													<option value="자연과학">자연과학</option>
+													<option value="교육">교육</option>
+													<option value="예체능">예체능</option>
+													<option value="기타">기타</option>
 												  </select>
 												</div>
 											</li>
@@ -1068,7 +704,7 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>전공</li>
 											<li>
-												<input type="text" class="inType01 w180"  >
+												<input type="text" th:field="*{schMajor5}" class="inType01 w180"  >
 											</li>
 										</ul>
 									</div>
@@ -1077,7 +713,7 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>평점</li>
 											<li>
-												<input type="text" class="inType01 w70 text-right"  >
+												<input type="text" th:field="*{schSubPointEvg5}" class="inType01 w70 text-right"  >
 											</li>
 											
 											<li class="ml10 mr10"> / </li>
@@ -1095,56 +731,13 @@
 										<input type="image" value=" 추가 " onclick="add_item4()" th:src="@{/img/ico_plus.png}">
 									</p>
 								</div>
-								<div id="field4"></div>
-								<div id="pre_set4" style="display:none">
-									<div class="row  mt50 ">
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>학과계열</li>
-												<li>
-													<div class="custom-sel------ w180">
-													  <select class="base w180">
-														<option value="선택해 주세요">선택해 주세요</option>
-														<option value="상경">상경</option>
-														<option value="인문">인문</option>
-													  </select>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>전공</li>
-												<li>
-													<input type="text" class="inType01 w180"  >
-												</li>
-											</ul>
-										</div>
-										
-										<div class="col-lg-12 mt10">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>평점</li>
-												<li>
-													<input type="text" class="inType01 w70 text-right"  >
-												</li>
-												
-												<li class="ml10 mr10"> / </li>
-												<li>
-													4.5
-												</li>
-												<p class="gray f14 mt10 ">*평점은 4.5 만점으로 환산하여 입력해주세요.</p>
-											</ul>
-										</div>
-									</div>	
-									<input class="inputDel2" type="image" value="삭제" onclick="remove_item4(this)" th:src="@{/img/ico_inputDel2.png}" >
-								</div>	
-								<!-- //전공COPY -->
 							</div>
 							<!-- //(6)박사 -->
 							<div class="w100 mt30">
 								<a href="write01.html"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="다음" /> 개인정보</p></a>
 								<a href="write03.html"><p class="f_right f20">학력정보 <img th:src="@{/img/btn_next.png}" alt="다음" /></p></a>
 							</div>
+						</form>
 						</div><!-- //wrap860 -->
 					</div><!-- //memberWrapBase -->
 				</div><!-- //container1300 -->
@@ -1154,65 +747,6 @@
 				// Content 
 		================================ -->
 	</div><!-- //wrap bg_01 -->
-
-
-
-	<!-- ================================ 
-				Popup 
-	================================ -->
-	<!-- popup -->
-	<div id="pop_dropOut"  style="display:none;">
-		<div class="popBasePW" cellspacing="0"  summary="타이틀">
-	
-			<p class="f23 fw600">학교검색</p>
-			
-			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
-			<p class="f14 fw400 mt40">학교명</p>
-			<div class="search_school ">
-				<fieldset class="search">
-                <legend>검색</legend>
-                   <input type="text" class="ss_inType mt20" placeholder="학교명을 2자 이상 입력해주세요."><a href="javascript:fnSearch();" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="학교명 검색"></a>
-                </fieldset>
-				<ul class="ss_ul mt10">
-					<li><a href="">건국대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">경기대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">경희대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">경희대학교 경영대학원 - 서울(서울)</a></li>
-					<li><a href="">경희대학교 일반대학원 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">남서울대학교(충남)</a></li>
-					<li><a href="">남서울대학교 대학원(충남)</a></li>
-					<li><a href="">남서울대학교 일반대학원(충남)</a></li>
-					<li><a href="">남서울대학교 특수대학원(충남)</a></li>
-					<li><a href="">남서울대학교 특수대학원(산업대)(충남)</a></li>
-					<li><a href="">남서울대학교(산업대)(충남)</a></li>
-					<li><a href="">남서울예술종합학교(해외)</a></li>
-					<li><a href="">단국대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">동국대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">동서울대학 평생교육원(경기)</a></li>
-					<li><a href="">동서울대학교(경기)</a></li>
-					<li><a href="">동서울대학교(경기)</a></li>
-					<li><a href="">디지털서울문화예술대학교(서울)</a></li>
-					<li><a href="">상명대학교 - 서울캠퍼스(서울)</a></li>
-					<li><a href="">서울과학기술대학교(서울)</a></li>
-					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
-					<li><a href="">서울과학기술대학교 IT정책전문대학원(서울)</a></li>
-					<li><a href="">서울과학기술대학교 IT정책전문대학원(산업대)(서울)</a></li>
-				</ul>
-				<p class="f14 mt30">찾으시는 결과가 없나요? <b>직접입력</b></p>
-				<input type="text" class="ss_inType mt10" >
-				<p class="mt40 btn_type05"><a href="#">등록</a></p>
-			</div>
-			
-		</div>
-	</div>
-	<!-- //popup -->
-
-	<script th:src="@{/common/js/modality.js}"></script>
-	<!-- 팝업 script -->
-	<script>
-		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); //회원탈퇴주의사항
-	</script>
-	<!-- //팝업 script -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

@@ -31,14 +31,14 @@
 							<p class="f23 fw600">지원서 작성</p>
 							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
 							<ul class="mt70 writeList">
-								<li class="w-ing"><a href="/application/personalInfo">개인정보</a></li>
-								<li class="w-before"><a href="/application/academy">학력정보</a></li>
+								<li class="w-ing"><a th:href="|@{/application/personalInfo}?idx=${app.idx}|">개인정보</a></li>
+								<li class="w-before"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
 								<li class="w-before"><a href="/application/qualification">어학/자격/기타</a></li>
 								<li class="w-before"><a href="/application/career">경력사항</a></li>
 								<li class="w-before"><a href="/application/introduce">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
-							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${application.idx} ]])">임시저장</a></p>
+							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${app.idx} ]])">임시저장</a></p>
 						</div>
 						<script>
 							$(document).ready(function(){
@@ -46,7 +46,7 @@
 							});
 						</script>
 						<div class="wrap860 f-right" >
-							<form class="fam-repeater" th:action="@{/application/registerPersonalInfo}" th:object="${application}" method="post" enctype="multipart/form-data" >
+							<form class="fam-repeater" th:action="@{/application/registerPersonalInfo}" th:object="${app}" method="post" enctype="multipart/form-data" >
 							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
 							<input type="hidden" th:field="*{idx}" />
 							<!--/* 파일이 변경된 경우, 해당 파라미터를 이용하여 파일 삭제 및 재등록 처리 */-->
@@ -169,43 +169,43 @@
 							<!-- (3)가족사항 -->
 							<p class="f23 fw600 mt80 pr">가족사항 <input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
 							<div class="r-box mt20">
-									<div data-repeater-list="fam">
-	                                    <div data-repeater-item>
-										<div class="row">
-											<input type="hidden" name="famCount" id="famCount"/>
-											<div class="col-lg-3" >
-												<ul class="s-d-2s">
-													<li class="f14"><span class="red">*</span>관계</li>
-													<li>
-														  <select name="Con">
-															<option value="0">선택</option>
-															<option value="1">부</option>
-															<option value="2">모</option>
-															<option value="3">형</option>
-															<option value="4">자</option>
-															<option value="4">매</option>
-														  </select>
-													</li>
-												</ul>
-											</div>
-											<div class="col-lg-3">
-												<ul class="s-d-2s">
-													<li class="f14">성명</li>
-													<li><input type="text" name="Name" class="inType01 w110" ></li>
-												</ul>
-											</div>
-											<div class="col-lg-4" >
-												<ul class="s-d-2s">
-													<li class="f14">연령(만)</li>
-													<li class="ml10"><input type="text" name="Age" class="inType01 w80" ></li>
-												</ul>
-											</div>
-											<div class="col-lg-2">
-												<input class="inputDel" type="button" value="삭제"  th:src="@{/img/ico_inputDel.png}" data-repeater-delete />
-											</div>
+								<input type="hidden" th:field="*{famCount}"/>
+								<div data-repeater-list="fam">
+                                    <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.famCount)}">
+									<div class="row">
+										<div class="col-lg-3" >
+											<ul class="s-d-2s">
+												<li class="f14"><span class="red">*</span>관계</li>
+												<li>
+													  <select th:id="famCon" th:name="famCon">
+														<option value="">선택</option>
+														<option value="부">부</option>
+														<option value="모">모</option>
+														<option value="형">형</option>
+														<option value="자">자</option>
+														<option value="매">매</option>
+													  </select>
+												</li>
+											</ul>
 										</div>
+										<div class="col-lg-3">
+											<ul class="s-d-2s">
+												<li class="f14">성명</li>
+												<li><input type="text" id="famName" name="famName" class="inType01 w110" ></li>
+											</ul>
+										</div>
+										<div class="col-lg-4" >
+											<ul class="s-d-2s">
+												<li class="f14">연령(만)</li>
+												<li class="ml10"><input type="text" id="famAge" name="famAge" class="inType01 w80" ></li>
+											</ul>
+										</div>
+										<div class="col-lg-2">
+											<input class="inputDel" type="button" value="삭제"  th:src="@{/img/ico_inputDel.png}" data-repeater-delete />
 										</div>
 									</div>
+									</div>
+								</div>
 							</div>									
 							<!-- //(3)가족사항 -->
 
@@ -217,9 +217,9 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>보훈대상여부</li>
 											<li class="radioStyle3">
-												<input type="radio" id="r3" th:attr="checked=*{bohun == '0' ? 'true' : 'false'}" name="bohun" value="0" />
+												<input type="radio" id="r3" th:attr="checked=*{bohun == '0' ? 'true' : 'false'}" th:field="*{bohun}" value="0" />
 												<label for="r3"><span></span>비대상</label>
-												<input type="radio" id="r4" th:attr="checked=*{bohun == '1' ? 'true' : 'false'}" name="bohun" value="1" />
+												<input type="radio" id="r4" th:attr="checked=*{bohun == '1' ? 'true' : 'false'}" th:field="*{bohun}" value="1" />
 												<label for="r4"><span></span>대상</label>
 											</li>
 										</ul>
@@ -238,9 +238,9 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>장애여부</li>
 											<li class="radioStyle3 ">
-												<input type="radio" id="r5" th:attr="checked=*{handicap == '0' ? 'true' : 'false'}" name="handicap" value="0" />
+												<input type="radio" id="r5" th:attr="checked=*{handicap == '0' ? 'true' : 'false'}" th:field="*{handicap}" value="0" />
 												<label for="r5"><span></span>비대상</label>
-												<input type="radio" id="r6" th:attr="checked=*{handicap == '1' ? 'true' : 'false'}" name="handicap" value="1" />
+												<input type="radio" id="r6" th:attr="checked=*{handicap == '1' ? 'true' : 'false'}" th:field="*{handicap}" value="1" />
 												<label for="r6"><span></span>대상</label>
 											</li>
 										</ul>
@@ -251,15 +251,15 @@
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>병역사항</li>
 											<li class="radioStyle3 " >
-												<input type="radio" id="r7" th:attr="checked=*{milClass == '비대상' ? 'true' : 'false'}" name="milClass" value="비대상" />
+												<input type="radio" id="r7" th:attr="checked=*{milClass == '비대상' ? 'true' : 'false'}" th:field="*{milClass}" value="비대상" />
 												<label for="r7"><span></span>비대상</label>
-												<input type="radio" id="r8" th:attr="checked=*{milClass == '군필' ? 'true' : 'false'}" name="milClass" value="군필" />
+												<input type="radio" id="r8" th:attr="checked=*{milClass == '군필' ? 'true' : 'false'}" th:field="*{milClass}" value="군필" />
 												<label for="r8"><span></span>군필</label>
-												<input type="radio" id="r9" th:attr="checked=*{milClass == '미필' ? 'true' : 'false'}" name="milClass" value="미필" />
+												<input type="radio" id="r9" th:attr="checked=*{milClass == '미필' ? 'true' : 'false'}" th:field="*{milClass}" value="미필" />
 												<label for="r9"><span></span>미필</label>
-												<input type="radio" id="r10" th:attr="checked=*{milClass == '면제' ? 'true' : 'false'}" name="milClass" value="면제" />
+												<input type="radio" id="r10" th:attr="checked=*{milClass == '면제' ? 'true' : 'false'}" th:field="*{milClass}" value="면제" />
 												<label for="r10"><span></span>면제</label>
-												<input type="radio" id="r11" th:attr="checked=*{milClass == '복무중' ? 'true' : 'false'}" name="milClass" value="복무중" />
+												<input type="radio" id="r11" th:attr="checked=*{milClass == '복무중' ? 'true' : 'false'}" th:field="*{milClass}" value="복무중" />
 												<label for="r11"><span></span>복무중</label>
 											</li>
 										</ul>
@@ -269,7 +269,7 @@
 											<li class="f14">군별</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select name="milArm">
+												  <select th:field="*{milArm}">
 													<option value="">선택해 주세요</option>
 													<option value="육군">육군</option>
 													<option value="해군">해군</option>
@@ -290,7 +290,7 @@
 											<li class="f14">병과</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select name="milType">
+												  <select th:field="*{milType}">
 													<option value="">선택해 주세요</option>
 													<option value="보병">보병</option>
 													<option value="행정">행정</option>
@@ -314,7 +314,7 @@
 											<li class="f14">계급</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select name="milLv">
+												  <select th:field="*{milLv}">
 													<option value="">선택해 주세요</option>
 													<option value="이병">이병</option>
 													<option value="일병">일병</option>
@@ -351,7 +351,7 @@
 											<li class="f14">제대구분</li>
 											<li>
 												<div class="custom-sel w180">
-												  <select name="milTicket" >
+												  <select th:field="*{milTicket}" >
 													<option value="">선택해 주세요</option>
 													<option value="만기제대(병장,부사관,장교)">만기제대(병장,부사관,장교)</option>
 													<option value="소집해제(사회복무.공익)">소집해제(사회복무.공익)</option>
@@ -387,5 +387,49 @@
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
 <script th:src="@{/common/js/personalInfo.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(document).ready(function(){
+
+		var famCnt = /*[[ ${app.famCount} ]]*/;
+		if(famCnt == 1) {
+			$("#famCon1").val(/*[[ ${app.famCon1} ]]*/).prop("selected", true);
+			$("#famName1").val(/*[[ ${app.famName1} ]]*/);
+			$("#famAge1").val(/*[[ ${app.famAge1} ]]*/);
+		} else if(famCnt == 2) {
+			$("#famCon1").val(/*[[ ${app.famCon1} ]]*/).prop("selected", true);
+			$("#famName1").val(/*[[ ${app.famName1} ]]*/);
+			$("#famAge1").val(/*[[ ${app.famAge1} ]]*/);
+			$("#famCon2").val(/*[[ ${app.famCon2} ]]*/).prop("selected", true);
+			$("#famName2").val(/*[[ ${app.famName2} ]]*/);
+			$("#famAge2").val(/*[[ ${app.famAge2} ]]*/);
+		} else if(famCnt == 3) {
+			$("#famCon1").val(/*[[ ${app.famCon1} ]]*/).prop("selected", true);
+			$("#famName1").val(/*[[ ${app.famName1} ]]*/);
+			$("#famAge1").val(/*[[ ${app.famAge1} ]]*/);
+			$("#famCon2").val(/*[[ ${app.famCon2} ]]*/).prop("selected", true);
+			$("#famName2").val(/*[[ ${app.famName2} ]]*/);
+			$("#famAge2").val(/*[[ ${app.famAge2} ]]*/);
+			$("#famCon3").val(/*[[ ${app.famCon3} ]]*/).prop("selected", true);
+			$("#famName3").val(/*[[ ${app.famName3} ]]*/);
+			$("#famAge3").val(/*[[ ${app.famAge3} ]]*/);
+		} else if(famCnt == 4) {
+			$("#famCon1").val(/*[[ ${app.famCon1} ]]*/).prop("selected", true);
+			$("#famName1").val(/*[[ ${app.famName1} ]]*/);
+			$("#famAge1").val(/*[[ ${app.famAge1} ]]*/);
+			$("#famCon2").val(/*[[ ${app.famCon2} ]]*/).prop("selected", true);
+			$("#famName2").val(/*[[ ${app.famName2} ]]*/);
+			$("#famAge2").val(/*[[ ${app.famAge2} ]]*/);
+			$("#famCon3").val(/*[[ ${app.famCon3} ]]*/).prop("selected", true);
+			$("#famName3").val(/*[[ ${app.famName3} ]]*/);
+			$("#famAge3").val(/*[[ ${app.famAge3} ]]*/);
+			$("#famCon4").val(/*[[ ${app.famCon4} ]]*/).prop("selected", true);
+			$("#famName4").val(/*[[ ${app.famName4} ]]*/);
+			$("#famAge4").val(/*[[ ${app.famAge4} ]]*/);
+		}
+
+	});
+/*]]>*/
+</script>
 </body>
 </html>
