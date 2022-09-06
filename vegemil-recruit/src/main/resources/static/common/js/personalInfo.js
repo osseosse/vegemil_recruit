@@ -125,53 +125,29 @@ function execPostcode() {
    	});
    	/*[- end of function -]*/
 
-     $("#milSDate").keyup(function() {
-   		
-   	    if( this.value.length > 8){
-   	         this.value = this.value.substr(0, 8);
-   	     }
-   	     var val         = this.value.replace(/\D/g, '');
-   	     var original    = this.value.replace(/\D/g, '').length;
-   	     var conversion  = '';
-   	     for(i=0;i<2;i++){
-   	         if (val.length > 4 && i===0) {
-   	             conversion += val.substr(0, 4) + '-';
-   	             val         = val.substr(4);
-   	         }
-   	         else if(original>6 && val.length > 2 && i===1){
-   	             conversion += val.substr(0, 2) + '-';
-   	             val         = val.substr(2);
-   	         }
-   	     }
-   	     conversion += val;
-   	     this.value = conversion;
-   	     
-   	 });
-   	 /*[- end of function -]*/
-     
-     $("#milEDate").keyup(function() {
-   		
-   	    if( this.value.length > 8){
-   	         this.value = this.value.substr(0, 8);
-   	     }
-   	     var val         = this.value.replace(/\D/g, '');
-   	     var original    = this.value.replace(/\D/g, '').length;
-   	     var conversion  = '';
-   	     for(i=0;i<2;i++){
-   	         if (val.length > 4 && i===0) {
-   	             conversion += val.substr(0, 4) + '-';
-   	             val         = val.substr(4);
-   	         }
-   	         else if(original>6 && val.length > 2 && i===1){
-   	             conversion += val.substr(0, 2) + '-';
-   	             val         = val.substr(2);
-   	         }
-   	     }
-   	     conversion += val;
-   	     this.value = conversion;
-   	     
-   	 });
-   	 /*[- end of function -]*/
+     $(".ls1").keyup(function() {
+		
+	    if( this.value.length > 8){
+	         this.value = this.value.substr(0, 8);
+	     }
+	     var val         = this.value.replace(/\D/g, '');
+	     var original    = this.value.replace(/\D/g, '').length;
+	     var conversion  = '';
+	     for(i=0;i<2;i++){
+	         if (val.length > 4 && i===0) {
+	             conversion += val.substr(0, 4) + '-';
+	             val         = val.substr(4);
+	         }
+	         else if(original>6 && val.length > 2 && i===1){
+	             conversion += val.substr(0, 2) + '-';
+	             val         = val.substr(2);
+	         }
+	     }
+	     conversion += val;
+	     this.value = conversion;
+	     
+	 });
+	 /*[- end of function -]*/
      
      function registerApplication(idx) {
 

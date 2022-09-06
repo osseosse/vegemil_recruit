@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment"></head>
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+<script th:src="@{/common/js/jquery.repeater.min.js}"></script>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				<div class="container1300 center" >
+					<div class="memberWrapBase ">
+						<div class="sidebar fixedsticky w350 f-left">
+							<p class="f23 fw600">지원서 작성</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<ul class="mt70 writeList">
+								<li class="w-after"><a th:href="|@{/application/personalInfo}?idx=${app.idx}|">개인정보</a></li>
+								<li class="w-after"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
+								<li class="w-ing"><a th:href="|@{/application/qualification}?idx=${app.idx}|">어학/자격/기타</a></li>
+								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
+								<li class="w-before"><a href="write05.html">자기소개</a></li>
+							</ul>
+							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
+							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerQualification([[ ${app.idx} ]])">임시저장</a></p>
+						</div>
+						<script>
+							$(document).ready(function(){
+								$( '.sidebar' ).fixedsticky();
+							});
+						</script>
+						<div class="wrap860 f-right" >
+						<form th:action="@{/application/registerQualification}" th:object="${app}" method="post" >
+							<!-- (1)어학 -->
+							<div id="field1" class="qualification-repeater">
+							<p class="f23 fw600 pr">어학 <input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+								<input type="hidden" th:field="*{langCount}"/>
+								<div data-repeater-list="lang">
+                                <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.langCount)}">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-6 ">
+											<ul class="s-d-2">
+												<li class="f14">외국어</li>
+												<li>
+													<div class="scroll w180">
+													  <select th:id="langName" th:name="langName" onchange="categoryChange(this)" class="base w180">
+														<option value="">선택</option>
+														<option value="영어">영어</option>
+														<option value="중국어">중국어</option>
+														<option value="일본어">일본어</option>
+														<option value="프랑스어">프랑스어</option>
+														<option value="스페인어">스페인어</option>
+														<option value="독일어">독일어</option>
+														<option value="이탈리아어">이탈리아어</option>
+														<option value="러시아어">러시아어</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 ">
+											<ul class="s-d-2">
+												<li class="f14">공인시험</li>
+												<li>
+													<div class="scroll w180">
+														<select th:id="langLicName" th:name="langLicName" class="base w180">
+															<option value="">선택</option>
+														</select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">점수</li>
+												<li>
+													<input type="text" th:id="langPoint" th:name="langPoint" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">등급</li>
+												<li>
+													<input type="text" th:id="langLv" th:name="langLv" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="row mt10">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">발급번호</li>
+												<li>
+													<input type="text" th:id="langLicNum" th:name="langLicNum" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 ">
+											<ul class="s-d-2">
+												<li class="f14">취득일</li>
+												<li>
+													<input type="text" th:id="langGet" th:name="langGet"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- 의미없는 상중하
+									<div class="row mt10">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">회화</li>
+												<li class="radioStyle3 i60">
+													<input type="radio" id="r12" th:name="langTalk" th:attr="checked=*{langTalk1 == '상' ? 'true' : 'false'}" value="상" />
+													<label for="r12"><span></span>상</label>
+													<input type="radio" id="r13" th:name="langTalk" th:attr="checked=*{langTalk1 == '중' ? 'true' : 'false'}" value="중" />
+													<label for="r13"><span></span>중</label>
+													<input type="radio" id="r14" th:name="langTalk" th:attr="checked=*{langTalk1 == '하' ? 'true' : 'false'}" value="하" />
+													<label for="r14"><span></span>하</label>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">작문</li>
+												<li class="radioStyle3 i60">
+													<input type="radio" id="r15" th:name="langMake" th:attr="checked=*{langMake1 == '상' ? 'true' : 'false'}" value="상" />
+													<label for="r15"><span></span>상</label>
+													<input type="radio" id="r16" th:name="langMake" th:attr="checked=*{langMake1 == '중' ? 'true' : 'false'}" value="중" />
+													<label for="r16"><span></span>중</label>
+													<input type="radio" id="r17" th:name="langMake" th:attr="checked=*{langMake1 == '하' ? 'true' : 'false'}" value="하" />
+													<label for="r17"><span></span>하</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="row mt10">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">독해</li>
+												<li class="radioStyle3 i60">
+													<input type="radio" id="r18" th:name="langRead" th:attr="checked=*{langRead1 == '상' ? 'true' : 'false'}" value="상" />
+													<label for="r18"><span></span>상</label>
+													<input type="radio" id="r19" th:name="langRead" th:attr="checked=*{langRead1 == '중' ? 'true' : 'false'}" value="중" />
+													<label for="r19"><span></span>중</label>
+													<input type="radio" id="r20" th:name="langRead" th:attr="checked=*{langRead1 == '하' ? 'true' : 'false'}" value="하" />
+													<label for="r20"><span></span>하</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+									 -->
+								</div>
+								<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+								</div>
+								</div>
+							</div><!-- field1 -->
+
+							<!-- (2)IT -->
+							<!-- 의미없는 상중하
+							<div id="field2">
+							<p class="f23 fw600 mt80 pr">IT 능력<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+								<input type="hidden" th:field="*{swCount}"/>
+								<div data-repeater-list="sw">
+                                <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.swCount)}">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">S/W명</li>
+												<li>
+													<input type="text" id="swName" name="swName" class="inType01 w180"  >
+												</li>
+												<li class="radioStyle3 i60 ml10">
+													<input type="radio" id="r21" th:name="swLv" th:attr="checked=*{swLv1 == '상' ? 'true' : 'false'}" value="상" />
+													<label for="r21"><span></span>상</label>
+													<input type="radio" id="r22" th:name="swLv" th:attr="checked=*{swLv1 == '중' ? 'true' : 'false'}" value="중" />
+													<label for="r22"><span></span>중</label>
+													<input type="radio" id="r23" th:name="swLv" th:attr="checked=*{swLv1 == '하' ? 'true' : 'false'}" value="하" />
+													<label for="r23"><span></span>하</label>
+												</li>
+											</ul>
+										</div>
+									</div>
+									</div>
+									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									</div>
+								</div>
+							</div>
+							-->
+							<!-- field2 -->
+							
+							<!-- (3)자격 및 면허 -->
+							<div id="field3" class="lic-repeater">
+							<p class="f23 fw600 mt80 pr">자격 및 면허<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+								<input type="hidden" th:field="*{licCount}"/>
+								<div data-repeater-list="lic">
+                                <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.licCount)}">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">자격증 명</li>
+												<li>
+													<input type="text" id="licName" name="licName" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 ">
+											<ul class="s-d-2">
+												<li class="f14">발급기관</li>
+												<li>
+													<input type="text" id="licPub" name="licPub" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2">
+												<li class="f14">발급번호</li>
+												<li>
+													<input type="text" id="licNum" name="licNum" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt10">
+											<ul class="s-d-2 day">
+												<li class="f14">취득일</li>
+												<li>
+													<input type="text" th:id="licGetDate" th:name="licGetDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+												</li>	
+											</ul>
+										</div>
+									</div>
+									</div>
+									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									</div> 
+								</div>
+							</div><!-- field3 -->
+
+							<!-- (4)수상경력 -->
+							<div id="field4" class="medal-repeater">
+							<p class="f23 fw600 mt80 pr">수상경력<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+								<input type="hidden" th:field="*{medalCount}"/>
+								<div data-repeater-list="medal">
+                                <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.medalCount)}">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">수상단체</li>
+												<li>
+													<input type="text" id="medalName" name="medalName" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 ">
+											<ul class="s-d-2">
+												<li class="f14">수상일자</li>
+												<li>
+													<input type="text" th:id="medalDate" th:name="medalDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-12 mt10">
+											<ul class="s-d-2">
+												<li class="f14">수상내용</li>
+												<li>
+													<input type="text" id="medalContent" name="medalContent"  class="inType01 w631" >
+												</li>
+											</ul>
+										</div>
+									</div>
+									</div>
+									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									</div> 
+								</div>
+							</div><!-- field4 -->
+
+							<!-- (5)해외연수/대외활동 -->
+							<div id="field5" class="for-repeater">
+							<p class="f23 fw600 mt80 pr">해외연수/대외활동<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+								<input type="hidden" th:field="*{forCount}"/>
+								<div data-repeater-list="for">
+                                <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.forCount)}">
+								<div class="r-box mt20">
+									<div class="row">
+										<div class="col-lg-6">
+											<ul class="s-d-2">
+												<li class="f14">국가명/활동명</li>
+												<li>
+													<input type="text" id="forState" name="forState" class="inType01 w180"  >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-12 mt10">
+											<ul class="s-d-2 day">
+												<li class="f14">연수기간</li>
+												<li>
+													<input type="text" th:id="forSDate" th:name="forSDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+												</li>
+												<li class="ml20 mr20"> ~ </li>
+												<li>
+													<input type="text" th:id="forEDate" th:name="forEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-12 mt10">
+											<ul class="s-d-2">
+												<li class="f14">내용</li>
+												<li>
+													<input type="text" id="forName" name="forName" class="inType01 w631"  >
+												</li>
+											</ul>
+										</div>
+									</div>
+									</div>
+									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									</div> 
+								</div>
+							</div><!-- field5 -->
+							
+							<div class="w100 mt30">
+								<a th:href="|@{/application/personalInfo}?idx=${app.idx}|">
+								<p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="개인정보" />학력정보</p></a>
+								<button type="submit" class="f_right"><p class="f20">경력사항 <img th:src="@{/img/btn_next.png}" alt="경력사항" /></p></button>
+							</div>
+						</form>
+						</div><!-- //wrap860 -->
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+<script th:src="@{/common/js/qualification.js}"></script>
+</body>
+</html>

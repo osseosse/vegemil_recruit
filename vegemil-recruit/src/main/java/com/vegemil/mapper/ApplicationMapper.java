@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.ApplicationDTO;
 import com.vegemil.domain.PersonalInfoDTO;
+import com.vegemil.domain.QualificationDTO;
 
 
 @Mapper
@@ -18,6 +19,10 @@ public interface ApplicationMapper {
 	public PersonalInfoDTO selectPersonalInfo(@Param("idx") Long idx,@Param("memNo") Long memNo);
 	
 	public AcademyInfoDTO selectAcademy(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	
+	public QualificationDTO selectQualification(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	
+	public int updateQualification(QualificationDTO params);
 
 	public int updatePersonalInformation(PersonalInfoDTO params);
 	

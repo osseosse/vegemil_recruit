@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.ApplicationDTO;
 import com.vegemil.domain.PersonalInfoDTO;
+import com.vegemil.domain.QualificationDTO;
 import com.vegemil.mapper.ApplicationMapper;
 
 @Service
@@ -69,6 +70,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
+	@Transactional
+	public boolean registerQualification(QualificationDTO params) {
+		int queryResult = 0;
+		
+		queryResult = applicationMapper.updateQualification(params);
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	@Override
 	public PersonalInfoDTO selectPersonalInfo(Long idx, Long memNo) {
 		return applicationMapper.selectPersonalInfo(idx, memNo);
 	}
@@ -76,6 +87,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public AcademyInfoDTO selectAcademy(Long idx, Long memNo) {
 		return applicationMapper.selectAcademy(idx, memNo);
+	}
+	
+	@Override
+	public QualificationDTO selectQualification(Long idx, Long memNo) {
+		return applicationMapper.selectQualification(idx, memNo);
 	}
 	
 }

@@ -24,6 +24,7 @@ import com.vegemil.constant.Method;
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.PersonalInfoDTO;
+import com.vegemil.domain.QualificationDTO;
 import com.vegemil.service.ApplicationService;
 import com.vegemil.util.UiUtils;
 
@@ -155,8 +156,7 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
-			model.addAttribute("application", application);
-			model.addAttribute("idx", idx);
+			model.addAttribute("app", application);
 	        
         }
 		
@@ -201,7 +201,86 @@ public class ApplicationController extends UiUtils {
 			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 		}
 
-		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/language?idx="+application.getIdx(), Method.GET, null, model);
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/qualification?idx="+application.getIdx(), Method.GET, null, model);
+	}
+	
+	@GetMapping(value = "/application/qualification")
+	public String openQualification(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		QualificationDTO application = new QualificationDTO();
+		
+		if (idx == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+		}
+		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+	        
+	        application = applicationService.selectQualification(idx, member.getMemNo());
+			if (application == null) {
+				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+			}
+			application.setIdx(idx);
+			application.setEmailAddr(member.getEmailAddr());
+	        application.setMemName(member.getMemName());
+	        application.setPhoneNo(member.getPhoneNo());
+	        
+			model.addAttribute("app", application);
+	        
+        }
+		
+		return "application/qualification";
+	}
+	
+	@PostMapping(value = "/application/registerQualification")
+	public String registerQualification(@ModelAttribute("app") final QualificationDTO application, 
+			BindingResult bindingResult, Model model, 
+			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		try {
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+			
+		        application.setEmailAddr(member.getEmailAddr());
+		        application.setMemName(member.getMemName());
+		        application.setMemNo(member.getMemNo());
+		        application.setPhoneNo(member.getPhoneNo());
+		        
+				boolean isRegistered = applicationService.registerQualification(application);
+				if (isRegistered == false) {
+					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+				
+			}
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		}
+
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/career?idx="+application.getIdx(), Method.GET, null, model);
 	}
 	
 	/*

@@ -35,17 +35,17 @@
 							<p class="f23 fw600">지원서 작성</p>
 							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
 							<ul class="mt70 writeList">
-								<li class="w-before"><a th:href="|@{/application/personalInfo}?idx=${idx}|">개인정보</a></li>
-								<li class="w-ing"><a th:href="|@{/application/academy}?idx=${idx}|">학력정보</a></li>
-								<li class="w-before"><a href="/application/qualification">어학/자격/기타</a></li>
-								<li class="w-before"><a href="/application/career">경력사항</a></li>
+								<li class="w-after"><a th:href="|@{/application/personalInfo}?idx=${app.idx}|">개인정보</a></li>
+								<li class="w-ing"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
+								<li class="w-before"><a th:href="|@{/application/qualification}?idx=${app.idx}|">어학/자격/기타</a></li>
+								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-before"><a href="/application/introduce">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
-							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${application.idx} ]])">임시저장</a></p>
+							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerAcademy([[ ${app.idx} ]])">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
-						<form class="fam-repeater" th:action="@{/application/registerAcademy}" th:object="${application}" method="post" >
+						<form class="fam-repeater" th:action="@{/application/registerAcademyInfo}" th:object="${app}" method="post" >
 							<!-- (1)최종 (예정) 학력 -->
 							
 							<!-- 개발시 노출범위 확인해주세요!
@@ -734,8 +734,8 @@
 							</div>
 							<!-- //(6)박사 -->
 							<div class="w100 mt30">
-								<a href="write01.html"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="다음" /> 개인정보</p></a>
-								<a href="write03.html"><p class="f_right f20">학력정보 <img th:src="@{/img/btn_next.png}" alt="다음" /></p></a>
+								<a th:href="|@{/application/personalInfo}?idx=${app.idx}|"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="개인정보" /> 개인정보</p></a>
+								<button type="submit" class="f_right"><p class=" f20">학력정보 <img th:src="@{/img/btn_next.png}" alt="어학정보" /></p></button>
 							</div>
 						</form>
 						</div><!-- //wrap860 -->
@@ -751,5 +751,31 @@
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
+<script>
+$(".ls1").keyup(function() {
+		
+    if( this.value.length > 8){
+         this.value = this.value.substr(0, 8);
+     }
+     var val         = this.value.replace(/\D/g, '');
+     var original    = this.value.replace(/\D/g, '').length;
+     var conversion  = '';
+     for(i=0;i<2;i++){
+         if (val.length > 4 && i===0) {
+             conversion += val.substr(0, 4) + '-';
+             val         = val.substr(4);
+         }
+         else if(original>6 && val.length > 2 && i===1){
+             conversion += val.substr(0, 2) + '-';
+             val         = val.substr(2);
+         }
+     }
+     conversion += val;
+     this.value = conversion;
+     
+ });
+ /*[- end of function -]*/
+ 
+</script>
 </body>
 </html>

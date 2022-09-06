@@ -4,13 +4,13 @@
 <mapper namespace="com.vegemil.mapper.ApplicationMapper">
 
 	<sql id="informationColumns">
-		idx, setup_th, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, join_type, join_company, join_field1, join_area1
+		idx, setup_th, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, join_type, join_company, join_field1, join_area1, mem_no
 		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, handicap, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 	</sql>
 	<sql id="academyColumns">
-		idx, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
+		idx, mem_no, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
 		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_max1, sch_point_evg1
     	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_max2, sch_point_evg2
     	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_max3, sch_point_evg3
@@ -19,6 +19,19 @@
     	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
     	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3, sch_sub_admis4, sch_sub_major4, sch_sub_point_evg4, sch_sub_admis5, sch_sub_major5
     	, sch_sub_point_evg5
+	</sql>
+	
+	<sql id="qualificationColumns">
+		idx, mem_no, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		, lang_name1, lang_point1, lang_lv1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
+		, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_num3, lang_get3, lang_talk3
+    	, lang_make3, lang_read3, lang_name4, lang_point4, lang_lv4, lang_lic_num4, lang_get4, lang_talk4, lang_make4, lang_read4
+    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5, sw_name6, sw_lv6
+    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
+    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4, lic_name5, lic_num5, lic_get_date5, lic_pub5
+    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
+    	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
+    	, lang_count, sw_count, lic_count, medal_count, for_count
 	</sql>
 
 	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
@@ -55,19 +68,42 @@
 	<update id="updateAcademy" parameterType="com.vegemil.domain.AcademyInfoDTO">
 		UPDATE R_Recruit
 		SET
-			  last_academy = #{lastAcademy}, sch_grad1 = #{sch_grad1}, sch_enter_ym1 = #{sch_enter_ym1}, sch_grad_ym1 = #{sch_grad_ym1}, sch_name1 = #{sch_name1}
-			, sch_admis1 = #{sch_admis1}, sch_major1 = #{sch_major1}, sch_site1 = #{sch_site1}, sch_night1 = #{sch_night1}, sch_point_evg1 = #{sch_point_evg1}
-			, sch_grad2 = #{sch_grad2}, sch_enter_ym2 = #{sch_enter_ym2}, sch_grad_ym2 = #{sch_grad_ym2}, sch_name2 = #{sch_name2}, sch_admis2 = #{sch_admis2}
-			, sch_major2 = #{sch_major2}, sch_site2 = #{sch_site2}, sch_night2 = #{sch_night2}, sch_point_evg2 = #{sch_point_evg2}, sch_grad3 = #{sch_grad3}
-			, sch_enter_ym3 = #{sch_enter_ym3}, sch_grad_ym3 = #{sch_grad_ym3}, sch_name3 = #{sch_name3}, sch_admis3 = #{sch_admis3}, sch_major3 = #{sch_major3}
-			, sch_site3 = #{sch_site3}, sch_night3 = #{sch_night3}, sch_point_evg3 = #{sch_point_evg3}, sch_grad4 = #{sch_grad4}, sch_enter_ym4 = #{sch_enter_ym4}
-			, sch_grad_ym4 = #{sch_grad_ym4}, sch_name4 = #{sch_name4}, sch_admis4 = #{sch_admis4}, sch_major4 = #{sch_major4}, sch_site4 = #{sch_site4}
-			, sch_night4 = #{sch_night4}, sch_point_evg4 = #{sch_point_evg4}, sch_grad5 = #{sch_grad5}, sch_enter_ym5 = #{sch_enter_ym5}, sch_grad_ym5 = #{sch_grad_ym5}
-			, sch_name5 = #{sch_name5}, sch_admis5 = #{sch_admis5}, sch_major5 = #{sch_major5}, sch_site5 = #{sch_site5}, sch_night5 = #{sch_night5}
-			, sch_point_evg5 = #{sch_point_evg5}, sch_sub_admis3 = #{sch_sub_admis3}, sch_sub_major3 = #{sch_sub_major3}, sch_sub_point_evg3 = #{sch_sub_point_evg3}
-			, sch_sub_admis4 = #{sch_sub_admis4}, sch_sub_major4 = #{sch_sub_major4}, sch_sub_point_evg4 = #{sch_sub_point_evg4}, sch_sub_admis5 = #{sch_sub_admis5}
-			, sch_sub_major5 = #{sch_sub_major5}, sch_sub_point_evg5 = #{sch_sub_point_evg5}, sch_dep_type2 = #{schDepType2}, sch_dep_type3 = #{schDepType3}
-			, sch_dep_type4 = #{schDepType4}, sch_dep_type5 = #{schDepType5}, sch_transfer3 = #{schTransfer3}, update_date = NOW()
+			  last_academy = #{lastAcademy}, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
+			, sch_admis1 = #{schAdmis1}, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}, sch_point_evg1 = #{schPointEvg1}
+			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
+			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
+			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_transfer3=#{schTransfer3} , sch_admis3 = #{schAdmis3}, sch_major3 = #{schMajor3}
+			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_sub_admis3=#{schSubAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
+			, sch_grad4 = #{schGrad4}, sch_enter_ym4 = #{schEnterYm4}, sch_dep_type4=#{schDepType4}, sch_sub_admis4=#{schSubAdmis4}, sch_sub_major4=#{schSubMajor4}
+			, sch_grad_ym4 = #{schGradYm4}, sch_name4 = #{schName4}, sch_admis4 = #{schAdmis4}, sch_major4 = #{schMajor4}, sch_site4 = #{schSite4}, sch_sub_point_evg4=#{schSubPointEvg4}
+			, sch_night4 = #{schNight4}, sch_point_evg4 = #{schPointEvg4}, sch_grad5 = #{schGrad5}, sch_enter_ym5 = #{schEnterYm5}, sch_grad_ym5 = #{schEnterYm5}
+			, sch_name5 = #{schName5}, sch_admis5 = #{schAdmis5}, sch_dep_type5=#{schDepType5}, sch_major5 = #{schMajor5}, sch_site5 = #{schSite5}, sch_night5 = #{schNight5}
+			, sch_point_evg5 = #{schPointEvg5}, sch_sub_admis5 = #{schSubAdmis5}, sch_sub_major5 = #{schSubMajor5}, sch_sub_point_evg5 = #{schSubPointEvg5}
+			, update_date = NOW()
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</update>
+	
+	<update id="updateQualification" parameterType="com.vegemil.domain.QualificationDTO">
+		UPDATE R_Recruit
+		SET
+			lang_name1=#{langName1}, lang_point1=#{langPoint1}, lang_lv1=#{langLv1}, lang_lic_num1=#{langLicNum1}, lang_get1=#{langGet1}, lang_talk1=#{langTalk1}
+			, lang_make1=#{langMake1}, lang_read1=#{langRead1}, lang_name2=#{langName2}, lang_point2=#{langPoint2}, lang_lv2=#{langLv2}
+			, lang_lic_num2=#{langLicNum2}, lang_get2=#{langGet2}, lang_talk2=#{langTalk2}, lang_make2=#{langMake2}, lang_read2=#{langRead2}
+			, lang_name3=#{langName3}, lang_point3=#{langPoint3}, lang_lv3=#{langLv3}, lang_lic_num3=#{langLicNum3}, lang_get3=#{langGet3}, lang_talk3=#{langTalk3}
+	    	, lang_make3=#{langMake3}, lang_read3=#{langRead3}, lang_name4=#{langName4}, lang_point4=#{langPoint4}, lang_lv4=#{langLv4}
+	    	, lang_lic_num4=#{langLicNum4}, lang_get4=#{langGet4}, lang_talk4=#{langTalk4}, lang_make4=#{langMake4}, lang_read4=#{langRead4}
+	    	, sw_name1=#{swName1}, sw_lv1=#{swLv1}, sw_name2=#{swName2}, sw_lv2=#{swLv2}, sw_name3=#{swName3}, sw_lv3=#{swLv3}, sw_name4=#{swName4} 
+	    	, sw_lv4=#{swLv4}, sw_name5=#{swName5}, sw_lv5=#{swLv5}, sw_name6=#{swName6}, sw_lv6=#{swLv6}
+	    	, lic_name1=#{licName1}, lic_num1=#{licNum1}, lic_get_date1=#{licGetDate1}, lic_pub1=#{licPub1}, lic_name2=#{licName2}, lic_num2=#{licNum2}
+	    	, lic_get_date2=#{licGetDate2}, lic_pub2=#{licPub2}, lic_name3=#{licName3}, lic_num3=#{licNum3}, lic_get_date3=#{licGetDate3}, lic_pub3=#{licPub3}, lic_name4=#{licName4}
+    		, lic_num4=#{licNum4}, lic_get_date4=#{licGetDate4}, lic_pub4=#{licPub4}, lic_name5=#{licName5}, lic_num5=#{licNum5}, lic_get_date5=#{licGetDate5}, lic_pub5=#{licPub5}
+			, medal_name1=#{medalName1}, medal_date1=#{medalDate1}, medal_content1=#{medalContent1}, medal_name2=#{medalName2}, medal_date2=#{medalDate2}
+			, medal_content2=#{medalContent2}, medal_name3=#{medalName3}, medal_date3=#{medalDate3}, medal_content3=#{medalContent3}
+			, for_state1=#{forState1}, for_s_date1=#{forSDate1}, for_e_date1=#{forEDate1}, for_name1=#{forName1}, for_content1=#{forContent1}
+			, for_state2=#{forState2}, for_s_date2=#{forSDate2}, for_e_date2=#{forEDate2}, for_name2=#{forName2}, for_content2=#{forContent2}
+			, lang_count=#{langCount}, sw_count=#{swCount}, lic_count=#{licCount}, medal_count=#{medalCount}, for_count=#{forCount}
+			, update_date = NOW()
 		WHERE
 			idx = #{idx} and mem_no= #{memNo}
 	</update>
@@ -84,6 +120,15 @@
 	<select id="selectAcademy" parameterType="map" resultType="com.vegemil.domain.AcademyInfoDTO">
 		SELECT
 			<include refid="academyColumns" />
+		FROM
+			R_Recruit
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</select>
+	
+	<select id="selectQualification" parameterType="map" resultType="com.vegemil.domain.QualificationDTO">
+		SELECT
+			<include refid="qualificationColumns" />
 		FROM
 			R_Recruit
 		WHERE
