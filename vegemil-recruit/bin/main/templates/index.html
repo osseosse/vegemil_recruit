@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<title>정식품 채용</title>
     <head th:replace="fragments/head :: headFragment"></head>
@@ -13,15 +15,15 @@
 					<ul class="h_menu text-left">
 						<li class="h_logo ac"><a href="/" ><img th:src="@{/img/logo.png}" alt="정식품"/><span class="fw700">Careers</span></a></li>
 						<li><a href="/information/info">채용안내</a></li>
-						<li><a href="/application/write01">입사지원</a></li>
-						<li><a href="/account/login">입사지원 수정</a></li>
-						<li><a href="/account/result02">합격여부 확인</a></li>
+						<li><a href="/recruit/list">입사지원</a></li>
+						<li><a href="/information/faq">FAQ</a></li>
+						<li><a href="/mypage/list">마이페이지</a></li>
 					</ul>
 					<div class="faceBox">
-						<a href="/member/login"><div class="face">로그인<img th:src="@{/img/ico_face.png}" /></div></a> 
-						<!-- 로그인 
-						<a href="#"><div class="face"><span>김지언님</span><img th:src="@{/img/photo_sample.jpg}" alt="지원자증명사진"/></div></a>
-						-->
+						<a sec:authorize="isAnonymous()" th:href="@{/member/login}"><div class="face">로그인<img th:src="@{/img/ico_face.png}" /></div></a>
+					    <form th:action="@{/member/logout}" method="POST" sec:authorize="isAuthenticated()">
+					        <button class="btn btn-info" type="submit">로그아웃</button>
+					    </form>
 					</div>
 				</div>
 			</div>
@@ -44,10 +46,10 @@
 								</p>
 							</div>
 							<ul class="ico_box mt100">
-								<li><a href="/application/noticelist"><img th:src="@{/img/ico01.png}" alt="지원하기"/><p class="mt10">지원하기</p></a></li>
-								<li><a href="/application/apllcantList"><img th:src="@{/img/ico02.png}" alt="지원서 수정"/><p class="mt10">지원서 수정</p></a></li>
+								<li><a href="/recruit/list"><img th:src="@{/img/ico01.png}" alt="지원하기"/><p class="mt10">지원하기</p></a></li>
+								<li><a href="/mypage/list"><img th:src="@{/img/ico02.png}" alt="지원서 수정"/><p class="mt10">지원서 수정</p></a></li>
 							</ul>
-							<p class="btn_type01 f16 mt50"><a href="/account/checkResult">합격 여부 보러가기</a></p>
+							<!-- <p class="btn_type01 f16 mt50"><a href="/account/checkResult">합격 여부 보러가기</a></p> -->
 						</div>
 						<div class="col-lg-6">
 							<div class="main_right">
@@ -57,40 +59,17 @@
 									<div class="roundType01 mt30">
 										<ul>
 											<li>
-												<p class="f15 ac gray fw400">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
-												<p class="mt10 f23 fw700"><span class="ac mr10 blue">D-16</span> 2023년 상반기 신입사원 정기채용</p>
-												<p class="mt20 btn_type11"><a href="#">공고 보러가기</a></p>
-												<p class="mt20 f20 fw600 number ml5"><span class="ac">08</span> <span class="f16 fw600 ">건</span></p> 
+												<p class="f15 ac gray fw400" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|" ></p>
+												<p class="mt10 f23 fw700" th:text="${recruit.sTitle}"><span class="ac mr10 blue" th:text="|D-${recruit.sDday}|"></span></p>
+												<p class="mt20 btn_type11"><a href="/recruit/list">공고 보러가기</a></p>
+												<p class="mt20 f20 fw600 number ml5"><span class="ac" th:text="${recruitCount}"></span> <span class="f16 fw600">건</span></p> 
 											</li>
 										</ul>
 									</div>
-									<!-- //공고가 1개일때 노출방법 -->
-									<!-- 공고가 2개일때 노출방법 
-									<div class="roundType01 mt30">
-										<a href="">
-											<ul>
-												<li>
-													<p class="f15 ac gray fw400">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
-													<p class="mt10 f23 fw700"><span class="ac mr10">D-16</span> 2023년 상반기 신입사원 정기채용</p>
-												</li>
-												<li><div class="roundType02 ac">5</div></li>
-											</ul>
-										</a>
+									<!-- //공고가 없을 떄 -->
+									<div class="roundType01 mt30" th:unless="${not #lists.isEmpty( recruit )}">
+										<div class="tex-center f16 pt20 pb20 gray">현재 진행중인 채용이 없습니다.</div>
 									</div>
-									
-									<div class="roundType01 mt20">
-										<a href="">
-											<ul>
-												<li>
-													<p class="f15 ac gray2 fw400 ">2021.08.06 09:00 ~ 2021.09.30 24:00</p>
-													<p class="mt10 f23 fw700"><span class="mr10 gray2">지원마감</span> <span class="gray2">경력사원 모집</span></p>
-												</li>
-												<li><div class="roundType02 ac gray2">1</div></li>
-											</ul>
-										</a>
-									</div>
-									<!-- //공고가 2개일때 노출방법 -->
-								
 								</div>
 								<ul class="info_ul mt20">
 									<li class="mr30"><img th:src="@{/img/ico04.png}" alt="연락처"/></li>
@@ -98,7 +77,7 @@
 										<dl>
 											<dt class="f16 fw600">채용문의</dt>
 											<dd class="f16 fw400 gray ac ml10"><span class="mr10">recruit@vegemil.co.kr</span>
-											<button type="button" class="f14 gray" onclick = "location.href = '/member/inquiry' ">1:1 문의하기</button>
+											<button type="button" class="f14 gray" onclick = "location.href = '/mypage/qna' ">1:1 문의하기</button>
 											</dd>
 										</dl>
 									</li>

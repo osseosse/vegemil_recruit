@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header id="header" class="subColor" th:fragment="headerFragment">
 <div class="header">
 	<div class="container1660 center">
 		<ul class="h_menu text-left">
 			<li class="h_logo ac"><a href="/" ><img th:src="@{/img/logo.png}" alt="정식품"/><span class="fw700">Careers</span></a></li>
 			<li><a href="/information/info">채용안내</a></li>
-			<li><a href="/application/write01">입사지원</a></li>
-			<li><a href="/account/login">입사지원 수정</a></li>
-			<li><a href="/account/result02">합격여부 확인</a></li>
+			<li><a href="/recruit/list">입사지원</a></li>
+			<li><a href="/information/faq">FAQ</a></li>
+			<li><a href="/mypage/list">마이페이지</a></li>
 		</ul>
 		<div class="faceBox">
-			<!-- 로그아웃
-			<a href="#"><div class="face">로그인<img src="./img/ico_face.png" /></div></a> 
-			<a href="#"><div class="face"><span>김지언님</span><img th:src="@{/img/photo_sample.jpg}" alt="지원자증명사진"/></div></a>
-			<!-- 로그인 -->
-			<a href="/member/login"><div class="face">로그인<img th:src="@{/img/ico_face.png}" /></div></a> 
+			<a sec:authorize="isAnonymous()" th:href="@{/member/login}"><div class="face">로그인<img th:src="@{/img/ico_face.png}" /></div></a>
+		    <form th:action="@{/member/logout}" method="POST" sec:authorize="isAuthenticated()">
+		        <button class="btn btn-info" type="submit">로그아웃</button>
+		    </form>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="sidebar fixedsticky w300 f-left">
+							<div class="myTitle">
+								<p class="f20 fw600">마이페이지</p>
+								<p class="f36 fw600 mt30" th:text="|${member.memName}님|"></p>
+								<p class="f16 fw300 ac mt20" th:text="${member.emailAddr}"></p>
+							</div>
+						</div>
+						<div class="wrap860 f-right" >
+							<form  th:action="@{/mypage/registerQna}" th:object="${qna}" method="post"  >
+							<!-- (1)제출완료 -->
+							<p class="f23 fw600">1:1문의하기 </p>
+							<div class="r-box mt20">
+								<ul class="s-d-2">
+									<li class="f14">문의회사</li>
+									<li>
+										<div class="custom-sel w230">
+										  <select th:field="*{rCompany}">
+											<option value="">선택</option>
+											<option value="1">정식품</option>
+											<option value="2">자연과사람들</option>
+											<option value="3">오쎄</option>
+											<option value="4">넬보스코</option>
+										  </select>
+										</div>
+										<p class="error" id="companyCheck" style="display: none;"><img th:src="@{/img/error.png}">회사를 선택해 주세요</p>
+									</li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14">제목</li>
+									<li>
+										<input type="text" th:field="*{rTitle}" class="inType01 mt10 w600" placeholder="제목을 입력해 주세요">
+										<p class="error" id="titleCheck" style="display: none;"><img th:src="@{/img/error.png}">제목을 입력해 주세요</p>
+									</li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14">이메일</li>
+									<li><input type="text" class="inType01 mt10 w600 " th:value="${member.emailAddr}" disabled></li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14">휴대폰 번호</li>
+									<li><input type="text" class="inType01 mt10 w600 " th:value="${member.phoneNo}" disabled></li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14 v-top">내용</li>
+									<li>
+										<textarea type="text" th:field="*{rContent}" class="areaType03 mt10" placeholder="문의내용을 작성해 주세요"></textarea>
+										<p class="error" id="contentCheck" style="display: none;"><img th:src="@{/img/error.png}">내용을 입력해 주세요</p>
+									</li>
+								</ul>
+							</div>
+							<div class="text-right mt40"><p class="btn_type07 fw600 w250 f20"><button type="submit" id="saveBtn" disabled="disabled">문의등록</button></p></div>
+							<!-- <p style="border:2px dashed red;padding:10px; background:yellow; text-align:left; line-height:140%">[전산] 문의등록내용모두 작성시 active 버튼 적용해주세요</p> -->
+							<!-- //(1)제출완료 -->
+						</form>
+						</div><!-- //wrap860 -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ 
+				// Content
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+	<!-- ================================ 
+				Popup 
+	================================ -->
+	<!-- popup 
+	<div id="pop_dropOut"  style="display:none;" >
+		<div class="popBasePW " cellspacing="0"  summary="타이틀">
+			<p class="f20 fw400 text-center">문의 내용을 저장하시겠습니까?</p>
+			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<ul class="popBtnbox mt40 ">
+				<li class="mt40"><a href="#pop_dropOut">저장</a></li>
+				<li class="mt40"><a href="#pop_dropOut">취소</a></li>
+			</ul>
+		</div>
+	</div>
+	//popup -->
+
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); 
+	</script>
+	<!-- //팝업 script -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+<script th:src="@{/common/js/qna.js}"></script>
+</body>
+</html>

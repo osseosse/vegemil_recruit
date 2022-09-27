@@ -6,9 +6,11 @@ import com.vegemil.domain.RecruitDTO;
 
 public interface RecruitService {
 	
-	public int getRecruitCount(RecruitDTO params);
+	public int getRecruitCount();
 	
-	public List<RecruitDTO> getRecruitList(RecruitDTO params);
+	public List<RecruitDTO> getRecruitList();
+	
+	public RecruitDTO getRecruitLatest();
 	
 	public boolean registerRecruit(RecruitDTO params);
 	

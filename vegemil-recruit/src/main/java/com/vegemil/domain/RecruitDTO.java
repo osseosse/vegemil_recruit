@@ -1,7 +1,5 @@
 package com.vegemil.domain;
 
-import java.sql.Timestamp;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,17 +11,17 @@ public class RecruitDTO extends CommonDTO {
 	private String sTitle;
 	private String sType;
 	private String sCompany;
-	private Timestamp sStartdate;
-	private Timestamp sEnddate;
-	private Timestamp s1;
-	private Timestamp s2;
-	private Timestamp s3;	
+	private String sStartdate;
+	private String sEnddate;
+	private String s1;
+	private String s2;
+	private String s3;	
 	private String sClose;
 	private String sCategory;
 	private String sCategory2;
 	private String sCollect;
 	private String sDday;
-	private Timestamp sInsertDate;
-	private Timestamp sModifyDate;
+	private String sInsertDate;
+	private String sModifyDate;
 
 }

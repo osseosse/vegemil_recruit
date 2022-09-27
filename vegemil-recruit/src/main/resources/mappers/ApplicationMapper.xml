@@ -4,13 +4,13 @@
 <mapper namespace="com.vegemil.mapper.ApplicationMapper">
 
 	<sql id="informationColumns">
-		idx, setup_th, join_num, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, join_type, join_company, join_field1, join_area1, mem_no
+		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
 		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, handicap, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 	</sql>
 	<sql id="academyColumns">
-		idx, mem_no, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
+		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
 		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_max1, sch_point_evg1
     	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_max2, sch_point_evg2
     	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_max3, sch_point_evg3
@@ -22,7 +22,7 @@
 	</sql>
 	
 	<sql id="qualificationColumns">
-		idx, mem_no, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
 		, lang_name1, lang_point1, lang_lv1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 		, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_num3, lang_get3, lang_talk3
     	, lang_make3, lang_read3, lang_name4, lang_point4, lang_lv4, lang_lic_num4, lang_get4, lang_talk4, lang_make4, lang_read4
@@ -33,10 +33,23 @@
     	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
     	, lang_count, sw_count, lic_count, medal_count, for_count
 	</sql>
+	
+	<sql id="careerColumns">
+		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
+		, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
+		, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
+		, port_file, port_url
+	</sql>
+	
+	<sql id="introduceColumns">
+		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
+	</sql>
 
 	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO R_Recruit (
-			setup_th, join_num, join_date, join_ok, join_type, join_company, join_field1, join_area1
+			setup_th, join_num, join_date, join_ok, submit_ok, join_company, join_field1, join_area1
 			, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, marry, religion
 			, ability, hobby, handicap, fam_mem1, fam_mem2, fam_mem3, fam_con1, fam_name1, fam_age1
 			, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
@@ -53,7 +66,7 @@
 	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO">
 		UPDATE R_Recruit
 		SET
-			  join_company= #{joinCompany}, join_type = #{joinType}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}, name_han = #{nameHan}
+			  join_company= #{joinCompany}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}, name_han = #{nameHan}
 			, sex = #{sex}, name_eng = #{nameEng}, photo = #{photo}, zip1 = #{zip1}, addr11 = #{addr11}, addr12 = #{addr12}
 			, bohun = #{bohun}, handicap = #{handicap}, fam_count = #{famCount}
 			, fam_con1 = #{famCon1}, fam_name1 = #{famName1}, fam_age1 = #{famAge1}, fam_con2 = #{famCon2}
@@ -107,6 +120,28 @@
 		WHERE
 			idx = #{idx} and mem_no= #{memNo}
 	</update>
+	
+	<update id="updateCareer" parameterType="com.vegemil.domain.CareerDTO">
+		UPDATE R_Recruit
+		SET
+			intern_name=#{internName}, intern_ing=#{internIng}, intern_s_date=#{internSDate}, intern_e_date=#{internEDate}, intern_duty=#{internDuty}
+			, his_count=#{hisCount}, his_co_name1=#{hisCoName1}, his_ing1=#{hisIng1}, his_s_date1=#{hisSDate1}, his_e_date1=#{hisEDate1}
+			, his_content1=#{hisContent1}, his_duty1=#{hisDuty1}, his_pay1=#{hisPay1}, his_co_name2=#{hisCoName2}, his_ing2=#{hisIng2}, his_s_date2=#{hisSDate2}
+			, his_e_date2=#{hisEDate2}, his_content2=#{hisContent2}, his_duty2=#{hisDuty2}, his_pay2=#{hisPay2}, his_co_name3=#{hisCoName3}, his_ing3=#{hisIng3}
+			, his_s_date3=#{hisSDate3}, his_e_date3=#{hisEDate3}, his_content3=#{hisContent3}, his_duty3=#{hisDuty3}, his_pay3=#{hisPay3}
+			, port_file=#{portFile}, port_url=#{portUrl}, update_date = NOW()
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</update>
+	
+	<update id="updateIntroduce" parameterType="com.vegemil.domain.IntroduceDTO">
+		UPDATE R_Recruit
+		SET
+			introduce1=#{introduce1}, introduce2=#{introduce2}, introduce3=#{introduce3}, introduce4=#{introduce4}, introduce5=#{introduce5}, introduce6=#{introduce6}
+			, submit_ok = #{submitOk}, update_date = NOW()
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</update>
 
 	<select id="selectPersonalInfo" parameterType="map" resultType="com.vegemil.domain.PersonalInfoDTO">
 		SELECT
@@ -135,16 +170,42 @@
 			idx = #{idx} and mem_no= #{memNo}
 	</select>
 
-
-	<select id="selectApplicationList" parameterType="com.vegemil.domain.ApplicationDTO" resultType="com.vegemil.domain.ApplicationDTO">
+	<select id="selectCareer" parameterType="map" resultType="com.vegemil.domain.CareerDTO">
 		SELECT
-			<include refid="informationColumns" />
+			<include refid="careerColumns" />
 		FROM
 			R_Recruit
 		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</select>
+	
+	<select id="selectIntroduce" parameterType="map" resultType="com.vegemil.domain.IntroduceDTO">
+		SELECT
+			<include refid="introduceColumns" />
+		FROM
+			R_Recruit
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</select>
+	
+	<select id="selectApplication" parameterType="com.vegemil.domain.ApplicationDTO" resultType="com.vegemil.domain.ApplicationDTO">
+		SELECT
+			idx, setup_th, setup_title, submit_ok, DATE_FORMAT(update_date,'%Y-%m') as update_date
+		FROM
+			R_Recruit
+		WHERE
+			idx = #{idx}
+	</select>
+
+	<select id="selectApplicationList" parameterType="long" resultType="com.vegemil.domain.ApplicationDTO">
+		SELECT re.idx, re.setup_title, DATE_FORMAT(re.join_date,'%Y-%m') as join_date, re.join_ok, re.submit_ok, DATE_FORMAT(se.s_enddate,'%Y.%m.%d') as setup_date
+		FROM R_Recruit as re
+		    INNER JOIN R_Setup as se
+		    ON re.setup_th = se.s_th
+		WHERE <![CDATA[ se.s_enddate <= NOW()]]>
+		AND	  re.mem_no= #{memNo}
 		ORDER BY
-			join_DATE ASC
-		<include refid="CommonMapper.paging" />
+			re.join_DATE DESC
 	</select>
 
 	<select id="selectApplicationCount" parameterType="map" resultType="int">
@@ -153,7 +214,7 @@
 		FROM
 			R_Recruit
 		WHERE
-			idx = #{idx} and mem_no= #{memNo}
+			mem_no= #{memNo}
 	</select>
 
 </mapper>

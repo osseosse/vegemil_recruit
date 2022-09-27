@@ -9,6 +9,11 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><!-- aos animation -->
+<script>
+	$(document).ready(function(){
+		$( '.sidebar' ).fixedsticky();
+	});
+</script>
 <body>
 	<div class="wrap">
 		<!-- ================================ Header ================================ -->
@@ -26,18 +31,7 @@
 					</script>
 				</div>
 			</div>
-			<script>
-				$(document).ready(function(){
-					$( '.sidebar' ).fixedsticky();
-				});
-			</script>
 			<div class="container100">
-				<div class="nav">
-					<div class="container1300 center">
-						<a href="/"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">입사지원</span></a>
-					</div>
-				</div>
-
 				<div class="container1300 center" >
 					<div class="memberWrapBase">
 						
@@ -88,7 +82,7 @@
 							</div>
 							<div id="recruitList">
 							<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
-								<a th:href="|@{/application/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sCategory}/${recruit.sCategory2}|" >
+								<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sCategory}/${recruit.sCategory2}|" >
 									<div class="r-box mt20">
 										<input type="hidden"  />
 										<div class="info01">
@@ -103,7 +97,7 @@
 											<span class="f20 fw600 " th:text="${recruit.sTitle}"></span>
 										</div>
 										<div class="info03">
-											<p class="gray f16 text-left pt20 ac" th:text="|${#dates.format( recruit.sStartdate, 'yyyy.MM.dd' )} - ${#dates.format( recruit.sEnddate, 'MM.dd' )}|"></p>
+											<p class="gray f16 text-left pt20 ac" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|"></p>
 										</div>
 									</div>
 								</a>

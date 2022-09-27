@@ -22,6 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.vegemil.constant.Method;
 import com.vegemil.domain.AcademyInfoDTO;
+import com.vegemil.domain.ApplicationDTO;
+import com.vegemil.domain.CareerDTO;
+import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
@@ -281,6 +284,216 @@ public class ApplicationController extends UiUtils {
 		}
 
 		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/career?idx="+application.getIdx(), Method.GET, null, model);
+	}
+	
+	@GetMapping(value = "/application/career")
+	public String openCareer(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		CareerDTO application = new CareerDTO();
+		
+		if (idx == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+		}
+		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+	        
+	        application = applicationService.selectCareer(idx, member.getMemNo());
+			if (application == null) {
+				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+			}
+			application.setIdx(idx);
+			application.setEmailAddr(member.getEmailAddr());
+	        application.setMemName(member.getMemName());
+	        application.setPhoneNo(member.getPhoneNo());
+	        
+			model.addAttribute("app", application);
+	        
+        }
+		
+		return "application/career";
+	}
+	
+	@PostMapping(value = "/application/registerCareer")
+	public String registerCareer(@ModelAttribute("app") final CareerDTO application, 
+			BindingResult bindingResult, @RequestParam("fileName") MultipartFile fileName, Model model, 
+			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		try {
+			
+			String originalName = fileName.getOriginalFilename();
+			if(!"".equals(originalName)) {
+				String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
+				String uuid = UUID.randomUUID().toString();
+				String savefileName = uuid + "_" + file;
+				Path savePath = Paths.get(request.getServletContext().getRealPath("/") + "/WEB-INF/classes/static/recruit/img/" + savefileName);
+				
+				fileName.transferTo(savePath);
+				//포트폴리오
+				//application.setPhoto(savefileName);
+			}
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+			
+		        application.setEmailAddr(member.getEmailAddr());
+		        application.setMemName(member.getMemName());
+		        application.setMemNo(member.getMemNo());
+		        application.setPhoneNo(member.getPhoneNo());
+		        
+				boolean isRegistered = applicationService.registerCareer(application);
+				if (isRegistered == false) {
+					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+				
+			}
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		}
+
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/introduce?idx="+application.getIdx(), Method.GET, null, model);
+	}
+	
+	@GetMapping(value = "/application/introduce")
+	public String openIntroduce(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		IntroduceDTO application = new IntroduceDTO();
+		
+		if (idx == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+		}
+		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+	        
+	        application = applicationService.selectIntroduce(idx, member.getMemNo());
+			if (application == null) {
+				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+			}
+			application.setIdx(idx);
+			application.setEmailAddr(member.getEmailAddr());
+	        application.setMemName(member.getMemName());
+	        application.setPhoneNo(member.getPhoneNo());
+	        
+			model.addAttribute("app", application);
+	        
+        }
+		
+		return "application/introduce";
+	}
+	
+	@PostMapping(value = "/application/registerIntroduce")
+	public String registerIntroduce(@ModelAttribute("app") final IntroduceDTO application, 
+			BindingResult bindingResult, Model model, 
+			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		try {
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+			
+		        application.setEmailAddr(member.getEmailAddr());
+		        application.setMemName(member.getMemName());
+		        application.setMemNo(member.getMemNo());
+		        application.setPhoneNo(member.getPhoneNo());
+		        
+		        //제출완료 submitOk=1
+		        application.setSubmitOk("1");
+		        
+				boolean isRegistered = applicationService.registerIntroduce(application);
+				if (isRegistered == false) {
+					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+				
+			}
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		}
+
+		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/finish?idx="+application.getIdx(), Method.GET, null, model);
+	}
+	
+	@GetMapping(value = "/application/finish")
+	public String openFinish(@RequestParam(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		ApplicationDTO application = new ApplicationDTO();
+		
+		if (idx == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+		}
+		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+	        
+	        application = applicationService.getApplication(idx, member.getMemNo());
+			if (application == null) {
+				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+			}
+	        
+			model.addAttribute("idx", idx);
+	        model.addAttribute("setupTitle", application.getSetupTitle());
+	        model.addAttribute("memName", member.getMemName());
+			model.addAttribute("updateDate", application.getUpdateDate());
+	        
+        }
+		
+		return "application/finish";
 	}
 	
 	/*

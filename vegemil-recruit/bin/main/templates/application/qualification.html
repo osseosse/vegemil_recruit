@@ -17,11 +17,6 @@
 		<!-- ================================ Content ================================ -->
 		<section>
 			<div class="container100">
-				<div class="nav">
-					<div class="container1300 center">
-						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
-					</div>
-				</div>
 				<div class="container1300 center" >
 					<div class="memberWrapBase ">
 						<div class="sidebar fixedsticky w350 f-left">
@@ -32,7 +27,7 @@
 								<li class="w-after"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
 								<li class="w-ing"><a th:href="|@{/application/qualification}?idx=${app.idx}|">어학/자격/기타</a></li>
 								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
-								<li class="w-before"><a href="write05.html">자기소개</a></li>
+								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerQualification([[ ${app.idx} ]])">임시저장</a></p>
@@ -44,6 +39,7 @@
 						</script>
 						<div class="wrap860 f-right" >
 						<form th:action="@{/application/registerQualification}" th:object="${app}" method="post" >
+							<input type="hidden" th:field="*{idx}" />
 							<!-- (1)어학 -->
 							<div id="field1" class="qualification-repeater">
 							<p class="f23 fw600 pr">어학 <input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.ApplicationDTO;
+import com.vegemil.domain.CareerDTO;
+import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
 
@@ -19,10 +21,20 @@ public interface ApplicationService {
 	
 	public boolean registerQualification(QualificationDTO params);
 	
+	public boolean registerCareer(CareerDTO params);
+	
+	public boolean registerIntroduce(IntroduceDTO params);
+	
+	public ApplicationDTO getApplication(Long idx, Long memNo);
+	
+	public IntroduceDTO selectIntroduce(Long idx, Long memNo);
+	
 	public PersonalInfoDTO selectPersonalInfo(Long idx, Long memNo);
 	
 	public AcademyInfoDTO selectAcademy(Long idx, Long memNo);
 	
 	public QualificationDTO selectQualification(Long idx, Long memNo);
+	
+	public CareerDTO selectCareer(Long idx, Long memNo);
 	
 }

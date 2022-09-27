@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="sidebar fixedsticky w300 f-left">
+							<div class="myTitle">
+								<p class="f20 fw600">마이페이지</p>
+								<p class="f36 fw600 mt30" th:text="|${member.memName}님|"></p>
+								<p class="f16 fw300 ac mt20" th:text="${member.emailAddr}"></p>
+							</div>
+							<p class="btn_bell mt10"><a href="result02.html"><img th:src="@{/img/ico_bell.png}" />채용결과 확인</a></p>
+						</div>
+						<div class="wrap860 f-right" >
+							<p class="f23 fw600">1:1문의하기 </p>
+							<div class="r-box3 mt20">
+								<p class="r-box-name"th:text="|${member.memName}님의<br>문의답변입니다.|"></p>
+								<p class="text-right"><img th:src="@{/img/qna.png}" alt="1:1문의하기" /></p>
+								<ul class="s-d-2">
+									<li class="f14">문의회사</li>
+									<li>
+										<input type="text" class="inType01 border0  w600" th:value="${qna.rCompany}" readonly>
+									</li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14">제목</li>
+									<li>
+										<input type="text"  class="inType01 mt10 w600 border0" th:value="${qna.rTitle}" readonly>
+									</li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14 v-top">내용</li>
+									<li>
+										<div class="ins w100 mt10 border0 f14 h200" th:text="${qna.rContent}"></div>
+									</li>
+								</ul>
+								<ul class="s-d-2">
+									<li class="f14 v-top">답변</li>
+									<li>
+										<div class="ins w100 mt10 border0 f14 h130 blue" th:text="${qna.rAnswer}"></div>
+									</li>
+								</ul>
+								<ul class="s-d-2 mt30">
+									<li class="f14 v-top">담당자</li>
+									<li>
+										<span class="w-r" th:text="|E-MAIL : ${qna.rAnswerEmail}|"></span><span class="w-r ml10" th:text="|TEL : ${qna.rAnswerTel}|"></span><span class="ml10"><img th:src="@{/img/ico_call.png}" alt="전화"/></span>
+									</li>
+								</ul>
+							</div>
+							<!-- 문의내용 작성시 활성버튼 -->
+							<div class="text-right mt40"><button class="btn_type07 fw600 w250 f20 active" onclick = "location.href = '/mypage/list' ">목록</button></div>
+						</div><!-- //wrap860 -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ 
+				// Content
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+	<!-- ================================ 
+				Popup 
+	================================ -->
+	<!-- popup 
+	<div id="pop_dropOut"  style="display:none;" >
+		<div class="popBasePW " cellspacing="0"  summary="타이틀">
+			<p class="f20 fw400 text-center">문의 내용을 저장하시겠습니까?</p>
+			<p class="btn_pop_close"><a href="#pop_dropOut"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<ul class="popBtnbox mt40 ">
+				<li class="mt40"><a href="#pop_dropOut">저장</a></li>
+				<li class="mt40"><a href="#pop_dropOut">취소</a></li>
+			</ul>
+		</div>
+	</div>
+	//popup -->
+
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+		var modal1 = Modality.init('#pop_dropOut ', {effect: 'slide-up'}); 
+	</script>
+	<!-- //팝업 script -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

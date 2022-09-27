@@ -45,8 +45,16 @@ public class MemberController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/member/join")
-	public String moveJoin(Model model) {
+	public String moveJoin(Model model, Authentication authentication) {
 		
+		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        
+		if(member != null) {
+	        if(member.getActive() != 1) {
+	        	return "member/joinConfirm";
+	        }
+		}
 		model.addAttribute("member", new MemberDTO());
 
 		return "member/join";
@@ -86,7 +94,11 @@ public class MemberController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/member/login")
-	public String moveLogin() {
+	public String moveLogin(Model model, Authentication authentication) {
+		
+		if(authentication != null)
+    	return showMessageWithRedirect("이미 로그인 상태입니다.", "/", Method.GET, null, model);
+		
 		return "member/login";
 	}
 	

@@ -17,8 +17,8 @@ public class RecruitServiceImpl implements RecruitService {
 	private RecruitMapper RecruitMapper;
 	
 	@Override
-	public int getRecruitCount(RecruitDTO params) {
-		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount(params);
+	public int getRecruitCount() {
+		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount();
 		
 		if(recruitTotalCount < 0 ) {
 			recruitTotalCount = 0;
@@ -28,18 +28,13 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 	
 	@Override
-	public List<RecruitDTO> getRecruitList(RecruitDTO params) {
+	public List<RecruitDTO> getRecruitList() {
 		List<RecruitDTO> recruitList = Collections.emptyList();
 
-		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount(params);
-
-		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalRecordCount(recruitTotalCount);
-
-		params.setPaginationInfo(paginationInfo);
+		int recruitTotalCount = RecruitMapper.selectRecruitTotalCount();
 
 		if (recruitTotalCount > 0) {
-			recruitList = RecruitMapper.selectRecruitList(params);
+			recruitList = RecruitMapper.selectRecruitList();
 		}
 
 		return recruitList;
@@ -61,6 +56,11 @@ public class RecruitServiceImpl implements RecruitService {
 	@Override
 	public RecruitDTO getRecruitDetail(Long sTh) {
 		return RecruitMapper.selectRecruitDetail(sTh);
+	}
+	
+	@Override
+	public RecruitDTO getRecruitLatest() {
+		return RecruitMapper.getRecruitLatest();
 	}
 	
 }

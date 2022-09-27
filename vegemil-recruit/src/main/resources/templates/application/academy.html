@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <title>정식품 채용</title>
-<head th:replace="fragments/head :: headFragment">
+<head th:replace="fragments/head :: headFragment"></head>
 <!-- add css -->
 <link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
 <link th:href="@{/common/css/modality.css}" rel="stylesheet">
@@ -13,7 +13,6 @@
 		$( '.sidebar' ).fixedsticky();
 	});
 </script>
-</head>
 <body>
 	<div class="wrap">
 		<!-- ================================ Header ================================ -->
@@ -22,13 +21,6 @@
 		<!-- ================================ Content ================================ -->
 		<section>
 			<div class="container100">
-				<div class="nav">
-					<div class="container1300 center">
-						<a href="#"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
-					</div>
-				</div>
-				
-
 				<div class="container1300 center" >
 					<div class="memberWrapBase">
 						<div class="sidebar fixedsticky w350 f-left" >
@@ -39,7 +31,7 @@
 								<li class="w-ing"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
 								<li class="w-before"><a th:href="|@{/application/qualification}?idx=${app.idx}|">어학/자격/기타</a></li>
 								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
-								<li class="w-before"><a href="/application/introduce">자기소개</a></li>
+								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerAcademy([[ ${app.idx} ]])">임시저장</a></p>
@@ -413,57 +405,6 @@
 										</ul>
 									</div>
 								</div>						
-								<!-- 전공COPY -->
-								<div class="w100 copybtn-box">
-									<p class="f16 fw400 mt20 pr btn_copy ">
-										<span>전공추가</span> 
-										<input type="image" value=" 추가 " onclick="add_item2()" th:src="@{/img/ico_plus.png}">
-									</p>
-								</div>
-								<div id="field2" ></div>
-								<div id="pre_set2" style="display:none">
-									<div class="row  mt50 ">
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>학과계열</li>
-												<li>
-													<div class="custom-sel------ w180">
-													<select class="base w180">
-														<option value="선택해 주세요">선택해 주세요</option>
-														<option value="상경">상경</option>
-														<option value="인문">인문</option>
-													  </select>
-													</div>
-												</li>
-											</ul>
-										</div>
-										<div class="col-lg-6 ">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>전공</li>
-												<li>
-													<input type="text" class="inType01 w180"  >
-												</li>
-											</ul>
-										</div>
-										
-										<div class="col-lg-12 mt10">
-											<ul class="s-d-2 ">
-												<li class="f14"><span class="red">*</span>평점</li>
-												<li>
-													<input type="text" class="inType01 w70 text-right"  >
-												</li>
-												
-												<li class="ml10 mr10"> / </li>
-												<li>
-													4.5
-												</li>
-												<p class="gray f14 mt10 ">*평점은 4.5 만점으로 환산하여 입력해주세요.</p>
-											</ul>
-										</div>
-									</div>	
-									<input class="inputDel2" type="image" value="삭제" onclick="remove_item2(this)" th:src="@{/img/ico_inputDel2.png}" >
-								</div>	
-								<!-- //전공COPY -->
 							</div>
 							<!-- (5)대학원 -->
 							<p class="f23 fw600 mt80 pr">대학원</p> 

@@ -8,8 +8,8 @@
 		, s_title
 		, s_company
 		, s_type
-		, s_startdate
-		, s_enddate
+		, DATE_FORMAT(s_startdate,'%Y.%m.%d') as s_startdate
+		, DATE_FORMAT(s_enddate,'%Y.%m.%d') as s_enddate
 		, s_1
 		, s_2
 		, s_3
@@ -71,43 +71,31 @@
 			S_TH = #{sTh}
 	</update>
 
-	<select id="selectRecruitList" parameterType="com.vegemil.domain.RecruitDTO" resultType="com.vegemil.domain.RecruitDTO">
+	<select id="getRecruitLatest" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT
 			<include refid="RecruitColumns" />
 		FROM
 			R_Setup
 		WHERE
 			S_CLOSE = '1'
-			<if test="searchKeyword != null and searchKeyword != ''">
-				<choose>
-				<when test="searchType != null and searchType != ''">
-					<choose>
-						<when test="'company'.equals(searchType)">
-							AND s_company LIKE CONCAT('%', #{searchKeyword}, '%')
-						</when>
-						<when test="'type'.equals(searchType)">
-							AND s_type LIKE CONCAT('%', #{searchKeyword}, '%')
-						</when>
-						<when test="'category'.equals(searchType)">
-							AND s_category LIKE CONCAT('%', #{searchKeyword}, '%')
-						</when>
-						<when test="'category2'.equals(searchType)">
-							AND s_category2 LIKE CONCAT('%', #{searchKeyword}, '%')
-						</when>
-						<when test="'collect'.equals(searchType)">
-							AND s_collect LIKE CONCAT('%', #{searchKeyword}, '%')
-						</when>
-					</choose>
-				</when>
-				</choose>
-			</if>
-		<include refid="CommonMapper.search" />
 		ORDER BY
-			s_insertdate ASC
-		<!-- <include refid="CommonMapper.paging" /> -->
+			s_insertdate DESC
+		LIMIT
+			1
 	</select>
 
-	<select id="selectRecruitTotalCount" parameterType="com.vegemil.domain.RecruitDTO" resultType="int">
+	<select id="selectRecruitList" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			<include refid="RecruitColumns" />
+		FROM
+			R_Setup
+		WHERE
+			S_CLOSE = '1'
+		ORDER BY
+			s_insertdate ASC
+	</select>
+
+	<select id="selectRecruitTotalCount" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM

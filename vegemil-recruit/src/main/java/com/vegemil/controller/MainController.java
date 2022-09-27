@@ -10,14 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.vegemil.service.MailService;
+import com.vegemil.service.RecruitService;
 import com.vegemil.domain.MailDTO;
 import com.vegemil.domain.MemberDTO;
+import com.vegemil.domain.RecruitDTO;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	private RecruitService RecruitService;
 
 	@RequestMapping(value = "/")
 	public String index(Model model, Authentication authentication) {
@@ -32,6 +37,13 @@ public class MainController {
 	        }
 	        model.addAttribute("member",member);	//유저 정보
         }
+        
+        RecruitDTO recruit = RecruitService.getRecruitLatest();
+		int recruitCount = RecruitService.getRecruitCount();
+		
+		model.addAttribute("recruit", recruit);
+		model.addAttribute("recruitCount", recruitCount);
+        
         return "index";
 	}
 	

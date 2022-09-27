@@ -15,8 +15,10 @@ public interface RecruitMapper {
 
 	public int updateRecruit(RecruitDTO params);
 
-	public List<RecruitDTO> selectRecruitList(RecruitDTO params);
+	public List<RecruitDTO> selectRecruitList();
+	
+	public RecruitDTO getRecruitLatest();
 
-	public int selectRecruitTotalCount(RecruitDTO params);
+	public int selectRecruitTotalCount();
 
 }

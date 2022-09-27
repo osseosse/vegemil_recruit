@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ Content ================================ -->
+		<section>
+			<div class="container100">
+				<div class="container1300 center" >
+					<div class="memberWrapBase">
+						<div class="sidebar fixedsticky w300 f-left">
+							<div class="myTitle">
+								<p class="f20 fw600">마이페이지</p>
+								<p class="f36 fw600 mt30" th:text="|${member.memName}님|"></p>
+								<p class="f16 fw300 ac mt20" th:text="${member.emailAddr}"></p>
+								<p class="f16 fw300 ac mt20" th:text="${member.phoneNo}"></p>
+							</div>
+						</div>
+						<div class="wrap860 f-right" >
+							<!-- (1)제출완료 / 제출완료 없을때 -->
+							<p class="f23 fw600">나의 지원 현황<span class="abs-r f16 fw400  mr10 mt10 gray">
+								<a href="/recruit/list">지원하기 <img th:src="@{/img/ico_arrow_g.png}" /></a>
+								</span></p>
+								<div class="r-box mt20 bgHover" th:if="${not #lists.isEmpty( appList )}" th:each="app : ${appList}">
+									<div class="info01">
+										<span class="r-blue" th:if="${app.submitOk.equals('1')}">지원완료</span><span class="r-black" th:unless="${app.submitOk.equals('1')}">임시저장</span><span class="f16">제출일</span>
+										<span class="ac f16 fw300 gray" th:text="${app.setupDate}"></span>
+									</div>
+									<div class="info02">
+										<dl class="mt20">
+											<dt><span class="f20 fw600 mt20 line-height140" th:text="${app.setupTitle}"></span></dt>
+											<dd>
+												<a class="btn_reviewBox" th:href="|@{/application/personalInfo}?idx=${app.idx}|">
+													<ul>
+														<li class="btn_review ">지원서 보기</li>
+														<li class="btn_review_arrow ml10"></li>
+													</ul>
+												</a>
+											</dd>
+										</dl>
+									</div>
+								</div>
+							
+							<div class="r-box mt20" th:unless="${not #lists.isEmpty( appList )}">
+								<div class="tex-center f16 pt20 pb20 gray">작성된 입사지원서가 없습니다.</div>
+							</div>
+							<!-- //(1)제출완료 / 제출완료없을때 -->
+							
+							<!-- (3)1:1문의 / 1:1문의 없을때 -->
+							<p class="f23 fw600 mt80">1:1문의 <span class="abs-r f16 fw400  mr10 mt10 gray">
+								<a href="/mypage/qna">문의하기 <img th:src="@{/img/ico_arrow_g.png}" /></a>
+								</span></p>
+								
+							<div class="r-box mt20 bgHover" th:if="${not #lists.isEmpty( qnaList )}" th:each="qna : ${qnaList}">
+								<div class="info01">
+									<span class="r-blue-line" th:if="${qna.rAnswerYn} == 'N'" th:text="답변대기"></span> 
+									<span class="r-blue" th:unless="${qna.rAnswerYn} == 'N'" th:text="답변완료"></span>
+									<!-- <span class="ac f16 fw300 gray">2022.04.05</span> -->
+								</div>
+								<div class="info02">
+									<dl class="mt20">
+										<dt><span class="f20 fw600 mt20 line-height140" th:text="${qna.rTitle}"></span></dt>
+										<dd>
+											<a class="btn_reviewBox" th:href="|@{/mypage/qna}?idx=${qna.qId}|">
+												<ul>
+													<li class="btn_review ">문의 보기</li>
+													<li class="btn_review_arrow ml10"></li>
+												</ul>
+											</a>
+										</dd>
+									</dl>
+								</div>
+							</div>
+							
+							<div class="r-box mt20" th:unless="${not #lists.isEmpty( qnaList )}">
+								<div class="tex-center f16 pt20 pb20 gray">문의 내역이 없습니다.</div>
+							</div>
+							<!-- (3)1:1문의 / 1:1문의 없을때-->
+							
+						</div><!-- //wrap860 -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ 
+				// Content
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>
