@@ -104,5 +104,14 @@
 			S_CLOSE = '1'
 		<include refid="CommonMapper.search" />
 	</select>
+	
+	<select id="getMajorList" parameterType="string" resultType="string">
+		SELECT
+			major_name
+		FROM
+			r_major
+		WHERE
+			major_name like CONCAT('%',#{majorName},'%')
+	</select>
 
 </mapper>

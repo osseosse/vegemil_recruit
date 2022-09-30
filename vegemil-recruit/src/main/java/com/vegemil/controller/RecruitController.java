@@ -3,6 +3,7 @@ package com.vegemil.controller;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,12 +14,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.vegemil.adapter.GsonLocalDateTimeAdapter;
 import com.vegemil.constant.Method;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.RecruitDTO;
@@ -43,6 +51,19 @@ public class RecruitController extends UiUtils {
 		return "recruit/list";
 	}
 	
+	@GetMapping(value = "/recruit/majorList")
+	public @ResponseBody JsonObject getMajorList(@RequestParam(value = "majorName", required = false) String majorName, Model model) {
+		
+		JsonObject jsonObj = new JsonObject();
+		List<String> majorList = RecruitService.getMajorList(majorName);
+		if (CollectionUtils.isEmpty(majorList) == false) {
+			Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
+			JsonArray jsonArr = gson.toJsonTree(majorList).getAsJsonArray();
+			jsonObj.add("majorList", jsonArr);
+		}
+
+		return jsonObj;
+	}
 	
 	@GetMapping(value = "/recruit/detail")
 	public String openRecruitDetail(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) Long sTh, Model model, HttpServletResponse response) throws Exception {

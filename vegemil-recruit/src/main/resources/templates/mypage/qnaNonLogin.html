@@ -17,9 +17,9 @@
 					<div class="memberWrapBase">
 						<div class="sidebar fixedsticky w300 f-left">
 							<div class="myTitle">
-								<p class="f20 fw600">마이페이지</p>
-								<p class="f36 fw600 mt30" th:text="|${member.memName}님|"></p>
-								<p class="f16 fw300 ac mt20" th:text="${member.emailAddr}"></p>
+								<p class="f26 fw600 line-height140 white">지금 올라온 공고가 <br>궁금하다면 <span class="italic">?</span></p>
+								<p class="f16 fw300 mt20 white">공고 보러가기 <img class="ml5" th:src="@{/img/ico_w_arrow.png}" alt=""/></p>
+								<p class="beneman"><img th:src="@{/img/bene_man.png}" alt="벨" /></p>										
 							</div>
 						</div>
 						<div class="wrap860 f-right" >
@@ -39,7 +39,6 @@
 											<option value="넬보스코">넬보스코</option>
 										  </select>
 										</div>
-										<p class="error" id="companyCheck" style="display: none;"><img th:src="@{/img/error.png}">회사를 선택해 주세요</p>
 									</li>
 								</ul>
 								<ul class="s-d-2">
@@ -51,11 +50,17 @@
 								</ul>
 								<ul class="s-d-2">
 									<li class="f14">이메일</li>
-									<li><input type="text" class="inType01 mt10 w600 " th:value="${member.emailAddr}" disabled></li>
+									<li><input type="text" th:field="*{rEmail}" class="inType01 mt10 w600" placeholder="이메일을 입력해주세요.">
+										<p class="error" id="emailCheck" style="display: none;"><img th:src="@{/img/error.png}"> 이메일을은 필수 입력값입니다.</p>
+										<p class="error" id="emailMatch" style="display: none;"><img th:src="@{/img/error.png}" > 잘못된 이메일 형식입니다. 이메일을 정확하게 입력해주세요.</p>
+									</li>
 								</ul>
 								<ul class="s-d-2">
 									<li class="f14">휴대폰 번호</li>
-									<li><input type="text" class="inType01 mt10 w600 " th:value="${member.phoneNo}" disabled></li>
+									<li><input type="text" th:field="*{rPhoneNo}" class="inType01 mt10 w600 " placeholder="휴대폰 번호를 넣어주세요.">
+										<p class="error" id="phoneNoCheck" style="display: none;"><img th:src="@{/img/error.png}"> 휴패폰 번호는 필수 입력값입니다.</p>
+									</li>
+									
 								</ul>
 								<ul class="s-d-2">
 									<li class="f14 v-top">내용</li>
@@ -64,10 +69,44 @@
 										<p class="error" id="contentCheck" style="display: none;"><img th:src="@{/img/error.png}">내용을 입력해 주세요</p>
 									</li>
 								</ul>
+								<!-- (1)개인정보 수집 이용동의 -->
+								<div class=" mt20">
+									<ul class="s-d-2">
+										<li class="f14 v-top line-height130">개인정보 수집 이용동의</li>
+										<li>
+											<div class="ins f12 w100 h100 over-y" >
+											(주)정&middot;식품(이하 ‘회사’)은 아래와 같이 개인정보를 수집 및 이용합니다.<br>
+											1. 수집 · 이용 항목<br>
+											문의 등록 시 다음정보를 수집 및 이용합니다.<br>
+											- 이메일주소, 휴대전화번호<br>
+											2. 수집 · 이용 목적<br>
+											수집한 개인정보는 아래 목적으로 이용됩니다.<br>
+											- 문의 확인 및 처리, 처리결과 전달, 문의 처리 시 필요에 따른 추가 안내<br>
+											3. 보유 및 이용기간<br>
+											(로그인하지 않고 접수한 문의는 문의처리 완료 후 6개월 뒤 자동 파기합니다.)<br>
+											개인정보 수집 이용에 동의하지 않으실 수 있으며, 동의하지 않는 경우 문의하기가 제한됩니다. 
+											</div>
+										</li>
+									</ul>
+									<ul class="s-d-2">
+										<li></li>
+										<li class="checkStyle2">
+											<p class="btn_type08 w600 mt20">
+												<input type="checkbox" id="rAgree" name="rAgree" /><label for="rAgree"><span></span> 동의하기</label>
+											</p>
+										</li>
+									</ul>
+								</div>
+							<!-- //(1)개인정보 수집 이용동의 -->
 							</div>
-							<div class="text-right mt40"><p class="btn_type07 fw600 w250 f20"><button type="submit" id="saveBtn" disabled="disabled">문의등록</button></p></div>
-							<!-- <p style="border:2px dashed red;padding:10px; background:yellow; text-align:left; line-height:140%">[전산] 문의등록내용모두 작성시 active 버튼 적용해주세요</p> -->
+							<div class="text-right mt40">
+							<button type="submit" class="btn_type07 fw600 w250 f20" id="saveBtn" disabled="disabled">문의등록</button>
+							<!-- 
+							<p style="border:2px dashed red;padding:10px; background:yellow; text-align:left; line-height:140%">[전산] 문의등록내용모두 작성시 active 버튼 적용해주세요
+							<a href="#pop_dropOut"><b>문의등록 레이어팝업</b></a></p>
+							 -->
 							<!-- //(1)제출완료 -->
+							</div>
 						</form>
 						</div><!-- //wrap860 -->
 					</div>
@@ -105,6 +144,6 @@
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
-<script th:src="@{/common/js/qna.js}"></script>
+<script th:src="@{/common/js/qnaNonLogin.js}"></script>
 </body>
 </html>

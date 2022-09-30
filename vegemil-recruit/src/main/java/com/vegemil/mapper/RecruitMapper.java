@@ -20,5 +20,7 @@ public interface RecruitMapper {
 	public RecruitDTO getRecruitLatest();
 
 	public int selectRecruitTotalCount();
+	
+	public List<String> getMajorList(String majorName);
 
 }

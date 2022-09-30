@@ -63,4 +63,13 @@ public class RecruitServiceImpl implements RecruitService {
 		return RecruitMapper.getRecruitLatest();
 	}
 	
+	@Override
+	public List<String> getMajorList(String majorName) {
+		
+		List<String> majorList = Collections.emptyList();
+		majorList = RecruitMapper.getMajorList(majorName);
+
+		return majorList;
+	}
+	
 }

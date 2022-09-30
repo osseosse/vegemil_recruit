@@ -60,7 +60,7 @@ public class QnaController extends UiUtils {
 	        }
 		} else {
 			model.addAttribute("qna", new QnaDTO());
-			returnPage = "mypage/qnqNonLogin";
+			returnPage = "mypage/qnaNonLogin";
 		}
 		
 		return returnPage;
@@ -93,20 +93,26 @@ public class QnaController extends UiUtils {
 	@PostMapping(value = "/mypage/registerQna")
 	public String registerQna(@ModelAttribute("params") final QnaDTO params, Model model, Authentication authentication) {
 		try {
-			MemberDTO member = (MemberDTO) authentication.getPrincipal();
-			if(member != null) {
-				if(member.getActive() != 1) {
-		        	return "member/joinConfirm";
-		        } else {
-		        	params.setMemNo(member.getMemNo());
-					boolean isRegistered = qnaService.registerQna(params);
-					if (isRegistered == false) {
-						return showMessageWithRedirect("1:1문의 등록에 실패하였습니다.", "/mypage/list", Method.GET, null, model);
-					}
-		        }
+			
+			if(authentication != null) {
+				MemberDTO member = (MemberDTO) authentication.getPrincipal();
+				if(member != null) {
+					if(member.getActive() != 1) {
+			        	return "member/joinConfirm";
+			        } else {
+			        	params.setMemNo(member.getMemNo());
+						boolean isRegistered = qnaService.registerQna(params);
+						if (isRegistered == false) {
+							return showMessageWithRedirect("1:1문의 등록에 실패하였습니다.", "/mypage/list", Method.GET, null, model);
+						}
+			        }
+				} else {
+					return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/mypage/list", Method.GET, null, model);
+				}
 			} else {
-				return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/mypage/list", Method.GET, null, model);
+				//비회원일 때 저장
 			}
+		
 		} catch (DataAccessException e) {
 			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/mypage/list", Method.GET, null, model);
 

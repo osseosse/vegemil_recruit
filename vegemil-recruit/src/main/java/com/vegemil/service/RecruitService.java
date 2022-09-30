@@ -16,4 +16,6 @@ public interface RecruitService {
 	
 	public RecruitDTO getRecruitDetail(Long sTh);
 	
+	public List<String> getMajorList(String majorName);
+	
 }

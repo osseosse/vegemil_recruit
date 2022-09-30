@@ -16,6 +16,9 @@
 		, r_answer
 		, r_answer_email
 		, r_answer_tel
+		, r_email
+		, r_phone_no
+		, r_agree
 		, DATE_FORMAT(r_answer_date,'%Y-%m') as r_answer_date
 	</sql>
 
@@ -24,6 +27,9 @@
 			  mem_no
 			, r_title
 			, r_content
+			, r_email
+			, r_phone_no
+			, r_agree
 			, r_insert_date
 			, r_update_date
 			, r_delete_yn
@@ -31,6 +37,9 @@
 			  #{memNo}
 			, #{rTitle}
 			, #{rContent}
+			, #{rEmail}
+			, #{rPhoneNo}
+			, #{rAgree}
 			, NOW()
 			, NOW()
 			, 'N'

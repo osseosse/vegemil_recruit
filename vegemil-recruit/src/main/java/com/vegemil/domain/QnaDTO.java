@@ -19,6 +19,10 @@ public class QnaDTO extends CommonDTO {
 	private String rDeleteDate;
 	private String rDeleteYn;
 	
+	private String rEmail;
+	private String rPhoneNo;
+	private String rAgree;
+	
 	//답변
 	private String rAnswerYn;
 	private String rAnswer;
