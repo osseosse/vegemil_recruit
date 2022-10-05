@@ -18,15 +18,15 @@ public interface ApplicationMapper {
 
 	public int savePersonalInformation(ApplicationDTO params);
 
-	public PersonalInfoDTO selectPersonalInfo(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	public PersonalInfoDTO selectPersonalInfo(@Param("idx") Long idx, @Param("memNo") Long memNo);
 	
-	public AcademyInfoDTO selectAcademy(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	public AcademyInfoDTO selectAcademy(@Param("idx") Long idx ,@Param("memNo") Long memNo);
 	
-	public QualificationDTO selectQualification(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	public QualificationDTO selectQualification(@Param("idx") Long idx, @Param("memNo") Long memNo);
 	
-	public CareerDTO selectCareer(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	public CareerDTO selectCareer(@Param("idx") Long idx, @Param("memNo") Long memNo);
 	
-	public IntroduceDTO selectIntroduce(@Param("idx") Long idx,@Param("memNo") Long memNo);
+	public IntroduceDTO selectIntroduce(@Param("idx") Long idx, @Param("memNo") Long memNo);
 	
 	public ApplicationDTO selectApplication(@Param("idx") Long idx);
 	
@@ -43,5 +43,7 @@ public interface ApplicationMapper {
 	public List<ApplicationDTO> selectApplicationList(Long memNo);
 
 	public int selectApplicationCount(Long memNo);
+	
+	public int selectApplicationCntBySth(@Param("memNo") Long memNo, @Param("sTh") String sTh);
 
 }

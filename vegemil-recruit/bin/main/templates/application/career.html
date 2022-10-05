@@ -82,7 +82,7 @@
 
 							<!-- (2)근무경력 -->
 							<div id="field2">
-							<p class="f23 fw600 pr mt80">근무경력 <input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<p class="f23 fw600 pr mt80">근무경력 <button type="button" class="selPlus" value="추가 " data-repeater-create><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 							<input type="hidden" th:field="*{hisCount}"/>
 								<div data-repeater-list="his">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.hisCount)}">
@@ -139,7 +139,7 @@
 										</div>
 									</div>
 								</div>
-								<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+								<button class="inputDel3" type="button" value="삭제" data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 								</div>
 								</div>
 							</div><!-- field2 -->

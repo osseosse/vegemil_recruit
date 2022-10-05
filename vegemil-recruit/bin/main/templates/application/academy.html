@@ -48,29 +48,28 @@
 								//박사 선택시 노출범위 :고등학고 + 전문대학 + 대학교 + 석사 + 박사
 							-->
 							<input type="hidden" th:field="*{idx}" />
-							<p class="f23 fw600">구분<span class="abs-r f14 fw400 red">*는 필수 입력 사항입니다.</span></p>
-							<div class="r-box mt20">
-								<ul class="s-d-2">
-									<li class="f14"><span class="red">*</span>최종학력</li>
-									<li>
-										<div class="custom-sel w230">
-										  <select th:field="*{lastAcademy}">
-											<option value="">선택해 주세요</option>
-											<option value="high_list">고등학교</option>
-											<option value="univ_list">전문대학</option>
-											<option value="univ_list">대학교</option>
-											<option value="univ_list">석사</option>
-											<option value="univ_list">박사</option>
-										  </select>
-										</div>
-									</li>
-								</ul>
-							</div>
 							<!-- 학력 -->
-							<p class="f23 fw600 mt80 pr">학력</p> 
+							<p class="f23 fw600 mt80 pr">학력<span class="abs-r f14 fw400 red">*는 필수 입력 사항입니다.</span></p> 
 							<div class="r-box mt20">
 								<div class="row">
-									<div class="col-lg-6">
+									<div class="col-lg-12">
+										<ul class="s-d-2">
+										<li class="f14">선택</li>
+										<li>
+											<div class="custom-sel w230">
+											  <select th:field="*{lastAcademy}">
+												<option value="">선택해 주세요</option>
+												<option value="high_list">고등학교</option>
+												<option value="univ_list">전문대학</option>
+												<option value="univ_list">대학교</option>
+												<option value="univ_list">석사</option>
+												<option value="univ_list">박사</option>
+											  </select>
+											</div>
+										</li>
+									</ul>
+									</div>
+									<div class="col-lg-6 mt10">
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>입학구분</li>
 											<li>
@@ -84,7 +83,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-lg-6 ">
+									<div class="col-lg-6 mt10">
 										<ul class="s-d-2">
 											<li class="f14"><span class="red">*</span>졸업구분</li>
 											<li>
@@ -199,54 +198,149 @@
 									</div>
 								</div>
 							<!-- 학력 저장 정보 로드  -->
-							<div>
+							<!-- //공통입력 -->
+							<div class="con-list">
+								<ul>
 								<!-- 고등 -->
-								<h2>고등</h2>
-								<input type="text" th:if="*{schName1 != null and schName1 != ''}" th:field="*{schName1}">
-								<input type="text" th:if="*{schSite1 != null and schSite1 != ''}" th:field="*{schSite1}">
-								<input type="text" th:if="*{schNight1 != null and schNight1 != ''}" th:field="*{schNight1}">
-								<input type="text" th:if="*{schEnterYm1 != null and schEnterYm1 != ''}" th:field="*{schEnterYm1}">
-								<input type="text" th:if="*{schGradYm1 != null and schGradYm1 != ''}" th:field="*{schGradYm1}">
+								<li th:if="*{schName1 != null and schName1 != ''}">
+									<dl>
+										<dt>
+											<span class="gray3">고등학교</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{schName1 != null and schName1 != ''}" th:text="*{schName1}"></span>
+											<input type="hidden" th:if="*{schName1 != null and schName1 != ''}" th:field="*{schName1}">
+											<span class="sublist" th:if="*{schSite1 != null and schSite1 != ''}" th:text="*{schSite1}"></span>
+											<input type="hidden" th:if="*{schSite1 != null and schSite1 != ''}" th:field="*{schSite1}">
+											<span class="sublist" th:if="*{schNight1 != null and schNight1 != ''}" th:text="*{schNight1}"></span>
+											<input type="hidden" th:if="*{schNight1 != null and schNight1 != ''}" th:field="*{schNight1}">
+											<span class="sublist" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:text="*{schAdmis1}"></span>
+											<input type="hidden" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:field="*{schAdmis1}">
+											<span class="sublist" th:if="*{schEnterYm1 != null and schEnterYm1 != '' and schGradYm1 != null and schGradYm1 != ''}" th:text="|*{schEnterYm1} ~ *{schGradYm1}|"></span>
+											<input type="hidden" th:if="*{schEnterYm1 != null and schEnterYm1 != ''}" th:field="*{schEnterYm1}">
+											<input type="hidden" th:if="*{schGradYm1 != null and schGradYm1 != ''}" th:field="*{schGradYm1}">
+										</dd>
+										<dd>
+											<span><a href="javascript:editAcademy('high');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('high');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
 								<!-- 전문학사 -->
-								<h2>전문학사</h2>
-								<input type="text" th:if="*{schName2 != null and schName2 != ''}" th:field="*{schName2}">
-								<input type="text" th:if="*{schSite2 != null and schSite2 != ''}" th:field="*{schSite2}">
-								<input type="text" th:if="*{schNight2 != null and schNight2 != ''}" th:field="*{schNight2}">
-								<input type="text" th:if="*{schEnterYm2 != null and schEnterYm2 != ''}" th:field="*{schEnterYm2}">
-								<input type="text" th:if="*{schGradYm2 != null and schGradYm2 != ''}" th:field="*{schGradYm2}">
-								<input type="text" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:field="*{schSubPointEvg2}">
-								<input type="text" th:if="*{schMajor2 != null and schMajor2 != ''}" th:field="*{schMajor2}">
-								<input type="text" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:field="*{schSubMajor2}">
+								<li th:if="*{schName2 != null and schName2 != ''}">
+									<dl>
+										<dt>
+											<span class="gray3">전문학사</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{schName2 != null and schName2 != ''}" th:text="*{schName2}"></span>
+											<input type="hidden" th:if="*{schName2 != null and schName2 != ''}" th:field="*{schName2}">
+											<span class="sublist" th:if="*{schSite2 != null and schSite2 != ''}" th:text="*{schSite2}"></span>
+											<input type="hidden" th:if="*{schSite2 != null and schSite2 != ''}" th:field="*{schSite2}">
+											<span class="sublist" th:if="*{schNight2 != null and schNight2 != ''}" th:text="*{schNight2}"></span>
+											<input type="hidden" th:if="*{schNight2 != null and schNight2 != ''}" th:field="*{schNight2}">
+											<span class="sublist" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:text="*{schSubPointEvg2}"></span>
+											<input type="hidden" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:field="*{schSubPointEvg2}">
+											<span class="sublist" th:if="*{schMajor2 != null and schMajor2 != ''}" th:text="*{schMajor2}"></span>
+											<input type="hidden" th:if="*{schMajor2 != null and schMajor2 != ''}" th:field="*{schMajor2}">
+											<span class="sublist" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:text="*{schSubMajor2}"></span>
+											<input type="hidden" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:field="*{schSubMajor2}">
+											<span class="sublist" th:if="*{schEnterYm2 != null and schEnterYm2 != '' and schGradYm2 != null and schGradYm2 != ''}" th:text="|*{schEnterYm2} ~ *{schGradYm2}|"></span>
+											<input type="hidden" th:if="*{schEnterYm2 != null and schEnterYm2 != ''}" th:field="*{schEnterYm2}">
+											<input type="hidden" th:if="*{schGradYm2 != null and schGradYm2 != ''}" th:field="*{schGradYm2}">
+										</dd>
+										<dd>
+											<span><a th:href="javascript:editAcademy('college');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a th:href="javascript:deleteAcademy('college');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
 								<!-- 학사 -->
-								<h2>학사</h2>
-								<input type="text" th:if="*{schName3 != null and schName3 != ''}" th:field="*{schName3}">
-								<input type="text" th:if="*{schSite3 != null and schSite3 != ''}" th:field="*{schSite3}">
-								<input type="text" th:if="*{schNight3 != null and schNight3 != ''}" th:field="*{schNight3}">
-								<input type="text" th:if="*{schEnterYm3 != null and schEnterYm3 != ''}" th:field="*{schEnterYm3}">
-								<input type="text" th:if="*{schGradYm3 != null and schGradYm3 != ''}" th:field="*{schGradYm3}">
-								<input type="text" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:field="*{schSubPointEvg3}">
-								<input type="text" th:if="*{schMajor3 != null and schMajor3 != ''}" th:field="*{schMajor3}">
-								<input type="text" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:field="*{schSubMajor3}">
+								<li th:if="*{schName3 != null and schName3 != ''}">
+									<dl>
+										<dt>
+											<span class="gray3">학사</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{schName3 != null and schName3 != ''}" th:text="*{schName3}"></span>
+											<input type="hidden" th:if="*{schName3 != null and schName3 != ''}" th:field="*{schName3}">
+											<span class="sublist" th:if="*{schSite3 != null and schSite3 != ''}" th:text="*{schSite3}"></span>
+											<input type="hidden" th:if="*{schSite3 != null and schSite3 != ''}" th:field="*{schSite3}">
+											<span class="sublist" th:if="*{schNight3 != null and schNight3 != ''}" th:text="*{schNight3}"></span>
+											<input type="hidden" th:if="*{schNight3 != null and schNight3 != ''}" th:field="*{schNight3}">
+											<span class="sublist" th:if="*{schMajor3 != null and schMajor3 != ''}" th:text="*{schMajor3}"></span>
+											<input type="hidden" th:if="*{schMajor3 != null and schMajor3 != ''}" th:field="*{schMajor3}">
+											<span class="sublist" th:if="*{schPointEvg3 != null and schPointEvg3 != ''}" th:text="*{schPointEvg3}"></span>
+											<input type="hidden" th:if="*{schPointEvg3 != null and schPointEvg3 != ''}" th:field="*{schPointEvg3}">
+											<span class="sublist" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:text="*{schSubMajor3}"></span>
+											<input type="hidden" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:field="*{schSubMajor3}">
+											<span class="sublist" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:text="*{schSubPointEvg3}"></span>
+											<input type="hidden" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:field="*{schSubPointEvg3}">
+											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} ~ *{schGradYm3}|"></span>
+											<input type="hidden" th:if="*{schEnterYm3 != null and schEnterYm3 != ''}" th:field="*{schEnterYm3}">
+											<input type="hidden" th:if="*{schGradYm3 != null and schGradYm3 != ''}" th:field="*{schGradYm3}">
+										</dd>
+										<dd>
+											<span><a th:href="javascript:editAcademy('univ');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a th:href="javascript:deleteAcademy('univ');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
 								<!-- 석사 -->
-								<h2>석사</h2>
-								<input type="text" th:if="*{schName4 != null and schName4 != ''}" th:field="*{schName4}">
-								<input type="text" th:if="*{schSite4 != null and schSite4 != ''}" th:field="*{schSite4}">
-								<input type="text" th:if="*{schNight4 != null and schNight4 != ''}" th:field="*{schNight4}">
-								<input type="text" th:if="*{schEnterYm4 != null and schEnterYm4 != ''}" th:field="*{schEnterYm4}">
-								<input type="text" th:if="*{schGradYm4 != null and schGradYm4 != ''}" th:field="*{schGradYm4}">
-								<input type="text" th:if="*{schSubPointEvg4 != null and schSubPointEvg4 != ''}" th:field="*{schSubPointEvg4}">
-								<input type="text" th:if="*{schMajor4 != null and schMajor4 != ''}" th:field="*{schMajor4}">
-								<input type="text" th:if="*{schSubMajor4 != null and schSubMajor4 != ''}" th:field="*{schSubMajor4}">
+								<li th:if="*{schName4 != null and schName4 != ''}">
+									<dl>
+										<dt>
+											<span class="gray3">석사</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{schName4 != null and schName4 != ''}" th:text="*{schName4}"></span>
+											<input type="hidden" th:if="*{schName4 != null and schName4 != ''}" th:field="*{schName4}">
+											<span class="sublist" th:if="*{schSite4 != null and schSite4 != ''}" th:text="*{schSite4}"></span>
+											<input type="hidden" th:if="*{schSite4 != null and schSite4 != ''}" th:field="*{schSite4}">
+											<span class="sublist" th:if="*{schNight4 != null and schNight4 != ''}" th:text="*{schNight4}"></span>
+											<input type="hidden" th:if="*{schNight4 != null and schNight4 != ''}" th:field="*{schNight4}">
+											<span class="sublist" th:if="*{schPointEvg4 != null and schPointEvg4 != ''}" th:text="*{schPointEvg4}"></span>
+											<input type="hidden" th:if="*{schPointEvg4 != null and schPointEvg4 != ''}" th:field="*{schPointEvg4}">
+											<span class="sublist" th:if="*{schMajor4 != null and schMajor4 != ''}" th:text="*{schMajor4}"></span>
+											<input type="hidden" th:if="*{schMajor4 != null and schMajor4 != ''}" th:field="*{schMajor4}">
+											<span class="sublist" th:if="*{schEnterYm4 != null and schEnterYm4 != '' and schGradYm4 != null and schGradYm4 != ''}" th:text="|*{schEnterYm4} ~ *{schGradYm4}|"></span>
+											<input type="hidden" th:if="*{schEnterYm4 != null and schEnterYm4 != ''}" th:field="*{schEnterYm4}">
+											<input type="hidden" th:if="*{schGradYm4 != null and schGradYm4 != ''}" th:field="*{schGradYm4}">
+										</dd>
+										<dd>
+											<span><a th:href="javascript:editAcademy('master');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a th:href="javascript:deleteAcademy('master');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
 								<!-- 박사 -->
-								<h2>박사</h2>
-								<input type="text" th:if="*{schName5 != null and schName5 != ''}" th:field="*{schName5}">
-								<input type="text" th:if="*{schSite5 != null and schSite5 != ''}" th:field="*{schSite5}">
-								<input type="text" th:if="*{schNight5 != null and schNight5 != ''}" th:field="*{schNight5}">
-								<input type="text" th:if="*{schEnterYm5 != null and schEnterYm5 != ''}" th:field="*{schEnterYm5}">
-								<input type="text" th:if="*{schGradYm5 != null and schGradYm5 != ''}" th:field="*{schGradYm5}">
-								<input type="text" th:if="*{schSubPointEvg5 != null and schSubPointEvg5 != ''}" th:field="*{schSubPointEvg5}">
-								<input type="text" th:if="*{schMajor5 != null and schMajor5 != ''}" th:field="*{schMajor5}">
-								<input type="text" th:if="*{schSubMajor5 != null and schSubMajor5 != ''}" th:field="*{schSubMajor5}">
+								<li th:if="*{schName5 != null and schName5 != ''}">
+									<dl>
+										<dt>
+											<span class="gray3">박사</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{schName5 != null and schName5 != ''}" th:text="*{schName5}"></span>
+											<input type="text" th:if="*{schName5 != null and schName5 != ''}" th:field="*{schName5}">
+											<span class="sublist" th:if="*{schSite5 != null and schSite5 != ''}" th:text="*{schSite5}"></span>
+											<input type="text" th:if="*{schSite5 != null and schSite5 != ''}" th:field="*{schSite5}">
+											<span class="sublist" th:if="*{schNight5 != null and schNight5 != ''}" th:text="*{schNight5}"></span>
+											<input type="text" th:if="*{schNight5 != null and schNight5 != ''}" th:field="*{schNight5}">
+											<span class="sublist" th:if="*{schPointEvg5 != null and schPointEvg5 != ''}" th:text="*{schPointEvg5}"></span>
+											<input type="text" th:if="*{schPointEvg5 != null and schPointEvg5 != ''}" th:field="*{schPointEvg5}">
+											<span class="sublist" th:if="*{schMajor5 != null and schMajor5 != ''}" th:text="*{schMajor5}"></span>
+											<input type="text" th:if="*{schMajor5 != null and schMajor5 != ''}" th:field="*{schMajor5}">
+											<span class="sublist" th:if="*{schEnterYm5 != null and schEnterYm5 != '' and schGradYm5 != null and schGradYm5 != ''}" th:field="|*{schEnterYm5} ~ *{schGradYm5}|"></span>
+											<input type="text" th:if="*{schEnterYm5 != null and schEnterYm5 != ''}" th:field="*{schEnterYm5}">
+											<input type="text" th:if="*{schGradYm5 != null and schGradYm5 != ''}" th:field="*{schGradYm5}">
+										</dd>
+										<dd>
+											<span><a th:href="javascript:editAcademy('doctor');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a th:href="javascript:deleteAcademy('doctor');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
+							</ul>
 							</div>					
 							</div>
 							<div class="w100 mt30">

@@ -11,7 +11,7 @@ public interface RecruitMapper {
 
 	public int insertRecruit(RecruitDTO params);
 
-	public RecruitDTO selectRecruitDetail(Long custNo);
+	public RecruitDTO selectRecruitDetail(String custNo);
 
 	public int updateRecruit(RecruitDTO params);
 

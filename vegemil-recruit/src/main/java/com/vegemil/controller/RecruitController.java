@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -29,7 +30,9 @@ import com.google.gson.JsonObject;
 import com.vegemil.adapter.GsonLocalDateTimeAdapter;
 import com.vegemil.constant.Method;
 import com.vegemil.domain.MemberDTO;
+import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.RecruitDTO;
+import com.vegemil.service.ApplicationService;
 import com.vegemil.service.RecruitService;
 import com.vegemil.util.UiUtils;
 
@@ -38,6 +41,9 @@ public class RecruitController extends UiUtils {
 
 	@Autowired
 	private RecruitService RecruitService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 	
 	@GetMapping(value = "/recruit/list")
 	public String openRecruitList(@ModelAttribute("params") RecruitDTO params, Model model) {
@@ -66,7 +72,7 @@ public class RecruitController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/recruit/detail")
-	public String openRecruitDetail(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) Long sTh, Model model, HttpServletResponse response) throws Exception {
+	public String openRecruitDetail(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) String sTh, Model model, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		if (sTh == null) {
@@ -87,30 +93,65 @@ public class RecruitController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/recruit/join")
-	public String openRecruitJoin(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) Long sTh, Model model, HttpServletResponse response) throws Exception {
+	public String openRecruitJoin(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) String sTh, Model model
+			, HttpServletResponse response, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		if (sTh == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.back();</script>");
+		
+		try {
+		
+			if (sTh == null) {
+				out.println("<script>alert('올바르지 않은 접근입니다.'); history.back();</script>");
+				out.flush();
+				return showMessageWithRedirect("올바르지 않은 접근입니다.", "recruit/list", Method.GET, null, model);
+			}
+			
+			RecruitDTO recruit = RecruitService.getRecruitDetail(sTh);
+			if (recruit == null) {
+				out.println("<script>alert('이미 종료된 채용입니다.'); history.back();</script>");
+				out.flush();
+				return showMessageWithRedirect("이미 종료된 채용입니다.", "recruit/list", Method.GET, null, model);
+			}
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+			
+		        PersonalInfoDTO application = new PersonalInfoDTO();
+		        application.setSetupTh(sTh);
+		        application.setEmailAddr(member.getEmailAddr());
+		        application.setMemName(member.getMemName());
+		        application.setMemNo(member.getMemNo());
+		        application.setPhoneNo(member.getPhoneNo());
+		        
+		        
+				boolean isRegistered = applicationService.registerPersonalInfo(application);
+				if (isRegistered == false) {
+					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+				return showMessageWithRedirect("지원서 입력 페이지로 이동합니다.", "/application/personalInfo?idx="+application.getIdx(), Method.GET, null, model);
+			}
+			
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("올바르지 않은 접근입니다.", "application/recruitList", Method.GET, null, model);
-		}
-		RecruitDTO recruit = RecruitService.getRecruitDetail(sTh);
-		if (recruit == null) {
-			out.println("<script>alert('이미 종료된 채용입니다.'); history.back();</script>");
-			out.flush();
-			return showMessageWithRedirect("이미 종료된 채용입니다.", "application/recruitList", Method.GET, null, model);
-		}
-		//recruit.setSTh(sTh);
-		model.addAttribute("recruit", recruit);
-		model.addAttribute("sTh", sTh);
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 
-		return "recruit/join";
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		}
 	}
 	
 	@PostMapping(value = "/recruit/register")
 	public String registerRecruit(
-			@ModelAttribute("member") final MemberDTO memberDTO, @RequestParam(value = "sTh", required = false) Long sTh,
+			@ModelAttribute("member") final MemberDTO memberDTO, @RequestParam(value = "sTh", required = false) String sTh,
 			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		
 		response.setContentType("text/html; charset=UTF-8");

@@ -63,7 +63,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public boolean registerPersonalInfo(PersonalInfoDTO params) {
 		int queryResult = 0;
 		
-		int applicationCount = applicationMapper.selectApplicationCount(params.getMemNo());
+		int applicationCount = applicationMapper.selectApplicationCntBySth(params.getMemNo(), params.getSetupTh());
 
 		if (applicationCount == 0) {
 			queryResult = applicationMapper.savePersonalInformation(params);

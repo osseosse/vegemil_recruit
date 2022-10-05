@@ -49,18 +49,21 @@
 
 	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO R_Recruit (
-			setup_th, join_num, join_date, join_ok, submit_ok, join_company, join_field1, join_area1
-			, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, marry, religion
-			, ability, hobby, handicap, fam_mem1, fam_mem2, fam_mem3, fam_con1, fam_name1, fam_age1
+			setup_th, mem_no, join_date, join_ok, submit_ok, join_company, join_field1, join_area1
+			, name_han, name_eng, photo, zip1, addr11, addr12, bohun
+			, handicap, fam_count, fam_con1, fam_name1, fam_age1
 			, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 			, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 		) VALUES (
-			  #{setupTh}, #{joinNum}, NOW(), #{joinOk}, #{joinType}, #{joinField1}, #{joinArea1}
-			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{marry}, #{religion}
-			, #{ability}, #{like}, #{handicap}, #{famCount}, #{famCon1}, #{famName1}, #{famAge1}
+			  #{setupTh}, #{memNo}, NOW(), '접수', '0', #{joinCompany}, #{joinField1}, #{joinArea1}
+			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{bohun}
+			, #{handicap}, #{famCount}, #{famCon1}, #{famName1}, #{famAge1}
 			, #{famCon2}, #{famName2}, #{famAge2}, #{famCon3}, #{famName3}, #{famAge3}, #{famCon4}, #{famName4}, #{famAge4}
 			, #{milClass}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate}
 		)
+		<selectKey keyProperty="idx" keyColumn="idx" resultType="long" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO">
@@ -208,13 +211,22 @@
 			re.join_DATE DESC
 	</select>
 
-	<select id="selectApplicationCount" parameterType="map" resultType="int">
+	<select id="selectApplicationCount" parameterType="long" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 			R_Recruit
 		WHERE
 			mem_no= #{memNo}
+	</select>
+	
+	<select id="selectApplicationCntBySth" parameterType="map" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			R_Recruit
+		WHERE
+			mem_no= #{memNo} and setup_th = #{sTh}
 	</select>
 
 </mapper>

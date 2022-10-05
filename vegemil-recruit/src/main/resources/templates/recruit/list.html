@@ -41,6 +41,7 @@
 							<div class="btn_listBox">
 								<!-- 클릭시 노출되게 -->
 								<ul class="blbType02 radioStyle1">
+									<li><input type="radio" id="r3" name="rr" value="" /><label for="r3"><span></span>전체</label></li>
 									<li><input type="radio" id="r1" name="rr" value="공채" /><label for="r1"><span></span>공채</label></li>
 									<li><input type="radio" id="r2" name="rr" value="수시" /><label for="r2"><span></span>수시</label></li>
 								</ul>
@@ -48,25 +49,27 @@
 
 							<p class="f23 fw600 mt40">직무</p>
 							<div class="btn_listBox">
-								<ul class="blbType02 checkStyle3">
-									<li><input type="checkbox" name="rr" id="#1" value="영업" > <label for="#1"><span></span>영업</label></li>
-									<li><input type="checkbox" name="rr" id="#2" value="경영지원" > <label for="#2"><span></span>경영지원</label></li>
-									<li><input type="checkbox" name="rr" id="#3" value="홍보" > <label for="#3"><span></span>홍보</label></li>
-									<li><input type="checkbox" name="rr" id="#4" value="기획" > <label for="#4"><span></span>기획</label></li>
-									<li><input type="checkbox" name="rr" id="#5" value="연구" > <label for="#5"><span></span>연구</label></li>
-									<li><input type="checkbox" name="rr" id="#6" value="생산" > <label for="#6"><span></span>생산</label></li>
-									<li><input type="checkbox" name="rr" id="#7" value="디자인" > <label for="#7"><span></span>디자인</label></li>
-									<li><input type="checkbox" name="rr" id="#8" value="전산" > <label for="#8"><span></span>전산</label></li>
+								<ul class="blbType02 radioStyle1">
+									<li><input type="radio" name="rr" id="#0" value="" > <label for="#0"><span></span>전체</label></li>
+									<li><input type="radio" name="rr" id="#1" value="영업" > <label for="#1"><span></span>영업</label></li>
+									<li><input type="radio" name="rr" id="#2" value="경영지원" > <label for="#2"><span></span>경영지원</label></li>
+									<li><input type="radio" name="rr" id="#3" value="홍보" > <label for="#3"><span></span>홍보</label></li>
+									<li><input type="radio" name="rr" id="#4" value="기획" > <label for="#4"><span></span>기획</label></li>
+									<li><input type="radio" name="rr" id="#5" value="연구" > <label for="#5"><span></span>연구</label></li>
+									<li><input type="radio" name="rr" id="#6" value="생산" > <label for="#6"><span></span>생산</label></li>
+									<li><input type="radio" name="rr" id="#7" value="디자인" > <label for="#7"><span></span>디자인</label></li>
+									<li><input type="radio" name="rr" id="#8" value="전산" > <label for="#8"><span></span>전산</label></li>
 								</ul>
 							</div>
 							
 							<p class="f23 fw600 mt40">지원회사</p>
 							<div class="btn_listBox">
-								<ul class="blbType02 checkStyle3">
-									<li><input type="checkbox" name="rr" id="#9" value="정식품" > <label for="#9"><span></span>정식품</label></li>
-									<li><input type="checkbox" name="rr" id="#10" value="넬보스코" > <label for="#10"><span></span>넬보스코</label></li>
-									<li><input type="checkbox" name="rr" id="#11" value="자연과사람들" > <label for="#11"><span></span>자연과사람들</label></li>
-									<li><input type="checkbox" name="rr" id="#12" value="오쎄" > <label for="#12"><span></span>오쎄</label></li>
+								<ul class="blbType02 radioStyle1">
+									<li><input type="radio" name="rr" id="#13" value="" > <label for="#13"><span></span>전체</label></li>
+									<li><input type="radio" name="rr" id="#9" value="정식품" > <label for="#9"><span></span>정식품</label></li>
+									<li><input type="radio" name="rr" id="#10" value="넬보스코" > <label for="#10"><span></span>넬보스코</label></li>
+									<li><input type="radio" name="rr" id="#11" value="자연과사람들" > <label for="#11"><span></span>자연과사람들</label></li>
+									<li><input type="radio" name="rr" id="#12" value="오쎄" > <label for="#12"><span></span>오쎄</label></li>
 								</ul>
 							</div>
 						</div>
@@ -82,7 +85,7 @@
 							</div>
 							<div id="recruitList">
 							<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
-								<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sCategory}/${recruit.sCategory2}|" >
+								<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sType}/${recruit.sCategory}/${recruit.sCategory2}|" >
 									<div class="r-box mt20">
 										<input type="hidden"  />
 										<div class="info01">
@@ -125,20 +128,21 @@
 $(document).ready(function(){
 	//카테고리 소팅 category sorting
 	$("input[name='rr']").on("click", function () {
-	   const value = $(this).val().toLowerCase();
-	   if(!$(this).is(":checked")) {
-		$(this).prop("checked", false);
+		const value = $(this).val().toLowerCase();
+		
+		if(!$(this).is(":checked")) {
+			$(this).prop("checked", false);
 			$("#recruitList a").filter(function() {
-		     $(this).toggle()
-		   });
-	   } else {
-		$(this).prop("checked", true);
+				$(this).toggle()
+			});
+		} else {
+			$(this).prop("checked", true);
 			$("#recruitList a").filter(function() {
-		     $(this).toggle($(this).attr('name').toLowerCase().indexOf(value) > -1)
-		   });
-	   }
-	   
-	 });
+				$(this).toggle($(this).attr('name').toLowerCase().indexOf(value) > -1)
+			});
+		}
+	});
+	
 });
 </script>
 </body>

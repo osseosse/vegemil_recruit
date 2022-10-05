@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <title>정식품 채용</title>
-<head th:replace="fragments/head :: headFragment">
-</head>
+<head th:replace="fragments/head :: headFragment"></head>
+<!-- add css -->
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
 <body>
 	<div class="wrap">
 		<!-- ================================ Header ================================ -->
@@ -26,24 +27,310 @@
 							<p class="f23 fw600">나의 지원 현황<span class="abs-r f16 fw400  mr10 mt10 gray">
 								<a href="/recruit/list">지원하기 <img th:src="@{/img/ico_arrow_g.png}" /></a>
 								</span></p>
-								<div class="r-box mt20 bgHover" th:if="${not #lists.isEmpty( appList )}" th:each="app : ${appList}">
+								<div class="r-box mt20 bgHover" th:if="${not #lists.isEmpty( appList )}" th:each="app, i : ${appList}">
 									<div class="info01">
 										<span class="r-blue" th:if="${app.submitOk.equals('1')}">지원완료</span><span class="r-black" th:unless="${app.submitOk.equals('1')}">임시저장</span><span class="f16">제출일</span>
 										<span class="ac f16 fw300 gray" th:text="${app.setupDate}"></span>
 									</div>
 									<div class="info02">
 										<dl class="mt20">
-											<dt><span class="f20 fw600 mt20 line-height140" th:text="${app.setupTitle}"></span></dt>
+											<dt><span class="f20 fw600 mt20 line-height140" th:text="|${i.index+1}.${app.setupTitle}|"></span></dt>
 											<dd>
-												<a class="btn_reviewBox" th:href="|@{/application/personalInfo}?idx=${app.idx}|">
+												<div class="list_ico_box">
+													<span><button type="button" value="open" class="btn modal-open"><img th:src="@{/img/ico_view.png}" alt="미리보기"/></button></span> 
+													<span><a th:href="|@{/application/personalInfo}?idx=${app.idx}|"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+													<span><a th:href="|@{/application/delete}?idx=${app.idx}|"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+												</div>
+												<button class="btn_reviewBox mt20" onclick = "location.href = '/mypage/result' ">
 													<ul>
-														<li class="btn_review ">지원서 보기</li>
+														<li class="btn_review ">합격여부 확인</li>
 														<li class="btn_review_arrow ml10"></li>
 													</ul>
-												</a>
+												</button>
 											</dd>
 										</dl>
 									</div>
+									
+									<!-- ================================  Popup > 마이페이지 > 보기 ================================ -->
+									<!-- popup -->
+									<div id="pop_view"  style="display:none;">
+										<div class="popBasePW" cellspacing="0"  summary="타이틀">
+											<div class="text-center mb60"><p class="f23 fw600">2023년 정식품 신입사원 공개채용</p></div>
+											<p class="btn_pop_close"><a href="#pop_view"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+											<div class="viewBox">
+												<p class="f18 fw600">지원부문</p>
+												<ul class="divide2">
+													<li><span class="gray3">지원회사</span><span class="sublist">정식품</span><span class="sublist">총무인사</span><span class="sublist">서울</span></li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">인적사항</p>
+												<ul class="divide30">
+													<li><img th:src="@{/img/photo_sample.jpg}" /></li>
+												</ul>
+												<ul class="divide70 divide2">
+													<li><span class="gray3">성명</span><span class="sublist">이민주</span><span class="sublist">LEE MIN JU</span><span class="sublist">李玟柱</span></li>
+													<li><span class="gray3">생년월일</span><span class="sublist">1990-08-01</span></li>
+													<li><span class="gray3">연령</span><span class="sublist">만 31세</span></li>
+													<li><span class="gray3">성별</span><span class="sublist">남</span></li>
+													<li><span class="gray3">주소</span><span class="sublist">서울특별시 성동구 아차산로 121</span></li>
+													<li><span class="gray3">휴대전화</span><span class="sublist">010-9074-3076</span></li>
+													<li><span class="gray3">이메일</span><span class="sublist">hahaha@naver.com</span></li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">가족사항</p>
+												<ul class="divide4 ">
+													<li><span class="gray3">부</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+													<li><span class="gray3">모</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+													<li><span class="gray3">형</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+													<li><span class="gray3">제</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+													<li><span class="gray3">부</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+													<li><span class="gray3">부</span><span class="sublist">이순수</span><span class="sublist">(만)55</span></li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">개인신상 및 기타</p>
+												<ul class="divide2 ">
+													<li><span class="gray3 w100">보훈대상여부</span>대상</li>
+													<li><span class="gray3 w100">보훈대상번호</span>545678999</li>
+													<li><span class="gray3 w100">장애여부</span>비대상</li>
+													<li><span class="gray3 w100">병역사항</span>육군</li>
+													<li><span class="gray3 w100">병과</span>행정</li>
+													<li><span class="gray3 w100">계급</span>병장</li>
+													<li><span class="gray3 w100">복무기간</span>2021년 8월 1일 ~ 2022년 8월 1일</li>
+													<li><span class="gray3 w100">제대구분</span>만기제대</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">학력정보</p>
+												<ul class="divide1">
+													<li>
+														<dl>
+															<dt>
+																<span class="gray3">고등학교</span>
+															</dt>
+															<dd>
+																<span class="sublist">일반</span>
+																<span class="sublist">졸업</span>
+																<span class="sublist">한국고등학교</span>
+																<span class="sublist">대구</span>
+																<span class="sublist">인문</span>
+																<span class="sublist">주간</span>
+																<span class="sublist">2021년 8월 1일 ~ 2022년 8월 1일</span>
+															</dd><br class="clear">
+														</dl>			
+													</li>
+													<li>
+														<dl>
+															<dt>
+																<span class="gray3">대학교</span>
+															</dt>
+															<dd>
+																<span class="sublist">편입</span>
+																<span class="sublist">졸업</span>
+																<span class="sublist">제주대학교</span>
+																<span class="sublist">제주</span>
+																<span class="sublist">디지털인문학부계열</span>
+																<span class="sublist">자연과학 법학과</span>
+																<span class="sublist">주간</span>
+																<span class="sublist">2021년 8월 1일 ~ 2022년 8월 1일</span>
+																<span class="sublist">3.5/4.5</span>
+																<span class="sublist">(부)인문학부</span>
+																<span class="sublist">(부)법학과</span>
+																<span class="sublist">(부)주간</span>
+																<span class="sublist">(부)3.5/4.5</span>
+															</dd>
+														</dl>
+													</li>
+													<li>
+														<dl>
+															<dt>
+																<span class="gray3">대학교</span>
+															</dt>
+															<dd>
+																<span class="sublist">편입</span>
+																<span class="sublist">졸업</span>
+																<span class="sublist">제주대학교</span>
+																<span class="sublist">제주</span>
+																<span class="sublist">디지털인문학부계열</span>
+																<span class="sublist">자연과학 법학과</span>
+																<span class="sublist">주간</span>
+																<span class="sublist">2021년 8월 1일 ~ 2022년 8월 1일</span>
+																<span class="sublist">3.5/4.5</span>
+																<span class="sublist">(부)인문학부</span>
+																<span class="sublist">(부)법학과</span>
+																<span class="sublist">(부)주간</span>
+																<span class="sublist">(부)3.5/4.5</span>
+															</dd>
+														</dl>
+													</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">외국어사항</p>
+												<ul class="divide1 ">
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">영어</span>
+														<span class="sublist">FLEX(말하기)</span>
+														<span class="sublist">540</span>
+														<span class="sublist" style=" background:yellow">*등급이 있다면 노출</span>
+														<span class="sublist">556677-54333</span>
+														<span class="sublist">2021년 8월 1일</span>
+														<span class="sublist">회화 상</span>
+														<span class="sublist">작문 상</span>
+														<span class="sublist">독해 상</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">중국어</span>
+														<span class="sublist">FLEX(말하기)</span>
+														<span class="sublist">540</span>
+														<span class="sublist" style=" background:yellow">*등급이 있다면 노출</span>
+														<span class="sublist">556677-54333</span>
+														<span class="sublist">2021년 8월 1일</span>
+														<span class="sublist">회화 상</span>
+														<span class="sublist">작문 상</span>
+														<span class="sublist">독해 상</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">프랑스어</span>
+														<span class="sublist">FLEX(말하기)</span>
+														<span class="sublist">540</span>
+														<span class="sublist" style=" background:yellow">*등급이 있다면 노출</span>
+														<span class="sublist">556677-54333</span>
+														<span class="sublist">2021년 8월 1일</span>
+														<span class="sublist">회화 상</span>
+														<span class="sublist">작문 상</span>
+														<span class="sublist">독해 상</span>
+													</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">IT 사항</p>
+												<ul class="divide4 ">
+													<li>
+														<span class="w50">&middot;</span>
+														<span  class="sublist">워드프로세스</span>
+														<span  class="sublist">중</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">어도비포토샵</span>
+														<span class="sublist">중</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">C++</span>
+														<span class="sublist">중</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">javascript</span>
+														<span class="sublist">상</span>
+													</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">자격 및 면허</p>
+												<ul class="divide1 ">
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">컬러리스트기사</span>
+														<span class="sublist">산업관리공단</span>
+														<span class="sublist">854785-958774</span>
+														<span class="sublist">2006년 5월 30일</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">컬러리스트기사</span>
+														<span class="sublist">산업관리공단</span>
+														<span class="sublist">854785-958774</span>
+														<span class="sublist">2006년 5월 30일</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">컬러리스트기사</span>
+														<span class="sublist">산업관리공단</span>
+														<span class="sublist">854785-958774</span>
+														<span class="sublist">2006년 5월 30일</span>
+													</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">수상경력</p>
+												<ul class="divide1 ">
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">한국광고협회</span>
+														<span class="sublist">2006년 5월 30일</span>
+														<span class="sublist">제2회 한국광고 협회 포스터 부문 장려상</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">한국광고협회</span>
+														<span class="sublist">2006년 5월 30일</span>
+														<span class="sublist">제2회 한국광고 협회 포스터 부문 장려상</span>
+													</li>
+													<li>
+														<span class="w50">&middot;</span>
+														<span class="sublist">한국광고협회</span>
+														<span class="sublist">2006년 5월 30일</span>
+														<span class="sublist">제2회 한국광고 협회 포스터 부문 장려상</span>
+													</li>
+												</ul><br class="clear">
+											</div>
+											<div class="viewBox">
+												<p class="f18 fw600">자기소개서</p>
+												<ul class="divide1 ">
+													<li>
+														<span class="w50">1. 성장과정을 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													<li class="mt50">
+														<span class="w50">2. 성격의 장,단점을 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													<li class="mt50">
+														<span class="w50">3. 차별화되는 본인만의 핵심역량은 무엇인지 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													<li class="mt50">
+														<span class="w50">4. 도전했던 경험과 이를 통해 얻은 성취는 무엇인지 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													<li class="mt50">
+														<span class="w50">5. 협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													<li class="mt50">
+														<span class="w50">6. 지원동기 및 입사 후 포부는 무엇인지 서술하여 주시기 바랍니다.</span>
+														<p class="txtbox">
+															정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성정식품 2022년 채용 입사지원서 작성
+														</p>
+													</li>
+													
+												</ul><br class="clear">
+											</div>
+											<div class="text-center">
+												<p class="mt40 btn_type13 center"><span class="white"><button type="button" value="close" class="btn modal-close"></button>닫기</span></p>
+											</div>
+										</div>
+									</div>
+									<!-- //popup -->
+									
 								</div>
 							
 							<div class="r-box mt20" th:unless="${not #lists.isEmpty( appList )}">
@@ -91,6 +378,18 @@
 				// Content
 		================================ -->
 	</div><!-- //wrap bg_01 -->
+	
+<script th:src="@{/common/js/modality.js}"></script>
+<!-- 팝업 script -->
+<script th:inline="javascript">
+/*<![CDATA[*/
+	const recruitCnt = /*[[ ${recruitCount} ]]*/; /*[- 업로드 파일 리스트 -]*/
+	for(var i=0; i<recruitCnt; i++) {
+	    var modal1 = Modality.init('#pop_view'+i, { effect: 'slide-up' }); // 팝업_미리보기
+	}
+/*]]>*/
+</script>
+<!-- //팝업 script -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

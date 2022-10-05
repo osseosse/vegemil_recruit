@@ -54,7 +54,7 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 	
 	@Override
-	public RecruitDTO getRecruitDetail(Long sTh) {
+	public RecruitDTO getRecruitDetail(String sTh) {
 		return RecruitMapper.selectRecruitDetail(sTh);
 	}
 	

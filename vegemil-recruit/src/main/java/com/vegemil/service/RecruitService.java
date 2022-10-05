@@ -14,7 +14,7 @@ public interface RecruitService {
 	
 	public boolean registerRecruit(RecruitDTO params);
 	
-	public RecruitDTO getRecruitDetail(Long sTh);
+	public RecruitDTO getRecruitDetail(String sTh);
 	
 	public List<String> getMajorList(String majorName);
 	

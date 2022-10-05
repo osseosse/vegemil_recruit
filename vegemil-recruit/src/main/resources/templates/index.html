@@ -15,15 +15,14 @@
 					<ul class="h_menu text-left">
 						<li class="h_logo ac"><a href="/" ><img th:src="@{/img/logo.png}" alt="정식품"/><span class="fw700">Careers</span></a></li>
 						<li><a href="/information/info">채용안내</a></li>
+						<li><a href="/information/work">인사제도</a></li>
+						<li><a href="/information/benefit">복지제도</a></li>
 						<li><a href="/recruit/list">입사지원</a></li>
-						<li><a href="/information/faq">FAQ</a></li>
-						<li><a href="/mypage/list">마이페이지</a></li>
 					</ul>
 					<div class="faceBox">
 						<a sec:authorize="isAnonymous()" th:href="@{/member/login}"><div class="face">로그인<img th:src="@{/img/ico_face.png}" /></div></a>
-					    <form th:action="@{/member/logout}" method="POST" sec:authorize="isAuthenticated()">
-					        <button class="btn btn-info" type="submit">로그아웃</button>
-					    </form>
+					    <button type="button" sec:authorize="isAuthenticated()" onclick="location.href='/mypage/list'"><img th:src="@{/img/ico_face.png}" alt="마이페이지" title="마이페이지" /></button>
+		   				<button onclick="location.href='/member/logout'" sec:authorize="isAuthenticated()" type="button"><img th:src="@{/img/ico_logout.png}" alt="로그아웃" title="로그아웃"/></button>
 					</div>
 				</div>
 			</div>

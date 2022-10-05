@@ -44,7 +44,7 @@
 		)
 	</insert>
 
-	<select id="selectRecruitDetail" parameterType="long" resultType="com.vegemil.domain.RecruitDTO">
+	<select id="selectRecruitDetail" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT
 			<include refid="RecruitColumns" />
 		FROM

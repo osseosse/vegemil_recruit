@@ -42,7 +42,7 @@
 							<input type="hidden" th:field="*{idx}" />
 							<!-- (1)어학 -->
 							<div id="field1" class="qualification-repeater">
-							<p class="f23 fw600 pr">어학 <input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<p class="f23 fw600 pr">어학 <button type="button" class="selPlus" value="추가 " data-repeater-create ><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 								<input type="hidden" th:field="*{langCount}"/>
 								<div data-repeater-list="lang">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.langCount)}">
@@ -161,7 +161,7 @@
 									</div>
 									 -->
 								</div>
-								<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+								<button class="inputDel3" type="button" value="삭제" data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 								</div>
 								</div>
 							</div><!-- field1 -->
@@ -202,7 +202,7 @@
 							
 							<!-- (3)자격 및 면허 -->
 							<div id="field3" class="lic-repeater">
-							<p class="f23 fw600 mt80 pr">자격 및 면허<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<p class="f23 fw600 mt80 pr">자격 및 면허<button type="button" class="selPlus" value="추가 " data-repeater-create><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 								<input type="hidden" th:field="*{licCount}"/>
 								<div data-repeater-list="lic">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.licCount)}">
@@ -242,14 +242,14 @@
 										</div>
 									</div>
 									</div>
-									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									<button class="inputDel3" type="button" value="삭제"  data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 									</div> 
 								</div>
 							</div><!-- field3 -->
 
 							<!-- (4)수상경력 -->
 							<div id="field4" class="medal-repeater">
-							<p class="f23 fw600 mt80 pr">수상경력<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<p class="f23 fw600 mt80 pr">수상경력<button type="button" class="selPlus" value="추가 " data-repeater-create><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 								<input type="hidden" th:field="*{medalCount}"/>
 								<div data-repeater-list="medal">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.medalCount)}">
@@ -281,14 +281,14 @@
 										</div>
 									</div>
 									</div>
-									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									<button class="inputDel3" type="button" value="삭제" data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 									</div> 
 								</div>
 							</div><!-- field4 -->
 
 							<!-- (5)해외연수/대외활동 -->
 							<div id="field5" class="for-repeater">
-							<p class="f23 fw600 mt80 pr">해외연수/대외활동<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<p class="f23 fw600 mt80 pr">해외연수/대외활동<button type="button" class="selPlus" value="추가 " data-repeater-create><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 								<input type="hidden" th:field="*{forCount}"/>
 								<div data-repeater-list="for">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.forCount)}">
@@ -324,7 +324,7 @@
 										</div>
 									</div>
 									</div>
-									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									<button class="inputDel3" type="button" value="삭제" data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 									</div> 
 								</div>
 							</div><!-- field5 -->

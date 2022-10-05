@@ -41,7 +41,7 @@
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
 	width:90%;
-	max-width:600px;
+	max-width:1200px;
 }
 .modality-modal:before, .mm-ghost {
     content: '';

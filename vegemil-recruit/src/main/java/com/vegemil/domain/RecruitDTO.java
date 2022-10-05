@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class RecruitDTO extends CommonDTO {
 
-	private Long   sTh;
+	private String sTh;
 	private String sTitle;
 	private String sType;
 	private String sCompany;
