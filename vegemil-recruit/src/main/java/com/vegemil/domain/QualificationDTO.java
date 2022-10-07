@@ -11,6 +11,7 @@ public class QualificationDTO extends ApplicationDTO {
 	//어학
 	private String langCount;
 	private String langName1;
+	private String langLicName1;
 	private String langPoint1;
 	private String langLv1;
 	private String langLicNum1;
@@ -19,6 +20,7 @@ public class QualificationDTO extends ApplicationDTO {
 	private String langMake1;
 	private String langRead1;
 	private String langName2;
+	private String langLicName2;
 	private String langPoint2;
 	private String langLv2;
 	private String langLicNum2;
@@ -27,6 +29,7 @@ public class QualificationDTO extends ApplicationDTO {
 	private String langMake2;
 	private String langRead2;
 	private String langName3;
+	private String langLicName3;
 	private String langPoint3;
 	private String langLv3;
 	private String langLicNum3;
@@ -35,6 +38,7 @@ public class QualificationDTO extends ApplicationDTO {
 	private String langMake3;
 	private String langRead3;
 	private String langName4;
+	private String langLicName4;
 	private String langPoint4;
 	private String langLv4;
 	private String langLicNum4;

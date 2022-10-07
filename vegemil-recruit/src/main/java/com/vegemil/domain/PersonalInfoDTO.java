@@ -18,6 +18,7 @@ public class PersonalInfoDTO extends ApplicationDTO {
 	private String addr12;
 	private String handicap;
 	private String bohun;
+	private String bohunNo;
 	
 	//군복무
 	private String milClass;

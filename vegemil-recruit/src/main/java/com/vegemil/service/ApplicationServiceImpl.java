@@ -13,6 +13,7 @@ import com.vegemil.domain.CareerDTO;
 import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
+import com.vegemil.domain.ResumeDTO;
 import com.vegemil.mapper.ApplicationMapper;
 
 @Service
@@ -43,6 +44,19 @@ public class ApplicationServiceImpl implements ApplicationService {
 		}
 
 		return application;
+	}
+	
+	@Override
+	public List<ResumeDTO> getResumeList(ResumeDTO params) {
+		List<ResumeDTO> resumeList = Collections.emptyList();
+
+		int recruitTotalCount = applicationMapper.selectApplicationCount(params.getMemNo());
+
+		if (recruitTotalCount > 0) {
+			resumeList = applicationMapper.selectResumeList(params.getMemNo());
+		}
+
+		return resumeList;
 	}
 	
 	@Override

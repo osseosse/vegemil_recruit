@@ -11,6 +11,7 @@ import com.vegemil.domain.CareerDTO;
 import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
+import com.vegemil.domain.ResumeDTO;
 
 
 @Mapper
@@ -39,6 +40,8 @@ public interface ApplicationMapper {
 	public int updatePersonalInformation(PersonalInfoDTO params);
 	
 	public int updateAcademy(AcademyInfoDTO params);
+	
+	public List<ResumeDTO> selectResumeList(Long memNo);
 
 	public List<ApplicationDTO> selectApplicationList(Long memNo);
 

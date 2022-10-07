@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vegemil.constant.Method;
-import com.vegemil.domain.ApplicationDTO;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.QnaDTO;
+import com.vegemil.domain.ResumeDTO;
 import com.vegemil.service.ApplicationService;
 import com.vegemil.service.QnaService;
 import com.vegemil.util.UiUtils;
@@ -135,10 +135,14 @@ public class QnaController extends UiUtils {
 	        } else {
 	        	
 	        	//지원서 리스트
-	        	ApplicationDTO app = new ApplicationDTO();
-	        	app.setMemNo(member.getMemNo());
-	    		List<ApplicationDTO> applicationList = applicationService.getApplicationList(app);
-	    		model.addAttribute("appList", applicationList);
+	        	ResumeDTO resume = new ResumeDTO();
+	        	resume.setMemNo(member.getMemNo());
+	    		List<ResumeDTO> resumeList = applicationService.getResumeList(resume);
+	    		int applicationCount = applicationService.getApplicationCount(resume);
+	    		
+	    		model.addAttribute("member", member);
+	    		model.addAttribute("resumeList", resumeList);
+	    		model.addAttribute("applicationCount", applicationCount);
 	    		
 	    		//1:1문의 리스트
 	    		QnaDTO qna = new QnaDTO();

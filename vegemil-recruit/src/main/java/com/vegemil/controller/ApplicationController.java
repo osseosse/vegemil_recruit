@@ -16,10 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.vegemil.constant.Method;
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.ApplicationDTO;
@@ -205,6 +210,25 @@ public class ApplicationController extends UiUtils {
 		}
 
 		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/qualification?idx="+application.getIdx(), Method.GET, null, model);
+	}
+	
+	@RequestMapping(value = { "/application/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+	public JsonObject updateAcademy(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final AcademyInfoDTO params) {
+
+		JsonObject jsonObj = new JsonObject();
+
+		try {
+			boolean isRegistered = applicationService.registerAcademyInfo(params);
+			jsonObj.addProperty("result", isRegistered);
+
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+
+		return jsonObj;
 	}
 	
 	@GetMapping(value = "/application/qualification")

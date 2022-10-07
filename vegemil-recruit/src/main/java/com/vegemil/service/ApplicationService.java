@@ -8,10 +8,13 @@ import com.vegemil.domain.CareerDTO;
 import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
+import com.vegemil.domain.ResumeDTO;
 
 public interface ApplicationService {
 	
 	public int getApplicationCount(ApplicationDTO params);
+	
+	public List<ResumeDTO> getResumeList(ResumeDTO params);
 	
 	public List<ApplicationDTO> getApplicationList(ApplicationDTO params);
 	
