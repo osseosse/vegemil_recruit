@@ -10,19 +10,19 @@
 		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 	</sql>
 	<sql id="academyColumns">
-		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
-		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_max1, sch_point_evg1
-    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_max2, sch_point_evg2
-    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_max3, sch_point_evg3
-    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_max4, sch_point_evg4
-    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_max5, sch_point_evg5
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
+		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
+    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
+    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
     	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
     	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3, sch_sub_admis4, sch_sub_major4, sch_sub_point_evg4, sch_sub_admis5, sch_sub_major5
     	, sch_sub_point_evg5
 	</sql>
 	
 	<sql id="qualificationColumns">
-		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
 		, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 		, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3
 		, lang_talk3, lang_make3, lang_read3, lang_name4, lang_point4, lang_lv4, lang_lic_name4, lang_lic_num4, lang_get4, lang_talk4, lang_make4, lang_read4
@@ -35,7 +35,7 @@
 	</sql>
 	
 	<sql id="careerColumns">
-		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
 		, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
 		, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
 		, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
@@ -43,7 +43,7 @@
 	</sql>
 	
 	<sql id="introduceColumns">
-		idx, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
 		, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
 	</sql>
 
@@ -216,6 +216,43 @@
 			idx = #{idx}
 	</select>
 	
+	<select id="selectResume" parameterType="long" resultType="com.vegemil.domain.ResumeDTO">
+		SELECT idx, setup_th, setup_title,
+				CASE
+			        WHEN submit_date IS NULL THEN NULL
+			        ELSE
+				 		 DATE_FORMAT(submit_date,'%Y-%m')
+				END as submit_date
+		 		, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
+				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
+				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
+				, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
+				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
+		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
+		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
+		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
+		    	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3, sch_sub_admis4, sch_sub_major4, sch_sub_point_evg4, sch_sub_admis5, sch_sub_major5
+		    	, sch_sub_point_evg5
+				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
+				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
+		    	, lang_make3, lang_read3, lang_name4, lang_point4, lang_lv4, lang_lic_name4, lang_lic_num4, lang_get4, lang_talk4, lang_make4, lang_read4
+		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5, sw_name6, sw_lv6
+		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
+		    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4, lic_name5, lic_num5, lic_get_date5, lic_pub5
+		    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
+		    	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
+		    	, lang_count, sw_count, lic_count, medal_count, for_count
+				, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
+				, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
+				, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
+				, port_file, port_url
+				, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
+		FROM R_Recruit
+		WHERE idx= #{idx}
+	</select>
+	
 	<select id="selectResumeList" parameterType="long" resultType="com.vegemil.domain.ResumeDTO">
 		SELECT idx, setup_th, setup_title,
 				CASE
@@ -227,11 +264,11 @@
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 				, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
-				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_max1, sch_point_evg1
-		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_max2, sch_point_evg2
-		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_max3, sch_point_evg3
-		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_max4, sch_point_evg4
-		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_max5, sch_point_evg5
+				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
+		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
+		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
 		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
 		    	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3, sch_sub_admis4, sch_sub_major4, sch_sub_point_evg4, sch_sub_admis5, sch_sub_major5
 		    	, sch_sub_point_evg5

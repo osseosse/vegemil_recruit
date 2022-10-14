@@ -33,12 +33,13 @@
 								<li class="w-after"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-ing"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
-							<p class="btn_type02 mt30"><a href="/application/view">미리보기</a></p>
+							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerIntroduce([[ ${app.idx} ]])">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
 						<form  th:action="@{/application/registerIntroduce}" th:object="${app}" method="post" >
 							<input type="hidden" th:field="*{idx}" />
+							<input type="hidden" th:field="*{setupTh}" />
 							<!-- (1)성장과정 -->
 							<p class="f23 fw600 pr">성장과정을 서술하여 주시기 바랍니다.</p>
 							<div class="r-box mt20">
@@ -115,7 +116,14 @@
 				// Content 
 		================================ -->
 	</div><!-- //wrap bg_01 -->
-
+	<!-- 이력서미리보기 -->
+	<div th:replace="fragments/resumeView :: resumeFragment"></div>
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+	    var modal = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
+	</script>
+	<!-- //팝업 script -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

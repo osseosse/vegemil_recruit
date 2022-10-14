@@ -55,7 +55,7 @@
 									<!-- popup -->
 									<div th:id="|pop_view${i.index+1}|" class="pop_wrap" style="display:none;">
 										<div class="popBasePW" cellspacing="0"  summary="타이틀">
-											<div class="text-center mb60"><p class="f23 fw600">2023년 정식품 신입사원 공개채용</p></div>
+											<div class="text-center mb60"><p class="f23 fw600" th:text="${resume.setupTitle}"></p></div>
 											<p class="btn_pop_close"><a th:href="|#pop_view${i.index+1}|"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
 											<div class="viewBox">
 												<p class="f18 fw600">지원부문</p>
@@ -69,7 +69,10 @@
 											<div class="viewBox">
 												<p class="f18 fw600">인적사항</p>
 												<ul class="divide30">
-													<li><img th:src="@{/img/photo_sample.jpg}" /></li>
+													<li>
+														<img th:if="*{resume.photo != null and resume.photo != ''}" th:src="|@{/recruit/img/}*{resume.photo}|" />
+														<img th:unless="*{resume.photo != null and resume.photo != ''}" th:src="@{/img/photo_sample.jpg}"/>
+													</li>
 												</ul>
 												<ul class="divide70 divide2">
 													<li><span class="gray3">성명</span>
@@ -150,11 +153,7 @@
 											<div class="viewBox">
 												<p class="f18 fw600">학력정보</p>
 												<ul class="divide1">
-													<li th:if="${resume.lastAcademy} == '고등학교'
-															or ${resume.lastAcademy} == '전문대학'
-															or ${resume.lastAcademy} == '대학교'
-															or ${resume.lastAcademy} == '석사'
-															or ${resume.lastAcademy} == '박사'">
+													<li th:if="*{resume.schName1 != null and resume.schName1 != ''}">
 														<dl>
 															<dt>
 																<span class="gray3">고등학교</span>
@@ -169,10 +168,7 @@
 															</dd><br class="clear">
 														</dl>			
 													</li>
-													<li th:if="${resume.lastAcademy} == '전문대학'
-															or ${resume.lastAcademy} == '대학교'
-															or ${resume.lastAcademy} == '석사'
-															or ${resume.lastAcademy} == '박사'">
+													<li th:if="*{resume.schName2 != null and resume.schName2 != ''}">
 														<dl>
 															<dt>
 																<span class="gray3">전문대학</span>
@@ -188,9 +184,7 @@
 															</dd>
 														</dl>
 													</li>
-													<li th:if="${resume.lastAcademy} == '대학교'
-															or ${resume.lastAcademy} == '석사'
-															or ${resume.lastAcademy} == '박사'">
+													<li th:if="*{resume.schName3 != null and resume.schName3 != ''}">
 														<dl>
 															<dt>
 																<span class="gray3">대학교</span>
@@ -204,13 +198,12 @@
 																<span class="sublist" th:text="${resume.schNight3}"></span>
 																<span class="sublist" th:text="|${resume.schEnterYm3} ~ ${resume.schGradYm3}|"></span>
 																<span class="sublist" th:text="|${resume.schPointEvg3}/4.5|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubMajor3}|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubPointEvg3}/4.5|"></span>
+																<span class="sublist" th:if="${resume.schSubMajor3} != null" th:text="|(부)${resume.schSubMajor3}|"></span>
+																<span class="sublist" th:if="${resume.schSubPointEvg3 != null" th:text="|(부)${resume.schSubPointEvg3}/4.5|"></span>
 															</dd>
 														</dl>
 													</li>
-													<li th:if="${resume.lastAcademy} == '석사'
-															or ${resume.lastAcademy} == '박사'">
+													<li th:if="*{resume.schName4 != null and resume.schName4 != ''}">
 														<dl>
 															<dt>
 																<span class="gray3">석사</span>
@@ -224,12 +217,10 @@
 																<span class="sublist" th:text="${resume.schNight4}"></span>
 																<span class="sublist" th:text="|${resume.schEnterYm4} ~ ${resume.schGradYm4}|"></span>
 																<span class="sublist" th:text="|${resume.schPointEvg4}/4.5|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubMajor4}|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubPointEvg4}/4.5|"></span>
 															</dd>
 														</dl>
 													</li>
-													<li th:if="${resume.lastAcademy} == '박사'">
+													<li th:if="*{resume.schName5 != null and resume.schName5 != ''}">
 														<dl>
 															<dt>
 																<span class="gray3">박사</span>
@@ -243,8 +234,6 @@
 																<span class="sublist" th:text="${resume.schNight5}"></span>
 																<span class="sublist" th:text="|${resume.schEnterYm5} ~ ${resume.schGradYm5}|"></span>
 																<span class="sublist" th:text="|${resume.schPointEvg5}/4.5|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubMajor5}|"></span>
-																<span class="sublist" th:text="|(부)${resume.schSubPointEvg5}/4.5|"></span>
 															</dd>
 														</dl>
 													</li>

@@ -41,6 +41,8 @@ public interface ApplicationMapper {
 	
 	public int updateAcademy(AcademyInfoDTO params);
 	
+	public ResumeDTO selectResume(Long idx);
+	
 	public List<ResumeDTO> selectResumeList(Long memNo);
 
 	public List<ApplicationDTO> selectApplicationList(Long memNo);

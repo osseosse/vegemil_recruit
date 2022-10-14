@@ -30,7 +30,7 @@
 								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
-							<p class="btn_type02 mt30"><a href="/application/reView">미리보기</a></p>
+							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${app.idx} ]])">임시저장</a></p>
 						</div>
 						<script>
@@ -42,6 +42,7 @@
 							<form class="fam-repeater" th:action="@{/application/registerPersonalInfo}" th:object="${app}" method="post" enctype="multipart/form-data" >
 							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
 							<input type="hidden" th:field="*{idx}" />
+							<input type="hidden" th:field="*{setupTh}" />
 							<!--/* 파일이 변경된 경우, 해당 파라미터를 이용하여 파일 삭제 및 재등록 처리 */-->
 							<!-- (1)최종 (예정) 학력 -->
 							<p class="f23 fw600">지원분야<span class="abs-r f14 fw400 red">*는 필수 입력 사항입니다.</span></p>
@@ -96,7 +97,10 @@
 								<div class="row">
 									<div class="col-lg-4" >
 										<div class="photoBox">
-											<div class="IDpicture"><img th:src="@{/img/photo_sample.jpg}" id="photo" /></div>
+											<div class="IDpicture">
+												<img th:if="*{photo != null and photo != ''}" th:src="|@{/recruit/img/}*{photo}|" id="photo" />
+												<img th:unless="*{photo != null and photo != ''}" th:src="@{/img/photo_sample.jpg}" id="photo" />
+											</div>
 											<input type="file" name="fileName" class="real-upload" accept="image/*" style="display:none;">
 										</div>
 										<p class="f12 mt10 gray">사진사이즈 : 120px X 160px </p>
@@ -223,7 +227,7 @@
 										<ul class="s-d-2">
 											<li class="f14">보훈대상번호</li>
 											<li>
-												<input type="text" class="inType01 w180"  id="bohunNo" name="bohunNo">
+												<input type="text" class="inType01 w180"  th:field="*{bohunNo}">
 											</li>
 										</ul>
 									</div>
@@ -377,6 +381,14 @@
 				// Content 
 		================================ -->
 	</div><!-- //wrap bg_01 -->
+	<!-- 이력서미리보기 -->
+	<div th:replace="fragments/resumeView :: resumeFragment"></div>
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+	    var modal = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
+	</script>
+	<!-- //팝업 script -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

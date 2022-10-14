@@ -50,7 +50,7 @@
 								</dl>
 							</li>
 						</ul>
-						<p class="btn_type01 mt30 w230"><a th:href="|@{/application/personalInfo}?idx=${idx}|">지원서 보기</a></p>
+						<p class="btn_type01 mt30 w230"><a href="#pop_view">지원서 보기</a></p>
 					</div><!-- //memberWrapBase -->
 				</div><!-- //container1300 -->
 			</div><!-- //container100 -->
@@ -59,6 +59,14 @@
 				// Content 
 		================================ -->
 	</div><!-- //wrap bg_01 -->
+	<!-- 이력서미리보기 -->
+	<div th:replace="fragments/resumeView :: resumeFragment"></div>
+	<script th:src="@{/common/js/modality.js}"></script>
+	<!-- 팝업 script -->
+	<script>
+	    var modal = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
+	</script>
+	<!-- //팝업 script -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

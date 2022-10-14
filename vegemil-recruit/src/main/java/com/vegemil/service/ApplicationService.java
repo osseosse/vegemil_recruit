@@ -28,6 +28,8 @@ public interface ApplicationService {
 	
 	public boolean registerIntroduce(IntroduceDTO params);
 	
+	public ResumeDTO getResume(Long idx, Long memNo);
+	
 	public ApplicationDTO getApplication(Long idx, Long memNo);
 	
 	public IntroduceDTO selectIntroduce(Long idx, Long memNo);

@@ -47,6 +47,19 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
+	public ResumeDTO getResume(Long idx, Long memNo) {
+		ResumeDTO application = new ResumeDTO();
+
+		int recruitTotalCount = applicationMapper.selectApplicationCount(memNo);
+
+		if (recruitTotalCount > 0) {
+			application = applicationMapper.selectResume(idx);
+		}
+
+		return application;
+	}
+	
+	@Override
 	public List<ResumeDTO> getResumeList(ResumeDTO params) {
 		List<ResumeDTO> resumeList = Collections.emptyList();
 

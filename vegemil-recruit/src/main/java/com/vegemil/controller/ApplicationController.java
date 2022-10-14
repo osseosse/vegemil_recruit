@@ -3,6 +3,7 @@ package com.vegemil.controller;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,7 @@ import com.vegemil.domain.IntroduceDTO;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
+import com.vegemil.domain.ResumeDTO;
 import com.vegemil.service.ApplicationService;
 import com.vegemil.util.UiUtils;
 
@@ -74,6 +76,11 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
+	        //지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -95,7 +102,7 @@ public class ApplicationController extends UiUtils {
 				String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
 				String uuid = UUID.randomUUID().toString();
 				String savefileName = uuid + "_" + file;
-				Path savePath = Paths.get(request.getServletContext().getRealPath("/") + "/WEB-INF/classes/static/recruit/img/" + savefileName);
+				Path savePath = Paths.get("C:/Users/kid4290/git/vegemil_recruit/vegemil-recruit/src/main/resources/static/recruit/img/" + savefileName);
 				
 				fileName.transferTo(savePath);
 				application.setPhoto(savefileName);
@@ -274,6 +281,12 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
+	        //지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
+	        
 			model.addAttribute("app", application);
 	        
         }
@@ -353,6 +366,11 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
+	        //지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -446,6 +464,11 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
+	        //지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -524,6 +547,12 @@ public class ApplicationController extends UiUtils {
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
 	        
+			//지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
+			
 			model.addAttribute("idx", idx);
 	        model.addAttribute("setupTitle", application.getSetupTitle());
 	        model.addAttribute("memName", member.getMemName());
