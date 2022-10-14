@@ -115,9 +115,9 @@
 											<li class="f14"><span class="red">*</span>입학구분</li>
 											<li>
 												<div class="w180">
-												  <select id="schTransfer" class="base w180">
+												  <select id="schAdmis" class="base w180">
 													<option value="">선택해 주세요</option>
-													<option value="일반">일반</option>
+													<option value="입학">입학</option>
 													<option value="편입">편입</option>
 												  </select>
 												</div>
@@ -169,7 +169,7 @@
 											<li class="f14"><span class="red">*</span>주전공</li>
 											<li>
 												<fieldset class="search">
-													<legend>학교검색</legend>
+													<legend>학과검색</legend>
 													<input type="text" id="schMajor" title='학과명 입력' placeholder="학과명"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_major" title="팝업" class="ico_search"><span class="btn_Type06">검색</span></a>
 												</fieldset>
 											</li>
@@ -192,8 +192,8 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>전공추가</li>
 											<li>
-												<div class="custom-sel w180">
-												  <select id="schDepType" class="schSelect">
+												<div class="w180">
+												  <select id="schDepType" class="base w180">
 													<option value="">전공추가</option>
 													<option value="복수전공">복수전공</option>
 													<option value="부전공">부전공</option>
@@ -208,7 +208,11 @@
 										<ul class="s-d-2 ">
 											<li class="f14"><span class="red">*</span>복수/부전공</li>
 											<li>
-												<input type="text" id="schSubMajor" class="inType01 w180"  disabled>
+												<fieldset class="search">
+													<legend>부전공검색</legend>
+													<input type="text" id="schSubMajor" title='학과명 입력' placeholder="학과명"  readonly='readonly' class="inType01 w120 bgGray2"><a  href="#pop_sub_major" title="팝업" class="ico_search"><span class="btn_Type06">검색</span></a>
+												</fieldset>
+												
 											</li>
 										</ul>
 									</div>
@@ -220,8 +224,8 @@
 								</div>
 							<!-- 학력 저장 정보 로드  -->
 							<!-- //공통입력 -->
-							<div class="con-list" id="con-list">
-								<ul>
+							<div class="con-list">
+								<ul id="con-list">
 								<!-- 고등 -->
 								<li th:if="*{schName1 != null and schName1 != ''}" id="high_list">
 									<dl>
@@ -232,12 +236,11 @@
 											<span class="sublist" th:if="*{schName1 != null and schName1 != ''}" th:text="*{schName1}" th:id="schName1"></span>
 											<span class="sublist" th:if="*{schSite1 != null and schSite1 != ''}" th:text="*{schSite1}" th:id="schSite1"></span>
 											<span class="sublist" th:if="*{schNight1 != null and schNight1 != ''}" th:text="*{schNight1}" th:id="schNight1"></span>
-											<span class="sublist" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:text="*{schAdmis1}" th:id="schAdmis1"></span>
-											<span class="sublist" th:if="*{schEnterYm1 != null and schEnterYm1 != '' and schGradYm1 != null and schGradYm1 != ''}" th:text="|*{schEnterYm1} ~ *{schGradYm1}|" id="schEnterYm1"></span>
+											<span class="sublist" th:if="*{schEnterYm1 != null and schEnterYm1 != '' and schGradYm1 != null and schGradYm1 != ''}" th:text="|*{schEnterYm1} *{schAdmis1} ~ *{schGradYm1} *{schGrad1}|"></span>
 										</dd>
 										<dd>
-											<span><a href="javascript:editAcademy('high');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a href="javascript:deleteAcademy('high');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a href="javascript:editAcademy('high_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('high_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 										</dd><br class="clear">
 									</dl>									
 								</li>
@@ -255,11 +258,11 @@
 											<span class="sublist" th:if="*{schMajor2 != null and schMajor2 != ''}" th:text="*{schMajor2}" id="schMajor2"></span>
 											<span class="sublist" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:text="*{schSubMajor2}" id="schSubMajor2"></span>
 											<span class="sublist" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:text="*{schSubPointEvg2}" id="schSubPointEvg2"></span>
-											<span class="sublist" th:if="*{schEnterYm2 != null and schEnterYm2 != '' and schGradYm2 != null and schGradYm2 != ''}" th:text="|*{schEnterYm2} ~ *{schGradYm2}|" id="schEnterYm2"></span>
+											<span class="sublist" th:if="*{schEnterYm2 != null and schEnterYm2 != '' and schGradYm2 != null and schGradYm2 != ''}" th:text="|*{schEnterYm2} *{schAdmis2} ~ *{schGradYm2} *{schGrad2}|"></span>
 										</dd>
 										<dd>
-											<span><a th:href="javascript:editAcademy('college');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a th:href="javascript:deleteAcademy('college');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a href="javascript:editAcademy('colg_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('colg_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 										</dd><br class="clear">
 									</dl>									
 								</li>
@@ -267,7 +270,7 @@
 								<li th:if="*{schName3 != null and schName3 != ''}" id="univ_list">
 									<dl>
 										<dt>
-											<span class="gray3">학사</span>
+											<span class="gray3">대학교</span>
 										</dt>
 										<dd>
 											<span class="sublist" th:if="*{schName3 != null and schName3 != ''}" th:text="*{schName3}" id="schName3"></span>
@@ -275,13 +278,14 @@
 											<span class="sublist" th:if="*{schNight3 != null and schNight3 != ''}" th:text="*{schNight3}" id="schNight3"></span>
 											<span class="sublist" th:if="*{schMajor3 != null and schMajor3 != ''}" th:text="*{schMajor3}" id="schMajor3"></span>
 											<span class="sublist" th:if="*{schPointEvg3 != null and schPointEvg3 != ''}" th:text="*{schPointEvg3}" id="schPointEvg3"></span>
+											<span class="sublist" th:if="*{schDepType3 != null and schDepType3 != ''}" th:text="*{schDepType3}" id="schDepType3"></span>
 											<span class="sublist" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:text="*{schSubMajor3}" id="schSubMajor3"></span>
 											<span class="sublist" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:text="*{schSubPointEvg3}" id="schSubPointEvg3"></span>
-											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} ~ *{schGradYm3}|" id="schEnterYm3"></span>
+											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} *{schAdmis3} ~ *{schGradYm3} *{schGrad3}|"></span>
 										</dd>
 										<dd>
-											<span><a th:href="javascript:editAcademy('univ');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a th:href="javascript:deleteAcademy('univ');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a href="javascript:editAcademy('univ_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('univ_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 										</dd><br class="clear">
 									</dl>									
 								</li>
@@ -297,11 +301,11 @@
 											<span class="sublist" th:if="*{schNight4 != null and schNight4 != ''}" th:text="*{schNight4}" id="schNight4"></span>
 											<span class="sublist" th:if="*{schPointEvg4 != null and schPointEvg4 != ''}" th:text="*{schPointEvg4}" id="schPointEvg4"></span>
 											<span class="sublist" th:if="*{schMajor4 != null and schMajor4 != ''}" th:text="*{schMajor4}" id="schMajor4"></span>
-											<span class="sublist" th:if="*{schEnterYm4 != null and schEnterYm4 != '' and schGradYm4 != null and schGradYm4 != ''}" th:text="|*{schEnterYm4} ~ *{schGradYm4}|" id="schEnterYm4"></span>
+											<span class="sublist" th:if="*{schEnterYm4 != null and schEnterYm4 != '' and schGradYm4 != null and schGradYm4 != ''}" th:text="|*{schEnterYm4} *{schAdmis4} ~ *{schGradYm4} *{schGrad4}|"></span>
 										</dd>
 										<dd>
-											<span><a th:href="javascript:editAcademy('master');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a th:href="javascript:deleteAcademy('master');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a href="javascript:editAcademy('mast_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('mast_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 										</dd><br class="clear">
 									</dl>									
 								</li>
@@ -317,63 +321,45 @@
 											<span class="sublist" th:if="*{schNight5 != null and schNight5 != ''}" th:text="*{schNight5}" id="schNight5"></span>
 											<span class="sublist" th:if="*{schPointEvg5 != null and schPointEvg5 != ''}" th:text="*{schPointEvg5}" id="schPointEvg5"></span>
 											<span class="sublist" th:if="*{schMajor5 != null and schMajor5 != ''}" th:text="*{schMajor5}" id="schMajor5"></span>
-											<span class="sublist" th:if="*{schEnterYm5 != null and schEnterYm5 != '' and schGradYm5 != null and schGradYm5 != ''}" th:field="|*{schEnterYm5} ~ *{schGradYm5}|" id="schEnterYm5"></span>
+											<span class="sublist" th:if="*{schEnterYm5 != null and schEnterYm5 != '' and schGradYm5 != null and schGradYm5 != ''}" th:field="|*{schEnterYm5} *{schAdmis5} ~ *{schGradYm5} *{schGrad5}|"></span>
 										</dd>
 										<dd>
-											<span><a th:href="javascript:editAcademy('doctor');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a th:href="javascript:deleteAcademy('doctor');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a href="javascript:editAcademy('doct_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('doct_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 										</dd><br class="clear">
 									</dl>									
 								</li>
 							</ul>
 								<!-- 고등 -->
-								<input type="hidden" th:if="*{schName1 != null and schName1 != ''}" th:name="*{schName1}">
-								<input type="hidden" th:if="*{schSite1 != null and schSite1 != ''}" th:name="*{schSite1}">
-								<input type="hidden" th:if="*{schNight1 != null and schNight1 != ''}" th:name="*{schNight1}">
-								<input type="hidden" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:name="*{schAdmis1}">
-								<input type="hidden" th:if="*{schEnterYm1 != null and schEnterYm1 != ''}" th:name="*{schEnterYm1}">
-								<input type="hidden" th:if="*{schGradYm1 != null and schGradYm1 != ''}" th:name="*{schGradYm1}">
+								<input type="hidden" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:value="*{schAdmis1}" id="schAdmis1">
+								<input type="hidden" th:if="*{schGrad1 != null and schGrad1 != ''}" th:value="*{schGrad1}" id="schGrad1">
+								<input type="hidden" th:if="*{schEnterYm1 != null and schEnterYm1 != ''}" th:value="*{schEnterYm1}" id="schEnterYm1">
+								<input type="hidden" th:if="*{schGradYm1 != null and schGradYm1 != ''}" th:value="*{schGradYm1}" id="schGradYm1">
 								<!-- 전문대 -->
-								<input type="hidden" th:if="*{schName2 != null and schName2 != ''}" th:name="*{schName2}">
-								<input type="hidden" th:if="*{schSite2 != null and schSite2 != ''}" th:name="*{schSite2}">
-								<input type="hidden" th:if="*{schNight2 != null and schNight2 != ''}" th:name="*{schNight2}">
-								<input type="hidden" th:if="*{schPointEvg2 != null and schPointEvg2 != ''}" th:name="*{schPointEvg2}">
-								<input type="hidden" th:if="*{schMajor2 != null and schMajor2 != ''}" th:name="*{schMajor2}">
-								<input type="hidden" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:name="*{schSubMajor2}">
-								<input type="hidden" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:name="*{schSubPointEvg2}">
-								<input type="hidden" th:if="*{schEnterYm2 != null and schEnterYm2 != ''}" th:name="*{schEnterYm2}">
-								<input type="hidden" th:if="*{schGradYm2 != null and schGradYm2 != ''}" th:name="*{schGradYm2}">
+								<input type="hidden" th:if="*{schAdmis2 != null and schAdmis2 != ''}" th:value="*{schAdmis2}" id="schAdmis2">
+								<input type="hidden" th:if="*{schGrad2 != null and schGrad2 != ''}" th:value="*{schGrad2}" id="schGrad2">
+								<input type="hidden" th:if="*{schEnterYm2 != null and schEnterYm2 != ''}" th:value="*{schEnterYm2}" id="schEnterYm2">
+								<input type="hidden" th:if="*{schGradYm2 != null and schGradYm2 != ''}" th:value="*{schGradYm2}" id="schGradYm2">
 								<!-- 학사 -->
-								<input type="hidden" th:if="*{schName3 != null and schName3 != ''}" th:name="*{schName3}">
-								<input type="hidden" th:if="*{schSite3 != null and schSite3 != ''}" th:name="*{schSite3}">
-								<input type="hidden" th:if="*{schNight3 != null and schNight3 != ''}" th:name="*{schNight3}">
-								<input type="hidden" th:if="*{schMajor3 != null and schMajor3 != ''}" th:name="*{schMajor3}">
-								<input type="hidden" th:if="*{schPointEvg3 != null and schPointEvg3 != ''}" th:name="*{schPointEvg3}">
-								<input type="hidden" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:name="*{schSubMajor3}">
-								<input type="hidden" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:name="*{schSubPointEvg3}">
-								<input type="hidden" th:if="*{schEnterYm3 != null and schEnterYm3 != ''}" th:name="*{schEnterYm3}">
-								<input type="hidden" th:if="*{schGradYm3 != null and schGradYm3 != ''}" th:name="*{schGradYm3}">
+								<input type="hidden" th:if="*{schAdmis3 != null and schAdmis3 != ''}" th:value="*{schAdmis3}" id="schAdmis3">
+								<input type="hidden" th:if="*{schGrad3 != null and schGrad3 != ''}" th:value="*{schGrad3}" id="schGrad3">
+								<input type="hidden" th:if="*{schEnterYm3 != null and schEnterYm3 != ''}" th:value="*{schEnterYm3}" id="schEnterYm3">
+								<input type="hidden" th:if="*{schGradYm3 != null and schGradYm3 != ''}" th:value="*{schGradYm3}" id="schGradYm3">
 								<!-- 석사 -->
-								<input type="hidden" th:if="*{schName4 != null and schName4 != ''}" th:name="*{schName4}">
-								<input type="hidden" th:if="*{schSite4 != null and schSite4 != ''}" th:name="*{schSite4}">
-								<input type="hidden" th:if="*{schNight4 != null and schNight4 != ''}" th:name="*{schNight4}">
-								<input type="hidden" th:if="*{schPointEvg4 != null and schPointEvg4 != ''}" th:name="*{schPointEvg4}">
-								<input type="hidden" th:if="*{schMajor4 != null and schMajor4 != ''}" th:name="*{schMajor4}">
-								<input type="hidden" th:if="*{schEnterYm4 != null and schEnterYm4 != ''}" th:name="*{schEnterYm4}">
-								<input type="hidden" th:if="*{schGradYm4 != null and schGradYm4 != ''}" th:name="*{schGradYm4}">
+								<input type="hidden" th:if="*{schAdmis4 != null and schAdmis4 != ''}" th:value="*{schAdmis4}" id="schAdmis4">
+								<input type="hidden" th:if="*{schGrad4 != null and schGrad4 != ''}" th:value="*{schGrad4}" id="schGrad4">
+								<input type="hidden" th:if="*{schEnterYm4 != null and schEnterYm4 != ''}" th:value="*{schEnterYm4}" id="schEnterYm4">
+								<input type="hidden" th:if="*{schGradYm4 != null and schGradYm4 != ''}" th:value="*{schGradYm4}" id="schGradYm4">
 								<!-- 박사 -->
-								<input type="text" th:if="*{schName5 != null and schName5 != ''}" th:name="*{schName5}">
-								<input type="text" th:if="*{schSite5 != null and schSite5 != ''}" th:name="*{schSite5}">
-								<input type="text" th:if="*{schNight5 != null and schNight5 != ''}" th:name="*{schNight5}">
-								<input type="text" th:if="*{schPointEvg5 != null and schPointEvg5 != ''}" th:name="*{schPointEvg5}">
-								<input type="text" th:if="*{schMajor5 != null and schMajor5 != ''}" th:name="*{schMajor5}">
-								<input type="text" th:if="*{schEnterYm5 != null and schEnterYm5 != ''}" th:name="*{schEnterYm5}">
-								<input type="text" th:if="*{schGradYm5 != null and schGradYm5 != ''}" th:name="*{schGradYm5}">
+								<input type="hidden" th:if="*{schAdmis5 != null and schAdmis5 != ''}" th:value="*{schAdmis5}" id="schAdmis5">
+								<input type="hidden" th:if="*{schGrad5 != null and schGrad5 != ''}" th:value="*{schGrad5}" id="schGrad5">
+								<input type="text" th:if="*{schEnterYm5 != null and schEnterYm5 != ''}" th:value="*{schEnterYm5}" id="schEnterYm5">
+								<input type="text" th:if="*{schGradYm5 != null and schGradYm5 != ''}" th:value="*{schGradYm5}" id="schGradYm5">
 							</div>					
 							</div>
 							<div class="w100 mt30">
 								<a th:href="|@{/application/personalInfo}?idx=${app.idx}|"><p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="개인정보" /> 개인정보</p></a>
-								<button type="submit" class="f_right"><p class=" f20">학력정보 <img th:src="@{/img/btn_next.png}" alt="어학정보" /></p></button>
+								<a th:href="|@{/application/qualification}?idx=${app.idx}|"><p class="f_right f20">어학정보 <img th:src="@{/img/btn_next.png}" alt="어학정보" /></p></a>
 							</div>
 						</form>
 						</div><!-- //wrap860 -->
@@ -421,7 +407,7 @@
 			<div class="search_school ">
 				<fieldset class="search">
                 <legend>검색</legend>
-                   <input type="text" id="majorName" class="ss_inType mt20" placeholder="전공명을 2자 이상 입력해주세요."><a href="javascript:fnMajor();" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="전공 검색"></a>
+                   <input type="text" id="majorName" class="ss_inType mt20" placeholder="전공명을 2자 이상 입력해주세요."><a href="javascript:fnMajor('main');" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="전공 검색"></a>
                 </fieldset>
 				<ul class="ss_ul mt10" id="majorList">
 					<li class="majLi"><a></a></li>
@@ -432,6 +418,27 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="pop_sub_major"  style="display:none;"  class="w600">
+		<div class="popBasePW" cellspacing="0"  summary="타이틀">
+	
+			<p class="f23 fw600">학과검색</p>
+			<p class="btn_pop_close"><a href="#pop_sub_major"><img th:src="@{/img/btn_popClose.png}" alt="닫기" /></a></p>
+			<p class="f14 fw400 mt40">학과명</p>
+			<div class="search_school ">
+				<fieldset class="search">
+                <legend>검색</legend>
+                   <input type="text" id="subMajorName" class="ss_inType mt20" placeholder="전공명을 2자 이상 입력해주세요."><a href="javascript:fnMajor('sub');" title="검색"><img class="ico_search2" th:src="@{/img/ico_search.png}" alt="전공 검색"></a>
+                </fieldset>
+				<ul class="ss_ul mt10" id="subMajorList">
+					<li class="subMajLi"><a></a></li>
+				</ul>
+				<p class="f14 mt30">찾으시는 결과가 없나요? <b><a onclick="javascript:inputSubMajor();">직접입력</a></b></p>
+				<input type="text" id="inSubMaj" class="ss_inType mt10" disabled>
+				<p class="mt40 btn_type05"><a href="#pop_sub_major" id="inputSubMajorBtn">등록</a></p>
+			</div>
+		</div>
+	</div>
 	<!-- //popup -->
 
 	<script th:src="@{/common/js/modality.js}"></script>
@@ -439,6 +446,7 @@
 	<script>
 		var modal1 = Modality.init('#pop_school ', {effect: 'slide-up'});
 		var modal2 = Modality.init('#pop_major ', {effect: 'slide-up'});
+		var modal3 = Modality.init('#pop_sub_major ', {effect: 'slide-up'});
 	</script>
 	<!-- //팝업 script -->
 	<script th:src="@{/common/js/academy.js}"></script>

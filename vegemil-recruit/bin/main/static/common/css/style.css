@@ -723,6 +723,8 @@ caption {display:none}
 #pop_school.w600 {width:600px; margin:0 auto}
 #pop_major {background:#fff; padding:70px 40px;}
 #pop_major.w600 {width:600px; margin:0 auto}
+#pop_sub_major {background:#fff; padding:70px 40px;}
+#pop_sub_major.w600 {width:600px; margin:0 auto}
 
 div.popBasePW {width:520px; position:relative; }
 div.popBasePW.w400 {width:400px; position:relative; }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
@@ -213,14 +214,25 @@ public class ApplicationController extends UiUtils {
 	}
 	
 	@RequestMapping(value = { "/application/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH })
-	public JsonObject updateAcademy(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final AcademyInfoDTO params) {
+	public @ResponseBody JsonObject updateAcademy(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final AcademyInfoDTO params, Authentication authentication) {
 
 		JsonObject jsonObj = new JsonObject();
 
 		try {
-			boolean isRegistered = applicationService.registerAcademyInfo(params);
-			jsonObj.addProperty("result", isRegistered);
-
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();
+			if(member != null) {
+			
+				params.setEmailAddr(member.getEmailAddr());
+				params.setMemName(member.getMemName());
+				params.setMemNo(member.getMemNo());
+				params.setPhoneNo(member.getPhoneNo());
+		        
+		        boolean isRegistered = applicationService.registerAcademyInfo(params);
+				jsonObj.addProperty("result", isRegistered);
+				
+			}
+			
 		} catch (DataAccessException e) {
 			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
 
@@ -350,7 +362,7 @@ public class ApplicationController extends UiUtils {
 	
 	@PostMapping(value = "/application/registerCareer")
 	public String registerCareer(@ModelAttribute("app") final CareerDTO application, 
-			BindingResult bindingResult, @RequestParam("fileName") MultipartFile fileName, Model model, 
+			BindingResult bindingResult, @RequestParam("portFile") MultipartFile fileName, Model model, 
 			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -362,11 +374,13 @@ public class ApplicationController extends UiUtils {
 				String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
 				String uuid = UUID.randomUUID().toString();
 				String savefileName = uuid + "_" + file;
-				Path savePath = Paths.get(request.getServletContext().getRealPath("/") + "/WEB-INF/classes/static/recruit/img/" + savefileName);
+				//테스트경로
+				Path savePath = Paths.get("C:/Users/kid4290/git/vegemil_recruit/vegemil-recruit/src/main/resources/static/recruit/port/" + savefileName);
 				
+				//저장
 				fileName.transferTo(savePath);
 				//포트폴리오
-				//application.setPhoto(savefileName);
+				application.setPortFile(file);
 			}
 			
 			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
@@ -513,7 +527,7 @@ public class ApplicationController extends UiUtils {
 			model.addAttribute("idx", idx);
 	        model.addAttribute("setupTitle", application.getSetupTitle());
 	        model.addAttribute("memName", member.getMemName());
-			model.addAttribute("updateDate", application.getUpdateDate());
+			model.addAttribute("submitDate", application.getSubmitDate());
 	        
         }
 		

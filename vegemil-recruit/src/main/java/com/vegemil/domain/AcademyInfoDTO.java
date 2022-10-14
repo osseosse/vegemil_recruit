@@ -10,6 +10,7 @@ public class AcademyInfoDTO extends ApplicationDTO {
 	
 	//학력
 	private String lastAcademy;
+	private String selectAcademy;
 	//고등
 	private String schGrad1;
 	private String schEnterYm1;

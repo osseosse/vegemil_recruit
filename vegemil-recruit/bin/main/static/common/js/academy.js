@@ -1,3 +1,5 @@
+ /*<![CDATA[*/
+ 
  $(".ls1").keyup(function() {
 	
     if( this.value.length > 8){
@@ -36,6 +38,13 @@ $(document).on("click", "#inputMajorBtn", function(){
 	$("#schMajor").val($("#inMaj").val());
 
 });
+
+$(document).on("click", "#inputSubMajorBtn", function(){
+
+	alert($("#inSubMaj").val());
+	$("#schSubMajor").val($("#inSubMaj").val());
+
+});
  
 $(document).on("click", ".schLi a", function(){
   	$(".schLi").removeClass("active");
@@ -53,6 +62,15 @@ $(document).on("click", ".majLi a", function(){
 	$("#majBtn").attr("disabled", false); //설정
 	$("#schMajor").val($(this).text());
 	modal2.close();
+});
+
+$(document).on("click", ".subMajLi a", function(){
+	$(".subMajLi").removeClass("active");
+	$(this).parent().addClass("active");
+	$("#subMajBtn").addClass('active');
+	$("#subMajBtn").attr("disabled", false); //설정
+	$("#schSubMajor").val($(this).text());
+	modal3.close();
 });
  
 $("#selectAcademy").change( function() {
@@ -75,10 +93,15 @@ $("#selectAcademy").change( function() {
 	} else {
 		$("#schChangeArea").hide();
 		$("#majorArea").show();
+		$("#majorAddArea1").hide();
+		$("#majorAddArea2").hide();
 	}
 	
 	$(".base option").prop("selected", false); 
-	$("input[class='inType01 ']").val('');
+	$("input[class='inType01 w180']").val('');
+	$("input[class='inType01 w180 ls1']").val('');
+	$("input[class='inType01 w120 bgGray2']").val('');
+	$("input[class='inType01 w70 text-right']").val('');
 	$("#searchArea").show();
 	$("#gradArea").show();
 	$("#schArea").show();
@@ -88,11 +111,118 @@ $("#selectAcademy").change( function() {
  
 });
 
+//학력 수정
+function editAcademy(schType) {
+
+	if(schType == 'high_list') {
+	
+		$("#selectAcademy").val('high_list').prop("selected", true);
+		$("#schName").val($("#schName1").text());
+   		$("#schSite").val($("#schSite1").text());
+   		$("#schNight").val($("#schNight1").text()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis1").val()).prop("selected", true);
+   		$("#schGrad").val($("#schGrad1").val()).prop("selected", true);
+   		$("#schEnterYm").val($("#schEnterYm1").val());
+   		$("#schGradYm").val($("#schGradYm1").val());
+   		
+   		$("#majorArea").hide();
+		$("#schChangeArea").hide();
+		
+	} else if(schType == 'colg_list') {
+	
+		$("#selectAcademy").val('colg_list').prop("selected", true);
+		$("#schName").val($("#schName2").text());
+   		$("#schSite").val($("#schSite2").text());
+   		$("#schNight").val($("#schNight2").text()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis2").val()).prop("selected", true);
+   		$("#schGrad").val($("#schGrad2").val()).prop("selected", true);
+   		$("#schMajor").val($("#schMajor2").text());
+   		$("#schPointEvg").val($("#schPointEvg2").text());
+   		$("#schEnterYm").val($("#schEnterYm2").val());
+   		$("#schGradYm").val($("#schGradYm2").val());
+   		
+   		$("#majorArea").show();
+   		$("#schChangeArea").hide();
+		$("#majorAddArea1").hide();
+		$("#majorAddArea2").hide();
+		
+	} else if(schType == 'univ_list') {
+	
+		$("#selectAcademy").val('univ_list').prop("selected", true);
+		$("#schName").val($("#schName3").text());
+   		$("#schSite").val($("#schSite3").text());
+   		$("#schNight").val($("#schNight3").text()).prop("selected", true);
+   		$("#schGrad").val($("#schGrad3").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis3").val()).prop("selected", true);
+   		$("#schMajor").val($("#schMajor3").text());
+   		$("#schPointEvg").val($("#schPointEvg3").text());
+   		$("#schSubMajor").val($("#schSubMajor3").text());
+   		$("#schDepType").val($("#schDepType3").text()).prop("selected", true);
+   		$("#schEnterYm").val($("#schEnterYm3").val());
+   		$("#schGradYm").val($("#schGradYm3").val());
+		
+		$("#majorArea").show();
+		$("#schChangeArea").show();
+		$("#majorAddArea1").show();
+		$("#majorAddArea2").show();
+		
+	} else if(schType == 'mast_list') {
+	
+		$("#selectAcademy").val('mast_list').prop("selected", true);
+		$("#schName").val($("#schName4").text());
+   		$("#schSite").val($("#schSite4").text());
+   		$("#schNight").val($("#schNight4").text()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis4").val()).prop("selected", true);
+   		$("#schGrad").val($("#schGrad4").val()).prop("selected", true);
+   		$("#schMajor").val($("#schMajor4").text());
+   		$("#schPointEvg").val($("#schPointEvg4").text());
+   		$("#schEnterYm").val($("#schEnterYm4").val());
+   		$("#schGradYm").val($("#schGradYm4").val());
+   		
+   		$("#schChangeArea").hide();
+		$("#majorArea").show();
+		$("#majorAddArea1").hide();
+		$("#majorAddArea2").hide();
+		
+	} else if(schType == 'doct_list') {
+	
+		$("#selectAcademy").val('doct_list').prop("selected", true);
+		$("#schName").val($("#schName5").text());
+   		$("#schSite").val($("#schSite5").text());
+   		$("#schNight").val($("#schNight5").text()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis5").val()).prop("selected", true);
+   		$("#schGrad").val($("#schGrad5").val()).prop("selected", true);
+   		$("#schMajor").val($("#schMajor5").text());
+   		$("#schPointEvg").val($("#schPointEvg5").text());
+   		$("#schEnterYm").val($("#schEnterYm5").val());
+   		$("#schGradYm").val($("#schGradYm5").val());
+   		
+   		$("#schChangeArea").hide();
+		$("#majorArea").show();
+		$("#majorAddArea1").hide();
+		$("#majorAddArea2").hide();
+		
+	}
+	
+	$("#searchArea").show();
+	$("#gradArea").show();
+	$("#schArea").show();
+	$("#nightArea").show();
+	$("#howLongArea").show();
+	
+
+}
+
  
  //학교검색
  function fnSchool() {
  
-    const selectAcademy = $("#selectAcademy option:selected").val();
+    var selectAcademy = $("#selectAcademy option:selected").val();
+    
+    if(selectAcademy == 'mast_list' || selectAcademy == 'doct_list') {
+    	selectAcademy = 'univ_list';
+    }
+    
     const shName = $("#shName").val();
     const uri = 'https://www.career.go.kr/cnet/openapi/getOpenApi?apiKey=817ec3a515c2007eaa94cf32acea21cb&svcType=api&svcCode=SCHOOL&contentType=json&gubun=' + selectAcademy + '&searchSchulNm=' + shName;
     var htmlString = "";
@@ -119,11 +249,19 @@ $("#selectAcademy").change( function() {
  /*[- end of function -]*/
  
  //학과 검색
- function fnMajor() {
+ function fnMajor(type) {
  
-    const majorName = $("#majorName").val();
+    var majorName;
+    
+    if(type == 'main') {
+    	majorName = $("#majorName").val();
+    } else {
+    	majorName = $("#subMajorName").val();
+    }
+    
     const uri = '/recruit/majorList?majorName=' + majorName;
     var majorList;
+    var subMajorList;
     var timehtml;
     var size;
     
@@ -135,16 +273,28 @@ $("#selectAcademy").change( function() {
         success: function (data) {
             
             if(data != null){
-	            majorList = data.majorList;
-	            timehtml = "";
+            	
+            	timehtml = "";
+            	majorList = data.majorList;
 	            size = majorList.length;
 	            
-	            for(var i=0;i<size; i++){
-                	timehtml+='<li class="majLi"><a>'+majorList[i]+'</a></li>';
-                	timehtml+='<input type="hidden" value='+majorList[i]+' >';
-	            }//for		            
-	           
-	            $("#majorList").html(timehtml).trigger('create');
+            	if(type == 'main') {
+            		
+            		for(var i=0;i<size; i++){
+	                	timehtml+='<li class="majLi"><a>'+majorList[i]+'</a></li>';
+	                	timehtml+='<input type="hidden" value='+majorList[i]+' >';
+		            }//for	
+            	
+		            $("#majorList").html(timehtml).trigger('create');
+		            
+		       	} else {
+		       	
+		       		for(var i=0;i<size; i++){
+	                	timehtml+='<li class="subMajLi"><a>'+majorList[i]+'</a></li>';
+	                	timehtml+='<input type="hidden" value='+majorList[i]+' >';
+		            }//for	
+		            $("#subMajorList").html(timehtml).trigger('create');
+		       	}
 	            
 	        }else{
 	          //alert("품절입니다.");
@@ -320,73 +470,85 @@ $("#schPointEvg").keydown(function(){
 
 function registerAcademy() {
 
-	const uri = "/application/updateAcademy";
+	var uri = "/application/updateAcademy";
 	const headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 	const idx = $("#idx").val();
 	const selectAcademy = $("#selectAcademy option:selected").val();
 	const lastAcademy = $("#lastAcademy").val();
+	var academyDTO;
 	
 	if(selectAcademy == 'high_list') {
-		const schName1 = $("#schName1").val();
-   		const schSite1 = $("#schSite1").val();
-   		const schNight1 = $("#schNight1").val();
-   		const schAdmis1 = $("#schAdmis1").val();
-   		const schEnterYm1 = $("#schEnterYm1").val();
-   		const schGradYm1 = $("#schGradYm1").val();
-   		var academyDTO = {"idx": idx, "lastAcademy": lastAcademy
-			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schAdmis1": schAdmis1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
+		var schName1 = $("#schName").val();
+   		var schSite1 = $("#schSite").val();
+   		var schNight1 = $("#schNight").val();
+   		var schAdmis1 = $("#schAdmis option:selected").val();
+   		var schGrad1 = $("#schGrad").val();
+   		var schEnterYm1 = $("#schEnterYm").val();
+   		var schGradYm1 = $("#schGradYm").val();
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis1": schAdmis1
+			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schGrad1": schGrad1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
 			};
    		
 	} else if(selectAcademy == 'colg_list') {
-		const schName2 = $("#schName2").val();
-   		const schSite2 = $("#schSite2").val();
-   		const schNight2 = $("#schNight2").val();
-   		const schPointEvg2 = $("#schPointEvg2").val();
-   		const schMajor2 = $("#schMajor2").val();
-   		const schEnterYm2 = $("#schEnterYm2").val();
-   		const schGradYm2 = $("#schGradYm2").val();
-   		const schSubMajor2 = $("#schSubMajor2").val();
-   		const schSubPointEvg2 = $("#schSubPointEvg2").val();
-   		var academyDTO = {"idx": idx, "lastAcademy": lastAcademy
-			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
+		var schName2 = $("#schName").val();
+   		var schSite2 = $("#schSite").val();
+   		var schNight2 = $("#schNight").val();
+   		var schAdmis2 = $("#schAdmis option:selected").val();
+   		var schGrad2 = $("#schGrad").val();
+   		var schPointEvg2 = $("#schPointEvg").val();
+   		var schMajor2 = $("#schMajor").val();
+   		var schEnterYm2 = $("#schEnterYm").val();
+   		var schGradYm2 = $("#schGradYm").val();
+   		var schSubMajor2 = $("#schSubMajor").val();
+   		var schSubPointEvg2 = $("#schSubPointEvg").val();
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
+			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schGrad2": schGrad2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
 			};
    		
 	} else if(selectAcademy == 'univ_list') {
-		const schName3 = $("#schName3").val();
-   		const schSite3 = $("#schSite3").val();
-   		const schNight3 = $("#schNight3").val();
-   		const schMajor3 = $("#schMajor3").val();
-   		const schPointEvg3 = $("#schPointEvg3").val();
-   		const schEnterYm3 = $("#schEnterYm3").val();
-   		const schGradYm3 = $("#schGradYm3").val();
-   		const schSubMajor3 = $("#schSubMajor3").val();
-   		const schSubPointEvg3 = $("#schSubPointEvg3").val();
-   		var academyDTO = {"idx": idx, "lastAcademy": lastAcademy
-			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
+		var schName3 = $("#schName").val();
+   		var schSite3 = $("#schSite").val();
+   		var schNight3 = $("#schNight option:selected").val();
+   		var schGrad3 = $("#schGrad option:selected").val();
+   		var schAdmis3 = $("#schAdmis option:selected").val();
+   		var schMajor3 = $("#schMajor").val();
+   		var schPointEvg3 = $("#schPointEvg").val();
+   		var schDepType3 = $("#schDepType option:selected").val();
+   		var schEnterYm3 = $("#schEnterYm").val();
+   		var schGradYm3 = $("#schGradYm").val();
+   		var schSubMajor3 = $("#schSubMajor").val();
+   		var schSubPointEvg3 = $("#schSubPointEvg").val();
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3
+			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schAdmis3": schAdmis3, "schGrad3": schGrad3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3
+			, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
 			};
 	
 	} else if(selectAcademy == 'mast_list') {
-		const schName4 = $("#schName4").val();
-   		const schSite4 = $("#schSite4").val();
-   		const schNight4 = $("#schNight4").val();
-   		const schEnterYm4 = $("#schEnterYm4").val();
-   		const schGradYm4 = $("#schGradYm4").val();
-   		const schMajor4 = $("#schMajor4").val();
-   		const schPointEvg4 = $("#schPointEvg4").val();
-   		var academyDTO = {"idx": idx, "lastAcademy": lastAcademy
-			, "schName4": schName4, "schSite4": schSite4, "schNight4": schNight4, "schEnterYm4": schEnterYm4, "schGradYm4": schGradYm4, "schMajor4": schMajor4, "schPointEvg4": schPointEvg4
+		var schName4 = $("#schName").val();
+   		var schSite4 = $("#schSite").val();
+   		var schNight4 = $("#schNight").val();
+   		var schAdmis4 = $("#schAdmis option:selected").val();
+   		var schGrad4 = $("#schGrad").val();
+   		var schEnterYm4 = $("#schEnterYm").val();
+   		var schGradYm4 = $("#schGradYm").val();
+   		var schMajor4 = $("#schMajor").val();
+   		var schPointEvg4 = $("#schPointEvg").val();
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis4": schAdmis4
+			, "schName4": schName4, "schSite4": schSite4, "schNight4": schNight4, "schGrad4": schGrad4, "schEnterYm4": schEnterYm4, "schGradYm4": schGradYm4, "schMajor4": schMajor4, "schPointEvg4": schPointEvg4
 			};
    		
 	} else if(selectAcademy == 'doct_list') {
-		const schName5 = $("#schName5").val();
-   		const schSite5 = $("#schSite5").val();
-   		const schNight5 = $("#schNight5").val();
-   		const schEnterYm5 = $("#schEnterYm5").val();
-   		const schGradYm5 = $("#schGradYm5").val();
-   		const schMajor5 = $("#schMajor5").val();
-   		const schPointEvg5 = $("#schPointEvg5").val();
-   		var academyDTO = {"idx": idx, "lastAcademy": lastAcademy
-			, "schName5": schName5, "schSite5": schSite5, "schNight5": schNight5, "schEnterYm5": schEnterYm5, "schGradYm5": schGradYm5, "schMajor5": schMajor5, "schPointEvg5": schPointEvg5
+		var schName5 = $("#schName").val();
+   		var schSite5 = $("#schSite").val();
+   		var schNight5 = $("#schNight").val();
+   		var schAdmis5 = $("#schAdmis option:selected").val();
+   		var schGrad5 = $("#schGrad").val();
+   		var schEnterYm5 = $("#schEnterYm").val();
+   		var schGradYm5 = $("#schGradYm").val();
+   		var schMajor5 = $("#schMajor").val();
+   		var schPointEvg5 = $("#schPointEvg").val();
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis5": schAdmis5
+			, "schName5": schName5, "schSite5": schSite5, "schNight5": schNight5, "schGrad5": schGrad5, "schEnterYm5": schEnterYm5, "schGradYm5": schGradYm5, "schMajor5": schMajor5, "schPointEvg5": schPointEvg5
 			};
 	}
 	
@@ -403,47 +565,256 @@ function registerAcademy() {
 				alert("저장에 실패하였습니다.");
 				return false;
 			}
-			//printSchInfo(selectAcademy);
 			alert("저장되었습니다.");
 			
 			if(selectAcademy == 'high_list') {
 				
+				$('#high_list').remove();
+				htmlString+= "<li id='high_list'>";
+            	htmlString+= "	<dl>";
+            	htmlString+= "		<dt>";
+            	htmlString+= "			<span class='gray3'>고등학교</span>";
+				htmlString+= "		</dt>";
+				htmlString+= "		<dd>";						
+				htmlString+= "			<span class='sublist' id='schName1'>"+schName1+"</span>";
+				htmlString+= "			<span class='sublist' id='schSite1'>"+schSite1+"</span>";
+				htmlString+= "			<span class='sublist' id='schNight1'>"+schNight1+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm1+" "+schAdmis1+" ~ "+schGradYm1+" "+schGrad1+"</span>";
+				htmlString+= "		</dd>";
+				htmlString+= "		<dd>";
+				htmlString+= '			<span><a href="javascript:editAcademy(\'high_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'high_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
+				
 			} else if(selectAcademy == 'colg_list') {
+				
+				$('#colg_list').remove();
+				htmlString+= "<li id='colg_list'>";
+            	htmlString+= "	<dl>";
+            	htmlString+= "		<dt>";
+            	htmlString+= "			<span class='gray3'>전문대학</span>";
+				htmlString+= "		</dt>";
+				htmlString+= "		<dd>";						
+				htmlString+= "			<span class='sublist' id='schName2'>"+schName2+"</span>";
+				htmlString+= "			<span class='sublist' id='schSite2'>"+schSite2+"</span>";
+				htmlString+= "			<span class='sublist' id='schNight2'>"+schNight2+"</span>";
+				htmlString+= "			<span class='sublist' id='schMajor2'>"+schMajor2+"</span>";
+				htmlString+= "			<span class='sublist' id='schPointEvg2'>"+schPointEvg2+"</span>";
+				htmlString+= "			<span class='sublist' id='schSubMajor2'>"+schSubMajor2+"</span>";
+				htmlString+= "			<span class='sublist' id='schSubPointEvg2'>"+schSubPointEvg2+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm2+" "+schAdmis2+" ~ "+schGradYm2+" "+schGrad2+"</span>";
+				htmlString+= "		</dd>";
+				htmlString+= "		<dd>";
+				htmlString+= '			<span><a href="javascript:editAcademy(\'colg_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'colg_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
 			
 			} else if(selectAcademy == 'univ_list') {
 			
-				htmlString+= "<li>";
+				$('#univ_list').remove();
+				htmlString+= "<li id='univ_list'>";
             	htmlString+= "	<dl>";
             	htmlString+= "		<dt>";
-            	htmlString+= "			<span class='gray3'>학사</span>";
+            	htmlString+= "			<span class='gray3'>대학교</span>";
 				htmlString+= "		</dt>";
 				htmlString+= "		<dd>";						
-				htmlString+= "			<span class='sublist'>"+schName3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schSite3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schNight3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schMajor3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schPointEvg3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schSubMajor3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schSubPointEvg3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm3+" ~ "+schGradYm3+"</span>
+				htmlString+= "			<span class='sublist' id='schName3'>"+schName3+"</span>";
+				htmlString+= "			<span class='sublist' id='schSite3'>"+schSite3+"</span>";
+				htmlString+= "			<span class='sublist' id='schNight3'>"+schNight3+"</span>";
+				htmlString+= "			<span class='sublist' id='schMajor3'>"+schMajor3+"</span>";
+				htmlString+= "			<span class='sublist' id='schPointEvg3'>"+schPointEvg3+"</span>";
+				htmlString+= "			<span class='sublist' id='schDepType3'>"+schDepType3+"</span>";
+				htmlString+= "			<span class='sublist' id='schSubMajor3'>"+schSubMajor3+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm3+" "+schAdmis3+" ~ "+schGradYm3+" "+schGrad3+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
-				htmlString+= "			<span><a href='javascript:editAcademy(univ);'><img src='/img/ico_edit.png' alt='수정'/></a></span>";
-				htmlString+= "			<span><a href='javascript:deleteAcademy(univ);'><img src='/img/ico_delete.png' alt='삭제'/></a></span>"; 
-				htmlString+= "		</dd><br class="clear">
-				htmlString+= "	</dl>									
-				htmlString+= "</li>
+				htmlString+= '			<span><a href="javascript:editAcademy(\'univ_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'univ_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
 			
 			} else if(selectAcademy == 'mast_list') {
 			
+				$('#mast_list').remove();
+				htmlString+= "<li id='mast_list'>";
+            	htmlString+= "	<dl>";
+            	htmlString+= "		<dt>";
+            	htmlString+= "			<span class='gray3'>석사</span>";
+				htmlString+= "		</dt>";
+				htmlString+= "		<dd>";						
+				htmlString+= "			<span class='sublist' id='schName4'>"+schName4+"</span>";
+				htmlString+= "			<span class='sublist' id='schSite4'>"+schSite4+"</span>";
+				htmlString+= "			<span class='sublist' id='schNight4'>"+schNight4+"</span>";
+				htmlString+= "			<span class='sublist' id='schMajor4'>"+schMajor4+"</span>";
+				htmlString+= "			<span class='sublist' id='schPointEvg4'>"+schPointEvg4+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm4+" "+schAdmis4+" ~ "+schGradYm4+" "+schGrad4+"</span>";
+				htmlString+= "		</dd>";
+				htmlString+= "		<dd>";
+				htmlString+= '			<span><a href="javascript:editAcademy(\'mast_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'mast_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
+			
 			} else if(selectAcademy == 'doct_list') {
 			
+				$('#doct_list').remove();
+				htmlString+= "<li id='doct_list'>";
+            	htmlString+= "	<dl>";
+            	htmlString+= "		<dt>";
+            	htmlString+= "			<span class='gray3'>박사</span>";
+				htmlString+= "		</dt>";
+				htmlString+= "		<dd>";						
+				htmlString+= "			<span class='sublist' id='schName5'>"+schName5+"</span>";
+				htmlString+= "			<span class='sublist' id='schSite5'>"+schSite5+"</span>";
+				htmlString+= "			<span class='sublist' id='schNight5'>"+schNight5+"</span>";
+				htmlString+= "			<span class='sublist' id='schMajor5'>"+schMajor5+"</span>";
+				htmlString+= "			<span class='sublist' id='schPointEvg5'>"+schPointEvg5+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm5+" "+schAdmis5+" ~ "+schGradYm5+" "+schGrad5+"</span>";
+				htmlString+= "		</dd>";
+				htmlString+= "		<dd>";
+				htmlString+= '			<span><a href="javascript:editAcademy(\'doct_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'doct_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
+				
 			}
 			
 			$("#con-list").append(htmlString).trigger('create');
 			
 		},
-		error: function(xhr, status, error) {
+		error: function(request, status, error) {
+			alert("에러가 발생하였습니다.");
+			return false;
+		}
+	});
+	
+}
+/*[- end of function -]*/
+
+function deleteAcademy(selectAcademy) {
+
+	var uri = "/application/updateAcademy";
+	const headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+	const idx = $("#idx").val();
+	const lastAcademy = $("#lastAcademy").val();
+	var academyDTO;
+	
+	if(selectAcademy == 'high_list') {
+		const schName1 = "";
+   		const schSite1 = "";
+   		const schNight1 = "";
+   		const schAdmis1 = "";
+   		const schGrad1 = "";
+   		const schEnterYm1 = "";
+   		const schGradYm1 = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis1": schAdmis1
+			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schGrad1": schGrad1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
+			};
+   		
+	} else if(selectAcademy == 'colg_list') {
+		const schName2 = "";
+   		const schSite2 = "";
+   		const schNight2 = "";
+   		const schAdmis2 = "";
+   		const schGrad2 = "";
+   		const schPointEvg2 = "";
+   		const schMajor2 = "";
+   		const schEnterYm2 = "";
+   		const schGradYm2 = "";
+   		const schSubMajor2 = "";
+   		const schSubPointEvg2 = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
+			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schGrad2": schGrad2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
+			};
+   		
+	} else if(selectAcademy == 'univ_list') {
+		const schName3 = "";
+   		const schSite3 = "";
+   		const schNight3 = "";
+   		const schGrad3 = "";
+   		const schAdmis3 = "";
+   		const schMajor3 = "";
+   		const schPointEvg3 = "";
+   		const schDepType3 = "";
+   		const schEnterYm3 = "";
+   		const schGradYm3 = "";
+   		const schSubMajor3 = "";
+   		const schSubPointEvg3 = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3
+			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schAdmis3": schAdmis3, "schGrad3": schGrad3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3
+			, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
+			};
+	
+	} else if(selectAcademy == 'mast_list') {
+		const schName4 = "";
+   		const schSite4 = "";
+   		const schNight4 = "";
+   		const schAdmis4 = "";
+   		const schGrad4 = "";
+   		const schEnterYm4 = "";
+   		const schGradYm4 = "";
+   		const schMajor4 = "";
+   		const schPointEvg4 = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis4": schAdmis4
+			, "schName4": schName4, "schSite4": schSite4, "schNight4": schNight4, "schGrad4": schGrad4, "schEnterYm4": schEnterYm4, "schGradYm4": schGradYm4, "schMajor4": schMajor4, "schPointEvg4": schPointEvg4
+			};
+   		
+	} else if(selectAcademy == 'doct_list') {
+		const schName5 = "";
+   		const schSite5 = "";
+   		const schNight5 = "";
+   		const schAdmis5 = "";
+   		const schGrad5 = "";
+   		const schEnterYm5 = "";
+   		const schGradYm5 = "";
+   		const schMajor5 = "";
+   		const schPointEvg5 = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis5": schAdmis5
+			, "schName5": schName5, "schSite5": schSite5, "schNight5": schNight5, "schGrad5": schGrad5, "schEnterYm5": schEnterYm5, "schGradYm5": schGradYm5, "schMajor5": schMajor5, "schPointEvg5": schPointEvg5
+			};
+	}
+	
+	var htmlString = "";
+	
+	$.ajax({
+		url: uri,
+		type: "POST",
+		headers: headers,
+		dataType: "json",
+		data: JSON.stringify(academyDTO),
+		success: function(response) {
+			if (response.result == false) {
+				alert("삭제에 실패하였습니다.");
+				return false;
+			}
+			alert("삭제되었습니다.");
+			
+			if(selectAcademy == 'high_list') {
+				$("#high_list").remove();
+				
+			} else if(selectAcademy == 'colg_list') {
+				$("#colg_list").remove();
+			
+			} else if(selectAcademy == 'univ_list') {
+				$("#univ_list").remove();
+			
+			} else if(selectAcademy == 'mast_list') {
+				$("#mast_list").remove();
+			
+			} else if(selectAcademy == 'doct_list') {
+				$("#doct_list").remove();
+			}
+			
+			
+		},
+		error: function(request, status, error) {
 			alert("에러가 발생하였습니다.");
 			return false;
 		}
@@ -469,3 +840,4 @@ function printSchInfo(selectAcademy) {
 }
 /*[- end of function -]*/
      
+/*]]>*/

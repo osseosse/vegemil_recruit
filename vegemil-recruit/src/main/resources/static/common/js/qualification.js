@@ -104,7 +104,7 @@
 });
 /*[- end of function -]*/
 
-$(".ls1").keyup(function() {
+$(".ls1").on("keyup", function(e){
 		
     if( this.value.length > 10){
          this.value = this.value.substr(0, 10);
@@ -128,7 +128,7 @@ $(".ls1").keyup(function() {
  });
  /*[- end of function -]*/
 
- $(".ls2").keyup(function() {
+ $(".ls2").on("keyup", function(e){
 		
     if( this.value.length > 8){
          this.value = this.value.substr(0, 8);

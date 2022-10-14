@@ -38,7 +38,7 @@
 							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${app.idx} ]])">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
-						<form th:action="@{/application/registerCareer}" th:object="${app}" method="post" >
+						<form th:action="@{/application/registerCareer}" th:object="${app}" method="post" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{idx}" />
 							<!-- (1)인턴경력 -->
 							<p class="f23 fw600 pr">인턴경력</p>
@@ -98,7 +98,7 @@
 												<li>
 													<input type="text" th:id="hisEDate" th:name="hisEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
 												</li>
-												<li class="ml30 checkStyle"><a href="#"><input type="checkbox" id="wk02" th:name="hisIng"  /><label for="wk02"><span></span>재직중</label></a></li>
+												<li class="ml30 checkStyle"><a href="#"><label><span><input type="checkbox" th:name="hisIng"  /></span>재직중</label></a></li>
 											</ul>
 										</div>
 										<div class="col-lg-6 mt10">
@@ -161,8 +161,8 @@
 											<li class="f14">파일업로드</li>
 											<li>
 												<div class="filebox w600">
-												<input class="upload-name" value="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재" placeholder="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재">
-												<label for="file">파일선택</label> <input type="file" th:field="*{portFile}">
+												<input class="upload-name" th:value="*{portFile}" placeholder="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재">
+												<label for="portFile">파일선택</label><input type="file" accept=".pdf,.zip" th:field="*{portFile}">
 												</div>
 											</li>
 										</ul>
@@ -200,5 +200,87 @@
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
 <script th:src="@{/common/js/career.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(document).ready(function(){
+		
+	var hisCount = /*[[ ${app.hisCount} ]]*/;
+	var hisIng1 = /*[[ ${app.hisIng1} ]]*/;
+	var hisIng2 = /*[[ ${app.hisIng2} ]]*/;
+	var hisIng3 = /*[[ ${app.hisIng3} ]]*/;
+	var internIng = /*[[ ${app.internIng} ]]*/;
+	
+	//인턴
+	if(internIng == '1') {
+		$("input:checkbox[id='internIng']").prop("checked", false);
+	}
+	$("input[name='internName']").val(/*[[ ${app.internName} ]]*/);
+	$("input[name='internSDate']").val(/*[[ ${app.internSDate} ]]*/);
+	$("input[name='internEDate']").val(/*[[ ${app.internEDate} ]]*/);
+	$("input[name='internDuty']").val(/*[[ ${app.internDuty} ]]*/);
+	
+	if(hisCount == 1) {
+		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
+		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", false);
+		}
+		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
+		$("input[name='hisEDate1']").val(/*[[ ${app.hisEDate1} ]]*/);
+		$("#hisContent1").val(/*[[ ${app.hisContent1} ]]*/);
+		$("input[name='hisDuty1']").val(/*[[ ${app.hisDuty1} ]]*/);
+		$("input[name='hisPay1']").val(/*[[ ${app.hisPay1} ]]*/);
+	} else if(hisCount == 2) {
+		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
+		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", false);
+		}
+		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
+		$("input[name='hisEDate1']").val(/*[[ ${app.hisEDate1} ]]*/);
+		$("#hisContent1").val(/*[[ ${app.hisContent1} ]]*/);
+		$("input[name='hisDuty1']").val(/*[[ ${app.hisDuty1} ]]*/);
+		$("input[name='hisPay1']").val(/*[[ ${app.hisPay1} ]]*/);
+		
+		$("input[name='hisCoName2']").val(/*[[ ${app.hisCoName2} ]]*/);
+		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", false);
+		}
+		$("input[name='hisSDate2']").val(/*[[ ${app.hisSDate2} ]]*/);
+		$("input[name='hisEDate2']").val(/*[[ ${app.hisEDate2} ]]*/);
+		$("#hisContent2").val(/*[[ ${app.hisContent2} ]]*/);
+		$("input[name='hisDuty2']").val(/*[[ ${app.hisDuty2} ]]*/);
+		$("input[name='hisPay2']").val(/*[[ ${app.hisPay2} ]]*/);
+	} else if(hisCount == 3) {
+		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
+		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", false);
+		}
+		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
+		$("input[name='hisEDate1']").val(/*[[ ${app.hisEDate1} ]]*/);
+		$("#hisContent1").val(/*[[ ${app.hisContent1} ]]*/);
+		$("input[name='hisDuty1']").val(/*[[ ${app.hisDuty1} ]]*/);
+		$("input[name='hisPay1']").val(/*[[ ${app.hisPay1} ]]*/);
+		$("input[name='hisCoName2']").val(/*[[ ${app.hisCoName2} ]]*/);
+		if(hisIng2 == '1') {
+			$("input:checkbox[id='hisIng2']").prop("checked", false);
+		}
+		$("input[name='hisSDate2']").val(/*[[ ${app.hisSDate2} ]]*/);
+		$("input[name='hisEDate2']").val(/*[[ ${app.hisEDate2} ]]*/);
+		$("#hisContent2").val(/*[[ ${app.hisContent2} ]]*/);
+		$("input[name='hisDuty2']").val(/*[[ ${app.hisDuty2} ]]*/);
+		$("input[name='hisPay2']").val(/*[[ ${app.hisPay2} ]]*/);
+		$("input[name='hisCoName3']").val(/*[[ ${app.hisCoName3} ]]*/);
+		if(hisIng3 == '1') {
+			$("input:checkbox[id='hisIng3']").prop("checked", false);
+		}
+		$("input[name='hisSDate3']").val(/*[[ ${app.hisSDate3} ]]*/);
+		$("input[name='hisEDate3']").val(/*[[ ${app.hisEDate3} ]]*/);
+		$("#hisContent3").val(/*[[ ${app.hisContent3} ]]*/);
+		$("input[name='hisDuty3']").val(/*[[ ${app.hisDuty3} ]]*/);
+		$("input[name='hisPay3']").val(/*[[ ${app.hisPay3} ]]*/);
+	}
+		
+});
+/*]]>*/
+</script>
 </body>
 </html>

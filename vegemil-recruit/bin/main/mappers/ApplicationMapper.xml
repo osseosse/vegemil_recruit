@@ -84,17 +84,30 @@
 	<update id="updateAcademy" parameterType="com.vegemil.domain.AcademyInfoDTO">
 		UPDATE R_Recruit
 		SET
-			  last_academy = #{lastAcademy}, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
-			, sch_admis1 = #{schAdmis1}, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}, sch_point_evg1 = #{schPointEvg1}
+			  last_academy = #{lastAcademy}
+			<if test="selectAcademy == 'high_list'">
+			, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
+			, sch_admis1 = #{schAdmis1}, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
+			</if>
+			<if test="selectAcademy == 'colg_list'">
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
-			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
-			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_transfer3=#{schTransfer3} , sch_admis3 = #{schAdmis3}, sch_major3 = #{schMajor3}
-			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_sub_admis3=#{schSubAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
+			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}
+			</if>
+			<if test="selectAcademy == 'univ_list'">
+			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
+			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}
+			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_admis3=#{schAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
+			</if>
+			<if test="selectAcademy == 'mast_list'">
 			, sch_grad4 = #{schGrad4}, sch_enter_ym4 = #{schEnterYm4}, sch_dep_type4=#{schDepType4}, sch_sub_admis4=#{schSubAdmis4}, sch_sub_major4=#{schSubMajor4}
 			, sch_grad_ym4 = #{schGradYm4}, sch_name4 = #{schName4}, sch_admis4 = #{schAdmis4}, sch_major4 = #{schMajor4}, sch_site4 = #{schSite4}, sch_sub_point_evg4=#{schSubPointEvg4}
-			, sch_night4 = #{schNight4}, sch_point_evg4 = #{schPointEvg4}, sch_grad5 = #{schGrad5}, sch_enter_ym5 = #{schEnterYm5}, sch_grad_ym5 = #{schEnterYm5}
+			, sch_night4 = #{schNight4}, sch_point_evg4 = #{schPointEvg4}
+			</if>
+			<if test="selectAcademy == 'doct_list'">
+			, sch_grad5 = #{schGrad5}, sch_enter_ym5 = #{schEnterYm5}, sch_grad_ym5 = #{schEnterYm5}
 			, sch_name5 = #{schName5}, sch_admis5 = #{schAdmis5}, sch_dep_type5=#{schDepType5}, sch_major5 = #{schMajor5}, sch_site5 = #{schSite5}, sch_night5 = #{schNight5}
 			, sch_point_evg5 = #{schPointEvg5}, sch_sub_admis5 = #{schSubAdmis5}, sch_sub_major5 = #{schSubMajor5}, sch_sub_point_evg5 = #{schSubPointEvg5}
+			</if>
 			, update_date = NOW()
 		WHERE
 			idx = #{idx} and mem_no= #{memNo}
@@ -132,7 +145,10 @@
 			, his_content1=#{hisContent1}, his_duty1=#{hisDuty1}, his_pay1=#{hisPay1}, his_co_name2=#{hisCoName2}, his_ing2=#{hisIng2}, his_s_date2=#{hisSDate2}
 			, his_e_date2=#{hisEDate2}, his_content2=#{hisContent2}, his_duty2=#{hisDuty2}, his_pay2=#{hisPay2}, his_co_name3=#{hisCoName3}, his_ing3=#{hisIng3}
 			, his_s_date3=#{hisSDate3}, his_e_date3=#{hisEDate3}, his_content3=#{hisContent3}, his_duty3=#{hisDuty3}, his_pay3=#{hisPay3}
-			, port_file=#{portFile}, port_url=#{portUrl}, update_date = NOW()
+			<if test="portFile != null and portFile != ''">
+			, port_file=#{portFile}
+			</if>
+			, port_url=#{portUrl}, update_date = NOW()
 		WHERE
 			idx = #{idx} and mem_no= #{memNo}
 	</update>
@@ -193,7 +209,7 @@
 	
 	<select id="selectApplication" parameterType="com.vegemil.domain.ApplicationDTO" resultType="com.vegemil.domain.ApplicationDTO">
 		SELECT
-			idx, setup_th, setup_title, submit_ok, DATE_FORMAT(update_date,'%Y-%m') as update_date
+			idx, setup_th, setup_title, submit_ok, DATE_FORMAT(submit_date,'%Y-%m-%d') as submit_date
 		FROM
 			R_Recruit
 		WHERE
