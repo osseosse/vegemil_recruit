@@ -622,10 +622,6 @@ select.base {bordeR:1px solid #E6E6E6; font-size:14px; height:40px; width:74px; 
 select.base::-ms-expand{display:none;/*for IE10,11*/}
 select.base.w180 {width:180px}
 select.base option {text-align:left; padding:112px 20px; border:1px solid red; height:150px}
-select.basic {bordeR:1px solid #E6E6E6; font-size:14px; height:40px; width:74px;  text-align:left; padding-left:17px;
--webkit-appearance:none; /* for chrome */-moz-appearance:none; /*for firefox*/appearance:none;  background:url('../../img/ico_sel_arrow.gif') no-repeat right  17px }
-select.basic.w180 {width:180px}
-select.bassic option {text-align:left; padding:112px 20px; border:1px solid red; height:150px}
 
 
 /*
@@ -732,10 +728,8 @@ div.popBasePW p.btn_pop_close {position:absolute; right:-50px; top:-50px; margin
 ul.ss_ul {position:relative; overflow-y:scroll; height:160px; width:100%; border:1px solid #E6E6E6}
 ul.ss_ul li a {font-size:14px;  color:#aaa; font-weight:300; padding:5px 5px; display:inline-block; width:100%}
 ul.ss_ul li a:hover {background:#999; color:#fff}
-ul.ss_ul li.schLi.active {background:#999; }
-ul.ss_ul li.schLi.active a {color:#fff}
-ul.ss_ul li.majLi.active {background:#999; }
-ul.ss_ul li.majLi.active a {color:#fff}
+ul.ss_ul li.active {background:#999; }
+ul.ss_ul li.active a {color:#fff}
 .ss_inType {bordeR:1px solid #E6E6E6; border-right:0;  padding:8px 5px; width:480px; font-size:14px; color:#333 }
 .btn_pop_close {position:absolute; right:0px; top:0px; margin:0; padding:0; max-width:90px; width:50px}
 .search {position:relative; }
