@@ -1,5 +1,7 @@
 package com.vegemil.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class PersonalInfoDTO extends ApplicationDTO {
 	
+	private MultipartFile fileName;
 	//개인정보
 	private String nameHan;
 	private String nameEng;

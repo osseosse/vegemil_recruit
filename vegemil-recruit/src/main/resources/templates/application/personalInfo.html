@@ -32,7 +32,7 @@
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
-							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerApplication([[ ${app.idx} ]])">임시저장</a></p>
+							<p class="btn_type03 mt10"><a onclick="javascript:registerApplication();">임시저장</a></p>
 						</div>
 						<script>
 							$(document).ready(function(){
@@ -40,7 +40,7 @@
 							});
 						</script>
 						<div class="wrap860 f-right" >
-							<form class="fam-repeater" th:action="@{/application/registerPersonalInfo}" th:object="${app}" method="post" enctype="multipart/form-data" >
+							<form class="fam-repeater" id="personalform" th:action="@{/application/registerPersonalInfo}" th:object="${app}" method="post" enctype="multipart/form-data" >
 							<!--/* update의 경우 서버로 전달할 게시글 번호 (PK) */-->
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
@@ -99,10 +99,10 @@
 									<div class="col-lg-4" >
 										<div class="photoBox">
 											<div class="IDpicture">
-												<img th:if="*{photo != null and photo != ''}" th:src="|@{/recruit/img/}*{photo}|" id="photo" />
+												<img th:if="*{photo != null and photo != ''}" th:src="|/display?filename=*{photo}|" id="photo" />
 												<img th:unless="*{photo != null and photo != ''}" th:src="@{/img/photo_sample.jpg}" id="photo" />
 											</div>
-											<input type="file" name="fileName" class="real-upload" accept="image/*" style="display:none;">
+											<input type="file" id="fileName" name="fileName" th:value=*{photo} class="real-upload" accept="image/*" style="display:none;">
 										</div>
 										<p class="f12 mt10 gray">사진사이즈 : 120px X 160px </p>
 									</div>

@@ -70,7 +70,11 @@
 		UPDATE R_Recruit
 		SET
 			  join_company= #{joinCompany}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}, name_han = #{nameHan}
-			, sex = #{sex}, name_eng = #{nameEng}, photo = #{photo}, zip1 = #{zip1}, addr11 = #{addr11}, addr12 = #{addr12}
+			, sex = #{sex}, name_eng = #{nameEng}
+			<if test="photo != null and photo != ''">
+			, photo = #{photo}
+			</if>
+			, zip1 = #{zip1}, addr11 = #{addr11}, addr12 = #{addr12}
 			, bohun = #{bohun}, bohun_no = #{bohunNo}, handicap = #{handicap}, fam_count = #{famCount}
 			, fam_con1 = #{famCon1}, fam_name1 = #{famName1}, fam_age1 = #{famAge1}, fam_con2 = #{famCon2}
 			, fam_name2 = #{famName2}, fam_age2 = #{famAge2}, fam_con3 = #{famCon3}, fam_name3 = #{famName3}
