@@ -29,8 +29,10 @@
 								</span></p>
 								<div class="r-box mt20 bgHover" th:if="${not #lists.isEmpty( resumeList )}" th:each="resume, i : ${resumeList}">
 									<div class="info01">
-										<span class="r-blue" th:if="${resume.submitOk.equals('1')}">지원완료</span><span class="r-black" th:unless="${resume.submitOk.equals('1')}">임시저장</span><span class="f16">제출일</span>
-										<span class="ac f16 fw300 gray" th:if="${resume.submitDate} != null and ${resume.submitDate} != ''" th:text="${resume.submitDate}"></span>
+										<span class="r-blue" th:if="${resume.submitOk.equals('1')}">지원완료</span>
+										<span class="r-black" th:unless="${resume.submitOk.equals('1')}">임시저장</span>
+										<span class="f16" th:if="${resume.submitOk.equals('1')}">제출일</span>
+										<span class="ac f16 fw300 gray" th:if="${resume.submitOk.equals('1')} and ${resume.submitDate} != null" th:text="${resume.submitDate}"></span>
 									</div>
 									<div class="info02">
 										<dl class="mt20">
@@ -464,7 +466,7 @@
 									<dl class="mt20">
 										<dt><span class="f20 fw600 mt20 line-height140" th:text="${qna.rTitle}"></span></dt>
 										<dd>
-											<a class="btn_reviewBox" th:href="|@{/mypage/qna}?idx=${qna.qId}|">
+											<a class="btn_reviewBox" th:href="|@{/mypage/qna}?qId=${qna.qId}|">
 												<ul>
 													<li class="btn_review ">문의 보기</li>
 													<li class="btn_review_arrow ml10"></li>

@@ -149,7 +149,7 @@ function execPostcode() {
 	 });
 	 /*[- end of function -]*/
      
-     function registerApplication() {
+     function updatePersonalInfo() {
 
    		const uri = "/application/updatePersonalInfo";
    		const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};

@@ -225,7 +225,7 @@
 				CASE
 			        WHEN submit_date IS NULL THEN NULL
 			        ELSE
-				 		 DATE_FORMAT(submit_date,'%Y-%m')
+				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
 		 		, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
@@ -262,7 +262,7 @@
 				CASE
 			        WHEN submit_date IS NULL THEN NULL
 			        ELSE
-				 		 DATE_FORMAT(submit_date,'%Y-%m')
+				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
 		 		, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1

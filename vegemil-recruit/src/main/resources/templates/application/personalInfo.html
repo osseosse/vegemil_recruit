@@ -32,7 +32,7 @@
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
-							<p class="btn_type03 mt10"><a onclick="javascript:registerApplication();">임시저장</a></p>
+							<p class="btn_type03 mt10"><a onclick="javascript:updatePersonalInfo();">임시저장</a></p>
 						</div>
 						<script>
 							$(document).ready(function(){
@@ -169,8 +169,7 @@
 							<div class="r-box mt20">
 								<input type="hidden" th:field="*{famCount}"/>
 								<div data-repeater-list="fam">
-                                    <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.famCount)}">
-									<div class="row mt10">
+                                    <div data-repeater-item class="row mt10" th:each="num : ${#numbers.sequence(1,app.famCount)}">
 										<div class="col-lg-3" >
 											<ul class="s-d-2s">
 												<li class="f14"><span class="red">*</span>관계</li>
@@ -194,16 +193,13 @@
 												<li><input type="text" id="famName" name="famName" class="inType01 w110" ></li>
 											</ul>
 										</div>
-										<div class="col-lg-4" >
+										<div class="col-lg-6" >
 											<ul class="s-d-2s">
 												<li class="f14">연령(만)</li>
 												<li class="ml10"><input type="text" id="famAge" name="famAge" class="inType01 w80" ></li>
 											</ul>
+											<button type="button" class="inputDel" value="삭제"  data-repeater-delete ><img th:src="@{/img/ico_inputDel.png}" alt="삭제"/></button>
 										</div>
-										<div class="col-lg-2">
-											<button class="inputDel" type="button" value="삭제"  data-repeater-delete ><img th:src="@{/img/ico_inputDel.png}" alt="삭제"/></button>
-										</div>
-									</div>
 									</div>
 								</div>
 							</div>									

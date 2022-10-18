@@ -52,7 +52,7 @@
 		FROM
 			r_recruit_qna
 		WHERE
-			r_id = #{rId} and mem_no = #{memNo}
+			q_id = #{qId} and mem_no = #{memNo}
 	</select>
 
 	<update id="updateQna" parameterType="com.vegemil.domain.QnaDTO">
@@ -62,7 +62,7 @@
 			, r_title = #{rTitle}
 			, r_content = #{rContent}
 		WHERE
-			r_id = #{rId} and mem_no = #{memNo}
+			q_id = #{qId} and mem_no = #{memNo}
 	</update>
 
 	<update id="deleteQna" parameterType="long">
@@ -71,7 +71,7 @@
 			  r_delete_yn = 'Y'
 			, r_delete_date = NOW()
 		WHERE
-			r_id = #{rId} and mem_no = #{memNo}
+			q_id = #{qId} and mem_no = #{memNo}
 	</update>
 
 	<select id="selectQnaList" parameterType="long" resultType="com.vegemil.domain.QnaDTO">

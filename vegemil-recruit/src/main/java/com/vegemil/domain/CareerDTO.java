@@ -1,5 +1,7 @@
 package com.vegemil.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class CareerDTO extends ApplicationDTO {
 	
+	private MultipartFile fileName;
 	//인턴
 	private String internName;
 	private String internIng;

@@ -365,6 +365,37 @@ public class ApplicationController extends UiUtils {
 		return "application/qualification";
 	}
 	
+	@RequestMapping(value = { "/application/updateQualification" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public @ResponseBody JsonObject updateQualification(QualificationDTO params,
+														HttpServletResponse response, HttpServletRequest request, Authentication authentication) {
+
+		JsonObject jsonObj = new JsonObject();
+
+		try {
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();
+			if(member != null) {
+			
+				params.setEmailAddr(member.getEmailAddr());
+				params.setMemName(member.getMemName());
+				params.setMemNo(member.getMemNo());
+				params.setPhoneNo(member.getPhoneNo());
+		        
+		        boolean isRegistered = applicationService.registerQualification(params);
+				jsonObj.addProperty("result", isRegistered);
+				
+			}
+			
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+
+		return jsonObj;
+	}
+	
 	@PostMapping(value = "/application/registerQualification")
 	public String registerQualification(@ModelAttribute("app") final QualificationDTO application, 
 			BindingResult bindingResult, Model model, 
@@ -447,6 +478,50 @@ public class ApplicationController extends UiUtils {
         }
 		
 		return "application/career";
+	}
+	
+	@RequestMapping(value = { "/application/updateCareer" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public @ResponseBody JsonObject updateCareer(CareerDTO params,
+														HttpServletResponse response, HttpServletRequest request, Authentication authentication) {
+
+		JsonObject jsonObj = new JsonObject();
+
+		try {
+			
+			if(params.getFileName() != null) {
+				String originalName = params.getFileName().getOriginalFilename();
+				if(!"".equals(originalName)) {
+					String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
+					String uuid = UUID.randomUUID().toString();
+					String savefileName = uuid + "_" + file;
+					Path savePath = Paths.get(uploadPath + "/port/" + savefileName);
+					
+					params.getFileName().transferTo(savePath);
+					params.setPortFile(savefileName);
+				}
+			}
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();
+			if(member != null) {
+			
+				params.setEmailAddr(member.getEmailAddr());
+				params.setMemName(member.getMemName());
+				params.setMemNo(member.getMemNo());
+				params.setPhoneNo(member.getPhoneNo());
+		        
+		        boolean isRegistered = applicationService.registerCareer(params);
+				jsonObj.addProperty("result", isRegistered);
+				
+			}
+			
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+
+		return jsonObj;
 	}
 	
 	@PostMapping(value = "/application/registerCareer")
@@ -545,6 +620,38 @@ public class ApplicationController extends UiUtils {
         }
 		
 		return "application/introduce";
+	}
+	
+	@RequestMapping(value = { "/application/updateIntroduce" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public @ResponseBody JsonObject updateIntroduce(IntroduceDTO params,
+												HttpServletResponse response, HttpServletRequest request, Authentication authentication) {
+
+		JsonObject jsonObj = new JsonObject();
+
+		try {
+			
+			MemberDTO member = (MemberDTO) authentication.getPrincipal();
+			if(member != null) {
+			
+				params.setEmailAddr(member.getEmailAddr());
+				params.setMemName(member.getMemName());
+				params.setMemNo(member.getMemNo());
+				params.setPhoneNo(member.getPhoneNo());
+				params.setSubmitOk("1");
+		        
+		        boolean isRegistered = applicationService.registerIntroduce(params);
+				jsonObj.addProperty("result", isRegistered);
+				
+			}
+			
+		} catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+
+		return jsonObj;
 	}
 	
 	@PostMapping(value = "/application/registerIntroduce")

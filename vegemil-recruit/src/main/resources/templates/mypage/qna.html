@@ -25,6 +25,7 @@
 						<div class="wrap860 f-right" >
 							<form  th:action="@{/mypage/registerQna}" th:object="${qna}" method="post"  >
 							<!-- (1)제출완료 -->
+							<input type="hidden" th:field="*{qId}" />
 							<p class="f23 fw600">1:1문의하기 </p>
 							<div class="r-box mt20">
 								<ul class="s-d-2">

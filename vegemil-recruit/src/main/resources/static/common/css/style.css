@@ -401,8 +401,8 @@ button.btn_type10 { border:1px solid #333333;background:#333; font-weight:600; t
 .btn_type12 { border:1px solid #333333;background:#333; font-weight:600; text-align:center; display:inline-block;border-radius:30px; font-size:16px; padding:18px 75px; color:#fff }
 .btn_type12 a {color:#fff;  display:inline-block; width:100%;  }
 
-.btn_type13 { background:#333333; color:#fff; font-weight:400; text-align:center; display:inline-block;border-radius:0px;  }
-.btn_type13 a {padding:13px 45px; display:inline-block; }
+.btn_type13 { background:#333333; color:#fff; font-weight:400; text-align:center; border-radius:0px; display:inline-block; }
+.btn_type13 a {padding:13px 45px;  background:#333333; border:0 }
 
 button.btn_type13 {background:#333333; font-weight:500; text-align:center; display:inline-block;border-radius:0px; font-size:16px; padding:28px 0px; color:#fff}
 button.btn_type14 {background:#0F93E1; font-weight:500; text-align:center; display:inline-block;border-radius:0px; font-size:16px; padding:28px 0px; color:#fff }
@@ -681,7 +681,7 @@ https://github.com/filamentgroup/fixed-sticky */
 .photoBox {position:relative; bordeR:1px solid #E6E6E6;background:#F3F3F3; padding:30px; width:180px}
 .photoBox .in-img {background:#fff; border:1px solid #E6E6E6; width:120px; height:160px; text-align:center; padding:55px 0;cursor:pointer }
 .photoBox .IDpicture {width:120px; height:160px;  border:0px solid #E6E6E6; overflow:hidden; padding:0; cursor:pointer }
-.inputDel {position:absolute;right:120px; top:0}
+.inputDel {position:absolute;right:120px; top:5px}
 .inputDel2 {position:absolute;right:0px; top:100px}
 .inputDel3 {position:relative; margin-top:15px; margin-left:790px;    }
 .inputDel3 img {max-width:71px; }
@@ -813,7 +813,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 	
 }
 
-/* 재직중 > 체크박스 디자인 */
+/* 재직중 > 체크박스 디자인  [전산 요청으로 label하위에 인풋요청. 아래 디자인체크박스 사용어려움 ]*/
 .checkStyle input[type="checkbox"] {display:none;}
 .checkStyle input[type="checkbox"] + label {color:#343434;}
 .checkStyle input[type="checkbox"] + label span {

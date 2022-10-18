@@ -34,10 +34,10 @@
 								<li class="w-ing"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
 							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
-							<p class="btn_type03 mt10"><a href="javascript:void(0);" th:onclick="registerIntroduce([[ ${app.idx} ]])">임시저장</a></p>
+							<p class="btn_type03 mt10"><a onclick="javascript:updateIntroduce();">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
-						<form  th:action="@{/application/registerIntroduce}" th:object="${app}" method="post" >
+						<form  th:action="@{/application/registerIntroduce}" id="introduceForm" th:object="${app}" method="post" >
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
 							<!-- (1)성장과정 -->

@@ -31,7 +31,7 @@ public class QnaController extends UiUtils {
 	private ApplicationService applicationService;
 
 	@GetMapping(value = "/mypage/qna")
-	public String openQnaWrite(@ModelAttribute("params") QnaDTO params, @RequestParam(value = "rId", required = false) Long rId, Model model , Authentication authentication) {
+	public String openQnaWrite(@ModelAttribute("params") QnaDTO params, @RequestParam(value = "qId", required = false) Long qId, Model model , Authentication authentication) {
 		
 		String returnPage = "";
 		if(authentication != null) {
@@ -43,9 +43,10 @@ public class QnaController extends UiUtils {
 		        	returnPage = "member/joinConfirm";
 		        }
 		        
-		        if (rId == null) {
+		        if (qId == null) {
 					model.addAttribute("qna", new QnaDTO());
 				} else {
+					params.setMemNo(member.getMemNo());
 			        QnaDTO qna = qnaService.getQnaDetail(params);
 					if (qna == null) {
 						model.addAttribute("qna", new QnaDTO());
