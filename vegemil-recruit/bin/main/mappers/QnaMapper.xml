@@ -8,6 +8,7 @@
 		, mem_no
 		, r_title
 		, r_content
+		, r_company
 		, r_delete_yn
 		, DATE_FORMAT(r_insert_date,'%Y-%m') as r_insert_date
 		, DATE_FORMAT(r_update_date,'%Y-%m') as r_update_date
@@ -27,6 +28,7 @@
 			  mem_no
 			, r_title
 			, r_content
+			, r_company
 			, r_email
 			, r_phone_no
 			, r_agree
@@ -37,6 +39,7 @@
 			  #{memNo}
 			, #{rTitle}
 			, #{rContent}
+			, #{rCompany}
 			, #{rEmail}
 			, #{rPhoneNo}
 			, #{rAgree}
@@ -60,6 +63,7 @@
 		SET
 			  r_update_date = NOW()
 			, r_title = #{rTitle}
+			, r_company = #{rCompany}
 			, r_content = #{rContent}
 		WHERE
 			q_id = #{qId} and mem_no = #{memNo}

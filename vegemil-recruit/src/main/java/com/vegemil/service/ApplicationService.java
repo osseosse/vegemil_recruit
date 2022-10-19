@@ -14,6 +14,8 @@ public interface ApplicationService {
 	
 	public int getApplicationCount(ApplicationDTO params);
 	
+	public int getIdx(ApplicationDTO params);
+	
 	public List<ResumeDTO> getResumeList(ResumeDTO params);
 	
 	public List<ApplicationDTO> getApplicationList(ApplicationDTO params);

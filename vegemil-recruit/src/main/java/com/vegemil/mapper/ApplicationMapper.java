@@ -50,5 +50,7 @@ public interface ApplicationMapper {
 	public int selectApplicationCount(Long memNo);
 	
 	public int selectApplicationCntBySth(@Param("memNo") Long memNo, @Param("sTh") String sTh);
+	
+	public int selectIdxBySth(@Param("memNo") Long memNo, @Param("sTh") String sTh);
 
 }

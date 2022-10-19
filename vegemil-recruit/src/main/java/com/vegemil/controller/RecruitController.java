@@ -123,12 +123,17 @@ public class RecruitController extends UiUtils {
 		        application.setMemNo(member.getMemNo());
 		        application.setPhoneNo(member.getPhoneNo());
 		        
-		        
-				boolean isRegistered = applicationService.registerPersonalInfo(application);
-				if (isRegistered == false) {
-					out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
-					out.flush();
-				}
+		        int idx = applicationService.getIdx(application);
+		        if(idx != 0 ) {
+		        	return showMessageWithRedirect("지원서 입력 페이지로 이동합니다.", "/application/personalInfo?idx="+idx, Method.GET, null, model);
+		        } else {
+		        	boolean isRegistered = applicationService.registerPersonalInfo(application);
+		        	if (isRegistered == false) {
+						out.println("<script>alert('저장에 실패하였습니다.'); history.go(-1);</script>");
+						out.flush();
+					}
+		        }
+				
 				return showMessageWithRedirect("지원서 입력 페이지로 이동합니다.", "/application/personalInfo?idx="+application.getIdx(), Method.GET, null, model);
 			}
 			

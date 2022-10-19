@@ -324,5 +324,14 @@
 		WHERE
 			mem_no= #{memNo} and setup_th = #{sTh}
 	</select>
+	
+	<select id="selectIdxBySth" parameterType="map" resultType="int">
+		SELECT
+			IFNULL(idx, 0)
+		FROM
+			R_Recruit
+		WHERE
+			mem_no= #{memNo} and setup_th = #{sTh}
+	</select>
 
 </mapper>

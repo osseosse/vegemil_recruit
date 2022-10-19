@@ -20,7 +20,7 @@ public class QnaServiceImpl implements QnaService {
 	public boolean registerQna(QnaDTO params) {
 		int queryResult = 0;
 
-		if (params.getRIdx() == null) {
+		if (params.getQId() == null) {
 			queryResult = qnaMapper.insertQna(params);
 		} else {
 			queryResult = qnaMapper.updateQna(params);
