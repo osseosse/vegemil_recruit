@@ -75,15 +75,6 @@ public class ResumeDTO extends ApplicationDTO {
 		private String langTalk3;
 		private String langMake3;
 		private String langRead3;
-		private String langName4;
-		private String langLicName4;
-		private String langPoint4;
-		private String langLv4;
-		private String langLicNum4;
-		private String langGet4;
-		private String langTalk4;
-		private String langMake4;
-		private String langRead4;
 		
 		//IT능력
 		private String swCount;
@@ -97,8 +88,6 @@ public class ResumeDTO extends ApplicationDTO {
 		private String swLv4;
 		private String swName5;
 		private String swLv5;
-		private String swName6;
-		private String swLv6;
 		
 		//자격 및 면허
 		private String licCount;
@@ -118,10 +107,6 @@ public class ResumeDTO extends ApplicationDTO {
 		private String licNum4;
 		private String licGetDate4;
 		private String licPub4;
-		private String licName5;
-		private String licNum5;
-		private String licGetDate5;
-		private String licPub5;
 		
 		//수상경력
 		private String medalCount;
@@ -200,9 +185,6 @@ public class ResumeDTO extends ApplicationDTO {
 		private String schSite4;
 		private String schNight4;
 		private String schPointEvg4;
-		private String schSubAdmis4;
-		private String schSubMajor4;
-		private String schSubPointEvg4;
 		
 		//박사
 		private String schGrad5;
@@ -215,9 +197,6 @@ public class ResumeDTO extends ApplicationDTO {
 		private String schSite5;
 		private String schNight5;
 		private String schPointEvg5;
-		private String schSubAdmis5;
-		private String schSubMajor5;
-		private String schSubPointEvg5;
 		
 		//인턴
 		private String internName;

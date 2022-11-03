@@ -61,8 +61,7 @@
 		UPDATE m_recruit_member
 		SET
 			  active_date = NOW()
-			, active 	  = 1 
-			, password 	  = #{password}
+			, active 	  = 1
 		WHERE
 			email_addr = #{emailAddr}
 	</update>
@@ -83,10 +82,8 @@
 			m_recruit_member
 		WHERE
 			SLEEP_YN = '0'
-		<include refid="CommonMapper.search" />
 		ORDER BY
 			INSERT_DATE ASC
-		<include refid="CommonMapper.paging" />
 	</select>
 	
 	<select id="selectMemberCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
@@ -96,7 +93,6 @@
 			m_recruit_member
 		WHERE
 			email_addr = #{emailAddr}
-		<include refid="CommonMapper.search" />
 	</select>
 
 	<select id="selectMemberTotalCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
@@ -106,7 +102,6 @@
 			m_recruit_member
 		WHERE
 			SLEEP_YN = '0'
-		<include refid="CommonMapper.search" />
 	</select>
 
 </mapper>

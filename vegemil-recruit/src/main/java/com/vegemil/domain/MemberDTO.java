@@ -29,6 +29,8 @@ public class MemberDTO implements UserDetails {
 	private String phoneNo;		/** 핸드폰번호 */
 	private String sleepYn;		/** 휴면여부 */
 	private String withdrawalYn;/** 탈퇴여부 */
+	private String joinDate;
+	private String adAgreeDate;
 	private Timestamp pwdModifyDate;/** 비밀번호 변경일 */
 	private Timestamp activeDate;/** 계정 활성화 날짜 */
 	private Timestamp lastLoginDate;/** 마지막 로그인날짜 */

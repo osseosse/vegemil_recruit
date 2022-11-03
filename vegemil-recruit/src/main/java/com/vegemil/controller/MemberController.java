@@ -45,16 +45,8 @@ public class MemberController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/member/join")
-	public String moveJoin(Model model, Authentication authentication) {
+	public String moveJoin(Model model) {
 		
-		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
-        
-		if(member != null) {
-	        if(member.getActive() != 1) {
-	        	return "member/joinConfirm";
-	        }
-		}
 		model.addAttribute("member", new MemberDTO());
 
 		return "member/join";

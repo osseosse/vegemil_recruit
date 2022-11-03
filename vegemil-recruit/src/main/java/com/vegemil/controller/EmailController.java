@@ -5,12 +5,17 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonObject;
 import com.vegemil.constant.Method;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.service.MemberService;
@@ -26,7 +31,7 @@ public class EmailController extends UiUtils {
 	@Autowired
 	private MailService mailService;
 	
-	@PostMapping("/email/sendAuthEmail")
+	@RequestMapping(value = { "/email/sendAuthEmail" }, method = { RequestMethod.POST, RequestMethod.PATCH })
 	public void execAuthmail(MemberDTO member, HttpServletResponse response) throws Exception {
 		
 		PrintWriter out = response.getWriter();
@@ -45,6 +50,32 @@ public class EmailController extends UiUtils {
 			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
 		}
+        
+    }
+	
+	@RequestMapping(value = { "/email/sendAuthEmailJson" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+	public @ResponseBody JsonObject execAuthmailJson(MemberDTO member, HttpServletResponse response) throws Exception {
+		
+		JsonObject jsonObj = new JsonObject();
+		
+        try {
+        	
+        	if (member == null) {
+        		jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+    		}
+        	//멤버를 세션에서 가져와야한다.
+			mailService.sendActiveEmail(member);
+			jsonObj.addProperty("result", true);
+			
+        } catch (DataAccessException e) {
+			jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+		} catch (Exception e) {
+			jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+		}
+        
+        return jsonObj;
+        
     }
 	
 	//회원 활성화

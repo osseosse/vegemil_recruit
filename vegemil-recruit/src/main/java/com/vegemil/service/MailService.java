@@ -69,7 +69,7 @@ public class MailService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return templateEngine.process("member/confirmMail", context);
+    	return templateEngine.process("email/confirmMail", context);
         
     }
     

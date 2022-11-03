@@ -373,8 +373,6 @@
 		var langLicName2 = /*[[ ${app.langLicName2} ]]*/;
 		var langName3 = /*[[ ${app.langName3} ]]*/;
 		var langLicName3 = /*[[ ${app.langLicName3} ]]*/;
-		var langName4 = /*[[ ${app.langName4} ]]*/;
-		var langLicName4 = /*[[ ${app.langLicName4} ]]*/;
 		
 		if(langCount == 1) {
 			$("select[name='langName1").append("<option value='"+langName1+"'>"+langName1+"</option>");
@@ -427,39 +425,6 @@
 			$("input[name='langLv3']").val(/*[[ ${app.langLv3} ]]*/);
 			$("input[name='langLicNum3']").val(/*[[ ${app.langLicNum3} ]]*/);
 			$("input[name='langGet3']").val(/*[[ ${app.langGet3} ]]*/);
-			
-		} else if(langCount == 4) {
-			$("select[name='langName1']").val(/*[[ ${app.langName1} ]]*/).prop("selected", true);
-			$("select[name='langLicName1']").val(/*[[ ${app.langLicName1} ]]*/).prop("selected", true);
-			$("input[name='langPoint1']").val(/*[[ ${app.langPoint1} ]]*/);
-			$("input[name='langLv1']").val(/*[[ ${app.langLv1} ]]*/);
-			$("input[name='langLicNum1']").val(/*[[ ${app.langLicNum1} ]]*/);
-			$("input[name='langGet1']").val(/*[[ ${app.langGet1} ]]*/);
-			$("select[name='langName2").append("<option value='"+langName2+"'>"+langName2+"</option>");
-			$("select[name='langLicName2").append("<option value='"+langLicName2+"'>"+langLicName2+"</option>");
-			$("select[name='langName2']").val(langName2).prop("selected", true);
-			$("select[name='langLicName2']").val(langLicName2).prop("selected", true);
-			$("input[name='langPoint2']").val(/*[[ ${app.langPoint2} ]]*/);
-			$("input[name='langLv2']").val(/*[[ ${app.langLv2} ]]*/);
-			$("input[name='langLicNum2']").val(/*[[ ${app.langLicNum2} ]]*/);
-			$("input[name='langGet2']").val(/*[[ ${app.langGet2} ]]*/);
-			$("select[name='langName3").append("<option value='"+langName3+"'>"+langName3+"</option>");
-			$("select[name='langLicName3").append("<option value='"+langLicName3+"'>"+langLicName3+"</option>");
-			$("select[name='langName3']").val(langName3).prop("selected", true);
-			$("select[name='langLicName3']").val(langLicName3).prop("selected", true);
-			$("input[name='langPoint3']").val(/*[[ ${app.langPoint3} ]]*/);
-			$("input[name='langLv3']").val(/*[[ ${app.langLv3} ]]*/);
-			$("input[name='langLicNum3']").val(/*[[ ${app.langLicNum3} ]]*/);
-			$("input[name='langGet3']").val(/*[[ ${app.langGet3} ]]*/);
-			
-			$("select[name='langName4").append("<option value='"+langName4+"'>"+langName4+"</option>");
-			$("select[name='langLicName4").append("<option value='"+langLicName4+"'>"+langLicName4+"</option>");
-			$("select[name='langName4']").val(langName4).prop("selected", true);
-			$("select[name='langLicName4']").val(langLicName4).prop("selected", true);
-			$("input[name='langPoint4']").val(/*[[ ${app.langPoint4} ]]*/);
-			$("input[name='langLv4']").val(/*[[ ${app.langLv4} ]]*/);
-			$("input[name='langLicNum4']").val(/*[[ ${app.langLicNum4} ]]*/);
-			$("input[name='langGet4']").val(/*[[ ${app.langGet4} ]]*/);
 			
 		}
 		

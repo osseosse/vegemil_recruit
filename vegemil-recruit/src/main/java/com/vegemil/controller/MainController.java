@@ -32,10 +32,10 @@ public class MainController {
         member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
 		
         if(member != null) {
+        	model.addAttribute("member",member);	//유저 정보
 	        if(member.getActive() != 1) {
 	        	return "member/joinConfirm";
 	        }
-	        model.addAttribute("member",member);	//유저 정보
         }
         
         RecruitDTO recruit = RecruitService.getRecruitLatest();

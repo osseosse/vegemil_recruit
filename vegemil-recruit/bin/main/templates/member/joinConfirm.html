@@ -28,7 +28,7 @@
 				</div>
 				<div class="container100" >
 					<div class="memberWrapBase text-center bgSky">
-					<form class="form-horizontal form-view" th:action="@{/member/sendAuthmail}" th:object="${member}">
+					<form id="emailForm" class="form-horizontal form-view" th:action="@{/member/sendAuthmail}" th:object="${member}">
 						<p class="mt50"><img th:src="@{/img/ico_join_c.png}"/></p>
 						<p class="f36 fw600 mt50 line-height120 ls-2">지원자 등록 완료</p>
 						<p class="f20 fw400 line-height140 mt30">등록하신 이메일 계정으로 인증메일이 발송되었습니다.</p>
@@ -39,8 +39,8 @@
 						<div class="mt30">
 							<input type="hidden" th:field="*{emailAddr}" />
 							<input type="hidden" th:field="*{memNo}" />
-							<button type="button" onclick="/email/sendAuthEmail" class="btn_type13 mt30 w230 mr5" >인증메일 재전송</button><!-- 로그인 통해서 고객정보 던진후 메일발송 -->
-							<button class="btn_type14 mt30 w230 ml5" onclick="/member/login">로그인</button>
+							<button type="button" onclick="sendAuthEmail()"  class="btn_type13 mt30 w230 mr5" >인증메일 재전송</button><!-- 로그인 통해서 고객정보 던진후 메일발송 -->
+							<button type="button" class="btn_type14 mt30 w230 ml5" onclick="location.href='/member/login'">로그인</button>
 						</div>
 					</form>
 					</div><!-- //memberWrapBase -->
@@ -63,6 +63,35 @@
         // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
         event.returnValue = '/member/login';
     });
+    
+    function sendAuthEmail() {
+
+   		const uri = "email/sendAuthEmailJson";
+   		
+   		$.ajax({
+   			url: uri,
+   			type: "POST",
+   			dataType: "json",
+   			contentType: false,
+      		processData: false,
+            data: new FormData($("#emailForm")[0]),
+   			success: function(response) {
+   				if (response.result == false) {
+   					alert("전송에 실패하였습니다.");
+   					return false;
+   				}
+   				alert("전송 되었습니다.");
+   				location.href='/member/logout';
+   			},
+   			error: function(xhr, status, error) {
+   				alert("에러가 발생하였습니다.");
+   				return false;
+   			}
+   		});
+   		
+   	}
+   	/*[- end of function -]*/
+    
 </script>
 </body>
 </html>

@@ -55,7 +55,7 @@
 								<div class="">
 									<p class="f20 fw400 white text-left mt100">채용공고</p>
 									<!-- 공고가 1개일때 노출방법 -->
-									<div class="roundType01 mt30">
+									<div class="roundType01 mt30" th:if="${not #lists.isEmpty( recruit )}">
 										<ul>
 											<li>
 												<p class="f15 ac gray fw400" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|" ></p>

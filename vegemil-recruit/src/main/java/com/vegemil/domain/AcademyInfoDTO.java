@@ -61,9 +61,6 @@ public class AcademyInfoDTO extends ApplicationDTO {
 	private String schSite4;
 	private String schNight4;
 	private String schPointEvg4;
-	private String schSubAdmis4;
-	private String schSubMajor4;
-	private String schSubPointEvg4;
 	
 	//박사
 	private String schGrad5;
@@ -76,8 +73,5 @@ public class AcademyInfoDTO extends ApplicationDTO {
 	private String schSite5;
 	private String schNight5;
 	private String schPointEvg5;
-	private String schSubAdmis5;
-	private String schSubMajor5;
-	private String schSubPointEvg5;
 	
 }

@@ -37,15 +37,6 @@ public class QualificationDTO extends ApplicationDTO {
 	private String langTalk3;
 	private String langMake3;
 	private String langRead3;
-	private String langName4;
-	private String langLicName4;
-	private String langPoint4;
-	private String langLv4;
-	private String langLicNum4;
-	private String langGet4;
-	private String langTalk4;
-	private String langMake4;
-	private String langRead4;
 	
 	//IT능력
 	private String swCount;
@@ -59,8 +50,6 @@ public class QualificationDTO extends ApplicationDTO {
 	private String swLv4;
 	private String swName5;
 	private String swLv5;
-	private String swName6;
-	private String swLv6;
 	
 	//자격 및 면허
 	private String licCount;
@@ -80,10 +69,6 @@ public class QualificationDTO extends ApplicationDTO {
 	private String licNum4;
 	private String licGetDate4;
 	private String licPub4;
-	private String licName5;
-	private String licNum5;
-	private String licGetDate5;
-	private String licPub5;
 	
 	//수상경력
 	private String medalCount;

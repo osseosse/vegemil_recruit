@@ -191,8 +191,7 @@
 			<ul class="divide1 ">
 				<li th:if="${resume.langCount} == '1'
 						or ${resume.langCount} == '2'
-						or ${resume.langCount} == '3'
-						or ${resume.langCount} == '4'">
+						or ${resume.langCount} == '3'">
 					<span class="w50">&middot;</span>
 					<span class="sublist" th:if="${resume.langName1} != null" th:text="${resume.langName1}"></span>
 					<span class="sublist" th:if="${resume.langLicName1} != null" th:text="${resume.langLicName1}"></span>
@@ -205,8 +204,7 @@
 					<span class="sublist" th:if="${resume.langRead1} != null" th:text="|독해 ${resume.langRead1}|"></span>
 				</li>
 				<li th:if="${resume.langCount} == '2'
-						or ${resume.langCount} == '3'
-						or ${resume.langCount} == '4'">
+						or ${resume.langCount} == '3'">
 					<span class="w50">&middot;</span>
 					<span class="sublist" th:text="${resume.langName2}"></span>
 					<span class="sublist" th:text="${resume.langLicName2}"></span>
@@ -218,8 +216,7 @@
 					<span class="sublist" th:text="|작문 ${resume.langMake2}|"></span>
 					<span class="sublist" th:text="|독해 ${resume.langRead2}|"></span>
 				</li>
-				<li th:if="${resume.langCount} == '3'
-						or ${resume.langCount} == '4'">
+				<li th:if="${resume.langCount} == '3'">
 					<span class="w50">&middot;</span>
 					<span class="sublist" th:text="${resume.langName3}"></span>
 					<span class="sublist" th:text="${resume.langLicName3}"></span>
@@ -230,18 +227,6 @@
 					<span class="sublist" th:text="|회화 ${resume.langTalk3}|"></span>
 					<span class="sublist" th:text="|작문 ${resume.langMake3}|"></span>
 					<span class="sublist" th:text="|독해 ${resume.langRead3}|"></span>
-				</li>
-				<li th:if="${resume.langCount} == '4'">
-					<span class="w50">&middot;</span>
-					<span class="sublist" th:text="${resume.langName4}"></span>
-					<span class="sublist" th:text="${resume.langLicName4}"></span>
-					<span class="sublist" th:text="${resume.langPoint4}"></span>
-					<span class="sublist" th:text="${resume.langLv4}"></span>
-					<span class="sublist" th:text="${resume.langLicNum4}"></span>
-					<span class="sublist" th:text="${resume.langGet4}"></span>
-					<span class="sublist" th:text="|회화 ${resume.langTalk4}|"></span>
-					<span class="sublist" th:text="|작문 ${resume.langMake4}|"></span>
-					<span class="sublist" th:text="|독해 ${resume.langRead4}|"></span>
 				</li>
 			</ul><br class="clear">
 		</div>
