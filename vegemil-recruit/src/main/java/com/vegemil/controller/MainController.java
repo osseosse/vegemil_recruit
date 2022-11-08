@@ -59,19 +59,19 @@ public class MainController {
     }
 	
 	@RequestMapping(value = "/information/info")
-    public String moveInfo(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+    public String moveInfo()throws Exception{
 		
 		return "/information/info";
     }
 	
 	@RequestMapping(value = "/information/work")
-    public String moveWork(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+    public String moveWork()throws Exception{
 		
 		return "/information/work";
     }
 	
 	@RequestMapping(value = "/information/benefit")
-    public String moveBbenefit(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+    public String moveBbenefit()throws Exception{
 		
 		return "/information/benefit";
     }
