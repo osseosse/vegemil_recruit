@@ -58,10 +58,22 @@ public class MainController {
 		return "/fragments/"+viewName;
     }
 	
-	@RequestMapping(value = "/information/{viewName}")
-    public String moveInformation(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+	@RequestMapping(value = "/information/info")
+    public String moveInfo(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
 		
-		return "/information/"+viewName;
+		return "/information/info";
+    }
+	
+	@RequestMapping(value = "/information/work")
+    public String moveWork(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+		
+		return "/information/work";
+    }
+	
+	@RequestMapping(value = "/information/benefit")
+    public String moveBbenefit(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+		
+		return "/information/benefit";
     }
 	
 	@RequestMapping(value = "/member/{viewName}")

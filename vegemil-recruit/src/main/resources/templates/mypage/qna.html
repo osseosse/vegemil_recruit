@@ -23,7 +23,7 @@
 							</div>
 						</div>
 						<div class="wrap860 f-right" >
-							<form  th:action="@{/mypage/registerQna}" th:object="${qna}" method="post"  >
+							<form  th:action="@{/mypage/registerQna}" id="qnaForm" th:object="${qna}" method="post" enctype="multipart/form-data" >
 							<!-- (1)제출완료 -->
 							<input type="hidden" th:field="*{qId}" />
 							<p class="f23 fw600">1:1문의하기 </p>
