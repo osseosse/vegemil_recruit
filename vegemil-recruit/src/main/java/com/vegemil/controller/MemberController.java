@@ -119,26 +119,23 @@ public class MemberController extends UiUtils {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		try {
-			boolean isRegistered = memberService.registerMember(params);
+			boolean isRegistered = memberService.resetPassword(params);
 			if (isRegistered == false) {
-				out.println("<script>alert('게시글 수정에 실패하였습니다.'); history.go(-1);</script>");
+				out.println("<script>alert('비밀번호 재설정에 실패하였습니다.'); history.go(-1);</script>");
 				out.flush();
 			}
 		} catch (DataAccessException e) {
 			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/admin/baby/babyInfoList", Method.GET, null, model);
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 
 		} catch (Exception e) {
 			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/admin/baby/babyInfoList", Method.GET, null, model);
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 		}
 		
-		out.println("<script>alert('게시글 수정이 완료되었습니다.'); window.location='/admin/baby/babyInfoList';</script>");
-		out.flush();
-
-		return showMessageWithRedirect("게시글 수정이 완료되었습니다.", "/admin/baby/babyInfoList", Method.GET, null, model);
+		return "member/login";
 	}
 	
 	@GetMapping(value = "/member/infoCheck")

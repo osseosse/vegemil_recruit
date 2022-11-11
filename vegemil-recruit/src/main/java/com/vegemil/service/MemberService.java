@@ -30,6 +30,16 @@ public class MemberService implements UserDetailsService  {
 		return memberTotalCount;
 	}
 	
+	public int getMemberCountByEmail(MemberDTO params) {
+		int memCount = memberMapper.selectMemberCount(params);
+		
+		if(memCount < 0 ) {
+			memCount = 0;
+		}
+		
+		return memCount;
+	}
+	
 	public List<MemberDTO> getMemberList(MemberDTO params) {
 		List<MemberDTO> memberList = Collections.emptyList();
 
@@ -56,6 +66,23 @@ public class MemberService implements UserDetailsService  {
 		
 		if (memCount == 0) {
 			queryResult = memberMapper.saveMember(member);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	@Transactional
+	public boolean resetPassword(MemberDTO member) {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		int queryResult = 0;
+		int memCount = 0;
+		
+		memCount = memberMapper.selectMemberCount(member);
+		member.setPassword(passwordEncoder.encode(member.getPassword()));
+		
+		if (memCount == 0) {
+			queryResult = memberMapper.updateMemPwd(member);
 		}
 
 		return (queryResult == 1) ? true : false;

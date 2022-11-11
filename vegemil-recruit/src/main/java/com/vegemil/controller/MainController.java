@@ -47,50 +47,38 @@ public class MainController {
         return "index";
 	}
 	
-	@RequestMapping(value = "/home")
-    public String main()throws Exception{
+	@GetMapping(value = "/home")
+    public String main() throws Exception {
 		return "index";
     }
 	
-	@RequestMapping(value = "/fragments/{viewName}")
-    public String openFragments(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+	@GetMapping(value = "/fragments/{viewName}")
+    public String openFragments(@PathVariable(value = "viewName", required = false) String viewName) throws Exception {
 		
-		return "/fragments/"+viewName;
+		return "fragments/"+viewName;
     }
 	
-	@RequestMapping(value = "/information/info")
-    public String moveInfo()throws Exception{
+	@GetMapping(value = "/info/info")
+    public String moveInfo() throws Exception {
 		
-		return "/information/info";
+		return "info/info";
     }
 	
-	@RequestMapping(value = "/information/work")
-    public String moveWork()throws Exception{
+	@GetMapping(value = "/info/work")
+    public String moveWork() throws Exception {
 		
-		return "/information/work";
+		return "info/work";
     }
 	
-	@RequestMapping(value = "/information/benefit")
-    public String moveBbenefit()throws Exception{
+	@GetMapping(value = "/info/benefit")
+    public String moveBenefit() throws Exception {
 		
-		return "/information/benefit";
-    }
-	
-	@RequestMapping(value = "/member/{viewName}")
-    public String moveMember(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
-		
-		return "/member/"+viewName;
-    }
-	
-	@RequestMapping(value = "/application/{viewName}")
-    public String moveAapplication(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
-		
-		return "/application/"+viewName;
+		return "info/benefit";
     }
 	
 	@GetMapping("/mail")
     public String dispMail() {
-        return "/utils/mail";
+        return "utils/mail";
     }
 	
 	@PostMapping("/sendAuthmail")

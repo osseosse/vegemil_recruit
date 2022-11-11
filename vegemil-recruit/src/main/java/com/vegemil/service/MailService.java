@@ -25,7 +25,7 @@ public class MailService {
     private JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
     private final RedisUtil redisUtil;
-    private static final String FROM_ADDRESS = "recruit@vegemil.co.kr";
+    private static final String FROM_ADDRESS = "DCF 채용담당<dcfrecruit@vegemil.co.kr>";
 
     public void mailSend(MailDTO mailDto) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -42,10 +42,10 @@ public class MailService {
         try {
         	
         	MimeMessage message = mailSender.createMimeMessage();
-        	
+        	message.setFrom(MailService.FROM_ADDRESS);
 			message.addRecipients(MimeMessage.RecipientType.TO, member.getEmailAddr());
-			 message.setSubject("[정식품]신규입사자 등록 인증 메일");
-			message.setText(setContext(member), "utf-8", "html"); 
+			message.setSubject("[DCF]신규입사자 등록 인증 메일");
+			message.setText(setAuthContext(member), "utf-8", "html"); 
 	        mailSender.send(message);
 	        
 		} catch (MessagingException e) {
@@ -55,7 +55,25 @@ public class MailService {
         
     }
     
-    private String setContext(MemberDTO member) {
+    public void sendPwResetEmail(MemberDTO member) {
+    	
+        try {
+        	
+        	MimeMessage message = mailSender.createMimeMessage();
+        	message.setFrom(MailService.FROM_ADDRESS);
+			message.addRecipients(MimeMessage.RecipientType.TO, member.getEmailAddr());
+			message.setSubject("[DCD]비밀번호 재설정 메일");
+			message.setText(setPwContext(member), "utf-8", "html"); 
+	        mailSender.send(message);
+	        
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+    }
+    
+    private String setAuthContext(MemberDTO member) {
     	
     	Context context = new Context();
     	try {
@@ -70,6 +88,24 @@ public class MailService {
 			e.printStackTrace();
 		}
     	return templateEngine.process("email/confirmMail", context);
+        
+    }
+    
+    private String setPwContext(MemberDTO member) {
+    	
+    	Context context = new Context();
+    	try {
+			
+    		UUID uuid = UUID.randomUUID();
+            // redis에 링크 정보 저장
+            redisUtil.setDataExpire(uuid.toString(),member.getEmailAddr(), 7);
+            context.setVariable("member", member);
+            context.setVariable("authToken", uuid.toString());
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return templateEngine.process("email/pwResetMail", context);
         
     }
     

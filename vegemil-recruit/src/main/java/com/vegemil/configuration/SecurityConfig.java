@@ -33,11 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 //.antMatchers("/member/**").authenticated()
-                .antMatchers("/information/**").permitAll()
+                .antMatchers("/info/**").permitAll()
             	.antMatchers("/member/login").permitAll()
             	.antMatchers("/member/join").permitAll()
             	.antMatchers("/member/register").permitAll()
             	.antMatchers("/member/joinConfirm").permitAll()
+            	.antMatchers("/member/passwordReset").permitAll()
             	.antMatchers("/mypage/qna").permitAll()
                 .antMatchers("/member/**").hasAuthority("USER") // user 권한의 유저만  접근가능
                 .antMatchers("/application/**").hasAuthority("USER") // user 권한의 유저만  접근가능
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .deleteCookies("remember-me", "JSESSIONID") //자동 로그인 쿠키, Tomcat이 발급한 세션 유지 쿠키 삭제
             .and()
                 .exceptionHandling()
-                .accessDeniedPage("/accessDenied")
+                .accessDeniedPage("/error/error")
             .and()
                 .rememberMe()
                 .key("vegemil") //쿠키에 사용되는 값을 암호화하기 위한 키(key)값
