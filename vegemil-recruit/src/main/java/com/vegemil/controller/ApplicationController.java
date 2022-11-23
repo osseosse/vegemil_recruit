@@ -742,43 +742,53 @@ public class ApplicationController extends UiUtils {
 		return "application/finish";
 	}
 	
-	@GetMapping(value = "/application/result/{idx}")
-	public String openResult(@PathVariable(value = "idx", required = false) Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
+	@RequestMapping(value = { "/application/result/{idx}" }, method = { RequestMethod.POST, RequestMethod.GET })
+	public String openResult(@PathVariable("idx") Long idx, Model model, HttpServletResponse response, Authentication authentication) throws Exception {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		ApplicationDTO application = new ApplicationDTO();
+		String viewPage = "";
 		
-		if (idx == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+		try {
+			if (idx == null) {
+				out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+			}
+			
+			//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
+	        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+	        if(member != null) {
+		        if(member.getActive() != 1) {
+		        	return "member/joinConfirm";
+		        }
+		        
+		        application = applicationService.getResume(idx, member.getMemNo());
+				if (application == null) {
+					out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
+					out.flush();
+					return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
+				}
+				
+				model.addAttribute("member", member);
+				if(application.getJoinOk().equals("0")) {
+					viewPage = "application/resultUnpass";
+				} else if(application.getJoinOk().equals("1") || application.getJoinOk().equals("2") || application.getJoinOk().equals("3")) {
+					model.addAttribute("joinOk", application.getJoinOk());
+					viewPage = "application/resultPass";
+				} else {
+					viewPage = "application/result";
+				}
+				
+	        }
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/", Method.GET, null, model);
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
 		}
 		
-		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-        MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
-        if(member != null) {
-	        if(member.getActive() != 1) {
-	        	return "member/joinConfirm";
-	        }
-	        
-	        application = applicationService.getResume(idx, member.getMemNo());
-			if (application == null) {
-				out.println("<script>alert('없는 지원서이거나 이미 삭제된 지원서입니다.'); history.go(-1);</script>");
-				out.flush();
-				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
-			}
-			
-			model.addAttribute("member", member);
-			if(application.getJoinOk().equals("0")) {
-				return "application/resultUnpass";
-			} else if(application.getJoinOk().equals("1") || application.getJoinOk().equals("2") || application.getJoinOk().equals("3")) {
-				model.addAttribute("resume", application);
-				return "application/resultPass";
-			}
-			
-        }
-        return "application/result";
+        return viewPage;
 		
 	}
 	
