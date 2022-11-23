@@ -34,6 +34,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
+	public int getIdxCount(ApplicationDTO params) {
+		
+		int idx = 0;
+		idx = applicationMapper.selectIdxCount(params.getMemNo(), params.getSetupTh());
+		
+		return idx;
+	}
+	
+	@Override
 	public int getIdx(ApplicationDTO params) {
 		
 		int idx = 0;

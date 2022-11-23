@@ -22,12 +22,17 @@
 		<!-- ================================ Content ================================ -->
 		<section>
 			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="/"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">입사지원</span></a>
+					</div>
+				</div>
 				<div class="container1300 center" >
 					<div class="memberWrapBase" th:object="${recruit}">
 						<div class="sidebar fixedsticky w350 f-left">
 							<p class="f23 fw600 line-height140" th:text="*{sTitle}"><span class="r-black-line2 f16" th:text="|D-*{recruit.sDday}|"></span> </p>
 							<p class="mt20"><span class="f14 fw400" th:text="|*{sStartdate} ~ *{sEnddate}|"></span></p>
-							<p class="mt50"><a href="/information/info"><img th:src="@{/img/infoBanner.png}" alt="채용절차 보러가기"/></a></p>
+							<p class="mt50"><a href="/info/info"><img th:src="@{/img/infoBanner.png}" alt="채용절차 보러가기"/></a></p>
 						</div>
 						<div class="wrap860 f-right" >
 							<div class="r-box4">

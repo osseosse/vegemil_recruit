@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment">
+<!-- add css -->
+<link rel='stylesheet' href='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.css'>
+<link th:href="@{/common/css/modality.css}" rel="stylesheet">
+<!-- add js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/filamentgroup/fixed-sticky/master/fixedsticky.js'></script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ 
+				Content
+		================================ -->
+		<section>
+			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="/"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="/mypage/list"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
+				
+				<div class="container100" >
+					<div class="memberWrapBase text-center resultAniBox">
+						<p class="mt50"><img th:src="@{/img/ico_result01.png}"/></p>
+						<p class="f36 fw600 mt80" th:text="|${member.name}님의 채용결과 입니다.|"></p>
+						<div class="obj01 ani01"><img th:src="@{/img/obj01.png}" alt="" /></div>
+						<div class="obj02 ani02"><img th:src="@{/img/obj02.png}" alt="" /></div>
+						<div class="obj03 ani03"><img th:src="@{/img/obj03.png}" alt="" /></div>
+						
+						<!-- 서류전형합격 -->
+						<ul class="resultStep mt100"  th:if="${application.joinOk.equals('1')}">
+							<li><p class="f20 fw600">서류전형</p><p class="mt20"><img th:src="@{/img/result01.png}" alt="서류전형합격"/></p></li>
+							<li><p class="f20 fw600 gray2">1차 면접</p><p class="mt20"><img th:src="@{/img/result_wait.png}" alt="1차 면접"/></p></li>
+							<li><p class="f20 fw600 gray2">2차 면접</p><p class="mt20"><img th:src="@{/img/result_wait.png}" alt="2차 면접" /></p></li>
+						</ul>
+						<p class="f20 mt50 line-height150">지언님, 서류전형에 합격하셨습니다.<br>1차 면접 일정은 개별 안내 예정입니다.<br>감사합니다.</p>
+						<!-- //서류전형합격 -->
+						
+						<!-- 1차면접합격 -->
+						<ul class="resultStep mt100"  th:if="${application.joinOk.equals('2')}">
+							<li><p class="f20 fw600">서류전형</p><p class="mt20"><img th:src="@{/img/result01.png}" alt="서류전형합격"/></p></li>
+							<li><p class="f20 fw600">1차 면접</p><p class="mt20"><img th:src="@{/img/result02.png}" alt="1차 면접"/></p></li>
+							<li><p class="f20 fw600 gray2">2차 면접</p><p class="mt20"><img th:src="@{/img/result_wait.png}" alt="2차 면접" /></p></li>
+						</ul>
+						<p class="f20 mt50 line-height150">지언님, 1차 면접 합격하셨습니다.<br>2차 면접 일정은 개별 안내 예정입니다.<br>감사합니다.</p>
+						<!-- //1차면접합격 -->
+						
+						<!-- 최종합격 -->
+						<ul class="resultStep mt100"  th:if="${application.joinOk.equals('3')}">
+							<li><p class="f20 fw600">서류전형</p><p class="mt20"><img th:src="@{/img/result01.png}" alt="서류전형합격"/></p></li>
+							<li><p class="f20 fw600">1차 면접</p><p class="mt20"><img th:src="@{/img/result02.png}" alt="1차 면접"/></p></li>
+							<li><p class="f20 fw600">2차 면접</p><p class="mt20"><img th:src="@{/img/result03.png}" alt="2차 면접" /></p></li>
+						</ul>
+						<p class="f20 mt50 line-height150" th:text="|${member.name}님, 최종 합격을 축하드립니다.|"><br>입사와 관련된 자세한 사항은 개별 안내 예정입니다.<br>감사합니다.</p>
+						<!-- //최종합격 -->
+
+
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+</body>
+</html>

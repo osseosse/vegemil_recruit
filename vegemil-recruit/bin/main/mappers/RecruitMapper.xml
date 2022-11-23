@@ -92,7 +92,7 @@
 		WHERE
 			S_CLOSE = '1'
 		ORDER BY
-			s_insertdate ASC
+			s_insertdate DESC
 	</select>
 
 	<select id="selectRecruitTotalCount" resultType="int">

@@ -117,7 +117,7 @@ $('#pw1').keyup(function () {
 });
 
 //비밀번호 일치 검사
-$('input[name=pw]').keyup(function () {
+$('input[name=password]').keyup(function () {
 	const sName = $('#txtName').val();
 	const sEmail = $('#txtEmail').val();
 	const sHp = $('#txtHp').val();
@@ -214,109 +214,5 @@ $("#txtBirthday").keyup(function() {
      btnAvtive();
      
  });
-
-//생년월일 유효성검사
-/*
-function joinCheck() {
-	
-	
-	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-    var getName= RegExp(/^[가-힣]+$/);
-    var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
-    
-    var pw = $("#pw1").val();
-	var num = pw.search(/[0-9]/g);
-	var eng = pw.search(/[a-z]/ig);
-	var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-	var birth = $("#txtBirthday").val();
-	
-	//동의 검사
-	if($("#agree").is(":checked") == false) {
-		alert("개인정보 수집 이용동의 체크해주세요");
-		$("#agree").focus();
-		return false;
-	}
-	
-  	//이름 공백 검사
-    if($("#name").val() == ""){
-      alert("이름을 입력해주세요");
-      $("#name").focus();
-      return false;
-    }
-
-    //이름 유효성 검사
-    if(!getName.test($("#name").val())){
-      alert("이름형식에 맞게 입력해주세요")
-      $("#name").val("");
-      $("#name").focus();
-      return false;
-    }
-    
-  	//핸드폰 공백 확인
-    if($("#hp2").val() == ""){
-      alert("휴대폰 번호를 입력해주세요");
-      $("#hp2").focus();
-      return false;
-    }
-	if($("#hp3").val() == ""){
-	   alert("휴대폰 번호를 입력해주세요");
-	   $("#hp3").focus();
-	   return false;
-	}
-    
-  	//이메일 공백 확인
-    if($("#txtEmail").val() == ""){
-      alert("이메일을 입력해주세요");
-      $("#txtEmail").focus();
-      return false;
-    }
-
-    //비밀번호 공백 확인
-    if($("#password").val() == ""){
-      alert("패스워드를 입력해 주세요");
-      $("#password").focus();
-      return false;
-    }
-         
-    //비밀번호 유효성검사
-    if( pw.length < 8 || pw.length > 20 ){
-    	alert("비밀번호는 8자 ~ 20자 내외로 입력해주세요");
-    	$("#password").focus();
-		return false;
-	} else if( pw.search(/\s/) != -1 ){
-		alert("공백이 없게 입력해주세요");
-		$("#password").focus();
-		return false;
-	} else if( num < 0 || eng < 0 || spe < 0 ){
-		alert("영문,숫자,특수문자를 혼합하여 입력해주세요");
-		$("#password").focus();
-		return false;
-	} else {
-	}
-         
-    //비밀번호 확인란 공백 확인
-    if($("#pw2").val() == ""){
-      alert("패스워드 확인란을 입력해주세요");
-      $("#pw2").focus();
-      return false;
-    }
-         
-    //비밀번호 서로확인
-    if($("#pw1").val() != $("#pw2").val()){
-        alert("비밀번호가 상이합니다");
-        $("#pw2").val("");
-        $("#pw2").focus();
-        return false;
-    }
-    
-	if( birth.length < 1){ 
-		alert("생년월일을 입력해주세요");
-		$("#txtBirthday").focus();
-		return false;
-	}
-	
-	return true;
-}
-*/
 
 /*]]>*/

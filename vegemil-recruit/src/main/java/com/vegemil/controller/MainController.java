@@ -58,11 +58,6 @@ public class MainController {
 		return "fragments/"+viewName;
     }
 	
-	@GetMapping(value = "/info/info")
-    public String moveInfo() throws Exception {
-		
-		return "info/info";
-    }
 	
 	@GetMapping(value = "/info/work")
     public String moveWork() throws Exception {

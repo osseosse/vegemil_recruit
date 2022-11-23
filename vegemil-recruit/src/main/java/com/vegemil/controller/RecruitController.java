@@ -67,6 +67,17 @@ public class RecruitController extends UiUtils {
 		return jsonObj;
 	}
 	
+	@GetMapping(value = "/info/info")
+    public String moveInfo(Model model, HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		RecruitDTO recruit = null;
+		recruit = RecruitService.getRecruitLatest();
+		model.addAttribute("recruit", recruit);
+		
+		return "info/info";
+    }
+	
 	@GetMapping(value = "/recruit/detail")
 	public String openRecruitDetail(@ModelAttribute("params") RecruitDTO params, @RequestParam(value = "sTh", required = false) String sTh, Model model, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
@@ -123,9 +134,10 @@ public class RecruitController extends UiUtils {
 		        application.setMemNo(member.getMemNo());
 		        application.setPhoneNo(member.getPhoneNo());
 		        
-		        int idx = applicationService.getIdx(application);
-		        if(idx != 0 ) {
-		        	return showMessageWithRedirect("지원서 입력 페이지로 이동합니다.", "/application/personalInfo?idx="+idx, Method.GET, null, model);
+		        int idxCount = applicationService.getIdxCount(application);
+		        if(idxCount != 0 ) {
+		        	int idx = applicationService.getIdx(application);
+		        	return showMessageWithRedirect("입사지원서 입력 페이지로 이동합니다.", "/application/personalInfo?idx="+idx, Method.GET, null, model);
 		        } else {
 		        	boolean isRegistered = applicationService.registerPersonalInfo(application);
 		        	if (isRegistered == false) {

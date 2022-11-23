@@ -12,6 +12,11 @@
 		<!-- ================================ Content ================================ -->
 		<section>
 			<div class="container100">
+				<div class="nav">
+					<div class="container1300 center">
+						<a href="/"><span class="round">HOME</span></a><img class="arrow" th:src="@{/img/arrow.png}" alt="화살표" /><a href="#"><span class="round">마이페이지</span></a>
+					</div>
+				</div>
 				<div class="container1300 center" >
 					<div class="memberWrapBase">
 						<div class="sidebar fixedsticky w300 f-left">
@@ -36,21 +41,23 @@
 									</div>
 									<div class="info02">
 										<dl class="mt20">
-											<dt><span class="f20 fw600 mt20 line-height140" th:if="${resume.setupTitle} != null and ${resume.setupTitle} != ''" th:text="${resume.setupTitle}"></span></dt>
+											<dt>
+												<a th:href="|@{/application/personalInfo}?idx=${resume.idx}|">
+												<span class="f20 fw600 mt20 line-height140" th:if="${resume.setupTitle} != null and ${resume.setupTitle} != ''" th:text="${resume.setupTitle}"></span>
+												</a>
+											</dt>
 											<dd>
 												<div class="list_ico_box">
 													<span><a th:href="|#pop_view${i.index+1}|" class="btn modal-open"><img th:src="@{/img/ico_view.png}" alt="미리보기"/></a></span> 
 													<span><a th:href="|@{/application/personalInfo}?idx=${resume.idx}|"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
 													<span><a th:href="|@{/application/delete}?idx=${resume.idx}|"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 												</div>
-												<!-- 
-												<button class="btn_reviewBox mt20" onclick = "location.href = '/mypage/result' ">
+												<button th:if="${resume.joinOk} != '접수'" class="btn_reviewBox mt20" th:onclick = "|location.href='/application/result/${resume.idx}'|">
 													<ul>
 														<li class="btn_review ">합격여부 확인</li>
 														<li class="btn_review_arrow ml10"></li>
 													</ul>
 												</button>
-												 -->
 											</dd>
 										</dl>
 									</div>
