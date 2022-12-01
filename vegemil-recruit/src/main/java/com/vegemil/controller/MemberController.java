@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vegemil.constant.Method;
 import com.vegemil.domain.MemberDTO;
@@ -52,6 +51,21 @@ public class MemberController extends UiUtils {
 		return "member/join";
 	}
 	
+	@GetMapping(value = "/member/emailSearch")
+	public String moveEmailSearch(Model model) {
+		
+		model.addAttribute("member", new MemberDTO());
+
+		return "member/emailSearch";
+	}
+	
+	@GetMapping(value = "/member/passwordSearch")
+	public String movePasswordSearch(Model model) {
+		
+		model.addAttribute("member", new MemberDTO());
+
+		return "member/passwordSearch";
+	}
 	
 	@PostMapping(value = "/member/register")
 	public String registerMember(
@@ -85,6 +99,45 @@ public class MemberController extends UiUtils {
 		return "member/joinConfirm";
 	}
 	
+	@PostMapping(value = "/member/resetPassword")
+	public String resetPassword(
+			@ModelAttribute("member") MemberDTO member,
+			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		int memCnt;
+		String mEmail = "";
+		
+		try {
+			
+			memCnt = memberService.isMemberCount(member);
+			//해당 회원 없음
+			if(memCnt == 0) {
+				out.println("<script>alert('비밀번호 재설정에 실패하였습니다.'); history.go(-1);</script>");
+				out.flush();
+			} else {
+				boolean isRegistered = memberService.resetPassword(member);
+				if (isRegistered == false) {
+					out.println("<script>alert('비밀번호 재설정에 실패하였습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+			}
+			
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.back();</script>");
+			out.flush();
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/member/list", Method.GET, null, model);
+
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/member/list", Method.GET, null, model);
+		}
+
+		return "member/pwResetResult";
+	}
+	
 	@GetMapping(value = "/member/login")
 	public String moveLogin(Model model, Authentication authentication) {
 		
@@ -94,66 +147,29 @@ public class MemberController extends UiUtils {
 		return "member/login";
 	}
 	
-	@GetMapping(value = "/member/detail")
-	public String openMemberDetail(@ModelAttribute("params") MemberDTO params, @RequestParam(value = "sTh", required = false) String emailAddr, Model model, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (emailAddr == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
-			out.flush();
-			return showMessageWithRedirect("올바르지 않은 접근입니다.", "member/memberList", Method.GET, null, model);
-		}
-		MemberDTO member = memberService.loadUserByUsername(emailAddr);
-		if (member == null) {
-			out.println("<script>alert('이미 종료된 채용입니다.'); history.go(-1);</script>");
-			out.flush();
-			return showMessageWithRedirect("이미 종료된 채용입니다.", "member/memberList", Method.GET, null, model);
-		}
-		model.addAttribute("member", member);
-
-		return "member/detail";
-	}
 	
-	@PostMapping(value = "/member/infoUpdate")
-	public String updateMemberInfo(@ModelAttribute("params") final MemberDTO params, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+	@PostMapping(value = "/member/searchEmail")
+	public String searchEmail(
+			@ModelAttribute("member") MemberDTO member,
+			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		String emailAddr = "";
+		
 		try {
-			boolean isRegistered = memberService.resetPassword(params);
-			if (isRegistered == false) {
-				out.println("<script>alert('비밀번호 재설정에 실패하였습니다.'); history.go(-1);</script>");
-				out.flush();
-			}
-		} catch (DataAccessException e) {
-			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
-			out.flush();
-			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
-
+			
+			emailAddr = memberService.searchEmail(member);
+			model.addAttribute("emailAddr", emailAddr);
+			
 		} catch (Exception e) {
 			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
 			out.flush();
-			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/home", Method.GET, null, model);
 		}
-		
-		return "member/login";
+
+		return "member/idSearchResult";
 	}
 	
-	@GetMapping(value = "/member/infoCheck")
-	public void changeCheck(@RequestParam(value = "memId", required = false) String emailAddr, @RequestParam(value = "active", required = false) int active, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		if (emailAddr == null) {
-			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
-			out.flush();
-		}
-		MemberDTO member = memberService.loadUserByUsername(emailAddr);
-		member.setEmailAddr(emailAddr);
-		member.setActive(active);
-		boolean isRegistered = memberService.registerMember(member);
-		if (isRegistered == false) {
-			out.println("<script>alert('메인화면 진열 변경에 실패하였습니다.'); window.location='/admin/baby/babyInfoList';</script>");
-			out.flush();
-		}
-	}
 	
 }

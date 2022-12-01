@@ -1,7 +1,11 @@
 package com.vegemil.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,17 +22,21 @@ import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.QnaDTO;
 import com.vegemil.domain.ResumeDTO;
 import com.vegemil.service.ApplicationService;
+import com.vegemil.service.MemberService;
 import com.vegemil.service.QnaService;
 import com.vegemil.util.UiUtils;
 
 @Controller
-public class QnaController extends UiUtils {
+public class MypageController extends UiUtils {
 
 	@Autowired
 	private QnaService qnaService;
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@GetMapping(value = "/mypage/qna")
 	public String openQnaWrite(@ModelAttribute("params") QnaDTO params, @RequestParam(value = "qId", required = false) Long qId, Model model , Authentication authentication) {
@@ -202,6 +210,68 @@ public class QnaController extends UiUtils {
 		}
 
 		return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/adminQna", Method.GET, pagingParams, model);
+	}
+	
+	@GetMapping(value = "/mypage/detail")
+	public String openMemberDetail(@ModelAttribute("params") MemberDTO params, @RequestParam(value = "sTh", required = false) String emailAddr, Model model, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (emailAddr == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "member/memberList", Method.GET, null, model);
+		}
+		MemberDTO member = memberService.loadUserByUsername(emailAddr);
+		if (member == null) {
+			out.println("<script>alert('이미 종료된 채용입니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("이미 종료된 채용입니다.", "member/memberList", Method.GET, null, model);
+		}
+		model.addAttribute("member", member);
+
+		return "member/detail";
+	}
+	
+	@PostMapping(value = "/mypage/infoUpdate")
+	public String updateMemberInfo(@ModelAttribute("params") final MemberDTO params, Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		try {
+			boolean isRegistered = memberService.resetPassword(params);
+			if (isRegistered == false) {
+				out.println("<script>alert('비밀번호 재설정에 실패하였습니다.'); history.go(-1);</script>");
+				out.flush();
+			}
+		} catch (DataAccessException e) {
+			out.println("<script>alert('데이터베이스 처리 과정에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+
+		} catch (Exception e) {
+			out.println("<script>alert('시스템에 문제가 발생하였습니다.'); history.go(-1);</script>");
+			out.flush();
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/", Method.GET, null, model);
+		}
+		
+		return "member/login";
+	}
+	
+	@GetMapping(value = "/mypage/infoCheck")
+	public void changeCheck(@RequestParam(value = "memId", required = false) String emailAddr, @RequestParam(value = "active", required = false) int active, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (emailAddr == null) {
+			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
+			out.flush();
+		}
+		MemberDTO member = memberService.loadUserByUsername(emailAddr);
+		member.setEmailAddr(emailAddr);
+		member.setActive(active);
+		boolean isRegistered = memberService.registerMember(member);
+		if (isRegistered == false) {
+			out.println("<script>alert('메인화면 진열 변경에 실패하였습니다.'); window.location='/admin/baby/babyInfoList';</script>");
+			out.flush();
+		}
 	}
 
 }

@@ -89,8 +89,6 @@ function endDateChange(e) {
 				alert("저장에 실패하였습니다.");
 				return false;
 			}
-			//임시저장 토스트
-			//printCommentList();
 			alert("저장되었습니다.");
 		},
 		error: function(xhr, status, error) {

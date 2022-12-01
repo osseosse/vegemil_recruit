@@ -2,6 +2,7 @@ package com.vegemil.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,10 +122,20 @@ public class ApplicationServiceImpl implements ApplicationService {
 	
 	@Override
 	@Transactional
-	public boolean registerAcademyInfo(AcademyInfoDTO params) {
+	public boolean updateAcademyInfo(Map<String, Object> params) {
 		int queryResult = 0;
 		
 		queryResult = applicationMapper.updateAcademy(params);
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	@Override
+	@Transactional
+	public boolean registerAcademyInfo(AcademyInfoDTO params) {
+		int queryResult = 0;
+		
+		queryResult = applicationMapper.registAcademy(params);
 
 		return (queryResult == 1) ? true : false;
 	}

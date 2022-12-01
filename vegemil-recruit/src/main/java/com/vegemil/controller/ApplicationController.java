@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -292,8 +293,9 @@ public class ApplicationController extends UiUtils {
 		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/qualification?idx="+application.getIdx(), Method.GET, null, model);
 	}
 	
-	@RequestMapping(value = { "/application/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH })
-	public @ResponseBody JsonObject updateAcademy(@PathVariable(value = "idx", required = false) Long idx, @RequestBody final AcademyInfoDTO params, Authentication authentication) {
+	@RequestMapping(value = { "/application/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonObject updateAcademy(@RequestBody Map<String, Object> academyInfoMap, Authentication authentication) {
 
 		JsonObject jsonObj = new JsonObject();
 
@@ -301,13 +303,10 @@ public class ApplicationController extends UiUtils {
 			
 			MemberDTO member = (MemberDTO) authentication.getPrincipal();
 			if(member != null) {
-			
-				params.setEmailAddr(member.getEmailAddr());
-				params.setMemName(member.getMemName());
-				params.setMemNo(member.getMemNo());
-				params.setPhoneNo(member.getPhoneNo());
-		        
-		        boolean isRegistered = applicationService.registerAcademyInfo(params);
+				
+				academyInfoMap.put("memNo", member.getMemNo());
+				
+		        boolean isRegistered = applicationService.updateAcademyInfo(academyInfoMap);
 				jsonObj.addProperty("result", isRegistered);
 				
 			}
@@ -483,7 +482,7 @@ public class ApplicationController extends UiUtils {
 	
 	@RequestMapping(value = { "/application/updateCareer" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public @ResponseBody JsonObject updateCareer(CareerDTO params,
-														HttpServletResponse response, HttpServletRequest request, Authentication authentication) {
+												HttpServletResponse response, HttpServletRequest request, Authentication authentication) {
 
 		JsonObject jsonObj = new JsonObject();
 
@@ -527,7 +526,7 @@ public class ApplicationController extends UiUtils {
 	
 	@PostMapping(value = "/application/registerCareer")
 	public String registerCareer(@ModelAttribute("app") final CareerDTO application, 
-			BindingResult bindingResult, @RequestParam("portFile") MultipartFile fileName, Model model, 
+			BindingResult bindingResult, @RequestParam("fileName") MultipartFile fileName, Model model, 
 			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

@@ -25,7 +25,7 @@
 		, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 		, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3
 		, lang_talk3, lang_make3, lang_read3
-    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5, sw_name6, sw_lv6
+    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5
     	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
     	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
     	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
@@ -43,7 +43,8 @@
 	
 	<sql id="introduceColumns">
 		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
-		, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
+		, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
+		, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
 	</sql>
 
 	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
@@ -84,13 +85,45 @@
 			idx = #{idx} and mem_no= #{memNo}
 	</update>
 	
-	<update id="updateAcademy" parameterType="com.vegemil.domain.AcademyInfoDTO">
+	<update id="registAcademy" parameterType="com.vegemil.domain.AcademyInfoDTO">
 		UPDATE R_Recruit
 		SET
 			  last_academy = #{lastAcademy}
 			<if test="selectAcademy == 'high_list'">
 			, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
-			, sch_admis1 = #{schAdmis1}, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
+			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
+			</if>
+			<if test="selectAcademy == 'colg_list'">
+			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
+			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}
+			</if>
+			<if test="selectAcademy == 'univ_list'">
+			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
+			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}
+			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_admis3=#{schAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
+			</if>
+			<if test="selectAcademy == 'mast_list'">
+			, sch_grad4 = #{schGrad4}, sch_enter_ym4 = #{schEnterYm4}, sch_dep_type4=#{schDepType4}
+			, sch_grad_ym4 = #{schGradYm4}, sch_name4 = #{schName4}, sch_admis4 = #{schAdmis4}, sch_major4 = #{schMajor4}, sch_site4 = #{schSite4}
+			, sch_night4 = #{schNight4}, sch_point_evg4 = #{schPointEvg4}
+			</if>
+			<if test="selectAcademy == 'doct_list'">
+			, sch_grad5 = #{schGrad5}, sch_enter_ym5 = #{schEnterYm5}, sch_grad_ym5 = #{schEnterYm5}
+			, sch_name5 = #{schName5}, sch_admis5 = #{schAdmis5}, sch_dep_type5=#{schDepType5}, sch_major5 = #{schMajor5}, sch_site5 = #{schSite5}, sch_night5 = #{schNight5}
+			, sch_point_evg5 = #{schPointEvg5}
+			</if>
+			, update_date = NOW()
+		WHERE
+			idx = #{idx} and mem_no= #{memNo}
+	</update>
+	
+	<update id="updateAcademy" parameterType="hashMap">
+		UPDATE R_Recruit
+		SET
+			  last_academy = #{lastAcademy}
+			<if test="selectAcademy == 'high_list'">
+			, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
+			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
 			</if>
 			<if test="selectAcademy == 'colg_list'">
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
@@ -249,7 +282,8 @@
 				, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
 				, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
 				, port_file, port_url
-				, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
+				, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
+				, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
 		FROM R_Recruit
 		WHERE idx= #{idx}
 	</select>
@@ -285,7 +319,8 @@
 				, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
 				, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
 				, port_file, port_url
-				, introduce1, introduce2, introduce3, introduce4, introduce5, introduce6
+				, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
+				, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
 		FROM R_Recruit
 		WHERE mem_no= #{memNo}
 		ORDER BY

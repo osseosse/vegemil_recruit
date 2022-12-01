@@ -265,107 +265,109 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-lg-6 mt20">
-										<ul class="s-d-2">
-											<li class="f14">군별</li>
-											<li>
-												<div class="custom-sel w180">
-												  <select th:field="*{milArm}">
-													<option value="">선택해 주세요</option>
-													<option value="육군">육군</option>
-													<option value="해군">해군</option>
-													<option value="공군">공군</option>
-													<option value="해병">해병</option>
-													<option value="전경">전경</option>
-													<option value="의경">의경</option>
-													<option value="공익">공익</option>
-													<option value="병특">병특</option>
-													<option value="기타">기타</option>
-												  </select>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="col-lg-6 mt20">
-										<ul class="s-d-2">
-											<li class="f14">병과</li>
-											<li>
-												<div class="custom-sel w180">
-												  <select th:field="*{milType}">
-													<option value="">선택해 주세요</option>
-													<option value="보병">보병</option>
-													<option value="행정">행정</option>
-													<option value="수송">수송</option>
-													<option value="의무">의무</option>
-													<option value="작전">작전</option>
-													<option value="보급">보급</option>
-													<option value="통신">통신</option>
-													<option value="포병">포병</option>
-													<option value="기갑">기갑</option>
-													<option value="공병">공병</option>
-													<option value="화학">화학</option>
-													<option value="기타">기타</option>
-												  </select>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="col-lg-6 mt20">
-										<ul class="s-d-2">
-											<li class="f14">계급</li>
-											<li>
-												<div class="custom-sel w180">
-												  <select th:field="*{milLv}">
-													<option value="">선택해 주세요</option>
-													<option value="이병">이병</option>
-													<option value="일병">일병</option>
-													<option value="상병">상병</option>
-													<option value="병장">병장</option>
-													<option value="하사">하사</option>
-													<option value="중사">중사</option>
-													<option value="상사">상사</option>
-													<option value="원사">원사</option>
-													<option value="준위">준위</option>
-													<option value="소위">소위</option>
-													<option value="중위">중위</option>
-													<option value="대위">대위</option>
-												  </select>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="col-lg-12 mt20">
-										<ul class="s-d-2">
-											<li class="f14">복무기간</li>
-											<li>
-												<input type="text" id="milSDate" th:field="*{milSDate}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
-											</li>
-											<li class="ml10 mr10"> ~ </li>
-											<li>
-												<input type="text" id="milEDate" th:field="*{milEdate}" class="inType01 w180 ls1" placeholder="YYYY-MM" >
-											</li>
-
-										</ul>
-									</div>
-									<div class="col-lg-12 mt20">
-										<ul class="s-d-2">
-											<li class="f14">제대구분</li>
-											<li>
-												<div class="custom-sel w180">
-												  <select th:field="*{milTicket}" >
-													<option value="">선택해 주세요</option>
-													<option value="만기제대(병장,부사관,장교)">만기제대(병장,부사관,장교)</option>
-													<option value="소집해제(사회복무.공익)">소집해제(사회복무.공익)</option>
-													<option value="의가사제대">의가사제대</option>
-													<option value="의병제대">의병제대</option>
-													<option value="불명예제대">불명예제대</option>
-													<option value="상의제대">상의제대</option>
-													<option value="기타사유">기타사유</option>
-												  </select>
-												</div>
-											</li>
-										</ul>
-									</div>
+									<div class="row  pt30 pd30" id="milSapce">
+										<div class="col-lg-6 mt20">
+											<ul class="s-d-2">
+												<li class="f14">군별</li>
+												<li>
+													<div class="custom-sel w180">
+													  <select th:field="*{milArm}">
+														<option value="">선택해 주세요</option>
+														<option value="육군">육군</option>
+														<option value="해군">해군</option>
+														<option value="공군">공군</option>
+														<option value="해병">해병</option>
+														<option value="전경">전경</option>
+														<option value="의경">의경</option>
+														<option value="공익">공익</option>
+														<option value="병특">병특</option>
+														<option value="기타">기타</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt20">
+											<ul class="s-d-2">
+												<li class="f14">병과</li>
+												<li>
+													<div class="custom-sel w180">
+													  <select th:field="*{milType}">
+														<option value="">선택해 주세요</option>
+														<option value="보병">보병</option>
+														<option value="행정">행정</option>
+														<option value="수송">수송</option>
+														<option value="의무">의무</option>
+														<option value="작전">작전</option>
+														<option value="보급">보급</option>
+														<option value="통신">통신</option>
+														<option value="포병">포병</option>
+														<option value="기갑">기갑</option>
+														<option value="공병">공병</option>
+														<option value="화학">화학</option>
+														<option value="기타">기타</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt20">
+											<ul class="s-d-2">
+												<li class="f14">계급</li>
+												<li>
+													<div class="custom-sel w180">
+													  <select th:field="*{milLv}">
+														<option value="">선택해 주세요</option>
+														<option value="이병">이병</option>
+														<option value="일병">일병</option>
+														<option value="상병">상병</option>
+														<option value="병장">병장</option>
+														<option value="하사">하사</option>
+														<option value="중사">중사</option>
+														<option value="상사">상사</option>
+														<option value="원사">원사</option>
+														<option value="준위">준위</option>
+														<option value="소위">소위</option>
+														<option value="중위">중위</option>
+														<option value="대위">대위</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-12 mt20">
+											<ul class="s-d-2">
+												<li class="f14">복무기간</li>
+												<li>
+													<input type="text" id="milSDate" th:field="*{milSDate}"  class="inType01 w180 ls1" placeholder="YYYY-MM" >
+												</li>
+												<li class="ml10 mr10"> ~ </li>
+												<li>
+													<input type="text" id="milEDate" th:field="*{milEdate}" class="inType01 w180 ls1" placeholder="YYYY-MM" >
+												</li>
+	
+											</ul>
+										</div>
+										<div class="col-lg-12 mt20">
+											<ul class="s-d-2">
+												<li class="f14">제대구분</li>
+												<li>
+													<div class="custom-sel w180">
+													  <select th:field="*{milTicket}" >
+														<option value="">선택해 주세요</option>
+														<option value="만기제대(병장,부사관,장교)">만기제대(병장,부사관,장교)</option>
+														<option value="소집해제(사회복무.공익)">소집해제(사회복무.공익)</option>
+														<option value="의가사제대">의가사제대</option>
+														<option value="의병제대">의병제대</option>
+														<option value="불명예제대">불명예제대</option>
+														<option value="상의제대">상의제대</option>
+														<option value="기타사유">기타사유</option>
+													  </select>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div><!-- milSpace -->	
 								</div>
 							</div>
 							<!-- //(4)개인신상 및 기타 -->

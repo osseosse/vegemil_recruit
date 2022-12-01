@@ -471,83 +471,129 @@ $("#schPointEvg").keydown(function(){
 function registerAcademy() {
 
 	var uri = "/application/updateAcademy";
-	const headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
-	const idx = $("#idx").val();
-	const selectAcademy = $("#selectAcademy option:selected").val();
-	const lastAcademy = $("#lastAcademy").val();
-	var academyDTO;
+	var headers = {"Content-Type" : "application/json", "X-HTTP-Method-Override" : "POST"};
+	var idx = Number($("#idx").val());
+	var selectAcademy = $("#selectAcademy option:selected").val();
+	var lastAcademy = $("#lastAcademy").val();
+	var academyInfoDTO;
 	
 	if(selectAcademy == 'high_list') {
-		var schName1 = $("#schName").val();
-   		var schSite1 = $("#schSite").val();
-   		var schNight1 = $("#schNight").val();
-   		var schAdmis1 = $("#schAdmis option:selected").val();
-   		var schGrad1 = $("#schGrad").val();
-   		var schEnterYm1 = $("#schEnterYm").val();
-   		var schGradYm1 = $("#schGradYm").val();
-   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis1": schAdmis1
+		var schName1 = "";
+   		var schSite1 = "";
+   		var schNight1 = "";
+   		var schGrad1 = "";
+   		var schEnterYm1 = "";
+   		var schGradYm1 = "";
+		schName1 = $("#schName").val();
+   		schSite1 = $("#schSite").val();
+   		schNight1 = $("#schNight").val();
+   		schGrad1 = $("#schGrad").val();
+   		schEnterYm1 = $("#schEnterYm").val();
+   		schGradYm1 = $("#schGradYm").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy
 			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schGrad1": schGrad1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
 			};
    		
 	} else if(selectAcademy == 'colg_list') {
-		var schName2 = $("#schName").val();
-   		var schSite2 = $("#schSite").val();
-   		var schNight2 = $("#schNight").val();
-   		var schAdmis2 = $("#schAdmis option:selected").val();
-   		var schGrad2 = $("#schGrad").val();
-   		var schPointEvg2 = $("#schPointEvg").val();
-   		var schMajor2 = $("#schMajor").val();
-   		var schEnterYm2 = $("#schEnterYm").val();
-   		var schGradYm2 = $("#schGradYm").val();
-   		var schSubMajor2 = $("#schSubMajor").val();
-   		var schSubPointEvg2 = $("#schSubPointEvg").val();
-   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
+		var schName2 = "";
+   		var schSite2 = "";
+   		var schNight2 = "";
+   		var schAdmis2 = "";
+   		var schGrad2 = "";
+   		var schPointEvg2 = "";
+   		var schMajor2 = "";
+   		var schEnterYm2 = "";
+   		var schGradYm2 = "";
+   		var schSubMajor2 = "";
+   		var schSubPointEvg2 = "";
+		schName2 = $("#schName").val();
+   		schSite2 = $("#schSite").val();
+   		schNight2 = $("#schNight").val();
+   		schAdmis2 = $("#schAdmis option:selected").val();
+   		schGrad2 = $("#schGrad").val();
+   		schPointEvg2 = $("#schPointEvg").val();
+   		schMajor2 = $("#schMajor").val();
+   		schEnterYm2 = $("#schEnterYm").val();
+   		schGradYm2 = $("#schGradYm").val();
+   		schSubMajor2 = $("#schSubMajor").val();
+   		schSubPointEvg2 = $("#schSubPointEvg").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
 			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schGrad2": schGrad2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
 			};
    		
 	} else if(selectAcademy == 'univ_list') {
-		var schName3 = $("#schName").val();
-   		var schSite3 = $("#schSite").val();
-   		var schNight3 = $("#schNight option:selected").val();
-   		var schGrad3 = $("#schGrad option:selected").val();
-   		var schAdmis3 = $("#schAdmis option:selected").val();
-   		var schMajor3 = $("#schMajor").val();
-   		var schPointEvg3 = $("#schPointEvg").val();
-   		var schDepType3 = $("#schDepType option:selected").val();
-   		var schEnterYm3 = $("#schEnterYm").val();
-   		var schGradYm3 = $("#schGradYm").val();
-   		var schSubMajor3 = $("#schSubMajor").val();
-   		var schSubPointEvg3 = $("#schSubPointEvg").val();
-   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3
+		var schName3 = "";
+   		var schSite3 = "";
+   		var schNight3 = "";
+   		var schGrad3 = "";
+   		var schAdmis3 = "";
+   		var schMajor3 = "";
+   		var schPointEvg3 = "";
+   		var schDepType3 = "";
+   		var schEnterYm3 = "";
+   		var schGradYm3 = "";
+   		var schSubMajor3 = "";
+   		var schSubPointEvg3 = "";
+		schName3 = $("#schName").val();
+   		schSite3 = $("#schSite").val();
+   		schNight3 = $("#schNight option:selected").val();
+   		schGrad3 = $("#schGrad option:selected").val();
+   		schAdmis3 = $("#schAdmis option:selected").val();
+   		schMajor3 = $("#schMajor").val();
+   		schPointEvg3 = $("#schPointEvg").val();
+   		schDepType3 = $("#schDepType option:selected").val();
+   		schEnterYm3 = $("#schEnterYm").val();
+   		schGradYm3 = $("#schGradYm").val();
+   		schSubMajor3 = $("#schSubMajor").val();
+   		schSubPointEvg3 = $("#schSubPointEvg").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3
 			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schAdmis3": schAdmis3, "schGrad3": schGrad3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3
 			, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
 			};
 	
 	} else if(selectAcademy == 'mast_list') {
-		var schName4 = $("#schName").val();
-   		var schSite4 = $("#schSite").val();
-   		var schNight4 = $("#schNight").val();
-   		var schAdmis4 = $("#schAdmis option:selected").val();
-   		var schGrad4 = $("#schGrad").val();
-   		var schEnterYm4 = $("#schEnterYm").val();
-   		var schGradYm4 = $("#schGradYm").val();
-   		var schMajor4 = $("#schMajor").val();
-   		var schPointEvg4 = $("#schPointEvg").val();
-   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis4": schAdmis4
+		var schName4 = "";
+   		var schSite4 = "";
+   		var schNight4 = "";
+   		var schAdmis4 = "";
+   		var schGrad4 = "";
+   		var schEnterYm4 = "";
+   		var schGradYm4 = "";
+   		var schMajor4 = "";
+   		var schPointEvg4 = "";
+		schName4 = $("#schName").val();
+   		schSite4 = $("#schSite").val();
+   		schNight4 = $("#schNight").val();
+   		schAdmis4 = $("#schAdmis option:selected").val();
+   		schGrad4 = $("#schGrad").val();
+   		schEnterYm4 = $("#schEnterYm").val();
+   		schGradYm4 = $("#schGradYm").val();
+   		schMajor4 = $("#schMajor").val();
+   		schPointEvg4 = $("#schPointEvg").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis4": schAdmis4
 			, "schName4": schName4, "schSite4": schSite4, "schNight4": schNight4, "schGrad4": schGrad4, "schEnterYm4": schEnterYm4, "schGradYm4": schGradYm4, "schMajor4": schMajor4, "schPointEvg4": schPointEvg4
 			};
    		
 	} else if(selectAcademy == 'doct_list') {
-		var schName5 = $("#schName").val();
-   		var schSite5 = $("#schSite").val();
-   		var schNight5 = $("#schNight").val();
-   		var schAdmis5 = $("#schAdmis option:selected").val();
-   		var schGrad5 = $("#schGrad").val();
-   		var schEnterYm5 = $("#schEnterYm").val();
-   		var schGradYm5 = $("#schGradYm").val();
-   		var schMajor5 = $("#schMajor").val();
-   		var schPointEvg5 = $("#schPointEvg").val();
-   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis5": schAdmis5
+		var schName5 = "";
+   		var schSite5 = "";
+   		var schNight5 = "";
+   		var schAdmis5 = "";
+   		var schGrad5 = "";
+   		var schEnterYm5 = "";
+   		var schGradYm5 = "";
+   		var schMajor5 = "";
+   		var schPointEvg5 = "";
+		schName5 = $("#schName").val();
+   		schSite5 = $("#schSite").val();
+   		schNight5 = $("#schNight").val();
+   		schAdmis5 = $("#schAdmis option:selected").val();
+   		schGrad5 = $("#schGrad").val();
+   		schEnterYm5 = $("#schEnterYm").val();
+   		schGradYm5 = $("#schGradYm").val();
+   		schMajor5 = $("#schMajor").val();
+   		schPointEvg5 = $("#schPointEvg").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis5": schAdmis5
 			, "schName5": schName5, "schSite5": schSite5, "schNight5": schNight5, "schGrad5": schGrad5, "schEnterYm5": schEnterYm5, "schGradYm5": schGradYm5, "schMajor5": schMajor5, "schPointEvg5": schPointEvg5
 			};
 	}
@@ -559,7 +605,7 @@ function registerAcademy() {
 		type: "POST",
 		headers: headers,
 		dataType: "json",
-		data: JSON.stringify(academyDTO),
+		data: JSON.stringify(academyInfoDTO),
 		success: function(response) {
 			if (response.result == false) {
 				alert("저장에 실패하였습니다.");
@@ -579,7 +625,7 @@ function registerAcademy() {
 				htmlString+= "			<span class='sublist' id='schName1'>"+schName1+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite1'>"+schSite1+"</span>";
 				htmlString+= "			<span class='sublist' id='schNight1'>"+schNight1+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm1+" "+schAdmis1+" ~ "+schGradYm1+" "+schGrad1+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm1+" 입학 ~ "+schGradYm1+" "+schGrad1+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'high_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';

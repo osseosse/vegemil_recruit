@@ -1,6 +1,7 @@
 package com.vegemil.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.vegemil.domain.AcademyInfoDTO;
 import com.vegemil.domain.ApplicationDTO;
@@ -23,6 +24,8 @@ public interface ApplicationService {
 	public List<ApplicationDTO> getApplicationList(ApplicationDTO params);
 	
 	public boolean registerPersonalInfo(PersonalInfoDTO params);
+	
+	public boolean updateAcademyInfo(Map<String, Object> params);
 	
 	public boolean registerAcademyInfo(AcademyInfoDTO params);
 	

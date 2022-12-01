@@ -62,7 +62,7 @@
 													<input type="text" th:id="internEDate" th:name="internEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
 												</li>
 												<li class="ml30">
-													<label><input type="checkbox" name="#" value="재직중" th:id="internIng" th:name="internIng"> 재직중</label>
+													<label><input type="checkbox" th:id="internIng" th:name="internIng"> 재직중</label>
 												</li>
 											</ul>
 										</div>
@@ -104,8 +104,8 @@
 												<li>
 													<input type="text" th:id="hisEDate" th:name="hisEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
 												</li>
-												<li class="ml30 checkStyle">
-													<label><input type="checkbox" name="#" value="재직중" th:id="hisIng" th:name="hisIng"> 재직중</label>
+												<li class="ml30">
+													<label><input type="checkbox" th:id="hisIng" th:name="hisIng"> 재직중</label>
 												</li>
 											</ul>
 										</div>
@@ -170,7 +170,7 @@
 											<li>
 												<div class="filebox w600">
 												<input class="upload-name" th:value="*{portFile}" placeholder="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재">
-												<label for="portFile">파일선택</label><input type="file" accept=".pdf,.zip" th:field="*{portFile}">
+												<label for="fileName">파일선택</label><input type="file" accept=".pdf,.zip" id="fileName" name="fileName">
 												</div>
 											</li>
 										</ul>
@@ -204,7 +204,7 @@
 		================================ -->
 	</div><!-- //wrap bg_01 -->
 	<!-- 이력서미리보기 -->
-	<div th:replace="fragments/resumeView :: resumeFragment"></div>
+	<th:block  th:replace="fragments/resumeView :: resumeFragment"></th:block >
 	<script th:src="@{/common/js/modality.js}"></script>
 	<!-- 팝업 script -->
 	<script>
@@ -227,7 +227,9 @@ $(document).ready(function(){
 	var internIng = /*[[ ${app.internIng} ]]*/;
 	
 	//인턴
-	if(internIng == '1') {
+	if(internIng == 'on') {
+		$("input:checkbox[id='internIng']").prop("checked", true);
+	} else {
 		$("input:checkbox[id='internIng']").prop("checked", false);
 	}
 	$("input[name='internName']").val(/*[[ ${app.internName} ]]*/);
@@ -237,7 +239,9 @@ $(document).ready(function(){
 	
 	if(hisCount == 1) {
 		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
-		if(hisIng1 == '1') {
+		if(hisIng1 == 'on') {
+			$("input:checkbox[id='hisIng1']").prop("checked", true);
+		} else {
 			$("input:checkbox[id='hisIng1']").prop("checked", false);
 		}
 		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
@@ -248,6 +252,8 @@ $(document).ready(function(){
 	} else if(hisCount == 2) {
 		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
 		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", true);
+		} else {
 			$("input:checkbox[id='hisIng1']").prop("checked", false);
 		}
 		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
@@ -257,8 +263,10 @@ $(document).ready(function(){
 		$("input[name='hisPay1']").val(/*[[ ${app.hisPay1} ]]*/);
 		
 		$("input[name='hisCoName2']").val(/*[[ ${app.hisCoName2} ]]*/);
-		if(hisIng1 == '1') {
-			$("input:checkbox[id='hisIng1']").prop("checked", false);
+		if(hisIng2 == 'on') {
+			$("input:checkbox[id='hisIng2']").prop("checked", true);
+		} else {
+			$("input:checkbox[id='hisIng2']").prop("checked", false);
 		}
 		$("input[name='hisSDate2']").val(/*[[ ${app.hisSDate2} ]]*/);
 		$("input[name='hisEDate2']").val(/*[[ ${app.hisEDate2} ]]*/);
@@ -268,6 +276,8 @@ $(document).ready(function(){
 	} else if(hisCount == 3) {
 		$("input[name='hisCoName1']").val(/*[[ ${app.hisCoName1} ]]*/);
 		if(hisIng1 == '1') {
+			$("input:checkbox[id='hisIng1']").prop("checked", true);
+		} else {
 			$("input:checkbox[id='hisIng1']").prop("checked", false);
 		}
 		$("input[name='hisSDate1']").val(/*[[ ${app.hisSDate1} ]]*/);
@@ -276,7 +286,9 @@ $(document).ready(function(){
 		$("input[name='hisDuty1']").val(/*[[ ${app.hisDuty1} ]]*/);
 		$("input[name='hisPay1']").val(/*[[ ${app.hisPay1} ]]*/);
 		$("input[name='hisCoName2']").val(/*[[ ${app.hisCoName2} ]]*/);
-		if(hisIng2 == '1') {
+		if(hisIng2 == 'on') {
+			$("input:checkbox[id='hisIng2']").prop("checked", true);
+		} else {
 			$("input:checkbox[id='hisIng2']").prop("checked", false);
 		}
 		$("input[name='hisSDate2']").val(/*[[ ${app.hisSDate2} ]]*/);
@@ -285,7 +297,9 @@ $(document).ready(function(){
 		$("input[name='hisDuty2']").val(/*[[ ${app.hisDuty2} ]]*/);
 		$("input[name='hisPay2']").val(/*[[ ${app.hisPay2} ]]*/);
 		$("input[name='hisCoName3']").val(/*[[ ${app.hisCoName3} ]]*/);
-		if(hisIng3 == '1') {
+		if(hisIng3 == 'on') {
+			$("input:checkbox[id='hisIng3']").prop("checked", true);
+		} else {
 			$("input:checkbox[id='hisIng3']").prop("checked", false);
 		}
 		$("input[name='hisSDate3']").val(/*[[ ${app.hisSDate3} ]]*/);

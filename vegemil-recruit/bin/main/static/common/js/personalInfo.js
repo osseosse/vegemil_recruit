@@ -148,6 +148,19 @@ function execPostcode() {
 	     
 	 });
 	 /*[- end of function -]*/
+	 
+	 $("input[name='milClass']:radio").change(function () {
+        //라디오 버튼 값
+        var clickVal = this.value;
+        
+        if(clickVal == '비대상') {
+        	$("#milSapce").hide();
+        } else {
+        	$("#milSapce").show();
+        }
+                        
+	});
+	 
      
      function updatePersonalInfo() {
 

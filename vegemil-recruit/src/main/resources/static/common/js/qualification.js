@@ -13,12 +13,12 @@
         'id': window.id1,
     },
     show: function () {
-      if(window.id1 < 4) {
+      if(window.id1 < 3) {
    	      $(this).slideDown();
    	      window.id1++;
    	      $('#langCount').val(window.id1);
       } else {
-      	alert("어학은 4개까지 입력 가능합니다.");
+      	alert("어학은 3개까지 입력 가능합니다.");
       	return false;
       }
     },
@@ -36,12 +36,12 @@
         'id': window.id2,
     },
     show: function () {
-      if(window.id2 < 5) {
+      if(window.id2 < 4) {
    	      $(this).slideDown();
    	      window.id2++;
    	      $('#licCount').val(window.id2);
       } else {
-      	alert("자격 및 면허는 5개까지 입력 가능합니다.");
+      	alert("자격 및 면허는 4개까지 입력 가능합니다.");
       	return false;
       }
     },
@@ -196,18 +196,16 @@ function categoryChange(e) {
      
  function updateQualification() {
 
-	const uri = "/application/updateQualification";
-	const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};
+	var uri = "/application/updateQualification";
 	
 	$.ajax({
    			url: uri,
    			type: "POST",
-   			//headers: headers,
+   			enctype: "multipart/form-data",
    			dataType: "json",
+   			processData: false,
    			contentType: false,
-      		processData: false,
             data: new FormData($("#qualform")[0]),
-			enctype: "multipart/form-data",
    			success: function(response) {
    				if (response.result == false) {
    					alert("저장에 실패하였습니다.");

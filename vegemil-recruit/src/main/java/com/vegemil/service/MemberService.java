@@ -30,6 +30,23 @@ public class MemberService implements UserDetailsService  {
 		return memberTotalCount;
 	}
 	
+	public int isMemberCount(MemberDTO params) {
+		int memCount = memberMapper.isMemberCount(params);
+		
+		if(memCount < 0 ) {
+			memCount = 0;
+		}
+		
+		return memCount;
+	}
+	
+	public String searchEmail(MemberDTO member) throws Exception{
+		
+		String emailAddr = memberMapper.getEmailAddr(member);
+		
+		return emailAddr;
+	}
+	
 	public int getMemberCountByEmail(MemberDTO params) {
 		int memCount = memberMapper.selectMemberCount(params);
 		
@@ -81,7 +98,7 @@ public class MemberService implements UserDetailsService  {
 		memCount = memberMapper.selectMemberCount(member);
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		
-		if (memCount == 0) {
+		if (memCount == 1) {
 			queryResult = memberMapper.updateMemPwd(member);
 		}
 

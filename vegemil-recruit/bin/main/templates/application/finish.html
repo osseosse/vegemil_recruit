@@ -59,7 +59,7 @@
 		================================ -->
 	</div><!-- //wrap bg_01 -->
 	<!-- 이력서미리보기 -->
-	<div th:replace="fragments/resumeView :: resumeFragment"></div>
+	<th:block th:replace="fragments/resumeView :: resumeFragment"></th:block>
 	<script th:src="@{/common/js/modality.js}"></script>
 	<!-- 팝업 script -->
 	<script>

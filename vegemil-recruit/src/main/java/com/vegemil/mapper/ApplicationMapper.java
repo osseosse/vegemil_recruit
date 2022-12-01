@@ -1,6 +1,7 @@
 package com.vegemil.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -39,7 +40,9 @@ public interface ApplicationMapper {
 
 	public int updatePersonalInformation(PersonalInfoDTO params);
 	
-	public int updateAcademy(AcademyInfoDTO params);
+	public int updateAcademy(Map<String, Object> params);
+	
+	public int registAcademy(AcademyInfoDTO params);
 	
 	public ResumeDTO selectResume(Long idx);
 	

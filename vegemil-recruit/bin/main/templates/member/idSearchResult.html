@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<title>정식품 채용 ID찾기 결과</title>
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+<!-- ================================ 
+		Header
+================================ -->
+<th:block class="white" th:replace="fragments/mainHeader :: headerFragment"></th:block>
+<!-- ================================ 
+		// Header
+================================ -->
+<!-- ================================ 
+		Content
+================================ -->
+<section>
+<div class="container100">
+	<div class="container1660 center" >
+		<div class="memberWrap">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<p class="f36 fw600">이메일 찾기</p>
+					<p class="f18 fw400 mt20 gray04" th:if="*{emailAddr != null and emailAddr != ''}">
+						검색하신 이메일은 <span class="blackLine3" th:text="${emailAddr}"></span><span class="f20 fw500 gray04">입니다.</span>
+					</p>
+					<p class="f18 fw400 mt20 gray04 center" th:if="*{emailAddr == null or emailAddr == ''}">
+						검색하신 데이터가 존재하지 않습니다. <br class="mView">다시 확인해주시기 바랍니다.
+					</p>
+					<button class="btnType01 mt20 active" type="button" onclick="location.href='/member/login'" >로그인 바로가기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<!-- ================================  
+		// Content
+================================ -->
+<!-- ================================ 
+		Footer
+================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ 
+		// Footer
+================================ -->
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<title>정식품 채용</title>
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+	<div class="wrap">
+		<!-- ================================ Header ================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ // Header ================================ -->
+		<!-- ================================ 
+				Content
+		================================ -->
+		<section>
+			<div class="container100">
+				<div class="container1660 center" >
+					<div class="memberWrap">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+							<form th:action="@{/member/searchEmail}" id="emailSeachform" th:object="${member}" method="post" onsubmit="return sendCheck();">
+								<p class="f36 fw600">이메일 찾기</p>
+								<p class="mt60 text-left">이름</p>
+								<p><input type="text" class="memType01 w100 mt10" id="txtName" name="memName" placeholder="공백 없이 입력해 주세요." ></p>
+								<p class="error" id="nameCheck" style="display: none;"><img th:src="@{/img/error.png}"> 이름은  필수 입력값입니다.</p>
+								<p class="mt20 text-left">생년월일</p>
+								<p class="mt10"><input class="memType01" id="txtBirth" name="birthday" type="text" placeholder="YYYY-MM-DD"></p>
+								<p class="error" id="birthCheck" style="display: none;"><img th:src="@{/img/error.png}"> 생년월일은 필수 입력값입니다.</p>
+								<!-- //입력 error시 -->
+								<!-- 개발확인 : 입력필드에 정보가 모두 작성시 버튼class "active"적용 -->
+								<button class="btnType01 mt20" type="submit" id="searchBtn" disabled="disabled" >이메일 찾기</button>
+								<p class="memInfo">지원서 작성시 입력한 정보를 입력해 주세요.</p>
+								<p class="memInfo">비밀번호를 잊어버리셨나요? <a href="/member/passwordSearch"><span>비밀번호 찾기</span></a></p>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ================================ 
+				// Content
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+
+<!-- ================================ Footer ================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ // Footer ================================ -->
+<script th:src="@{/common/js/emailSearch.js}"></script>
+</body>
+</html>

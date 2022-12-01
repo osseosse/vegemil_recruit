@@ -62,7 +62,7 @@ public class MailService {
         	MimeMessage message = mailSender.createMimeMessage();
         	message.setFrom(MailService.FROM_ADDRESS);
 			message.addRecipients(MimeMessage.RecipientType.TO, member.getEmailAddr());
-			message.setSubject("[DCD]비밀번호 재설정 메일");
+			message.setSubject("[DCF]비밀번호 재설정 메일");
 			message.setText(setPwContext(member), "utf-8", "html"); 
 	        mailSender.send(message);
 	        
@@ -110,8 +110,11 @@ public class MailService {
     }
     
     public String verifyEmail(String key) throws NotFoundException {
+    	
         String memberEmail = redisUtil.getData(key);
-        if(memberEmail==null) throw new NotFoundException("유효하지 않은 링크입니다.");
+        if(memberEmail==null) { 
+        	throw new NotFoundException("유효하지 않은 링크입니다.");
+        } 
         redisUtil.deleteData(key);
         
         return memberEmail;

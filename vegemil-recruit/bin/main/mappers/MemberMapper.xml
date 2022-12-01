@@ -45,6 +45,24 @@
 			, NOW()
 		)
 	</insert>
+	
+	<select id="isMemberCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			m_recruit_member
+		WHERE
+			email_addr = #{emailAddr}
+	</select>
+	
+	<select id="getEmailAddr" parameterType="com.vegemil.domain.MemberDTO" resultType="String">
+		SELECT
+			email_addr
+		FROM
+			m_recruit_member
+		WHERE
+			mem_name = #{memName} and birthday = #{birthday}
+	</select>
 
 	<select id="getMemberAccount" parameterType="String" resultType="com.vegemil.domain.MemberDTO">
 		SELECT

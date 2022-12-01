@@ -20,9 +20,13 @@ public interface MemberMapper {
 
 	public int updateMemPwd(MemberDTO params);
 
+	public String getEmailAddr(MemberDTO params);
+	
 	public List<MemberDTO> selectMemberList(MemberDTO params);
 
 	public int selectMemberTotalCount(MemberDTO params);
+	
+	public int isMemberCount(MemberDTO params);
 	
 	public int selectMemberCount(MemberDTO params);
 

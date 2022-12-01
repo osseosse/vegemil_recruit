@@ -84,9 +84,8 @@ function sendCheck() {
 	
 	return true;
 }
-	
 
- function sendPwResetEmail() {
+function sendPwResetEmail() {
 
 	const uri = "/email/sendPwResetEmail";
 	const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};
@@ -112,7 +111,7 @@ function sendCheck() {
 		}
 	});
 	
-}
+}	
 /*[- end of function -]*/
 
 /*]]>*/   
