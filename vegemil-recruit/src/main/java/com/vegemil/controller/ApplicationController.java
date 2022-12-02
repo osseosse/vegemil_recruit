@@ -245,6 +245,11 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
+	        //지원서 미리보기
+        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
+    		
+    		model.addAttribute("member", member);
+    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
