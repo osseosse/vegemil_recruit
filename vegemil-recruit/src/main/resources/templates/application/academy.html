@@ -30,7 +30,7 @@
 					<div class="memberWrapBase">
 						<div class="sidebar fixedsticky w350 f-left" >
 							<p class="f23 fw600">지원서 작성</p>
-							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20" th:if="${app.setupTitle} != null and ${app.setupTitle} != ''" th:text="${app.setupTitle}"></p>
 							<ul class="mt70 writeList">
 								<li class="w-after"><a th:href="|@{/application/personalInfo}?idx=${app.idx}|">개인정보</a></li>
 								<li class="w-ing"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
@@ -62,7 +62,7 @@
 										<li class="f14">선택</li>
 										<li>
 											<div class="scroll w180">
-											  <select class="basic w180" id="selectAcademy">
+											  <select class="base w180" id="selectAcademy">
 												<option value="">구분</option>
 												<option value="high_list">고등학교</option>
 												<option value="colg_list">전문대학</option>
@@ -447,14 +447,13 @@
 	</div>
 	<!-- //popup -->
 
-	<div th:replace="fragments/resumeView :: resumeFragment"></div>
 	<script th:src="@{/common/js/modality.js}"></script>
 	<!-- 팝업 script -->
 	<script>
 		var modal1 = Modality.init('#pop_school ', {effect: 'slide-up'});
 		var modal2 = Modality.init('#pop_major ', {effect: 'slide-up'});
 		var modal3 = Modality.init('#pop_sub_major ', {effect: 'slide-up'});
-		var modal4 = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
+		//var modal4 = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
 	</script>
 	<!-- //팝업 script -->
 	<script th:src="@{/common/js/academy.js}"></script>

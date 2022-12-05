@@ -195,5 +195,17 @@ public class ApplicationServiceImpl implements ApplicationService {
 		return applicationMapper.selectIntroduce(idx, memNo);
 	}
 	
+	@Override
+	public boolean deleteResume(Long idx) {
+		int queryResult = 0;
+
+		ResumeDTO resume = applicationMapper.selectResume(idx);
+
+		if (resume != null ) {
+			queryResult = applicationMapper.deleteResume(idx);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 	
 }

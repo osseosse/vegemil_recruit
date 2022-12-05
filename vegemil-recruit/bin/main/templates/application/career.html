@@ -31,7 +31,7 @@
 					<div class="memberWrapBase">
 						<div class="sidebar fixedsticky w350 f-left">
 							<p class="f23 fw600 ">지원서 작성</p>
-							<p class="f38 fw600 line-height120 ls-2 mt20">정식품 2022년<br>하반기 신입, 경력사원<br>공채 모집</p>
+							<p class="f38 fw600 line-height120 ls-2 mt20" th:if="${app.setupTitle} != null and ${app.setupTitle} != ''" th:text="${app.setupTitle}"></p>
 							<ul class="mt70 writeList">
 								<li class="w-after"><a th:href="|@{/application/personalInfo}?idx=${app.idx}|">개인정보</a></li>
 								<li class="w-after"><a th:href="|@{/application/academy}?idx=${app.idx}|">학력정보</a></li>
@@ -39,7 +39,6 @@
 								<li class="w-ing"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
-							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
 							<p class="btn_type03 mt10"><a onclick="javascript:updateCareer();">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
@@ -203,14 +202,13 @@
 				// Content 
 		================================ -->
 	</div><!-- //wrap bg_01 -->
-	<!-- 이력서미리보기 -->
+	<!-- 이력서미리보기 
 	<th:block  th:replace="fragments/resumeView :: resumeFragment"></th:block >
 	<script th:src="@{/common/js/modality.js}"></script>
-	<!-- 팝업 script -->
 	<script>
 	    var modal = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
 	</script>
-	<!-- //팝업 script -->
+	 -->
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>

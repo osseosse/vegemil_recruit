@@ -373,5 +373,13 @@
 		WHERE
 			mem_no= #{memNo} and setup_th = #{sTh}
 	</select>
+	
+	<delete id="deleteResume" parameterType="long">
+		DELETE 
+		FROM 
+			R_Recruit
+		WHERE
+			idx = #{idx}
+	</delete>
 
 </mapper>

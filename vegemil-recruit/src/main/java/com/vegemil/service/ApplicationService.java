@@ -49,4 +49,6 @@ public interface ApplicationService {
 	
 	public CareerDTO selectCareer(Long idx, Long memNo);
 	
+	public boolean deleteResume(Long idx);
+	
 }

@@ -104,11 +104,7 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
-	        //지원서 미리보기
-        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
-    		
     		model.addAttribute("member", member);
-    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -244,12 +240,8 @@ public class ApplicationController extends UiUtils {
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
-	        
-	        //지원서 미리보기
-        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
     		
     		model.addAttribute("member", member);
-    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -357,12 +349,7 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
-	        //지원서 미리보기
-        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
-    		
     		model.addAttribute("member", member);
-    		model.addAttribute("resume", resume);
-	        
 			model.addAttribute("app", application);
 	        
         }
@@ -472,12 +459,8 @@ public class ApplicationController extends UiUtils {
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
-	        
-	        //지원서 미리보기
-        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
     		
     		model.addAttribute("member", member);
-    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -615,11 +598,7 @@ public class ApplicationController extends UiUtils {
 	        application.setMemName(member.getMemName());
 	        application.setPhoneNo(member.getPhoneNo());
 	        
-	        //지원서 미리보기
-        	ResumeDTO resume = applicationService.getResume(idx,member.getMemNo());
-    		
     		model.addAttribute("member", member);
-    		model.addAttribute("resume", resume);
 			model.addAttribute("app", application);
 	        
         }
@@ -794,6 +773,27 @@ public class ApplicationController extends UiUtils {
 		
         return viewPage;
 		
+	}
+	
+	@GetMapping(value = "/application/delete")
+	public String deleteResume( @RequestParam(value = "idx", required = false) Long idx, Model model) {
+		if (idx == null) {
+			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/mypage/list", Method.GET, null, model);
+		}
+
+		try {
+			boolean isDeleted = applicationService.deleteResume(idx);
+			if (isDeleted == false) {
+				return showMessageWithRedirect("지원서 삭제에 실패하였습니다.", "/mypage/list", Method.GET, null, model);
+			}
+		} catch (DataAccessException e) {
+			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/mypage/list", Method.GET, null, model);
+
+		} catch (Exception e) {
+			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/mypage/list", Method.GET, null, model);
+		}
+
+		return showMessageWithRedirect("지원서 삭제가 완료되었습니다.", "/mypage/list", Method.GET, null, model);
 	}
 	
 }

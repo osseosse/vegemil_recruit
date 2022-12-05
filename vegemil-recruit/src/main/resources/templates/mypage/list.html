@@ -50,7 +50,7 @@
 												<div class="list_ico_box">
 													<span><a th:href="|#pop_view${i.index+1}|" class="btn modal-open"><img th:src="@{/img/ico_view.png}" alt="미리보기"/></a></span> 
 													<span><a th:href="|@{/application/personalInfo}?idx=${resume.idx}|"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-													<span><a th:href="|@{/application/delete}?idx=${resume.idx}|"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+													<span><a href="javascript:void(0);" th:onclick="|deleteResume(${resume.idx});|" ><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
 												</div>
 												<button type="button" th:if="${resume.joinOk} != '접수'" class="btn_reviewBox mt20" th:onclick = "|location.href='/application/result/${resume.idx}'|">
 													<ul>
@@ -513,6 +513,18 @@
 	    var modal = Modality.init('#pop_view'+i, { effect: 'slide-up' }); // 팝업_미리보기
 	}
 
+	function deleteResume(idx) {
+		
+		var result = confirm('지원서를 삭제 하시겠습니까?');
+		if(result) {
+           //yes
+            location.href='/application/delete?idx='+idx;
+        } else {
+            //no
+            return false;
+        }
+	}
+	
 </script>
 <!-- //팝업 script -->
 

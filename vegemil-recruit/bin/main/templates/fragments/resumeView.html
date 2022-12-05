@@ -18,8 +18,8 @@
 			<p class="f18 fw600">인적사항</p>
 			<ul class="divide30">
 				<li>
-					<img th:if="*{resume.photo != null and resume.photo != ''}" th:src="|/display?filename=*{resume.photo}|" />
-					<img th:unless="*{resume.photo != null and resume.photo != ''}" th:src="@{/img/photo_sample.jpg}"/>
+					<img th:if="*{resume.photo != null and resume.photo != ''}" id="resumePhoto" th:src="|/display?filename=*{resume.photo}|" />
+					<img th:unless="*{resume.photo != null and resume.photo != ''}" id="resumePhoto" />
 				</li>
 			</ul>
 			<ul class="divide70 divide2">
