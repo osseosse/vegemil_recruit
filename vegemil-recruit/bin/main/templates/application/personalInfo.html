@@ -110,11 +110,9 @@
 								<div class="row">
 									<div class="col-lg-4" >
 										<div class="photoBox">
-											<div class="IDpicture" th:if="*{photo != null and photo != ''}">
-												<img  th:src="|/display?filename=*{photo}|" id="photo" />
-											</div>
-											<div class="in-img" th:unless="*{photo != null and photo != ''}">
-												<img th:src="@{/img/ico_photo.png}" id="photo" />
+											<div class="IDpicture">
+												<img th:if="*{photo != null and photo != ''}" th:src="|/display?filename=*{photo}|" id="photo" />
+												<img th:unless="*{photo != null and photo != ''}" th:src="@{/img/ico_photo.png}" id="photo" />
 											</div>
 											<input type="file" id="fileName" name="fileName" th:value=*{photo} class="real-upload" accept="image/*" style="display:none;">
 										</div>

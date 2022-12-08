@@ -38,7 +38,7 @@
 								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
-							<p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p>
+							<!-- <p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p> -->
 						</div>
 						<div class="wrap860 f-right" >
 						<form class="fam-repeater" th:action="@{/application/registerAcademyInfo}" th:object="${app}" method="post" >
@@ -453,13 +453,12 @@
 		var modal1 = Modality.init('#pop_school ', {effect: 'slide-up'});
 		var modal2 = Modality.init('#pop_major ', {effect: 'slide-up'});
 		var modal3 = Modality.init('#pop_sub_major ', {effect: 'slide-up'});
-		//var modal4 = Modality.init('#pop_view', { effect: 'slide-up' }); // 팝업_미리보기
 	</script>
 	<!-- //팝업 script -->
-	<script th:src="@{/common/js/academy.js}"></script>
 
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
+<script th:src="@{/common/js/academy.js}"></script>
 </body>
 </html>

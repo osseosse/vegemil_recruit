@@ -24,17 +24,22 @@
  });
  /*[- end of function -]*/
 
+function inputSchool(){
+   $('#inSch').prop("disabled", false); // Element(s) are now enabled.
+}
+
+function inputMajor(){
+   $('#inMaj').prop("disabled", false); // Element(s) are now enabled.
+}
 
 $(document).on("click", "#inputSchoolBtn", function(){
 
-	alert($("#inSch").val());
 	$("#schName").val($("#inSch").val());
 
 });
 
 $(document).on("click", "#inputMajorBtn", function(){
 
-	alert($("#inMaj").val());
 	$("#schMajor").val($("#inMaj").val());
 
 });
@@ -97,7 +102,7 @@ $("#selectAcademy").change( function() {
 		$("#majorAddArea2").hide();
 	}
 	
-	$(".base option").prop("selected", false); 
+	//$(".base option").prop("selected", false); 
 	$("input[class='inType01 w180']").val('');
 	$("input[class='inType01 w180 ls1']").val('');
 	$("input[class='inType01 w120 bgGray2']").val('');
@@ -214,8 +219,8 @@ function editAcademy(schType) {
 }
 
  
- //학교검색
- function fnSchool() {
+//학교검색
+function fnSchool() {
  
     var selectAcademy = $("#selectAcademy option:selected").val();
     
@@ -233,6 +238,7 @@ function editAcademy(schType) {
         datatype : "json",
         success: function (data) {
             
+            alert("3");
             $.each(data.dataSearch.content, function(index, item) { // 데이터 =item
             	htmlString+= "<li class='schLi'><a>"+item.schoolName+"</a></li>";
             	htmlString+= "<input type='hidden' value='"+item.region+"' >";

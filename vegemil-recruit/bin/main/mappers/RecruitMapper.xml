@@ -19,7 +19,7 @@
 		, s_close
 		, s_insertdate
 		, s_modifydate
-		, DATEDIFF(NOW(), s_startdate) as s_dday
+		, DATEDIFF(NOW(), s_enddate) as s_dday
 	</sql>
 
 	<insert id="insertRecruit" parameterType="com.vegemil.domain.RecruitDTO" useGeneratedKeys="true" keyProperty="memNo">

@@ -279,7 +279,7 @@ header.subColor div.header ul.h_menu li a {color:#000; }
 /*================================ 
     footer  
 ================================*/
-footer {padding:30px 0 70px 0; }
+footer {padding:30px 0 70px 0; background:#e5e5e5}
 ul.f_sns {position:relative; float:left;  margin-right:30px}
 ul.f_sns li {display:inline-block; margin-left:10px}
 ul.f_person {position:relative; }
@@ -598,6 +598,7 @@ input.add-type01 {width:400px}
   z-index: 99;
   border:1px solid #333;
   max-height:200px;
+	overflow-y:scroll
 }
 /* 胶农费 积己 */
 .custom-sel.scroll .select-items{overflow-y:scroll; }
@@ -680,7 +681,7 @@ https://github.com/filamentgroup/fixed-sticky */
 .selPlus {position:absolute; right:10px; top:0px; }
 .photoBox {position:relative; bordeR:1px solid #E6E6E6;background:#F3F3F3; padding:30px; width:180px}
 .photoBox .in-img {background:#fff; border:1px solid #E6E6E6; width:120px; height:160px; text-align:center; padding:55px 0;cursor:pointer }
-.photoBox .IDpicture {width:120px; height:160px;  border:0px solid #E6E6E6; overflow:hidden; padding:0; cursor:pointer }
+.photoBox .IDpicture {width:120px; height:160px;  border:1px solid #E6E6E6; overflow:hidden; padding:0; cursor:pointer }
 .inputDel {position:absolute;right:120px; top:5px}
 .inputDel2 {position:absolute;right:0px; top:100px}
 .inputDel3 {position:relative; margin-top:15px; margin-left:790px;    }
@@ -715,6 +716,16 @@ https://github.com/filamentgroup/fixed-sticky */
 caption {display:none}
 #pop_dropOut {background:#fff; padding:70px 40px;}
 #pop_dropOut.w600 {width:600px; margin:0 auto}
+#pop_school {background:#fff; padding:70px 40px;}
+#pop_school.w600 {width:600px; margin:0 auto}
+#pop_major {background:#fff; padding:70px 40px;}
+#pop_major.w600 {width:600px; margin:0 auto}
+#pop_sub_major {background:#fff; padding:70px 40px;}
+#pop_sub_major.w600 {width:600px; margin:0 auto}
+
+
+
+
 
 div.popBasePW {width:520px; position:relative; }
 div.popBasePW.w400 {width:400px; position:relative; }
