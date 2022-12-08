@@ -50,7 +50,7 @@
 		FROM
 			R_Setup
 		WHERE
-			S_CLOSE = '1'
+			S_CLOSE = '0'
 		AND
 			S_TH = #{sTh}
 	</select>
@@ -77,7 +77,7 @@
 		FROM
 			R_Setup
 		WHERE
-			S_CLOSE = '1'
+			S_CLOSE = '0'
 		ORDER BY
 			s_insertdate DESC
 		LIMIT
@@ -90,7 +90,7 @@
 		FROM
 			R_Setup
 		WHERE
-			S_CLOSE = '1'
+			S_CLOSE = '0'
 		ORDER BY
 			s_insertdate DESC
 	</select>
@@ -101,7 +101,7 @@
 		FROM
 			R_Setup
 		WHERE
-			S_CLOSE = '1'
+			S_CLOSE = '0'
 		<include refid="CommonMapper.search" />
 	</select>
 	
