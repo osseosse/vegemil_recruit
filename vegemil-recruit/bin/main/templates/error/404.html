@@ -1,14 +1,42 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-  <head>
-    <meta charset="UTF-8">
-</head>
+<title>정식품 에러</title>
+<head th:replace="fragments/head :: headFragment"></head>
 <body>
-    <h1>This is 404 Error Page!</h1>
-	<div>
-           CODE: <span th:text="${code}"></span><br>
-           MSG: <span th:text="${msg}"></span><br>
-           TIMESTAMP: <span th:text="${timestamp}"></span><br>
-	</div>
+	<div class="wrap">
+		<!-- ================================ 
+				Header
+		================================ -->
+		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
+		<!-- ================================ 
+				// Header
+		================================ -->
+		<!-- ================================ 
+				Content
+		================================ -->
+		<section>
+			<div class="container100">
+				<div class="bottomLine2"></div>
+				<div class="container100" >
+					<div class="memberWrapBase text-center">
+						<h1 class="f70 fw600  mt50 line-height160">에러페이지(404)</h1>
+						<p><img th:src="@{/img/bene_man.png}"></p>
+						<p class="f26 fw600 mt20 line-height160">잘못된 접근이거나 <br>요청하신 페이지를 찾을 수 없습니다.</p>
+						<div class="btn_type01 mt40 f16"><a href="/">메인으로 가기</a></div>
+					</div><!-- //memberWrapBase -->
+				</div><!-- //container1300 -->
+			</div><!-- //container100 -->
+		</section>
+		<!-- ================================ 
+				// Content 
+		================================ -->
+	</div><!-- //wrap bg_01 -->
+<!-- ================================ 
+		Footer
+================================ -->
+<footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
+<!-- ================================ 
+		// Footer
+================================ -->
 </body>
 </html>
