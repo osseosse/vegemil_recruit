@@ -4,7 +4,7 @@
 <mapper namespace="com.vegemil.mapper.ApplicationMapper">
 
 	<sql id="informationColumns">
-		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
+		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, mem_no, join_field2, join_area2
 		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 		, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
@@ -49,15 +49,15 @@
 
 	<insert id="savePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO R_Recruit (
-			setup_th, setup_title, mem_no, join_date, join_ok, submit_ok, join_company, join_field1, join_area1
+			setup_th, setup_title, mem_no, join_date, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2
 			, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no
 			, handicap, fam_count, fam_con1, fam_name1, fam_age1
 			, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 			, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 		) VALUES (
-			  #{setupTh}, #{setupTitle}, #{memNo}, NOW(), '접수', '0', #{joinCompany}, #{joinField1}, #{joinArea1}
+			  #{setupTh}, #{setupTitle}, #{memNo}, NOW(), '접수', '0', #{joinCompany1}, #{joinCompany2}, #{joinField1}, #{joinArea1}, #{joinField2}, #{joinArea2}
 			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{bohun}, #{bohunNo}
-			, #{handicap}, #{famCount}, #{famCon1}, #{famName1}, #{famAge1}
+			, #{handicap}, '1', #{famCon1}, #{famName1}, #{famAge1}
 			, #{famCon2}, #{famName2}, #{famAge2}, #{famCon3}, #{famName3}, #{famAge3}, #{famCon4}, #{famName4}, #{famAge4}
 			, #{milClass}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate}
 		)
@@ -69,8 +69,9 @@
 	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO">
 		UPDATE R_Recruit
 		SET
-			  join_company= #{joinCompany}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}, name_han = #{nameHan}
-			, sex = #{sex}, name_eng = #{nameEng}
+			  join_company1= #{joinCompany1}, join_company2= #{joinCompany2}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}
+			, join_field2 = #{joinField2}, join_area2 = #{joinArea2}
+			, name_han = #{nameHan}, sex = #{sex}, name_eng = #{nameEng}
 			<if test="photo != null and photo != ''">
 			, photo = #{photo}
 			</if>
@@ -258,7 +259,7 @@
 			        ELSE
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
-		 		, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
+		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 				, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
@@ -295,7 +296,7 @@
 			        ELSE
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
-		 		, join_ok, submit_ok, join_company, join_field1, join_area1, mem_no
+		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 				, mil_class, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy

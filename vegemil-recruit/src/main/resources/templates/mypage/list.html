@@ -71,10 +71,18 @@
 											<div class="viewBox">
 												<p class="f18 fw600">지원부문</p>
 												<ul class="divide2">
-													<li><span class="gray3">지원회사</span>
-														<span class="sublist" th:if="${resume.joinCompany} != null and ${resume.joinCompany} != ''" th:text="${resume.joinCompany}"></span>
+													<li>
+														<span class="gray3">지원회사(1지망)</span>
+														<span class="sublist" th:if="${resume.joinCompany1} != null and ${resume.joinCompany1} != ''" th:text="${resume.joinCompany1}"></span>
 														<span class="sublist" th:if="${resume.joinField1} != null and ${resume.joinField1} != ''" th:text="${resume.joinField1}"></span>
-														<span class="sublist" th:if="${resume.joinArea1} != null and ${resume.joinArea1} != ''" th:text="${resume.joinArea1}"></span></li>
+														<span class="sublist" th:if="${resume.joinArea1} != null and ${resume.joinArea1} != ''" th:text="${resume.joinArea1}"></span>
+													</li>
+													<li>
+														<span class="gray3">지원회사(2지망)</span>
+														<span class="sublist" th:if="${resume.joinCompany2} != null and ${resume.joinCompany2} != ''" th:text="${resume.joinCompany2}"></span>
+														<span class="sublist" th:if="${resume.joinField2} != null and ${resume.joinField2} != ''" th:text="${resume.joinField2}"></span>
+														<span class="sublist" th:if="${resume.joinArea2} != null and ${resume.joinArea2} != ''" th:text="${resume.joinArea2}"></span>
+													</li>
 												</ul><br class="clear">
 											</div>
 											<div class="viewBox">
@@ -82,7 +90,7 @@
 												<ul class="divide30">
 													<li>
 														<img th:if="*{resume.photo != null and resume.photo != ''}" th:src="|/display?filename=*{resume.photo}|" />
-														<img th:unless="*{resume.photo != null and resume.photo != ''}" th:src="@{/img/photo_sample.jpg}"/>
+														<img th:unless="*{resume.photo != null and resume.photo != ''}" th:src="@{/img/ico_photo.png}"/>
 													</li>
 												</ul>
 												<ul class="divide70 divide2">

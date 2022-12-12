@@ -18,8 +18,10 @@ public class ApplicationDTO extends MemberDTO {
 	private String submitDate;
 	private String joinDate;
 	private String updateDate;
-	private String joinCompany;
+	private String joinCompany1;
+	private String joinCompany2;
 	private String joinField1;
 	private String joinArea1;
-	
+	private String joinField2;
+	private String joinArea2;
 }

@@ -161,8 +161,24 @@ function execPostcode() {
                         
 	});
 	 
+	function registerPersonalInfo() {
+	
+		if($('input[name="bohun"]:checked').val() == '1'){
+		    if( $('#bohunNo').val().length < 1){
+		    	alert("보훈 대상자의 경우 보훈번호를 입력해주세요.");
+		    	return false;
+		    }
+		}
+	}
      
      function updatePersonalInfo() {
+     
+     	if($('input[name="bohun"]:checked').val() == '1'){
+		    if( $('#bohunNo').val().length < 1){
+		    	alert("보훈 대상자의 경우 보훈번호를 입력해주세요.");
+		    	return false;
+		    }
+		}
 
    		const uri = "/application/updatePersonalInfo";
    		const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};

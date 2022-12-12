@@ -262,8 +262,8 @@ left:0; top:0; background-position:center; width:100%;-webkit-background-size: c
 .abs-r {position:absolute; right:0}
 .abs-l {position:absolute; left:0}
 .italic {font-style: italic;}
-
-
+.f_info {color:#bfbfbf; font-size:13px; line-height:150%}
+.f_info span {background:#bfbfbf; padding:2px 10px; border-radius:20px; color:#fff}
 /*================================ 
     header  
 ================================*/

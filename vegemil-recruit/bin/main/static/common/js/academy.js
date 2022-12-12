@@ -238,7 +238,6 @@ function fnSchool() {
         datatype : "json",
         success: function (data) {
             
-            alert("3");
             $.each(data.dataSearch.content, function(index, item) { // 데이터 =item
             	htmlString+= "<li class='schLi'><a>"+item.schoolName+"</a></li>";
             	htmlString+= "<input type='hidden' value='"+item.region+"' >";
