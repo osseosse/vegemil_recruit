@@ -158,6 +158,12 @@ function execPostcode() {
         } else {
         	$("#milSapce").show();
         }
+        
+        if(clickVal == '미필') {
+        	$("#milReasonSapce").show();
+        } else {
+        	$("#milReasonSapce").hide();
+        }
                         
 	});
 	 
@@ -169,6 +175,14 @@ function execPostcode() {
 		    	return false;
 		    }
 		}
+		
+		if($('input[name="milClass"]:checked').val() == '미필'){
+		    if( $('#milReason').val().length < 1){
+		    	alert("미필의 경우 사유를 입력해주세요.");
+		    	return false;
+		    }
+		}
+		
 	}
      
      function updatePersonalInfo() {
@@ -176,6 +190,13 @@ function execPostcode() {
      	if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
 		    	alert("보훈 대상자의 경우 보훈번호를 입력해주세요.");
+		    	return false;
+		    }
+		}
+		
+		if($('input[name="milClass"]:checked').val() == '미필'){
+		    if( $('#milReason').val().length < 1){
+		    	alert("미필의 경우 사유를 입력해주세요.");
 		    	return false;
 		    }
 		}

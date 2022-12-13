@@ -498,7 +498,7 @@ function registerAcademy() {
    		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy
 			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schGrad1": schGrad1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
 			};
-   		
+			
 	} else if(selectAcademy == 'colg_list') {
 		var schName2 = "";
    		var schSite2 = "";
@@ -555,6 +555,15 @@ function registerAcademy() {
 			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schAdmis3": schAdmis3, "schGrad3": schGrad3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3
 			, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
 			};
+			
+		//필수입력 검증
+		if(	$("#schMajor").val().length < 1
+		 || $("#schAdmis option:selected").val() < 1
+		 || $("#schPointEvg").val().length < 1)
+		{
+			alert("필수입력값을 모두 입력해 주세요");
+			return false;
+		}
 	
 	} else if(selectAcademy == 'mast_list') {
 		var schName4 = "";
@@ -578,6 +587,14 @@ function registerAcademy() {
    		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis4": schAdmis4
 			, "schName4": schName4, "schSite4": schSite4, "schNight4": schNight4, "schGrad4": schGrad4, "schEnterYm4": schEnterYm4, "schGradYm4": schGradYm4, "schMajor4": schMajor4, "schPointEvg4": schPointEvg4
 			};
+			
+		//필수입력 검증
+		if(	$("#schMajor").val().length < 1
+		 || $("#schPointEvg").val().length < 1)
+		{
+			alert("필수입력값을 모두 입력해 주세요");
+			return false;
+		}
    		
 	} else if(selectAcademy == 'doct_list') {
 		var schName5 = "";
@@ -601,6 +618,26 @@ function registerAcademy() {
    		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis5": schAdmis5
 			, "schName5": schName5, "schSite5": schSite5, "schNight5": schNight5, "schGrad5": schGrad5, "schEnterYm5": schEnterYm5, "schGradYm5": schGradYm5, "schMajor5": schMajor5, "schPointEvg5": schPointEvg5
 			};
+		
+		//필수입력 검증
+		if(	$("#schMajor").val().length < 1
+		 || $("#schPointEvg").val().length < 1) {
+			alert("필수입력값을 모두 입력해 주세요");
+			return false;
+		}	
+			
+	}
+	
+	//필수입력 검증
+	if(	$("#schName").val().length < 1
+	 || $("#schSite").val().length < 1
+	 || $("#schNight").val().length < 1
+	 || $("#schGrad").val().length < 1
+	 || $("#schEnterYm").val().length < 1
+	 || $("#schGradYm").val().length < 1)
+	{
+		alert("필수입력값을 모두 입력해 주세요");
+		return false;
 	}
 	
 	var htmlString = "";

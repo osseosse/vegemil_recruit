@@ -1122,6 +1122,14 @@ ul.workGray li:first-child {width:300px}
 .tab_rc ul li.active {font-size:20px; color:#333333;  }
 .tab_rc ul li.active a {background: url(../../img/ico_blue.png) no-repeat 260px 0px; border-bottom:3px solid #CFE9F9;  font-weight:500;}
 
+ul.work05 {position:relative; width:100%}
+ul.work05 li {display:inline-block; vertical-align:top}
+ul.work05 li:first-child {width:400px;  vertical-align:top}
+ul.work05 li:nth-child(2) {width:800px}
+ul.work05 dl.work05-dl dd {width:45%; display:inline-block; border-left:3px solid #2BBF56; padding-left:20px; margin-bottom:60px}
+ul.work05 dl.work05-dl dd p {padding-bottom:3px; line-height:160%}
+ul.work05 dl.work05-dl dd p.f01 {font-size:18px; font-weight:600; color:#333; }
+ul.work05 dl.work05-dl dd p.f02 {font-size:18px; font-weight:400; color:#333; }
 /* Underline From Center */
 .hvr-underline-from-center {
   display: inline-block;

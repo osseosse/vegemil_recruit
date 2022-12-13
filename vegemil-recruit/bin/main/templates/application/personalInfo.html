@@ -71,12 +71,16 @@
 												<div class="custom-sel w230">
 												  <select th:field="*{joinField1}">
 													<option value="선택">선택</option>
-													<option value="영업관리">영업관리</option>
-													<option value="연구">연구</option>
+													<option value="경영지원(서울)">경영지원(서울)</option>
+													<option value="영업관리(서울)">영업관리(서울)</option>
+													<option value="영업관리(경남)">영업관리(전북)</option>
+													<option value="영업관리(경남)">영업관리(경남)</option>
+													<option value="연구(청주)-석사">연구(청주)-석사</option>
 												  </select>
 												</div>
 											</li>
 										</ul>
+										<!-- 
 										<ul class="s-d-2 mt10">
 											<li class="f14"><span class="red">*</span>희망근무지(1지망)</li>
 											<li>
@@ -90,6 +94,7 @@
 												</div>
 											</li>
 										</ul>
+										 -->
 									</div>
 									<div class="col-lg-6">
 										<ul class="s-d-2">
@@ -108,13 +113,17 @@
 											<li>
 												<div class="custom-sel w230">
 												  <select th:field="*{joinField2}">
-													<option value="선택">선택</option>
-													<option value="영업관리">영업관리</option>
-													<option value="연구">연구</option>
+												  	<option value="선택">선택</option>
+													<option value="경영지원(서울)">경영지원(서울)</option>
+													<option value="영업관리(서울)">영업관리(서울)</option>
+													<option value="영업관리(경남)">영업관리(전북)</option>
+													<option value="영업관리(경남)">영업관리(경남)</option>
+													<option value="연구(청주)-석사">연구(청주)-석사</option>
 												  </select>
 												</div>
 											</li>
 										</ul>
+										<!-- 
 										<ul class="s-d-2 mt10">
 											<li class="f14"><span class="red">*</span>희망근무지(2지망)</li>
 											<li>
@@ -128,6 +137,7 @@
 												</div>
 											</li>
 										</ul>
+										-->
 									</div>
 								</div>
 							</div>
@@ -297,6 +307,12 @@
 												<label for="r10"><span></span>면제</label>
 												<input type="radio" id="r11" th:attr="checked=*{milClass == '복무중' ? 'true' : 'false'}" th:field="*{milClass}" value="복무중" />
 												<label for="r11"><span></span>복무중</label>
+											</li>
+										</ul>
+										<ul class="s-d-2" id="milReasonSapce">
+											<li class="f14"><span class="red">*</span>미필사유</li>
+											<li class="radioStyle3 " >
+												<input type="text" class="inType01 w180" th:field="*{milReason}" placeholder="ex) 병역특례">
 											</li>
 										</ul>
 									</div>

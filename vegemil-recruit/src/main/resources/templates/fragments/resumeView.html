@@ -97,6 +97,10 @@
 					<span class="gray3 w100">병역사항</span>
 					<span th:if="${resume.milClass} != null and ${resume.milClass} != ''" th:text="${resume.milClass}"></span>
 				</li>
+				<li th:if="${resume.milReason} != null and ${resume.milReason} != ''">
+					<span class="gray3 w100">미필사유</span>
+					<span th:text="${resume.milReason}"></span>
+				</li>
 				<li><span class="gray3 w100">병과</span><span th:if="${resume.milType} != null and ${resume.milType} != ''" th:text="${resume.milType}"></span></li>
 				<li><span class="gray3 w100">계급</span><span th:if="${resume.milLv} != null and ${resume.milLv} != ''" th:text="${resume.milLv}"></span></li>
 				<li>
@@ -207,9 +211,11 @@
 					<span class="sublist" th:if="${resume.langLv1} != null" th:text="${resume.langLv1}"></span>
 					<span class="sublist" th:if="${resume.langLicNum1} != null" th:text="${resume.langLicNum1}"></span>
 					<span class="sublist" th:if="${resume.langGet1} != null" th:text="${resume.langGet1}"></span>
+					<!-- 
 					<span class="sublist" th:if="${resume.langTalk1} != null" th:text="|회화 ${resume.langTalk1}|"></span>
 					<span class="sublist" th:if="${resume.langMake1} != null" th:text="|작문 ${resume.langMake1}|"></span>
 					<span class="sublist" th:if="${resume.langRead1} != null" th:text="|독해 ${resume.langRead1}|"></span>
+					 -->
 				</li>
 				<li th:if="${resume.langCount} == '2'
 						or ${resume.langCount} == '3'">
