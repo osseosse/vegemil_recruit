@@ -53,6 +53,7 @@
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.langCount)}">
 								<div class="r-box mt20">
 									<div class="row">
+										<!--  
 										<div class="col-lg-6 ">
 											<ul class="s-d-2">
 												<li class="f14">외국어</li>
@@ -73,6 +74,7 @@
 												</li>
 											</ul>
 										</div>
+										-->
 										<div class="col-lg-6 ">
 											<ul class="s-d-2">
 												<li class="f14">공인시험</li>
@@ -80,6 +82,13 @@
 													<div class="scroll w180">
 														<select th:id="langLicName" th:name="langLicName" class="base w180">
 															<option value="">선택</option>
+															<option value="토익">토익</option>
+															<option value="오픽">오픽</option>
+															<option value="토플">토플</option>
+															<option value="일본어JPT">일본어JPT</option>
+															<option value="텝스">텝스</option>
+															<option value="중국어HSK">중국어HSK</option>
+															<option value="토스">토스</option>
 														</select>
 													</div>
 												</li>
