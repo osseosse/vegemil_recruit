@@ -490,10 +490,18 @@
 								<div class="info02">
 									<dl class="mt20">
 										<dt><span class="f20 fw600 mt20 line-height140" th:text="${qna.rTitle}"></span></dt>
-										<dd>
+										<dd th:if="${qna.rAnswerYn} == 'N'">
 											<a class="btn_reviewBox" th:href="|@{/mypage/qna}?qId=${qna.qId}|">
 												<ul>
 													<li class="btn_review ">문의 보기</li>
+													<li class="btn_review_arrow ml10"></li>
+												</ul>
+											</a>
+										</dd>
+										<dd th:unless="${qna.rAnswerYn} == 'N'">
+											<a class="btn_reviewBox" th:href="|@{/mypage/answer}?qId=${qna.qId}|">
+												<ul>
+													<li class="btn_review ">답변 보기</li>
 													<li class="btn_review_arrow ml10"></li>
 												</ul>
 											</a>

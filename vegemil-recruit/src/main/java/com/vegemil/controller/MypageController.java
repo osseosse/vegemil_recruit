@@ -77,7 +77,7 @@ public class MypageController extends UiUtils {
 	}
 	
 	@GetMapping(value = "/mypage/answer")
-	public String openQnaAnswer(@ModelAttribute("params") QnaDTO params, @RequestParam(value = "rId", required = false) Long rId, Model model, Authentication authentication) {
+	public String openQnaAnswer(@ModelAttribute("params") QnaDTO params, @RequestParam(value = "qId", required = false) Long qId, Model model, Authentication authentication) {
 		
 		//Authentication 객체를 통해 유저 정보를 가져올 수 있다.
         MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
@@ -86,6 +86,7 @@ public class MypageController extends UiUtils {
 	        	return "member/joinConfirm";
 	        }
 	        
+	        params.setMemNo(member.getMemNo());
 	        QnaDTO qna = qnaService.getQnaDetail(params);
 			if (qna == null) {
 				return showMessageWithRedirect("올바르지 않은 접근입니다.", "/mypage/list", Method.GET, null, model);
@@ -96,7 +97,7 @@ public class MypageController extends UiUtils {
 	        
         }
 		
-		return "mypage/qna";
+		return "mypage/answer";
 	}
 
 	@PostMapping(value = "/mypage/registerQna")
