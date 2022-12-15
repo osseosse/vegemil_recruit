@@ -122,7 +122,7 @@
 											<li class="f14"><span class="red">*</span>입학구분</li>
 											<li>
 												<div class="w180">
-												  <select id="schAdmis" class="base w180">
+												  <select id="schTransfer" class="base w180">
 													<option value="">선택해 주세요</option>
 													<option value="입학">입학</option>
 													<option value="편입">편입</option>
@@ -153,6 +153,23 @@
 												  </select>
 												</div>
 											</li>
+										</ul>
+									</div>
+									<div id="schAdmisArea" class="col-lg-6 " style="display:none;">
+										<ul class="s-d-2">
+											<li class="f14"><span class="red">*</span>계열</li>
+											<li>
+												<div class="w180">
+												  <select id="schAdmis" class="base w180">
+													<option value="">선택해 주세요</option>
+													<option value="인문사회계열">인문사회계열</option>
+													<option value="자연과학계열">자연과학계열</option>
+													<option value="공학계열">공학계열</option>
+													<option value="의학계열">의학계열</option>
+													<option value="예체능계열">예체능계열</option>
+												  </select>
+												</div>
+											</li> 
 										</ul>
 									</div>
 								</div>
@@ -240,10 +257,11 @@
 											<span class="gray3">고등학교</span>
 										</dt>
 										<dd>
-											<span class="sublist" th:if="*{schName1 != null and schName1 != ''}" th:text="*{schName1}" th:id="schName1"></span>
-											<span class="sublist" th:if="*{schSite1 != null and schSite1 != ''}" th:text="*{schSite1}" th:id="schSite1"></span>
-											<span class="sublist" th:if="*{schNight1 != null and schNight1 != ''}" th:text="*{schNight1}" th:id="schNight1"></span>
-											<span class="sublist" th:if="*{schEnterYm1 != null and schEnterYm1 != '' and schGradYm1 != null and schGradYm1 != ''}" th:text="|*{schEnterYm1} *{schAdmis1} ~ *{schGradYm1} *{schGrad1}|"></span>
+											<span class="sublist" th:if="*{schName1 != null and schName1 != ''}" th:text="*{schName1}" id="schName1"></span>
+											<span class="sublist" th:if="*{schSite1 != null and schSite1 != ''}" th:text="*{schSite1}" id="schSite1"></span>
+											<span class="sublist" th:if="*{schNight1 != null and schNight1 != ''}" th:text="*{schNight1}" id="schNight1"></span>
+											<span class="sublist" th:if="*{schAdmis1 != null and schAdmis1 != ''}" th:text="*{schAdmis1}"></span>
+											<span class="sublist" th:if="*{schEnterYm1 != null and schEnterYm1 != '' and schGradYm1 != null and schGradYm1 != ''}" th:text="|*{schEnterYm1} ~ *{schGradYm1} *{schGrad1}|"></span>
 										</dd>
 										<dd>
 											<span><a href="javascript:editAcademy('high_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
@@ -261,11 +279,12 @@
 											<span class="sublist" th:if="*{schName2 != null and schName2 != ''}" th:text="*{schName2}" id="schName2"></span>
 											<span class="sublist" th:if="*{schSite2 != null and schSite2 != ''}" th:text="*{schSite2}" id="schSite2"></span>
 											<span class="sublist" th:if="*{schNight2 != null and schNight2 != ''}" th:text="*{schNight2}" id="schNight2"></span>
+											<span class="sublist" th:if="*{schAdmis2 != null and schAdmis2 != ''}" th:text="*{schAdmis2}"></span>
 											<span class="sublist" th:if="*{schPointEvg2 != null and schPointEvg2 != ''}" th:text="*{schPointEvg2}" id="schPointEvg2"></span>
 											<span class="sublist" th:if="*{schMajor2 != null and schMajor2 != ''}" th:text="*{schMajor2}" id="schMajor2"></span>
 											<span class="sublist" th:if="*{schSubMajor2 != null and schSubMajor2 != ''}" th:text="*{schSubMajor2}" id="schSubMajor2"></span>
 											<span class="sublist" th:if="*{schSubPointEvg2 != null and schSubPointEvg2 != ''}" th:text="*{schSubPointEvg2}" id="schSubPointEvg2"></span>
-											<span class="sublist" th:if="*{schEnterYm2 != null and schEnterYm2 != '' and schGradYm2 != null and schGradYm2 != ''}" th:text="|*{schEnterYm2} *{schAdmis2} ~ *{schGradYm2} *{schGrad2}|"></span>
+											<span class="sublist" th:if="*{schEnterYm2 != null and schEnterYm2 != '' and schGradYm2 != null and schGradYm2 != ''}" th:text="|*{schEnterYm2} ~ *{schGradYm2} *{schGrad2}|"></span>
 										</dd>
 										<dd>
 											<span><a href="javascript:editAcademy('colg_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
@@ -283,12 +302,13 @@
 											<span class="sublist" th:if="*{schName3 != null and schName3 != ''}" th:text="*{schName3}" id="schName3"></span>
 											<span class="sublist" th:if="*{schSite3 != null and schSite3 != ''}" th:text="*{schSite3}" id="schSite3"></span>
 											<span class="sublist" th:if="*{schNight3 != null and schNight3 != ''}" th:text="*{schNight3}" id="schNight3"></span>
+											<span class="sublist" th:if="*{schAdmis3 != null and schAdmis3 != ''}" th:text="*{schAdmis3}"></span>
 											<span class="sublist" th:if="*{schMajor3 != null and schMajor3 != ''}" th:text="*{schMajor3}" id="schMajor3"></span>
 											<span class="sublist" th:if="*{schPointEvg3 != null and schPointEvg3 != ''}" th:text="*{schPointEvg3}" id="schPointEvg3"></span>
 											<span class="sublist" th:if="*{schDepType3 != null and schDepType3 != ''}" th:text="*{schDepType3}" id="schDepType3"></span>
 											<span class="sublist" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:text="*{schSubMajor3}" id="schSubMajor3"></span>
 											<span class="sublist" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:text="*{schSubPointEvg3}" id="schSubPointEvg3"></span>
-											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} *{schAdmis3} ~ *{schGradYm3} *{schGrad3}|"></span>
+											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} ~ *{schGradYm3} *{schGrad3}|"></span>
 										</dd>
 										<dd>
 											<span><a href="javascript:editAcademy('univ_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
@@ -306,9 +326,10 @@
 											<span class="sublist" th:if="*{schName4 != null and schName4 != ''}" th:text="*{schName4}" id="schName4"></span>
 											<span class="sublist" th:if="*{schSite4 != null and schSite4 != ''}" th:text="*{schSite4}" id="schSite4"></span>
 											<span class="sublist" th:if="*{schNight4 != null and schNight4 != ''}" th:text="*{schNight4}" id="schNight4"></span>
+											<span class="sublist" th:if="*{schAdmis4 != null and schAdmis4 != ''}" th:text="*{schAdmis4}"></span>
 											<span class="sublist" th:if="*{schPointEvg4 != null and schPointEvg4 != ''}" th:text="*{schPointEvg4}" id="schPointEvg4"></span>
 											<span class="sublist" th:if="*{schMajor4 != null and schMajor4 != ''}" th:text="*{schMajor4}" id="schMajor4"></span>
-											<span class="sublist" th:if="*{schEnterYm4 != null and schEnterYm4 != '' and schGradYm4 != null and schGradYm4 != ''}" th:text="|*{schEnterYm4} *{schAdmis4} ~ *{schGradYm4} *{schGrad4}|"></span>
+											<span class="sublist" th:if="*{schEnterYm4 != null and schEnterYm4 != '' and schGradYm4 != null and schGradYm4 != ''}" th:text="|*{schEnterYm4} ~ *{schGradYm4} *{schGrad4}|"></span>
 										</dd>
 										<dd>
 											<span><a href="javascript:editAcademy('mast_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
@@ -326,9 +347,10 @@
 											<span class="sublist" th:if="*{schName5 != null and schName5 != ''}" th:text="*{schName5}" id="schName5"></span>
 											<span class="sublist" th:if="*{schSite5 != null and schSite5 != ''}" th:text="*{schSite5}" id="schSite5"></span>
 											<span class="sublist" th:if="*{schNight5 != null and schNight5 != ''}" th:text="*{schNight5}" id="schNight5"></span>
+											<span class="sublist" th:if="*{schAdmis5 != null and schAdmis5 != ''}" th:text="*{schAdmis5}" ></span>
 											<span class="sublist" th:if="*{schPointEvg5 != null and schPointEvg5 != ''}" th:text="*{schPointEvg5}" id="schPointEvg5"></span>
 											<span class="sublist" th:if="*{schMajor5 != null and schMajor5 != ''}" th:text="*{schMajor5}" id="schMajor5"></span>
-											<span class="sublist" th:if="*{schEnterYm5 != null and schEnterYm5 != '' and schGradYm5 != null and schGradYm5 != ''}" th:field="|*{schEnterYm5} *{schAdmis5} ~ *{schGradYm5} *{schGrad5}|"></span>
+											<span class="sublist" th:if="*{schEnterYm5 != null and schEnterYm5 != '' and schGradYm5 != null and schGradYm5 != ''}" th:field="|*{schEnterYm5} ~ *{schGradYm5} *{schGrad5}|"></span>
 										</dd>
 										<dd>
 											<span><a href="javascript:editAcademy('doct_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 

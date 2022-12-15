@@ -69,7 +69,7 @@
 											<ul class="s-d-2">
 												<li class="f14">직장명</li>
 												<li>
-													<input type="text" th:id="internName" th:name="internName"  class="inType01 w180" maxlength="5" >
+													<input type="text" th:id="internName" th:name="internName"  class="inType01 w180" maxlength="20" >
 												</li>
 											</ul>
 										</div>
@@ -77,7 +77,7 @@
 											<ul class="s-d-2">
 												<li class="f14">담당업무</li>
 												<li>
-													<input type="text" th:id="internDuty" th:name="internDuty"  class="inType01 w180"  >
+													<input type="text" th:id="internDuty" th:name="internDuty"  class="inType01 w180" maxlength="20" >
 												</li>
 											</ul>
 										</div>
@@ -112,7 +112,7 @@
 											<ul class="s-d-2">
 												<li class="f14">직장명</li>
 												<li>
-													<input type="text" th:id="hisCoName" th:name="hisCoName" class="inType01 w180"  >
+													<input type="text" th:id="hisCoName" th:name="hisCoName" class="inType01 w180" maxlength="20">
 												</li>
 											</ul>
 										</div>
@@ -120,7 +120,7 @@
 											<ul class="s-d-2">
 												<li class="f14">담당업무</li>
 												<li>
-													<input type="text" th:id="hisDuty" th:name="hisDuty" class="inType01 w180"  >
+													<input type="text" th:id="hisDuty" th:name="hisDuty" class="inType01 w180" maxlength="20">
 												</li>
 											</ul>
 										</div>
@@ -128,7 +128,7 @@
 											<ul class="s-d-2">
 												<li class="f14">(월)평균급여</li>
 												<li>
-													<input type="text" th:id="hisPay" th:name="hisPay" class="inType01 w180 text-right"  > <span class="gray f14">만원</span>
+													<input type="text" th:id="hisPay" th:name="hisPay" class="inType01 w180 text-right"> <span class="gray f14">만원</span>
 												</li>
 											</ul>
 										</div>
@@ -139,8 +139,8 @@
 											<ul class="s-d-2">
 												<li class="f14">주요업무</li>
 												<li>
-													<textarea type="text" class="areaType01" th:id="hisContent" th:name="hisContent"  placeholder="200자 이내로 작성해 주세요." ></textarea>
-													<div class="mt10 f14 gray f_right mr40" name="cnt" id="cnt">(0/200)</div>
+													<textarea type="text" class="areaType01" th:id="hisContent" th:name="hisContent"  placeholder="100자 이내로 작성해 주세요." ></textarea>
+													<div class="mt10 f14 gray f_right mr40" name="cnt" id="cnt">(0/100)</div>
 												</li>
 											</ul>
 										</div>

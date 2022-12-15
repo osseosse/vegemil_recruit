@@ -110,6 +110,7 @@ $("#selectAcademy").change( function() {
 	$("#searchArea").show();
 	$("#gradArea").show();
 	$("#schArea").show();
+	$("#schAdmisArea").show();
 	$("#nightArea").show();
 	$("#howLongArea").show();
 	
@@ -125,7 +126,7 @@ function editAcademy(schType) {
 		$("#schName").val($("#schName1").text());
    		$("#schSite").val($("#schSite1").text());
    		$("#schNight").val($("#schNight1").text()).prop("selected", true);
-   		$("#schAdmis").val($("#schAdmis1").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis1").val());
    		$("#schGrad").val($("#schGrad1").val()).prop("selected", true);
    		$("#schEnterYm").val($("#schEnterYm1").val());
    		$("#schGradYm").val($("#schGradYm1").val());
@@ -139,7 +140,7 @@ function editAcademy(schType) {
 		$("#schName").val($("#schName2").text());
    		$("#schSite").val($("#schSite2").text());
    		$("#schNight").val($("#schNight2").text()).prop("selected", true);
-   		$("#schAdmis").val($("#schAdmis2").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis2").val());
    		$("#schGrad").val($("#schGrad2").val()).prop("selected", true);
    		$("#schMajor").val($("#schMajor2").text());
    		$("#schPointEvg").val($("#schPointEvg2").text());
@@ -158,7 +159,8 @@ function editAcademy(schType) {
    		$("#schSite").val($("#schSite3").text());
    		$("#schNight").val($("#schNight3").text()).prop("selected", true);
    		$("#schGrad").val($("#schGrad3").val()).prop("selected", true);
-   		$("#schAdmis").val($("#schAdmis3").val()).prop("selected", true);
+   		$("#schTransfer").val($("#schTransfer3").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis3").val());
    		$("#schMajor").val($("#schMajor3").text());
    		$("#schPointEvg").val($("#schPointEvg3").text());
    		$("#schSubMajor").val($("#schSubMajor3").text());
@@ -177,7 +179,7 @@ function editAcademy(schType) {
 		$("#schName").val($("#schName4").text());
    		$("#schSite").val($("#schSite4").text());
    		$("#schNight").val($("#schNight4").text()).prop("selected", true);
-   		$("#schAdmis").val($("#schAdmis4").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis4").val());
    		$("#schGrad").val($("#schGrad4").val()).prop("selected", true);
    		$("#schMajor").val($("#schMajor4").text());
    		$("#schPointEvg").val($("#schPointEvg4").text());
@@ -195,7 +197,7 @@ function editAcademy(schType) {
 		$("#schName").val($("#schName5").text());
    		$("#schSite").val($("#schSite5").text());
    		$("#schNight").val($("#schNight5").text()).prop("selected", true);
-   		$("#schAdmis").val($("#schAdmis5").val()).prop("selected", true);
+   		$("#schAdmis").val($("#schAdmis5").val());
    		$("#schGrad").val($("#schGrad5").val()).prop("selected", true);
    		$("#schMajor").val($("#schMajor5").text());
    		$("#schPointEvg").val($("#schPointEvg5").text());
@@ -212,6 +214,7 @@ function editAcademy(schType) {
 	$("#searchArea").show();
 	$("#gradArea").show();
 	$("#schArea").show();
+	$("#schAdmisArea").show();
 	$("#nightArea").show();
 	$("#howLongArea").show();
 	
@@ -504,16 +507,18 @@ function registerAcademy() {
 		var schName1 = "";
    		var schSite1 = "";
    		var schNight1 = "";
+   		var schAdmis1 = "";
    		var schGrad1 = "";
    		var schEnterYm1 = "";
    		var schGradYm1 = "";
 		schName1 = $("#schName").val();
    		schSite1 = $("#schSite").val();
    		schNight1 = $("#schNight").val();
+   		schAdmis1 = $("#schAdmis option:selected").val();
    		schGrad1 = $("#schGrad").val();
    		schEnterYm1 = $("#schEnterYm").val();
    		schGradYm1 = $("#schGradYm").val();
-   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis1": schAdmis1
 			, "schName1": schName1, "schSite1": schSite1, "schNight1": schNight1, "schGrad1": schGrad1, "schEnterYm1": schEnterYm1, "schGradYm1": schGradYm1
 			};
 			
@@ -549,6 +554,7 @@ function registerAcademy() {
    		var schSite3 = "";
    		var schNight3 = "";
    		var schGrad3 = "";
+   		var schTransfer3 = "";
    		var schAdmis3 = "";
    		var schMajor3 = "";
    		var schPointEvg3 = "";
@@ -561,6 +567,7 @@ function registerAcademy() {
    		schSite3 = $("#schSite").val();
    		schNight3 = $("#schNight option:selected").val();
    		schGrad3 = $("#schGrad option:selected").val();
+   		schTransfer3 = $("#schTransfer option:selected").val();
    		schAdmis3 = $("#schAdmis option:selected").val();
    		schMajor3 = $("#schMajor").val();
    		schPointEvg3 = $("#schPointEvg").val();
@@ -569,7 +576,7 @@ function registerAcademy() {
    		schGradYm3 = $("#schGradYm").val();
    		schSubMajor3 = $("#schSubMajor").val();
    		schSubPointEvg3 = $("#schSubPointEvg").val();
-   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schDepType3" : schDepType3, "schTransfer3" : schTransfer3
 			, "schName3": schName3, "schSite3": schSite3, "schNight3": schNight3, "schAdmis3": schAdmis3, "schGrad3": schGrad3, "schMajor3": schMajor3, "schPointEvg3": schPointEvg3
 			, "schEnterYm3": schEnterYm3, "schGradYm3": schGradYm3, "schSubMajor3": schSubMajor3, "schSubPointEvg3": schSubPointEvg3
 			};
@@ -684,8 +691,8 @@ function registerAcademy() {
 				htmlString+= "		<dd>";						
 				htmlString+= "			<span class='sublist' id='schName1'>"+schName1+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite1'>"+schSite1+"</span>";
-				htmlString+= "			<span class='sublist' id='schNight1'>"+schNight1+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm1+" 입학 ~ "+schGradYm1+" "+schGrad1+"</span>";
+				htmlString+= "			<span class='sublist' id='schAdmis1'>"+schAdmis1+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm1+" "+schGradYm1+" "+schGrad1+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'high_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
@@ -705,12 +712,12 @@ function registerAcademy() {
 				htmlString+= "		<dd>";						
 				htmlString+= "			<span class='sublist' id='schName2'>"+schName2+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite2'>"+schSite2+"</span>";
-				htmlString+= "			<span class='sublist' id='schNight2'>"+schNight2+"</span>";
+				htmlString+= "			<span class='sublist' id='schAdmis2'>"+schAdmis2+"</span>";
 				htmlString+= "			<span class='sublist' id='schMajor2'>"+schMajor2+"</span>";
 				htmlString+= "			<span class='sublist' id='schPointEvg2'>"+schPointEvg2+"</span>";
 				htmlString+= "			<span class='sublist' id='schSubMajor2'>"+schSubMajor2+"</span>";
 				htmlString+= "			<span class='sublist' id='schSubPointEvg2'>"+schSubPointEvg2+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm2+" "+schAdmis2+" ~ "+schGradYm2+" "+schGrad2+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm2+" ~ "+schGradYm2+" "+schGrad2+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'colg_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
@@ -730,12 +737,12 @@ function registerAcademy() {
 				htmlString+= "		<dd>";						
 				htmlString+= "			<span class='sublist' id='schName3'>"+schName3+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite3'>"+schSite3+"</span>";
-				htmlString+= "			<span class='sublist' id='schNight3'>"+schNight3+"</span>";
+				htmlString+= "			<span class='sublist' id='schAdmis3'>"+schAdmis3+"</span>";
 				htmlString+= "			<span class='sublist' id='schMajor3'>"+schMajor3+"</span>";
 				htmlString+= "			<span class='sublist' id='schPointEvg3'>"+schPointEvg3+"</span>";
 				htmlString+= "			<span class='sublist' id='schDepType3'>"+schDepType3+"</span>";
 				htmlString+= "			<span class='sublist' id='schSubMajor3'>"+schSubMajor3+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm3+" "+schAdmis3+" ~ "+schGradYm3+" "+schGrad3+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm3+" ~ "+schGradYm3+" "+schGrad3+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'univ_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
@@ -755,10 +762,10 @@ function registerAcademy() {
 				htmlString+= "		<dd>";						
 				htmlString+= "			<span class='sublist' id='schName4'>"+schName4+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite4'>"+schSite4+"</span>";
-				htmlString+= "			<span class='sublist' id='schNight4'>"+schNight4+"</span>";
+				htmlString+= "			<span class='sublist' id='schAdmis4'>"+schAdmis4+"</span>";
 				htmlString+= "			<span class='sublist' id='schMajor4'>"+schMajor4+"</span>";
 				htmlString+= "			<span class='sublist' id='schPointEvg4'>"+schPointEvg4+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm4+" "+schAdmis4+" ~ "+schGradYm4+" "+schGrad4+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm4+" ~ "+schGradYm4+" "+schGrad4+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'mast_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
@@ -778,10 +785,10 @@ function registerAcademy() {
 				htmlString+= "		<dd>";						
 				htmlString+= "			<span class='sublist' id='schName5'>"+schName5+"</span>";
 				htmlString+= "			<span class='sublist' id='schSite5'>"+schSite5+"</span>";
-				htmlString+= "			<span class='sublist' id='schNight5'>"+schNight5+"</span>";
+				htmlString+= "			<span class='sublist' id='schAdmis5'>"+schAdmis5+"</span>";
 				htmlString+= "			<span class='sublist' id='schMajor5'>"+schMajor5+"</span>";
 				htmlString+= "			<span class='sublist' id='schPointEvg5'>"+schPointEvg5+"</span>";
-				htmlString+= "			<span class='sublist'>"+schEnterYm5+" "+schAdmis5+" ~ "+schGradYm5+" "+schGrad5+"</span>";
+				htmlString+= "			<span class='sublist'>"+schEnterYm5+" ~ "+schGradYm5+" "+schGrad5+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
 				htmlString+= '			<span><a href="javascript:editAcademy(\'doct_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';

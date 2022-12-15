@@ -5,7 +5,8 @@
 
 	<sql id="informationColumns">
 		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, submit_ok, join_company1, join_company2, join_field1, join_area1, mem_no, join_field2, join_area2
-		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
+		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
+		, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 		, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 	</sql>
@@ -13,7 +14,7 @@
 		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date, last_academy
 		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
     	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
-    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
     	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
     	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
     	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
@@ -51,13 +52,13 @@
 		INSERT INTO R_Recruit (
 			setup_th, setup_title, mem_no, join_date, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2
 			, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no
-			, handicap, fam_count, fam_con1, fam_name1, fam_age1
+			, handicap, religoin, ability, hobby, fam_count, fam_con1, fam_name1, fam_age1
 			, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 			, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 		) VALUES (
 			  #{setupTh}, #{setupTitle}, #{memNo}, NOW(), '접수', '0', #{joinCompany1}, #{joinCompany2}, #{joinField1}, #{joinArea1}, #{joinField2}, #{joinArea2}
 			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{bohun}, #{bohunNo}
-			, #{handicap}, '1', #{famCon1}, #{famName1}, #{famAge1}
+			, #{handicap}, #{religoin}, #{ability}, #{hobby}, '1', #{famCon1}, #{famName1}, #{famAge1}
 			, #{famCon2}, #{famName2}, #{famAge2}, #{famCon3}, #{famName3}, #{famAge3}, #{famCon4}, #{famName4}, #{famAge4}
 			, #{milClass}, #{milReason}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate}
 		)
@@ -76,7 +77,8 @@
 			, photo = #{photo}
 			</if>
 			, zip1 = #{zip1}, addr11 = #{addr11}, addr12 = #{addr12}
-			, bohun = #{bohun}, bohun_no = #{bohunNo}, handicap = #{handicap}, fam_count = #{famCount}
+			, bohun = #{bohun}, bohun_no = #{bohunNo}, handicap = #{handicap}, religoin = #{religoin}
+			, ability = #{ability}, hobby = #{hobby}, fam_count = #{famCount}
 			, fam_con1 = #{famCon1}, fam_name1 = #{famName1}, fam_age1 = #{famAge1}, fam_con2 = #{famCon2}
 			, fam_name2 = #{famName2}, fam_age2 = #{famAge2}, fam_con3 = #{famCon3}, fam_name3 = #{famName3}
 			, fam_age3 = #{famAge3}, fam_con4 = #{famCon4}, fam_name4 = #{famName4}, fam_age4 = #{famAge4}
@@ -92,7 +94,7 @@
 			  last_academy = #{lastAcademy}
 			<if test="selectAcademy == 'high_list'">
 			, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
-			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
+			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}, sch_admis1 = #{schAdmis1}
 			</if>
 			<if test="selectAcademy == 'colg_list'">
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
@@ -100,7 +102,7 @@
 			</if>
 			<if test="selectAcademy == 'univ_list'">
 			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
-			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}
+			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}, sch_transfer3=#{schTransfer3}
 			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_admis3=#{schAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
 			</if>
 			<if test="selectAcademy == 'mast_list'">
@@ -124,7 +126,7 @@
 			  last_academy = #{lastAcademy}
 			<if test="selectAcademy == 'high_list'">
 			, sch_grad1 = #{schGrad1}, sch_enter_ym1 = #{schEnterYm1}, sch_grad_ym1 = #{schGradYm1}, sch_name1 = #{schName1}
-			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}
+			, sch_major1 = #{schMajor1}, sch_site1 = #{schSite1}, sch_night1 = #{schNight1}, sch_admis1 = #{schAdmis1}
 			</if>
 			<if test="selectAcademy == 'colg_list'">
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
@@ -132,7 +134,7 @@
 			</if>
 			<if test="selectAcademy == 'univ_list'">
 			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
-			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}
+			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}, sch_transfer3=#{schTransfer3}
 			, sch_site3 = #{schSite3}, sch_night3 = #{schNight3}, sch_point_evg3 = #{schPointEvg3}, sch_admis3=#{schAdmis3}, sch_sub_major3=#{schSubMajor3}, sch_sub_point_evg3=#{schSubPointEvg3}
 			</if>
 			<if test="selectAcademy == 'mast_list'">
@@ -259,12 +261,13 @@
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
 		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
-				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
+				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
+				, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 				, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
 				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
 		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
-		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
 		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
 		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
 		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
@@ -298,12 +301,13 @@
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
 		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
-				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
+				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
+				, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 				, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
 				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
 		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
-		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
+		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
 		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
 		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
 		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3

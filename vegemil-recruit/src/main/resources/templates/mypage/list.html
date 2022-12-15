@@ -108,13 +108,26 @@
 											<li><span class="gray3">생년월일</span>
 												<span class="sublist" th:if="${member.birthday} != null and ${member.birthday} != ''" th:text="${member.birthday}"></span></li>
 											<li><span class="gray3">성별</span>
-												<span class="sublist" th:if="${resume.sex} != null and ${resume.sex} != ''" th:text="${#strings.equals( resume.sex, '1' ) ? '남' : '여'}"></span></li>
+												<span class="sublist" th:if="${resume.sex} != null and ${resume.sex} != ''" th:text="${#strings.equals( resume.sex, '1' ) ? '남' : '여'}"></span>
+											</li>
 											<li><span class="gray3">주소</span>
-												<span class="sublist" th:if="${resume.addr11} != null and ${resume.addr11} != ''" th:text="|${resume.addr11} ${resume.addr12}"></span></li>
+												<span class="sublist" th:if="${resume.addr11} != null and ${resume.addr11} != ''" th:text="|${resume.addr11} ${resume.addr12}"></span>
+											</li>
 											<li><span class="gray3">휴대전화</span>
-												<span class="sublist" th:if="${member.phoneNo} != null and ${member.phoneNo} != ''" th:text="${member.phoneNo}"></span></li>
+												<span class="sublist" th:if="${member.phoneNo} != null and ${member.phoneNo} != ''" th:text="${member.phoneNo}"></span>
+											</li>
 											<li><span class="gray3">이메일</span>
-												<span class="sublist" th:if="${member.emailAddr} != null and ${member.emailAddr} != ''" th:text="${member.emailAddr}"></span></li>
+												<span class="sublist" th:if="${member.emailAddr} != null and ${member.emailAddr} != ''" th:text="${member.emailAddr}"></span>
+											</li>
+											<li><span class="gray3">종교</span>
+												<span class="sublist" th:if="${resume.religoin} != null and ${resume.religoin} != ''" th:text="${resume.religoin}"></span>
+											</li>
+											<li><span class="gray3">특기</span>
+												<span class="sublist" th:if="${resume.ability} != null and ${resume.ability} != ''" th:text="${resume.ability}"></span>
+											</li>
+											<li><span class="gray3">취미</span>
+												<span class="sublist" th:if="${resume.hobby} != null and ${resume.hobby} != ''" th:text="${resume.hobby}"></span>
+											</li>
 										</ul><br class="clear">
 									</div>
 									<div class="viewBox">
