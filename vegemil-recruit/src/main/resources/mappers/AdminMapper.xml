@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminMapper">
+
+	<sql id="adminColumns">
+		  a_id
+		, a_pwd
+		, a_name
+		, a_class
+		, a_location
+		, a_auth
+		, a_active
+	</sql>
+
+	<insert id="insertAdmin" parameterType="com.vegemil.domain.AdminDTO">
+		/* insertAdmin by AdminMapper.xml */
+		INSERT INTO M_Admin (
+			<include refid="adminColumns" />
+		) VALUES (
+			  #{aId}
+			, #{aPwd}
+			, #{aName}
+			, '임직원'
+			, #{aLocation}
+			, 'ADMIN'
+			, 0
+		)
+	</insert>
+
+	<select id="findAdminById" parameterType="string" resultType="com.vegemil.domain.AdminDTO">
+		/* findAdminById by AdminMapper.xml */
+		SELECT 
+			<include refid="adminColumns" />
+		  FROM M_Admin
+		 WHERE a_id = #{aId}
+		   AND a_active = 1
+	</select>
+
+	<update id="updateAdminPwd" parameterType="com.vegemil.domain.AdminDTO">
+		/* updateAdminPwd by AdminMapper.xml */
+		UPDATE M_Admin
+		SET
+			a_pwd = #{aPwd}
+		WHERE
+			a_id = #{aId}
+	</update>
+
+	<select id="selectAdminList" parameterType="com.vegemil.domain.MemberDTO" resultType="com.vegemil.domain.AdminDTO">
+	    /* selectAdminList by AdminMapper.xml */
+		SELECT
+			<include refid="adminColumns" />
+		FROM
+			M_Admin
+		WHERE
+		<include refid="CommonMapper.search" />
+		ORDER BY
+		<include refid="CommonMapper.paging" />
+	</select>
+	
+	<select id="selectAdminCount" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_Admin
+		WHERE
+			a_id = #{aId, jdbcType=VARCHAR}
+		AND
+		    a_name = #{aName, jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectAdminTotalCount" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+		/* selectAdminTotalCount by AdminMapper.xml */
+		SELECT
+			COUNT(*)
+		FROM
+			M_Admin
+		WHERE
+		<include refid="CommonMapper.search" />
+	</select>
+	
+	<select id="checkMember" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+		/* checkMember by AdminMapper.xml */
+		SELECT COUNT(*)
+		  FROM M_Admin
+		 WHERE a_id = #{aId, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="activeAdmin" parameterType="com.vegemil.domain.AdminDTO">
+		UPDATE M_Admin
+		SET
+			 a_active 	  = 1
+		WHERE
+			a_id = #{aId, jdbcType=VARCHAR}
+	    AND
+	        a_name = #{aName, jdbcType=VARCHAR}
+	</update>
+
+</mapper>

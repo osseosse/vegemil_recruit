@@ -55,9 +55,9 @@
 									</dt>
 									<dd>
 										<div class="list_ico_box">
-											<span><a th:href="|#pop_view${i.index+1}|" class="btn modal-open"><img th:src="@{/img/ico_view.png}" alt="미리보기"/></a></span> 
-											<span th:if="${resume.sDday} < 1"><a th:href="|@{/application/personalInfo}?idx=${resume.idx}|"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
-											<span><a href="javascript:void(0);" th:onclick="|deleteResume(${resume.idx});|" ><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+											<span><a th:href="|#pop_view${i.index+1}|" class="btn modal-open"><img th:src="@{/img/ico_view.png}" alt="미리보기" title="미리보기"/></a></span> 
+											<span th:if="${resume.sDday} < 1"><a th:href="|@{/application/personalInfo}?idx=${resume.idx}|"><img th:src="@{/img/ico_edit.png}" alt="수정" title="수정"/></a></span> 
+											<span><a href="javascript:void(0);" th:onclick="|deleteResume(${resume.idx});|" ><img th:src="@{/img/ico_delete.png}" alt="삭제" title="삭제"/></a></span> 
 										</div>
 										<button type="button" th:if="${resume.joinOk} != '접수'" class="btn_reviewBox mt20" th:onclick = "|location.href='/application/result/${resume.idx}'|">
 											<ul>

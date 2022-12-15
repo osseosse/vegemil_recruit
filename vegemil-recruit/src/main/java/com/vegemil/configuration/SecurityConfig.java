@@ -32,18 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
-	        	.antMatcher("/admin/**")
-	            	.authorizeRequests().anyRequest().hasAuthority("ADMIN")
-	            .and()
-	            	.csrf().disable()
+	            
+	        .antMatcher("/admin/recruit/**")
+        	.authorizeRequests().anyRequest().hasAuthority("ADMIN")   
+	            .and().csrf().disable()
 		            .formLogin()
-		                .loginPage("/member/adminLogin")
-		                .loginProcessingUrl("/admin/loginProc")
-		                .failureUrl("/admin/login?error=true")
-		                .defaultSuccessUrl("/")
+		                .loginPage("/admin/auth/login")
+		                .loginProcessingUrl("/member/loginProc")
+		                .failureUrl("/admin/auth/login?error=true")
+		                .defaultSuccessUrl("/admin/recruit/volunteerList", true)
 	            .and()
 	                .logout()
-		                .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout")) // 로그아웃 시 URL 재정의
+		                .logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout", "GET")) // 로그아웃 시 URL 재정의
 		                .logoutSuccessUrl("/") // 로그아웃 성공 시 redirect 이동
 		                .invalidateHttpSession(true) // HTTP Session 초기화
 		                .deleteCookies("JSESSIONID") // 특정 쿠키 제거
@@ -55,8 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    @Override
 	    public void configure(AuthenticationManagerBuilder auth) throws Exception {
 	        auth.userDetailsService(memberService).passwordEncoder(new BCryptPasswordEncoder());
-	        //어드민으로 수정
-	        //auth.userDetailsService(adminService).passwordEncoder(new BCryptPasswordEncoder());
 	    }
     
     }
@@ -72,14 +70,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
-	            .authorizeRequests()
-	                .antMatchers("/application/**").hasAuthority("USER") // user 권한의 유저만  접근가능
-	                .antMatchers("/mypage/**").hasAuthority("USER") // user 권한의 유저만  접근가능
-	                .antMatchers("/recruit/join", "/recruit/register").hasAuthority("USER") // user 권한의 유저만  접근가능
-	            .anyRequest()
-	                .permitAll()
-	                .and().csrf().disable()
-	            .formLogin()
+	        .authorizeRequests()
+            .antMatchers("/mypage/**").authenticated()
+            .antMatchers("/application/**").authenticated()
+            .antMatchers("/recruit/join", "/recruit/register").authenticated()
+	        .anyRequest()
+	        	.permitAll()
+	            .and().formLogin()
 	                .loginPage("/member/login")
 	                .loginProcessingUrl("/member/loginProc")
 	                .failureUrl("/member/login?error=true")
