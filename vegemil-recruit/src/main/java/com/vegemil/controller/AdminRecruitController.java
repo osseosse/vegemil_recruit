@@ -54,7 +54,13 @@ public class AdminRecruitController extends UiUtils {
 	private AdminRecruitService adminRecruitService;
 	
 	@GetMapping(value = "/admin/recruit/{viewName}")
-    public String adminRecruit(@PathVariable(value = "viewName", required = false) String viewName, HttpServletRequest req, Model model)throws Exception{
+    public String adminRecruit(@PathVariable(value = "viewName", required = false) String viewName, HttpServletRequest req, Model model,
+    		Authentication authentication)throws Exception{
+		
+		//관리자 검증
+		boolean result = getAdminAuth(authentication);
+       	model.addAttribute("getAuth", result);
+		
 		return "admin/recruit/"+viewName;
     }
 	
@@ -188,10 +194,19 @@ public class AdminRecruitController extends UiUtils {
 		
 		MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
         if(member != null) {
-        	if(!"ADMIN".equals(member.getAuth())) {
-        		return "/";
+        	LOGGER.info("=======member.getAuth()======"+member.getAuth());
+        	System.out.println("=======member.getAuth()======"+member.getAuth());
+        	if("ADMIN".equals(member.getAuth()) && member.getActive() == 1) {
+        		model.addAttribute("auth", true);
+        	}else {
+        		model.addAttribute("auth", false);
         	}
+        	
         }
+        
+        //관리자 검증
+        boolean result = getAdminAuth(authentication);
+       	model.addAttribute("getAuth", result);
 		
 		if(sTh == null) sTh = recruitList.get(0).getSTh();
 		
@@ -298,9 +313,13 @@ public class AdminRecruitController extends UiUtils {
     }
 	
 	@GetMapping(value = "/admin/recruit/qnaList")
-    public String qnaList(@ModelAttribute("params") QnaDTO params, HttpServletRequest req, Model model)throws Exception{
+    public String qnaList(@ModelAttribute("params") QnaDTO params, HttpServletRequest req, Model model,
+    		Authentication authentication)throws Exception{
 		List<RecruitDTO> recruitList = adminRecruitService.getRecruitList();
 		
+		//관리자 검증
+		boolean result = getAdminAuth(authentication);
+       	model.addAttribute("getAuth", result);
 		model.addAttribute("recruitList", recruitList);
 		
 		return "admin/recruit/qnaList";
@@ -374,5 +393,19 @@ public class AdminRecruitController extends UiUtils {
 		}
 
 		return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/admin/recruit/qnaList", Method.GET, null, model);
+	}
+	
+	public boolean getAdminAuth(Authentication authentication) throws Exception {
+		boolean result = true;
+		MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+        if(member != null) {
+        	if("ADMIN".equals(member.getAuth()) && member.getActive() == 1) {
+        		result = true;
+        	}else {
+        		result = false;
+        	}
+        	
+        }
+        return result;
 	}
 }

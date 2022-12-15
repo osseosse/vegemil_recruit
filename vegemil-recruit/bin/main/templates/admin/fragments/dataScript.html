@@ -59,8 +59,14 @@
                 });
             }
         })
+        if(![[${getAuth}]]) {
+        	alert('관리자로 로그인해주세요');
+        	window.location.href = '/home';
+        }
 
     </script>
     
+    
 </th:block>
+
 </html>
