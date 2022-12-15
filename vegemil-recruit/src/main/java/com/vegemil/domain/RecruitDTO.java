@@ -23,7 +23,7 @@ public class RecruitDTO extends CommonDTO {
 	private String sCollect;
 	private Long sDday;
 	private String sInsertdate;
-	private String sModifyDate;
+	private String sModifydate;
 	private String sYyyy;
 	private String sMm;
 	private String sField;
