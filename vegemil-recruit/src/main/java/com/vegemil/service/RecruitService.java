@@ -18,4 +18,6 @@ public interface RecruitService {
 	
 	public List<String> getMajorList(String majorName);
 	
+	public int checkRecruitEnd(String setupTh);
+	
 }

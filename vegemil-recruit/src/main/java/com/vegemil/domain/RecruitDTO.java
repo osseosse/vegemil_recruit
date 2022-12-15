@@ -15,12 +15,13 @@ public class RecruitDTO extends CommonDTO {
 	private String sEnddate;
 	private String s1;
 	private String s2;
-	private String s3;	
+	private String s3;
+	private String sImg;
 	private String sClose;
 	private String sCategory;
 	private String sCategory2;
 	private String sCollect;
-	private String sDday;
+	private Long sDday;
 	private String sInsertDate;
 	private String sModifyDate;
 
