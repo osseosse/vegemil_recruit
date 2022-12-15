@@ -113,14 +113,14 @@
 	
 	<select id="selectDateApplyData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT /* selectDateApplyData by AdminRecruitMapper.xml */
-			 join_date
+			 date_format(join_date, '%Y-%m-%d') as join_date
 			,count(*) AS dateCount
 		FROM
 			R_Recruit
 		WHERE
 			setup_th = #{sTh}
 		GROUP BY
-			join_date
+			date_format(join_date, '%Y-%m-%d')
 		ORDER BY
 			join_date
 	</select>

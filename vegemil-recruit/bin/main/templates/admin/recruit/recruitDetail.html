@@ -84,8 +84,8 @@
 							<tr>
 								<td class="hool" rowspan=6>
 									<div class="imgPhotoBack">
-										<img th:if="*{recruit.photo != null and recruit.photo != ''}" id="resumePhoto" th:src="|/display?filename=*{recruit.photo}|" />
-										<img th:unless="*{recruit.photo != null and recruit.photo != ''}" th:src="@{/img/ico_photo.png}" id="recruitPhoto" />
+										<img th:if="*{recruit.photo != null and recruit.photo != ''}" id="resumePhoto" th:src="|/display?filename=*{recruit.photo}|" style="max-width:120px; width:100%" />
+										<img th:unless="*{recruit.photo != null and recruit.photo != ''}" th:src="@{/img/ico_photo.png}" id="recruitPhoto" style="max-width:120px; width:100%" />
 									</div>
 								</td>
 								<th rowspan=3><div class="hool">성명</div></th>
