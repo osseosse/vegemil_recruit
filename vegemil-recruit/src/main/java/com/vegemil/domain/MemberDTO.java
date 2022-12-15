@@ -35,6 +35,7 @@ public class MemberDTO implements UserDetails {
 	private Timestamp activeDate;/** 계정 활성화 날짜 */
 	private Timestamp lastLoginDate;/** 마지막 로그인날짜 */
 	private Timestamp sleepDate;/** 휴면처리날짜 */
+	private String location; /** 부서 **/
 
 	 @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

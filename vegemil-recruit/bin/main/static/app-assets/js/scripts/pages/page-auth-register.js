@@ -27,17 +27,17 @@ $(function () {
         $(element).valid();
       }, */
       rules: {
-        'aName': {
+        'memName': {
           required: true
         },
-        'aId': {
+        'eamilAddr': {
           required: true,
           email: true
         },
-        'aPwd': {
+        'password': {
           required: true
         },
-        'aLocation': {
+        'location': {
 	      required: true
 		}
       }

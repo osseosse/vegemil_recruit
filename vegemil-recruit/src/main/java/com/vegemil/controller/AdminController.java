@@ -68,13 +68,13 @@ public class AdminController extends UiUtils {
     public String adminAccount(@PathVariable(value = "viewName", required = false) String viewName, HttpServletRequest req, Model model)throws Exception{
 		
 		HttpSession session = req.getSession();
-		if(viewName.equals("settings")) {
-			AdminDTO admin = (AdminDTO) session.getAttribute("admin");
-			admin = adminService.getAdmin(admin.getAId());
-			if(admin != null) {
-				model.addAttribute("admin", admin);
-			}
-		}
+//		if(viewName.equals("settings")) {
+//			AdminDTO admin = (AdminDTO) session.getAttribute("admin");
+//			admin = adminService.getAdmin(admin.getAId());
+//			if(admin != null) {
+//				model.addAttribute("admin", admin);
+//			}
+//		}
 		
 		return "admin/account/"+viewName;
     }
@@ -98,18 +98,18 @@ public class AdminController extends UiUtils {
 	
     // 회원가입 처리
     @PostMapping("/admin/auth/signUp")
-    public String adminSignup(AdminDTO adminDto, Model model) {
+    public String adminSignup(MemberDTO memberDto, Model model) {
     	
     	try {
 	    	
-	    	int result = adminService.joinAdmin(adminDto);
+	    	int result = adminService.joinAdmin(memberDto);
 			if (result == 0) {
 				return showMessageWithRedirect("이미 등록된 아이디입니다.", "/admin/auth/register", Method.GET, null, model);
 			}else if(result == 2) {
 				return showMessageWithRedirect("회원 가입 실패하였습니다.", "/admin/auth/register", Method.GET, null, model);
 			}
 			
-			mailService.mailSend(adminDto);
+			mailService.adminMailSend(memberDto);
 			
     	} catch (DataAccessException e) {
 			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/admin/auth/register", Method.GET, null, model);
@@ -123,12 +123,12 @@ public class AdminController extends UiUtils {
     }
     
     @PostMapping("/admin/auth/searchPwdProc")
-    public String searchPwdProc(AdminDTO adminDto, Model model, Authentication authentication) {
+    public String searchPwdProc(MemberDTO memberDto, Model model, Authentication authentication) {
     	
     	boolean result;
     	
     	try {
-    		result = adminService.initPwd(adminDto);
+    		result = adminService.initPwd(memberDto);
     		if(!result) {
     			return showMessageWithRedirect("다시 확인해주세요.", "admin/auth/resetPassword", Method.GET, null, model);
     		}
@@ -162,14 +162,14 @@ public class AdminController extends UiUtils {
 //    }
 
     @PostMapping("/admin/passChange" )
-	public String adminPassChange(AdminDTO adminDto, Model model , HttpServletRequest req, RedirectAttributes rttr 
+	public String adminPassChange(MemberDTO memberDto, Model model , HttpServletRequest req, RedirectAttributes rttr 
 			,Authentication authentication) {
 		
 		try {
-			AdminDTO loginUser = (AdminDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
-			adminDto.setAId(loginUser.getAId());
+			MemberDTO loginUser = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
+			memberDto.setEmailAddr(loginUser.getEmailAddr());
 			
-			boolean isUpdated = adminService.changePwd(adminDto);
+			boolean isUpdated = adminService.changePwd(memberDto);
 			
 			if(!isUpdated) {
 				return showMessageWithRedirect("비밀번호가 일치하지 않습니다.", "/admin/auth/resetPassword", Method.GET, null, model);
@@ -187,24 +187,24 @@ public class AdminController extends UiUtils {
     
     //회원 활성화
   	@GetMapping(value = "/admin/email/active")
-  	public void changeActive(@RequestParam(value="aId", required=true) String aId, 
-  			@RequestParam(value="aName", required=true) String aName, Model model, HttpServletResponse response) throws Exception {
+  	public void changeActive(@RequestParam(value="emailAddr", required=true) String eamilAddr, 
+  			@RequestParam(value="memName", required=true) String memName, Model model, HttpServletResponse response) throws Exception {
   		response.setContentType("text/html; charset=UTF-8");
   		PrintWriter out = response.getWriter();
-  		AdminDTO adminDto = new AdminDTO();
-  		if (aId == null || aName == null) {
+  		MemberDTO memberDto = new MemberDTO();
+  		if (eamilAddr == null || memName == null) {
   			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
   			out.flush();
   		}
-  		adminDto.setAId(aId);
-  		adminDto.setAName(aName);
+  		memberDto.setEmailAddr(eamilAddr);
+  		memberDto.setMemName(memName);
   		
-  		boolean isActived = mailService.verifyEmail(adminDto);
+  		boolean isActived = mailService.verifyAdminEmail(memberDto);
   		if (!isActived) {
   			out.println("<script>alert('올바르지 않은 접근입니다.'); history.go(-1);</script>");
   			out.flush();
   		}
-  		boolean isRegistered = adminService.activeMember(adminDto);
+  		boolean isRegistered = adminService.activeMember(memberDto);
   		if (isRegistered == false) {
   			out.println("<script>alert('이메일인증에 실패하였습니다.'); window.location='/';</script>");
   			out.flush();
