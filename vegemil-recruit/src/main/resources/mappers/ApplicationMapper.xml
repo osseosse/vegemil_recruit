@@ -25,7 +25,7 @@
 		, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 		, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3
 		, lang_talk3, lang_make3, lang_read3
-    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5
+    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
     	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
     	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
     	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
@@ -158,8 +158,7 @@
 			, lang_lic_name2=#{langLicName2}, lang_lic_num2=#{langLicNum2}, lang_get2=#{langGet2}, lang_talk2=#{langTalk2}, lang_make2=#{langMake2}, lang_read2=#{langRead2}
 			, lang_name3=#{langName3}, lang_point3=#{langPoint3}, lang_lv3=#{langLv3}, lang_lic_name3=#{langLicName3}, lang_lic_num3=#{langLicNum3}, lang_get3=#{langGet3}, lang_talk3=#{langTalk3}
 	    	, lang_make3=#{langMake3}, lang_read3=#{langRead3}
-	    	, sw_name1=#{swName1}, sw_lv1=#{swLv1}, sw_name2=#{swName2}, sw_lv2=#{swLv2}, sw_name3=#{swName3}, sw_lv3=#{swLv3}, sw_name4=#{swName4} 
-	    	, sw_lv4=#{swLv4}, sw_name5=#{swName5}, sw_lv5=#{swLv5}
+	    	, sw_name1=#{swName1}, sw_lv1=#{swLv1}, sw_name2=#{swName2}, sw_lv2=#{swLv2}, sw_name3=#{swName3}, sw_lv3=#{swLv3}
 	    	, lic_name1=#{licName1}, lic_num1=#{licNum1}, lic_get_date1=#{licGetDate1}, lic_pub1=#{licPub1}, lic_name2=#{licName2}, lic_num2=#{licNum2}
 	    	, lic_get_date2=#{licGetDate2}, lic_pub2=#{licPub2}, lic_name3=#{licName3}, lic_num3=#{licNum3}, lic_get_date3=#{licGetDate3}, lic_pub3=#{licPub3}, lic_name4=#{licName4}
     		, lic_num4=#{licNum4}, lic_get_date4=#{licGetDate4}, lic_pub4=#{licPub4}
@@ -273,7 +272,7 @@
 				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
 		    	, lang_make3, lang_read3
-		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5
+		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
 		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
 		    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
 		    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
@@ -312,7 +311,7 @@
 				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
 		    	, lang_make3, lang_read3
-		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_name4, sw_lv4, sw_name5, sw_lv5
+		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
 		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
 		    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
 		    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3

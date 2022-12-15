@@ -6,6 +6,7 @@
   window.id2 = $('#licCount').val();
   window.id3 = $('#medalCount').val();
   window.id4 = $('#forCount').val();
+  window.id5 = $('#swCount').val();
   
   
   $('#field1').repeater({
@@ -26,6 +27,29 @@
       if (confirm('삭제하시겠습니까?')) {
     	window.id1--;
         $('#langCount').val(window.id1);
+        $(this).slideUp(deleteElement);
+      }
+    }
+  });
+  
+  $('#field2').repeater({
+	defaultValues: {
+        'id': window.id5,
+    },
+    show: function () {
+      if(window.id5 < 3) {
+   	      $(this).slideDown();
+   	      window.id5++;
+   	      $('#swCount').val(window.id5);
+      } else {
+      	alert("S/W는 3개까지 입력 가능합니다.");
+      	return false;
+      }
+    },
+    hide: function (deleteElement) {
+      if (confirm('삭제하시겠습니까?')) {
+    	window.id5--;
+        $('#swCount').val(window.id5);
         $(this).slideUp(deleteElement);
       }
     }

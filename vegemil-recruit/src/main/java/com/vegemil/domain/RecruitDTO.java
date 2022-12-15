@@ -213,12 +213,6 @@ public class RecruitDTO extends CommonDTO {
 	private String swLv2;
 	private String swName3;
 	private String swLv3;
-	private String swName4;
-	private String swLv4;
-	private String swName5;
-	private String swLv5;
-	private String swName6;
-	private String swLv6;
 	private String licCount;
 	private String licName1;
 	private String licNum1;

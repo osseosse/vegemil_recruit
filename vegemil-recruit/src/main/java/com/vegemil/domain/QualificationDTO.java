@@ -46,10 +46,6 @@ public class QualificationDTO extends ApplicationDTO {
 	private String swLv2;
 	private String swName3;
 	private String swLv3;
-	private String swName4;
-	private String swLv4;
-	private String swName5;
-	private String swLv5;
 	
 	//자격 및 면허
 	private String licCount;

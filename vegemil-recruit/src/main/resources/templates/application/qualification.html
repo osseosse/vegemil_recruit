@@ -129,7 +129,7 @@
 											</ul>
 										</div>
 									</div>
-									<!-- 의미없는 상중하
+									<!-- 의미없는 상중하 
 									<div class="row mt10">
 										<div class="col-lg-6">
 											<ul class="s-d-2">
@@ -181,9 +181,9 @@
 							</div><!-- field1 -->
 
 							<!-- (2)IT -->
-							<!-- 의미없는 상중하
-							<div id="field2">
-							<p class="f23 fw600 mt80 pr">IT 능력<input type="button" class="selPlus" value="추가 " data-repeater-create th:src="@{/img/ico_plus.png}"></p>
+							<!-- 의미없는 상중하 -->
+							<div id="field2" class="sw-repeater">
+							<p class="f23 fw600 mt80 pr">IT 능력<button type="button" class="selPlus" value="추가 " data-repeater-create><img th:src="@{/img/ico_plus.png}" alt="수정"/></button></p>
 								<input type="hidden" th:field="*{swCount}"/>
 								<div data-repeater-list="sw">
                                 <div data-repeater-item th:each="num : ${#numbers.sequence(1,app.swCount)}">
@@ -195,23 +195,24 @@
 												<li>
 													<input type="text" id="swName" name="swName" class="inType01 w180"  >
 												</li>
-												<li class="radioStyle3 i60 ml10">
-													<input type="radio" id="r21" th:name="swLv" th:attr="checked=*{swLv1 == '상' ? 'true' : 'false'}" value="상" />
-													<label for="r21"><span></span>상</label>
-													<input type="radio" id="r22" th:name="swLv" th:attr="checked=*{swLv1 == '중' ? 'true' : 'false'}" value="중" />
-													<label for="r22"><span></span>중</label>
-													<input type="radio" id="r23" th:name="swLv" th:attr="checked=*{swLv1 == '하' ? 'true' : 'false'}" value="하" />
-													<label for="r23"><span></span>하</label>
+												<li>
+													<div class="scroll w180">
+														<select id="swLv" th:name="swLv" class="base w180">
+															<option value="">선택</option>
+															<option value="상">상</option>
+															<option value="중">중</option>
+															<option value="하">하</option>
+														</select>
+													</div>
 												</li>
 											</ul>
 										</div>
 									</div>
 									</div>
-									<input class="inputDel3" type="button" value="삭제" data-repeater-delete th:src="@{/img/ico_inputDel2.png}" >
+									<button class="inputDel3" type="button" value="삭제"  data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 									</div>
 								</div>
 							</div>
-							-->
 							<!-- field2 -->
 							
 							<!-- (3)자격 및 면허 -->
@@ -378,6 +379,7 @@
 		var licCount = /*[[ ${app.licCount} ]]*/;
 		var medalCount = /*[[ ${app.medalCount} ]]*/;
 		var forCount = /*[[ ${app.forCount} ]]*/;
+		var swCount = /*[[ ${app.swCount} ]]*/;
 		
 		var langName1 = /*[[ ${app.langName1} ]]*/;
 		var langLicName1 = /*[[ ${app.langLicName1} ]]*/;
@@ -507,6 +509,23 @@
 			$("input[name='medalName3']").val(/*[[ ${app.medalName3} ]]*/);
 			$("input[name='medalDate3']").val(/*[[ ${app.medalDate3} ]]*/);
 			$("input[name='medalContent3']").val(/*[[ ${app.medalContent3} ]]*/);
+		}
+		
+		if(swCount == 1) {
+			$("input[name='swName1']").val(/*[[ ${app.swName1} ]]*/);
+			$("select[name='swLv1']").val(/*[[ ${app.swLv1} ]]*/).prop("selected", true);
+		} else if(swCount == 2) {
+			$("input[name='swName1']").val(/*[[ ${app.swName1} ]]*/);
+			$("select[name='swLv1']").val(/*[[ ${app.swLv1} ]]*/).prop("selected", true);
+			$("input[name='swName2']").val(/*[[ ${app.swName2} ]]*/);
+			$("select[name='swLv2']").val(/*[[ ${app.swLv2} ]]*/).prop("selected", true);
+		} else if(swCount == 3) {
+			$("input[name='swName1']").val(/*[[ ${app.swName1} ]]*/);
+			$("select[name='swLv1']").val(/*[[ ${app.swLv1} ]]*/).prop("selected", true);
+			$("input[name='swName2']").val(/*[[ ${app.swName2} ]]*/);
+			$("select[name='swLv2']").val(/*[[ ${app.swLv2} ]]*/).prop("selected", true);
+			$("input[name='swName3']").val(/*[[ ${app.swName3} ]]*/);
+			$("select[name='swLv3']").val(/*[[ ${app.swLv3} ]]*/).prop("selected", true);
 		}
 		
 		if(forCount == 1) {
