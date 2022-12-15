@@ -107,6 +107,9 @@ $("#selectAcademy").change( function() {
 	$("input[class='inType01 w180 ls1']").val('');
 	$("input[class='inType01 w120 bgGray2']").val('');
 	$("input[class='inType01 w70 text-right']").val('');
+	$("#schGrad").val('');
+	$("#schNight").val('');
+	$("#schAdmis").val('');
 	$("#searchArea").show();
 	$("#gradArea").show();
 	$("#schArea").show();
