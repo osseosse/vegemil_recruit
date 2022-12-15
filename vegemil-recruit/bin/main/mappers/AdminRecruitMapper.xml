@@ -363,7 +363,7 @@
 		SELECT /* selectQna by AdminRecruitMapper.xml */
 			q.q_id, q.mem_no, q.r_idx, q.r_title, q.r_company, q.r_content, q.r_insert_date, q.r_update_date, q.r_delete_date, m.mem_name, 
 			q.r_delete_yn, q.r_answer_yn, q.r_answer, q.r_answer_email, q.r_answer_tel, q.r_answer_date, q.r_email, q.r_phone_no, q.r_agree,
-			m.email_addr as r_email, m.phone_no as r_phone_no
+			m.email_addr as rEmail, m.phone_no as rPhoneNo
 		FROM
 			r_recruit_qna q, m_recruit_member m
 		WHERE q.mem_no = m.mem_no

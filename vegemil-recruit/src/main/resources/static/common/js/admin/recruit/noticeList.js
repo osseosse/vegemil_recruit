@@ -34,7 +34,6 @@ function copyNotice(sTh){
 				}
 				else{
 					alert("채용공고 복사에 성공했습니다.");
-					window.location.reload();
 					$('.datatables-basic').DataTable().ajax.reload();
 				}
 				
@@ -281,7 +280,7 @@ var createTable = function() {
       		targets: 5,
       		orderable: false,
           	render: function (data, type, full, meta) {
-				return(full['sInsertdate'].substr(0,10));
+				return(full['sInsertdate']);
 	        }
       	}
       ],

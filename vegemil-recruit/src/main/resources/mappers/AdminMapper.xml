@@ -84,7 +84,7 @@
 		WHERE
 			email_addr = #{emailAddr, jdbcType=VARCHAR}
 		AND
-		    memName = #{memName, jdbcType=VARCHAR}
+		    mem_name = #{memName, jdbcType=VARCHAR}
 	</select>
 
 	<select id="selectAdminTotalCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
@@ -107,11 +107,11 @@
 	<update id="activeAdmin" parameterType="com.vegemil.domain.MemberDTO">
 		UPDATE m_recruit_member
 		SET
-			 a_active 	  = 1
+			 active 	  = 1
 		WHERE
 			email_addr = #{emailAddr, jdbcType=VARCHAR}
 	    AND
-	        memName = #{memName, jdbcType=VARCHAR}
+	        mem_name = #{memName, jdbcType=VARCHAR}
 	</update>
 
 </mapper>

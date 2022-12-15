@@ -60,7 +60,7 @@ public class EmailController extends UiUtils {
         
     }
 	
-	@RequestMapping(value = { "/email/sendAuthEmailJson" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+	@RequestMapping(value = { "/email/sendAuthEmailJson" }, method = { RequestMethod.POST})
 	public @ResponseBody JsonObject execAuthmailJson(MemberDTO member, HttpServletResponse response) throws Exception {
 		
 		JsonObject jsonObj = new JsonObject();
@@ -71,7 +71,9 @@ public class EmailController extends UiUtils {
         		jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
     		}
         	//멤버를 세션에서 가져와야한다.
-			mailService.sendActiveEmail(member);
+        	mailService.sendActiveEmail(member);
+			
+			
 			jsonObj.addProperty("result", true);
 			
         } catch (DataAccessException e) {
