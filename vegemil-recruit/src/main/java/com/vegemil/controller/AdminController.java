@@ -109,7 +109,9 @@ public class AdminController extends UiUtils {
 				return showMessageWithRedirect("회원 가입 실패하였습니다.", "/admin/auth/register", Method.GET, null, model);
 			}
 			
+			memberDto.setAuth("ADMIN");
 			mailService.adminMailSend(memberDto);
+			model.addAttribute("member", memberDto);
 			
     	} catch (DataAccessException e) {
 			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/admin/auth/register", Method.GET, null, model);

@@ -221,26 +221,32 @@ function createTable(){
       		className: "text-center",
       		orderable: false,
           	render: function (data, type, full, meta) {
-          		var checked1 = '';
-          		var checked2 = '';
-          		var checked3 = '';
-          		var checked4 = '';
+				let checked0 = '';
+          		let checked1 = '';
+          		let checked2 = '';
+          		let checked3 = '';
           		
-          		if(full['joinOk'] == '1')	checked1 = 'checked';
+          		
+          		if(full['joinOk'] == '0')   	checked0 = 'checked';
+          		if(full['joinOk'] == '1')		checked1 = 'checked';
           		if(full['joinOk'] == '2')		checked2 = 'checked';
           		if(full['joinOk'] == '3')		checked3 = 'checked';
           		
 	            return (
+				  '<div class="form-check form-check-inline">' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId01' + full['idx'] + '" value="0" ' + checked0 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"0"); />' +
+		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">불합격</label>' +
+	              '</div>' + 
 	              '<div class="form-check form-check-inline">' +
-		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId01' + full['idx'] + '" value="접수증" ' + checked1 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"1"); />' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId01' + full['idx'] + '" value="1" ' + checked1 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"1"); />' +
 		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">서류</label>' +
 	              '</div>' + 
 	              '<div class="form-check form-check-inline">' +
-		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId02' + full['idx'] + '" value="1" ' + checked2 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"2"); />' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId02' + full['idx'] + '" value="2" ' + checked2 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"2"); />' +
 		              '<label class="form-check-label" for="radioId02' + full['idx'] + '">1차</label>' +
 	              '</div>' +
 	              '<div class="form-check form-check-inline">' +
-		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId03' + full['idx'] + '" value="2" ' + checked3 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"3"); />' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId03' + full['idx'] + '" value="3" ' + checked3 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"3"); />' +
 		              '<label class="form-check-label" for="radioId03' + full['idx'] + '">2차</label>' +
 	              '</div>'
 	            );
