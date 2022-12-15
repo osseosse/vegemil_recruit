@@ -321,5 +321,10 @@ public class RecruitDTO extends CommonDTO {
 	private int dateCount;
 	private int fieldCount;
 	
+	private String religoin;
+	private String ability;
+	private String hobby;
+	private String schTransfer3;
+	
 
 }
