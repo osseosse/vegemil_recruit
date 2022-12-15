@@ -118,7 +118,7 @@ public class AdminController extends UiUtils {
 			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/admin/auth/register", Method.GET, null, model);
 		}
     	
-    	return showMessageWithRedirect("가입이 완료되었습니다.\n 로그인 페이지로  이동 합니다.", "/admin/auth/login", Method.GET, null, model);
+    	return "admin/auth/joinConfirm";
 
     }
     
