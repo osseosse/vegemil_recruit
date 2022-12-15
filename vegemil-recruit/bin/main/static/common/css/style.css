@@ -264,6 +264,8 @@ left:0; top:0; background-position:center; width:100%;-webkit-background-size: c
 .italic {font-style: italic;}
 .f_info {color:#bfbfbf; font-size:13px; line-height:150%}
 .f_info span {background:#bfbfbf; padding:2px 10px; border-radius:20px; color:#fff}
+.btn-admin {background:#aaa;  border-radius:20px; float:left; margin-top:13px; margin-right:10px ; position:relative}
+.btn-admin a {color:#Ffff; font-size:14px; padding:5px 15px; display:inline-block}
 /*================================ 
     header  
 ================================*/
