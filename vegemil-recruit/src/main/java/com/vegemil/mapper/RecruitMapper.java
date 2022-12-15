@@ -22,5 +22,7 @@ public interface RecruitMapper {
 	public int selectRecruitTotalCount();
 	
 	public List<String> getMajorList(String majorName);
+	
+	public int getRecruitEndYn(String setupTh);
 
 }

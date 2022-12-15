@@ -89,32 +89,35 @@
 								
 							</div>
 							<div id="recruitList">
-							<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
-								<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:name="|${recruit.sCompany}/${recruit.sType}/${recruit.sCategory}/${recruit.sCategory2}|" >
-									<div class="r-box mt20">
-										<input type="hidden"  />
-										<div class="info01">
-											<th:block th:unless="${#strings.isEmpty( recruit.sCategory )}">
-												<span class="r-blue" th:text="${recruit.sCategory}"></span>
-												<!-- <span class="r-blue">신입</span> -->
-											</th:block>
-											<span class="r-black" th:text="|D${recruit.sDday}|"></span>
+								<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
+									<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:if="${recruit.sDday} < 1" th:name="|${recruit.sCompany}/${recruit.sType}/${recruit.sCategory}/${recruit.sCategory2}|" >
+										<div class="r-box mt20">
+											<input type="hidden"  />
+											<div class="info01">
+												<th:block th:unless="${#strings.isEmpty( recruit.sCategory )}">
+													<span class="r-blue" th:text="${recruit.sCategory}"></span>
+													<!-- <span class="r-blue">신입</span> -->
+												</th:block>
+												<span class="r-black" th:text="|D${recruit.sDday}|"></span>
+											</div>
+											<!-- <div class="r-g-line ac">8</div> -->
+											<div class="info02 mt20 pb0 line-height140">
+												<span class="f20 fw600 " th:text="${recruit.sTitle}"></span>
+											</div>
+											<div class="info03">
+												<p class="gray f16 text-left pt20 ac" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|"></p>
+											</div>
 										</div>
-										<!-- <div class="r-g-line ac">8</div> -->
-										<div class="info02 mt20 pb0 line-height140">
-											<span class="f20 fw600 " th:text="${recruit.sTitle}"></span>
-										</div>
-										<div class="info03">
-											<p class="gray f16 text-left pt20 ac" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|"></p>
-										</div>
+									</a>
+									<div class="r-box mt20" th:unless="${recruit.sDday} < 1">
+										<div class="tex-center f16 pt40 pb40 gray">진행중인 채용이 없습니다.</div>
 									</div>
-								</a>
-							</th:block>
-							<th:block th:unless="${not #lists.isEmpty( recruitList )}">
-								<div class="r-box mt20">
-									<div class="tex-center f16 pt40 pb40 gray">진행중인 채용이 없습니다.</div>
-								</div>
-							</th:block>
+								</th:block>
+								<th:block th:unless="${not #lists.isEmpty( recruitList )}">
+									<div class="r-box mt20">
+										<div class="tex-center f16 pt40 pb40 gray">진행중인 채용이 없습니다.</div>
+									</div>
+								</th:block>
 							</div>
 						</div><!-- //wrap860 -->
 					</div><!-- //memberWrapBase -->

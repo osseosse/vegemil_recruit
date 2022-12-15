@@ -4,13 +4,13 @@
 <mapper namespace="com.vegemil.mapper.ApplicationMapper">
 
 	<sql id="informationColumns">
-		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, mem_no, join_field2, join_area2
+		idx, setup_th, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, submit_ok, join_company1, join_company2, join_field1, join_area1, mem_no, join_field2, join_area2
 		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
 		, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
 	</sql>
 	<sql id="academyColumns">
-		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date, last_academy
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date, last_academy
 		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
     	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
     	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3
@@ -21,7 +21,7 @@
 	</sql>
 	
 	<sql id="qualificationColumns">
-		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
 		, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 		, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3
 		, lang_talk3, lang_make3, lang_read3
@@ -34,7 +34,7 @@
 	</sql>
 	
 	<sql id="careerColumns">
-		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
 		, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
 		, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
 		, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
@@ -42,7 +42,7 @@
 	</sql>
 	
 	<sql id="introduceColumns">
-		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, update_date
+		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
 		, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
 		, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
 	</sql>
@@ -253,7 +253,7 @@
 	</select>
 	
 	<select id="selectResume" parameterType="long" resultType="com.vegemil.domain.ResumeDTO">
-		SELECT idx, setup_th, setup_title,
+		SELECT idx, setup_th, setup_title, DATE_FORMAT(se.s_startdate,'%Y-%m-%d') as s_startdate, DATE_FORMAT(se.s_enddate,'%Y-%m-%d') as s_enddate, DATEDIFF(NOW(), s_enddate) as s_dday,
 				CASE
 			        WHEN submit_date IS NULL THEN NULL
 			        ELSE
@@ -285,12 +285,14 @@
 				, port_file, port_url
 				, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
 				, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
-		FROM R_Recruit
+		FROM R_Recruit re
+		LEFT OUTER JOIN R_Setup se
+		ON re.setup_th = se.s_th
 		WHERE idx= #{idx}
 	</select>
 	
 	<select id="selectResumeList" parameterType="long" resultType="com.vegemil.domain.ResumeDTO">
-		SELECT idx, setup_th, setup_title,
+		SELECT idx, setup_th, setup_title, se.s_startdate as s_startdate, se.s_enddate as s_enddate, DATEDIFF(NOW(), s_enddate) as s_dday,
 				CASE
 			        WHEN submit_date IS NULL THEN NULL
 			        ELSE
@@ -322,7 +324,9 @@
 				, port_file, port_url
 				, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
 				, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
-		FROM R_Recruit
+		FROM R_Recruit re
+		LEFT OUTER JOIN R_Setup se
+		ON re.setup_th = se.s_th
 		WHERE mem_no= #{memNo}
 		ORDER BY
 			join_DATE DESC
@@ -376,8 +380,8 @@
 	</select>
 	
 	<delete id="deleteResume" parameterType="long">
-		DELETE 
-		FROM 
+		DELETE
+		 FROM 
 			R_Recruit
 		WHERE
 			idx = #{idx}

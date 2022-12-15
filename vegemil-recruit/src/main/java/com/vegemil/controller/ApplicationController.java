@@ -46,6 +46,7 @@ import com.vegemil.domain.PersonalInfoDTO;
 import com.vegemil.domain.QualificationDTO;
 import com.vegemil.domain.ResumeDTO;
 import com.vegemil.service.ApplicationService;
+import com.vegemil.service.RecruitService;
 import com.vegemil.util.UiUtils;
 
 @Controller
@@ -53,6 +54,9 @@ public class ApplicationController extends UiUtils {
 
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private RecruitService recruitService;
 	
 	@Value("${spring.servlet.multipart.location}")
     private String uploadPath;
@@ -99,6 +103,14 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
+			
+			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			if(recruitEndCheck == 0) {
+				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
+			}
+			
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
@@ -236,6 +248,14 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
+			
+			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			if(recruitEndCheck == 0) {
+				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
+			}
+			
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
@@ -344,6 +364,14 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
+			
+			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			if(recruitEndCheck == 0) {
+				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
+			}
+			
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
@@ -455,6 +483,14 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
+			
+			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			if(recruitEndCheck == 0) {
+				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
+			}
+			
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());
@@ -593,6 +629,14 @@ public class ApplicationController extends UiUtils {
 				out.flush();
 				return showMessageWithRedirect("없는 지원서이거나 이미 삭제된 지원서입니다.", "/", Method.GET, null, model);
 			}
+			
+			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			if(recruitEndCheck == 0) {
+				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
+				out.flush();
+				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
+			}
+			
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());

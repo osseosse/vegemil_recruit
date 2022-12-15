@@ -54,22 +54,22 @@
 							<div class="main_right">
 								<div class="">
 									<p class="f20 fw400 white text-left mt100">채용공고</p>
-									<!-- 공고가 1개일때 노출방법 
+									<!-- 공고가 1개일때 노출방법 -->
 									<div class="roundType01 mt30" th:if="${not #lists.isEmpty( recruit )}">
-										<ul>
+										<ul th:if="${recruit.sDday} < 1">
 											<li>
 												<p class="f15 ac gray fw400" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|" ></p>
-												<p class="mt10 f23 fw700" th:text="${recruit.sTitle}"><span class="ac mr10 blue" th:text="|D-${recruit.sDday}|"></span></p>
+												<p class="mt10 f23 fw700"><span class="ac mr10 blue" th:text="|D${recruit.sDday}|"></span><span th:text="${recruit.sTitle}"></span></p>
 												<p class="mt20 btn_type11"><a href="/recruit/list">공고 보러가기</a></p>
 												<p class="mt20 f20 fw600 number ml5"><span class="ac" th:text="${recruitCount}"></span> <span class="f16 fw600">건</span></p> 
 											</li>
 										</ul>
+										<div th:unless="${recruit.sDday} < 1" class="tex-center f16 pt20 pb20 gray">현재 진행중인 채용이 없습니다.</div>
 									</div>
-									<!-- //공고가 없을 떄 
+									<!-- //공고가 없을 떄 -->
 									<div class="roundType01 mt30" th:unless="${not #lists.isEmpty( recruit )}">
 										<div class="tex-center f16 pt20 pb20 gray">현재 진행중인 채용이 없습니다.</div>
 									</div>
-									-->
 								</div>
 								<ul class="info_ul mt20">
 									<li class="mr30"><img th:src="@{/img/ico04.png}" alt="연락처"/></li>

@@ -72,4 +72,16 @@ public class RecruitServiceImpl implements RecruitService {
 		return majorList;
 	}
 	
+	@Override
+	public int checkRecruitEnd(String setupTh) {
+		
+		int recruitEndCheck = RecruitMapper.getRecruitEndYn(setupTh);
+		
+		if(recruitEndCheck > 0 ) {
+			recruitEndCheck = 0;
+		}
+		
+		return recruitEndCheck;
+	}
+	
 }

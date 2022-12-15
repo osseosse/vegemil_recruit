@@ -7,6 +7,29 @@ import lombok.Setter;
 @Setter
 public class RecruitDTO extends CommonDTO {
 
+	private String sTh;
+	private String sTitle;
+	private String sType;
+	private String sCompany;
+	private String sStartdate;
+	private String sEnddate;
+	private String s1;
+	private String s2;
+	private String s3;
+	private String sImg;
+	private String sClose;
+	private String sCategory;
+	private String sCategory2;
+	private String sCollect;
+	private Long sDday;
+	private String sInsertDate;
+	private String sModifyDate;
+	private String sYyyy;
+	private String sMm;
+	private String sField;
+	private String sArea;
+	private String sEtc;
+
 	private Long   idx;		/** 번호  */
 	private String setupTh;			/** 아이디 */
 	private String memNo;		/** 사원명 */
@@ -289,33 +312,8 @@ public class RecruitDTO extends CommonDTO {
 	private String introduce4;
 	private String introduce5;
 	private String introduce6;
-	
 	private String phoneNo;
 	private String emailAddr;
-	
-	
-	private String sTh;			/** 아이디 */
-	private String sYyyy;
-	private String sMm;
-	private String sTitle;		/** 사원명 */
-	private String sCompany;		/** 비밀번호 */
-	private String sField;
-	private String sArea;
-	private String sType;		/** 사원등급 */
-	private String sStartdate;	/** 부서명 */
-	private String sEnddate;	/** 부서명 */
-	private String s1;	/** 부서명 */
-	private String s2;	/** 부서명 */
-	private String s3;	/** 부서명 */
-	private String sClose;	/** 부서명 */
-	private String sInsertdate;	/** 부서명 */
-	private String sModifydate;	/** 부서명 */
-	private String sCategory;	/** 부서명 */
-	private String sCategory2;	/** 부서명 */
-	private String sCollect;	/** 부서명 */
-	private String sDday;
-	private String sEtc;
-	
 	private String newSTh;	
 	
 	private int totalCount;
