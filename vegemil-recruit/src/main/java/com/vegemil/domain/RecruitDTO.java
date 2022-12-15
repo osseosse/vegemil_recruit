@@ -320,5 +320,6 @@ public class RecruitDTO extends CommonDTO {
 	private int osseCount;
 	private int dateCount;
 	private int fieldCount;
+	
 
 }
