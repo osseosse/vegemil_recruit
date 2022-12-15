@@ -105,9 +105,7 @@ public class MailService {
 			
     		UUID uuid = UUID.randomUUID();
             // redis에 링크 정보 저장
-    		if(!"ADMIN".equals(member.getAuth())) {
-    			redisUtil.setDataExpire(uuid.toString(),member.getEmailAddr(), 7);
-    		}
+			redisUtil.setDataExpire(uuid.toString(),member.getEmailAddr(), 7);
             context.setVariable("member", member);
             context.setVariable("authToken", uuid.toString());
     		

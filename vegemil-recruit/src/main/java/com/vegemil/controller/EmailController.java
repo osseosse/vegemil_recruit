@@ -71,11 +71,7 @@ public class EmailController extends UiUtils {
         		jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
     		}
         	//멤버를 세션에서 가져와야한다.
-        	if("ADMIN".equals(member.getAuth())) {
-        		mailService.adminMailSend(member);
-        	}else {
-        		mailService.sendActiveEmail(member);
-        	}
+        	mailService.sendActiveEmail(member);
 			
 			
 			jsonObj.addProperty("result", true);

@@ -31,18 +31,8 @@
 					<form id="emailForm" class="form-horizontal form-view" th:action="@{/member/sendAuthmail}" th:object="${member}">
 						<p class="mt50"><img th:src="@{/img/ico_join_c.png}"/></p>
 						<p class="f36 fw600 mt50 line-height120 ls-2">관리자 등록 완료</p>
-						<p class="f20 fw400 line-height140 mt30">입력하신 이메일 계정으로 인증메일이 발송되었습니다.</p>
-						<p class="f16 fw400 gray line-height140 mt30">메일함을 확인하여 인증하기 버튼을 눌러 주세요<br><b class="black">7일</b> 이내에 인증을 완료하지 않을 경우 계정정보가 삭제 됩니다.</p>
-						<ul class="sendUL2">
-							<li class="fw400 text-left f16 gray"><img class="arrow" th:src="@{/img/ico_wb.png}" alt="화살표" /> 인증메일이 확인되지 않는 경우, 메일 재전송 버튼을 눌러 주세요.</li>
-						</ul>
-						<div class="mt30">
-							<input type="hidden" th:field="*{emailAddr}" />
-							<input type="hidden" th:field="*{auth}" />
-							<!-- 로그인 통해서 고객정보 던진후 메일발송 -->
-							<button type="button" onclick="sendAuthEmail()"  class="btn_type13 mt30 w230 mr5" >인증메일 재전송</button>
-							<button type="button" class="btn_type14 mt30 w230 ml5" onclick="location.href='/admin/auth/login'">로그인</button>
-						</div>
+						<p class="f20 fw400 line-height140 mt30">가입이 완료되었습니다.</p>
+						<p class="f20 fw400 line-height140 mt30">정보전산실로 연락주시기 바랍니다.</p>
 					</form>
 					</div><!-- //memberWrapBase -->
 				</div><!-- //container1300 -->

@@ -110,7 +110,7 @@ public class AdminController extends UiUtils {
 			}
 			
 			memberDto.setAuth("ADMIN");
-			mailService.adminMailSend(memberDto);
+//			mailService.adminMailSend(memberDto); 미사용 
 			model.addAttribute("member", memberDto);
 			
     	} catch (DataAccessException e) {
