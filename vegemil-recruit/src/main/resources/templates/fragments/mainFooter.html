@@ -12,6 +12,7 @@
 		</ul>
 	</div>
 	<div class="f_right">
+		<span id="adminLink" style="display:none;"><a href="/admin/recruit/volunteerList">관리자페이지</a></span>
 		<ul class="f_sns">
 			<li><a href="https://www.facebook.com/vegemilgood"><img th:src="@{/img/sns01.png}" alt="페이스북" /></a></li>
 			<li><a href="https://www.instagram.com/vegemil.official/"><img th:src="@{/img/sns02.png}" alt="인스타그램" /></a></li>
@@ -28,5 +29,26 @@
 		</div>
 	</div>
 </div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	if (window.location.protocol == "http:") {
+		if(window.location.hostname == 'vegemil.co.kr' || window.location.hostname == "recruit.vegemil.co.kr") {
+			window.location.href = window.location.href.replace('http:', 'https:');
+		}
+	}
+
+	$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+	
+      function(json) {
+        if(json.ip == '211.204.41.41' || json.ip == '115.88.198.133') {
+        	$('#adminLink').css('display', 'block');
+        } else {
+        	$('#adminLink').css('display', 'none');
+        }
+      }
+    );
+
+/*]]>*/
+</script>
 </footer>
 </html>

@@ -33,28 +33,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/themes/bordered-layout.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/themes/semi-dark-layout.css}">
 
-	<script th:inline="javascript">
-	/*<![CDATA[*/
-		if (window.location.protocol == "http:") {
-			if(window.location.hostname == 'vegemil.co.kr' || window.location.hostname == "recruit.vegemil.co.kr") {
-				window.location.href = window.location.href.replace('http:', 'https:');
-			}
-		}
-	
-		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-		
-	      function(json) {
-				alert("관리자만 접속 가능한 페이지입니다. 현재 IP:"+ json.ip);
-	        if(json.ip != '211.204.41.41' || json.ip != '115.88.198.133') {
-	        	alert("접근 권한이 없습니다.");
-	        	window.location.href = '/';
-	        }
-	      }
-	    );
-	
-	/*]]>*/
-	</script>
-
 	<!-- BEGIN: Page CSS-->
     <th:block layout:fragment="add-css"></th:block>
     <!-- END: Page CSS-->
