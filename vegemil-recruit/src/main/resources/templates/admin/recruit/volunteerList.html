@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="admin/layout/dataLayout">
+	
+	<th:block layout:fragment="title">
+		<title>채용 관리1</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+	    <link rel="shortcut icon" type="image/x-icon" th:href="@{/app-assets/images/ico/favicon.ico}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/recruit2022.css}">
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/pages/app-invoice.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/forms/pickers/form-pickers.js}"></script>
+
+	    <script th:src="@{/app-assets/vendors/js/extensions/sweetalert2.all.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jszip.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/pdfmake.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/vfs_fonts.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.html5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.print.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js}"></script>
+	    <script type="text/javascript" th:src="@{https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js}"></script>
+	     
+	    
+	    
+	    <script th:src="@{/common/js/admin/recruit/volunteerList.js}"></script>
+	    <script th:src="@{/common/js/admin/common/jquery.serializeObject.min.js}"></script>
+
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">지원자 리스트</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">채용</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">지원자 리스트
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+            <div class="content-body">
+            <form name="frm" id="frm">
+            	<input type="hidden" class="form-control" name="sEnddate" id="sEnddate" value=""/>
+            	<input type="hidden" class="form-control" name="sStartdate" id="sStartdate" value=""/>
+				<input type="hidden" name="setupTh" id="setupTh" value=""/>
+                <section>
+                    <div class="row">
+						<!-- 조회 -->
+						<div class="col-md-12 col-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="row mb-1">
+										<div class="col-md-1 col-12">기수</div>
+										<div class="col-md-2 col-12">
+                                            <select class="form-select" id="sTh" name="sTh">
+                                            	<option value=""></option>
+	                                            <th:block th:if="${recruitList !=null}" th:each="recruitList : ${recruitList}">
+	                                            	<option th:value="${recruitList.sTh}">[[${recruitList.sTh}]]</option>
+	                                            </th:block>
+											</select>
+										</div>
+										<div class="col-md-1 col-12">
+											<p class="text-right">진행상태</p>
+										</div>
+										<div class="col-md-2 col-12">
+                                           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+												<input type="radio" class="btn-check" name="notice" id="btnradio2-1" value="전체" autocomplete="off" checked />
+                                                <label class="btn btn-outline-primary" for="btnradio2-1">전체</label>
+
+                                                <input type="radio" class="btn-check" name="notice" id="btnradio2-2" value="0" autocomplete="off" />
+                                                <label class="btn btn-outline-primary" for="btnradio2-2">진행</label>
+
+                                                <input type="radio" class="btn-check" name="notice" id="btnradio2-3" value="1" autocomplete="off" />
+                                                <label class="btn btn-outline-primary" for="btnradio2-3">마감</label>
+
+                                            </div>
+										</div>
+										<div class="col-md-1 col-12">
+											<p class="text-right">지원날짜</p>
+										</div>
+										<div class="col-md-3 col-12">
+											<input type="date" id="volunteerRange" name="volunteerRange" class="form-control flatpickr-range" placeholder="YYYY-MM-DD to YYYY-MM-DD" />
+										</div>
+									</div>
+									<div class="row mb-1">
+										<div class="col-md-1 col-12">회사명</div>
+										<div class="col-md-2 col-12">
+                                            <select class="form-select" id="#" name="dept">
+												<option value="전체">전체</option>
+												<option value="정식품">정식품</option>
+												<option value="자연과사람들">자연과사람들</option>
+												<option value="오쎄">오쎄</option>
+												<option value="넬보스코">넬보스코</option>
+											</select>
+										</div>
+										<div class="col-md-1 col-12">
+											<p class="text-right">공고명</p>
+										</div>
+										<div class="col-md-4 col-12">
+                                            <select class="form-select" name="recruitName">
+                                            	<option selected value="전체">전체</option>
+                                            	<th:block th:if="${recruitList !=null}" th:each="recruitList : ${recruitList}">
+                                            		<option th:value="${recruitList.sTitle}">[[${recruitList.sTitle}]]</option>
+                                            	</th:block>
+											</select>
+										</div>
+										<!-- 
+										<div class="col-md-6 col-12">
+											<input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="2021년 정식품 신입사원 공개채용" />
+										</div> -->
+									</div>
+									<div class="row mb-1">
+										<div class="col-md-1 col-12">합격상태</div>
+										<div class="col-md-2 col-12">
+                                            <select class="form-select" id="joinOk" name="joinOk">
+												<option value="전체">전체</option>
+												<option value="1">서류</option>
+												<option value="2">1차</option>
+												<option value="3">2차</option>
+											</select>
+										</div>
+										<div class="col-md-1 col-12">
+											<p class="text-right">지원자명</p>
+										</div>
+										<div class="col-md-2 col-12">
+											<input type="text" class="form-control" name="volunteer" />
+										</div>
+									</div>
+									<hr />
+									<div class="row mb-1">
+										 <div class="col-sm-12 text-center">
+												<button type="button" onclick="javascript:createTable();" class="btn btn-primary me-1">조회</button>
+												<button type="reset" onclick="javascript:reset();" class="btn btn-outline-secondary">초기화</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- //기수부여 -->
+                    </div>
+                </section>
+            </form>
+  
+			<form id="form" name="form" method="POST">
+                <section id="basic-horizontal-layouts">
+                     <!-- 공고목록 -->
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body text-md-end">
+									<div class="row mb-1">
+										 <div class="col-sm-6 text-left">
+											<button type="reset" class="btn btn-outline-secondary waves-effect btn-sm">선택인쇄</button>&nbsp;&nbsp;
+											<button type="button" id="btnDel" class="btn btn-outline-danger text-nowrap px-1 btn-sm waves-effect">선택삭제</button>
+										</div>
+										 <div class="col-sm-6 text-right">
+											현재 리스트: <span th:text="${#lists.size('data')}"></span>명
+											
+											
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="datatables-basic table table-bordered text-center listTable mt-10" id="volunteerList">
+										<colgroup>
+											<col width="1%">
+											<col width="4%">
+											<col width="7%">
+											<col width="18%">
+											<col width="6%">
+											<col width="4%">
+											<col width="7%">
+											<col width="8%">
+											<col width="6%">
+											<col width="7%">
+											<col width="13%">
+											<col width="6%">
+											<col width="7%">
+											<col width="6%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th>
+													<div class="form-check">
+														<input type="checkbox" class="form-check-input" id="customCheck2" name="allCheck"/>
+														<label class="form-check-label" for="customCheck2"></label>
+													</div>
+												</th>
+												<th>기수</th>
+												<th>이름</th>
+												<th>합격상태</th>
+												<th>생년월일</th>
+												<th>성별</th>
+												<th>지원회사</th>
+												<th>지원부문</th>
+												<th>희망근무지</th>
+												<th>학교</th>
+												<th>전공</th>
+												<th>지원서</th>
+												<th>첨부파일</th>
+												<th>지원일자</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- //공고목록 -->
+					
+                </section>
+                <pre id="example-console"></pre>
+             </form>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

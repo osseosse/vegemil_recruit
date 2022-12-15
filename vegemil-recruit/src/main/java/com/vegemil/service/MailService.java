@@ -7,14 +7,17 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import com.vegemil.domain.AdminDTO;
 import com.vegemil.domain.MailDTO;
 import com.vegemil.domain.MemberDTO;
+import com.vegemil.mapper.AdminMapper;
 import com.vegemil.util.RedisUtil;
 
 import javassist.NotFoundException;
@@ -26,6 +29,9 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
     private final RedisUtil redisUtil;
     private static final String FROM_ADDRESS = "DCF 채용담당<dcfrecruit@vegemil.co.kr>";
+    
+    @Autowired
+	private AdminMapper adminMapper;
 
     public void mailSend(MailDTO mailDto) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -35,6 +41,25 @@ public class MailService {
         message.setText(mailDto.getMessage());
 
         mailSender.send(message);
+    }
+    
+    /**
+     * 관리자 회원인증
+     * @param adminDto
+     */
+    public void mailSend(AdminDTO adminDto) {
+    	
+    	try {
+	    	MimeMessage message = mailSender.createMimeMessage();
+	    	message.setFrom(MailService.FROM_ADDRESS);
+			message.addRecipients(MimeMessage.RecipientType.TO, adminDto.getAId());
+	        message.setSubject("관리자 회원인증");
+	        message.setText(setAuthContext(adminDto), "utf-8", "html");
+	        mailSender.send(message);
+    	}catch(MessagingException e) {
+    		e.printStackTrace();
+    	}
+
     }
     
     public void sendActiveEmail(MemberDTO member) {
@@ -91,6 +116,18 @@ public class MailService {
         
     }
     
+    public String setAuthContext(AdminDTO adminDto) {
+    	Context context = new Context();
+    	try {
+			
+            context.setVariable("member", adminDto);
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return templateEngine.process("admin/email/confirmMail", context);
+    }
+    
     private String setPwContext(MemberDTO member) {
     	
     	Context context = new Context();
@@ -118,6 +155,23 @@ public class MailService {
         redisUtil.deleteData(key);
         
         return memberEmail;
+    }
+    
+    /**
+     * 관리자 로그인
+     * @param adminDto
+     * @return
+     * @throws NotFoundException
+     */
+    public boolean verifyEmail(AdminDTO adminDto) throws NotFoundException {
+    	int queryResult = adminMapper.selectAdminCount(adminDto);
+    		
+		if (queryResult != 0) {
+			queryResult = adminMapper.activeAdmin(adminDto);
+		}
+
+		return (queryResult == 1) ? true : false;
+        
     }
     
 }

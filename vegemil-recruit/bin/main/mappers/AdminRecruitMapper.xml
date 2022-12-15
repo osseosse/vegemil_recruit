@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminRecruitMapper">
+
+	<sql id="setupColumns">
+		  s_th
+		, s_yyyy
+		, s_mm
+		, s_title
+		, s_company
+		, s_type
+		, s_startdate
+		, s_enddate
+		, s_1
+		, s_2
+		, s_3
+		, s_close
+		, s_insertdate
+		, s_modifydate
+		, s_category
+		, s_category2
+		, s_collect
+		, s_etc
+	</sql>
+	
+	<select id="selectRecruitList" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectRecruitList by AdminRecruitMapper.xml */
+			<include refid="setupColumns" />
+		FROM
+			R_Setup
+		ORDER BY
+			s_th DESC
+	</select>
+	
+	<select id="selectRecruitList2" parameterType="hashMap" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectRecruitList2 by AdminRecruitMapper.xml */
+			   s_th
+			   , s_yyyy
+			   , s_mm
+			   , s_title
+			   , s_company
+			   , s_type
+			   , s_startdate
+			   , s_enddate
+			   , s_1
+			   , s_2
+			   , s_3
+			   , case when now() between s_startdate and s_enddate then '0'
+			          when now() &lt; s_startdate then '2'
+				 else '1' end as s_close
+			   , s_insertdate
+			   , s_modifydate
+			   , s_category
+			   , s_category2
+			   , s_collect
+			   , s_etc
+		  FROM R_Setup
+	     WHERE 1=1
+	     <if test='status == "0" '>
+	       AND s_close = 0
+	     </if>
+	     <if test='status == "1" '>
+	       AND s_close = 1
+	     </if>
+	     <if test='searchWord != "" '>
+	       AND s_title like CONCAT('%',#{searchWord, jdbcType=VARCHAR},'%')
+	     </if>
+	     <if test='sStartdate != "" '>
+	       AND s_startdate &gt;= #{sStartdate, jdbcType=VARCHAR} 
+	     </if>
+	     <if test='sEnddate != "" '>
+	       AND s_enddate &lt;= #{sEnddate, jdbcType=VARCHAR}
+	     </if>
+	  	 ORDER BY s_th DESC
+	</select>
+	
+	<select id="selectRecruitData" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectRecruitData by AdminRecruitMapper.xml */
+			<include refid="setupColumns" />
+		FROM
+			R_Setup
+		WHERE
+			s_th = #{sTh}
+	</select>
+	
+	<select id="selectRecruitDtData" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectRecruitDtData by AdminRecruitMapper.xml */
+			s_th, s_company, s_field, s_area
+		FROM
+			R_SetupDt
+		WHERE
+			s_th = #{sTh}
+	</select>
+	
+	<select id="selectVolunteerData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectVolunteerData by AdminRecruitMapper.xml */
+			 COUNT(*) AS totalCount
+			,COUNT(CASE WHEN sex='1' THEN 1 END) AS maleCount
+			,COUNT(CASE WHEN sex='2' THEN 1 END) AS femaleCount
+			<!--,COUNT(CASE WHEN join_career='신입' THEN 1 END) AS juniorCount
+			,COUNT(CASE WHEN join_career='경력' THEN 1 END) AS seniorCount -->
+			,0 AS juniorCount
+			,0 AS seniorCount
+			,COUNT(CASE WHEN join_company1='정식품' THEN 1 END) AS chungCount
+			,COUNT(CASE WHEN join_company1='자연과사람들' THEN 1 END) AS nnpCount
+			,COUNT(CASE WHEN join_company1='오쎄' THEN 1 END) AS osseCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+	</select>
+	
+	<select id="selectDateApplyData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectDateApplyData by AdminRecruitMapper.xml */
+			 join_date
+			,count(*) AS dateCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+		GROUP BY
+			join_date
+		ORDER BY
+			join_date
+	</select>
+	
+	<select id="selectFieldData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectFieldData by AdminRecruitMapper.xml */
+			 IFNULL(join_field1, "기타") as join_field1
+			,IFNULL(join_company1, "기타") as join_company1
+			<!-- ,join_career -->
+			,'0' as join_career
+			,count(*) AS fieldCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+		GROUP BY
+			join_field1
+		ORDER BY
+			join_company1 DESC
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		/* insertNotice by AdminRecruitMapper.xml */
+		INSERT INTO R_Setup (
+			<include refid="setupColumns" />
+		) VALUES (
+			  #{sTh}
+			, #{sYyyy}
+			, #{sMm}
+			, #{sTitle}
+			, #{sCompany}
+			, #{sType}
+			, #{sStartdate}
+			, #{sEnddate}
+			, #{s1}
+			, #{s2}
+			, #{s3}
+			, '0'
+			, NOW()
+			, #{sModifydate}
+			, #{sCategory}
+			, #{sCategory2}
+			, #{sCollect}
+			, #{sEtc}
+		)
+	</insert>
+	
+	<insert id="insertNoticeDt" parameterType="java.util.List">
+		/* insertNoticeDt by AdminRecruitMapper.xml */
+		INSERT INTO R_SetupDt ( s_th, s_company, s_field, s_area, s_datetime) 
+		VALUES 
+		<foreach collection='list' item='item' separator=','>
+		(#{item.sTh}, #{item.sCompany}, #{item.sField}, #{item.sArea}, NOW())		
+		</foreach> 
+		ON DUPLICATE KEY 
+		UPDATE s_company = values(s_company), s_field = values(s_field), s_area = values(s_area)
+	</insert>
+	
+	<update id="updateNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		/* updateNotice by AdminRecruitMapper.xml */
+		UPDATE R_Setup
+		SET
+			  s_title		= #{sTitle}
+			, s_company		= #{sCompany}
+			, s_type		= #{sType}
+			, s_startdate	= #{sStartdate}
+			, s_enddate		= #{sEnddate}
+			, s_1			= #{s1}
+			, s_2			= #{s2}
+			, s_3			= #{s3}
+			, s_modifydate	= NOW()
+			, s_category	= #{sCategory}
+			, s_category2	= #{sCategory2}
+			, s_collect		= #{sCollect}
+			, s_etc			= #{sEtc}
+		WHERE
+			s_th = #{sTh}
+	</update>
+	
+	<insert id="copyNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		/* copyNotice by AdminRecruitMapper.xml */
+		INSERT INTO R_Setup (
+			<include refid="setupColumns" />
+		) SELECT 
+			  #{newSTh}
+			, s_yyyy
+			, s_mm
+			, s_title
+			, s_company
+			, s_type
+			, s_startdate
+			, s_enddate
+			, s_1
+			, s_2
+			, s_3
+			, s_close
+			, NOW()
+			, null
+			, s_category
+			, s_category2
+			, s_collect
+			, s_etc
+		FROM R_Setup
+		WHERE s_th = #{sTh}
+	</insert>
+	
+	<select id="selectVolunteerList" parameterType="hashMap" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT /* selectVolunteerList by AdminRecruitMapper.xml */
+			  a.idx
+			, a.setup_th
+			, a.mem_no
+			, b.mem_name
+			, a.join_ok
+			, b.birthday
+			, a.sex
+			, a.join_company1
+			, a.join_field1
+			, a.join_area1
+			, a.sch_name4
+			, a.sch_major4
+			, a.join_date
+			, s.s_close
+	 	FROM R_Recruit a, m_recruit_member b, R_Setup s
+	    WHERE a.mem_no = b.mem_no
+	     <if test='sTh != "" '>
+ 		 AND a.setup_th = #{sTh, jdbcType=VARCHAR}
+ 		 </if>
+ 		 AND a.setup_th = s.s_th
+ 		 <if test='notice != "전체" '>
+ 		 AND s.s_close = #{notice, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='volunteer != "" '>
+ 		 AND b.mem_name = #{volunteer, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='dept != "전체" '>
+ 		 AND a.join_company1 = #{dept, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='joinOk != "전체" '>
+ 		 AND a.join_ok = #{joinOk, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='recruitName != "전체" '>
+ 		 AND s.s_title = #{recruitName, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='sStartdate != "" '>
+ 		 AND a.join_date &gt;= #{sStartdate, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='sEnddate != "" '>
+ 		 AND a.join_date &lt;= #{sEnddate, jdbcType=VARCHAR}
+ 		 </if>
+ 		 
+	    ORDER BY
+			a.join_date DESC
+	</select>
+	
+	<update id="updateVolunteer" parameterType="com.vegemil.domain.RecruitDTO">
+		UPDATE R_Recruit
+		   SET join_ok = #{joinOk, jdbcType=VARCHAR}
+		 WHERE idx = #{idx, jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectVolunteerAllData" parameterType="com.vegemil.domain.RecruitDTO" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT r.*, m.mem_name, m.birthday, m.phone_no, m.email_addr /* selectVolunteerAllData by AdminRecruitMapper.xml */
+		  FROM R_Recruit r join m_recruit_member m on r.mem_no = m.mem_no
+		 WHERE setup_th = #{setupTh, jdbcType=VARCHAR}
+		   AND idx = #{idx, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="deleteVolunteer" parameterType="hashMap">
+		/* deleteVolunteer by AdminRecruitMapper.xml */
+		UPDATE R_Recruit
+		   SET join_ok = 1
+		 WHERE idx IN 
+	  <foreach collection='list' index='index' item='idx' open='(' close=')' separator=','> 
+		 #{idx, jdbcType=VARCHAR}
+	  </foreach>
+	       AND setup_th = #{setupTh, jdbcType=VARCHAR} 
+	</update>
+	
+	<delete id="deleteNotice" parameterType="hashMap">
+		/* deleteNotice by AdminRecruitMapper.xml */
+		DELETE FROM R_Setup
+		 WHERE s_th IN 
+	  <foreach collection='list' index='index' item='idx' open='(' close=')' separator=','> 
+		 #{idx, jdbcType=VARCHAR}
+	  </foreach>
+	</delete>
+	
+	<delete id="deleteNoticeDt" parameterType="hashMap">
+		/* deleteNoticeDt by AdminRecruitMapper.xml */
+		DELETE FROM R_SetupDt
+		 WHERE s_th IN 
+	  <foreach collection='list' index='index' item='idx' open='(' close=')' separator=','> 
+		 #{idx, jdbcType=VARCHAR}
+	  </foreach>
+	</delete>
+	
+	<select id="selectNoticeDtTotalCount" parameterType="hashMap" resultType="int">
+		SELECT /* selectNoticeDtTotalCount by AdminRecruitMapper.xml */
+			COUNT(*)
+		FROM
+			R_SetupDt
+		WHERE
+		    s_th = #{sTh, jdbcType=VARCHAR} 
+	</select>
+	
+	<select id="selectQnaList" parameterType="hashMap" resultType="com.vegemil.domain.QnaDTO">
+		SELECT /* selectFaqList by AdminRecruitMapper.xml */
+			  q.q_id,
+			  q.r_answer_yn,
+			  q.r_company,
+			  q.r_title,
+			  m.mem_name,
+			  q.r_insert_date
+	 	FROM r_recruit_qna q, m_recruit_member m
+	    WHERE q.mem_no = m.mem_no
+	     <if test='searchWord != "" '>
+	      AND (q.r_title like CONCAT('%',#{searchWord, jdbcType=VARCHAR},'%') or q.r_content like CONCAT('%',#{searchWord, jdbcType=VARCHAR},'%')) 
+	     </if>
+ 		 <if test='sStartdate != "" '>
+ 		 AND q.r_insert_date &gt;= #{sStartdate, jdbcType=VARCHAR}
+ 		 </if>
+ 		 <if test='sEnddate != "" '>
+ 		 AND q.r_insert_date &lt;= #{sEnddate, jdbcType=VARCHAR}
+ 		 </if>
+ 		 
+	    ORDER BY
+			q.r_insert_date DESC
+	</select>
+	
+	<delete id="deleteQnaList" parameterType="hashMap">
+		/* deleteQna by AdminRecruitMapper.xml */
+		DELETE FROM r_recruit_qna
+		 WHERE q_id IN 
+	  <foreach collection='list' index='index' item='idx' open='(' close=')' separator=','> 
+		 #{idx, jdbcType=VARCHAR}
+	  </foreach>
+	</delete>
+	
+	<select id="selectQna" resultType="com.vegemil.domain.QnaDTO">
+		SELECT /* selectQna by AdminRecruitMapper.xml */
+			q.q_id, q.mem_no, q.r_idx, q.r_title, q.r_company, q.r_content, q.r_insert_date, q.r_update_date, q.r_delete_date, m.mem_name, 
+			q.r_delete_yn, q.r_answer_yn, q.r_answer, q.r_answer_email, q.r_answer_tel, q.r_answer_date, q.r_email, q.r_phone_no, q.r_agree,
+			m.email_addr as r_email, m.phone_no as r_phone_no
+		FROM
+			r_recruit_qna q, m_recruit_member m
+		WHERE q.mem_no = m.mem_no
+		  AND q_id = #{qId}
+	</select>
+	
+	<update id="updateQnaDetail" parameterType="com.vegemil.domain.QnaDTO">
+		UPDATE r_recruit_qna
+		   SET r_answer =  #{rAnswer, jdbcType=VARCHAR}, r_answer_yn = 'Y', r_answer_date = now()
+		 WHERE q_id = #{qId, jdbcType=VARCHAR}
+	</update>
+	
+</mapper>

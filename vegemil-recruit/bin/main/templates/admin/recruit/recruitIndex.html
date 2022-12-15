@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="admin/layout/dataLayout">
+	
+	<th:block layout:fragment="title">
+		<title>채용 관리</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+	    <link rel="shortcut icon" type="image/x-icon" th:href="@{/app-assets/images/ico/favicon.ico}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/recruit2022.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/pages/app-invoice.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/forms/pickers/form-pickers.js}"></script>
+
+	    <script th:src="@{/common/js/admin/recruit/card-analytics.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/charts/apexcharts.min.js}"></script>
+	    <!-- Sheet JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+		<!--FileSaver savaAs 이용 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+	    <script th:inline="javascript">
+	    	/*<![CDATA[*/
+			$(document).ready(function() {
+				console.log('ready')
+				$('#recruitList').val('/admin/recruit/recruitIndex?sTh=' + [[${sTh}]]).prop("selected",true);
+				var lineChartX = [];
+				var lineChartY = [];
+				
+				var i=0;
+				console.log([[${dateapplydata}]]);
+				[# th:each="dateList : ${dateapplydata}"]
+				console.log([[${dateList.joinDate}]])
+					lineChartX[i] = [[${dateList.joinDate}]].substr(5,5);
+					lineChartY[i] = [[${dateList.dateCount}]];
+					i++;
+				[/]
+				
+				var chungTot = 0;
+				var nnpTot = 0;
+				var osseTot = 0;
+				
+				console.log([[${fielddata}]]);
+				[# th:each="fieldList : ${fielddata}"]
+					console.log('field')
+					if([[${fieldList.joinCompany1}]] == '정식품') chungTot += [[${fieldList.fieldCount}]];
+					else if([[${fieldList.joinCompany1}]] == '자연과사람들') nnpTot += [[${fieldList.fieldCount}]];
+					else if([[${fieldList.joinCompany1}]] == '오쎄') osseTot += [[${fieldList.fieldCount}]];
+					console.log('fieldCount',[[${fieldList.fieldCount}]])
+				[/]
+				
+				$('#chungTot').text(chungTot + '명');
+				$('#nnpTot').text(nnpTot + '명');
+				$('#osseTot').text(osseTot + '명');
+				
+				var total = chungTot + nnpTot + osseTot;
+				var chungRatio = Math.round(chungTot/total*100);
+				var nnpRatio = Math.round(nnpTot/total*100);
+				var osseRatio = Math.round(osseTot/total*100);
+				
+				$('#chungRatio').text(chungRatio + '%');
+				$('#nnpRatio').text(nnpRatio + '%');
+				$('#osseRatio').text(osseRatio + '%');
+				
+				var fieldCount = [];
+				var fieldList = [];
+				var fieldColor = [];
+				i=0;
+				[# th:each="fieldList : ${fielddata}"]
+					if([[${fieldList.joinCompany1}]] == '정식품'){
+						fieldCount[i] = [[${fieldList.fieldCount}]];
+						fieldList[i] = 'D' + [[${fieldList.joinField1}]];
+						fieldColor[i] = '#28c76f';
+					}
+					else if([[${fieldList.joinCompany1}]] == '자연과사람들'){
+						fieldCount[i] = [[${fieldList.fieldCount}]];
+						fieldList[i] = 'N' + [[${fieldList.joinField1}]];
+						fieldColor[i] = '#1fe2ff';
+					}
+					else if([[${fieldList.joinCompany1}]] == '오쎄'){
+						fieldCount[i] = [[${fieldList.fieldCount}]];
+						fieldList[i] = 'O' + [[${fieldList.joinField1}]];
+						fieldColor[i] = '#ff6305';
+					}
+				i++;
+				[/]
+
+				console.log('lineChartY', lineChartY);
+				dailyChart(lineChartX,lineChartY);
+				orderChart(chungTot,nnpTot,osseTot);
+				sessionChart(fieldCount, fieldList, fieldColor);
+			});
+			/*]]>*/
+			
+			const excelDownload = document.querySelector('#excelDownload');
+
+			document.addEventListener('DOMContentLoaded', ()=>{
+			    excelDownload.addEventListener('click', exportExcel);
+			});
+			
+			function exportExcel(){ 
+			  // step 1. workbook 생성
+			  var wb = XLSX.utils.book_new();
+			
+			  // step 2. 시트 만들기 
+			  var newWorksheet = excelHandler.getWorksheet();
+			
+			  // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
+			  XLSX.utils.book_append_sheet(wb, newWorksheet, excelHandler.getSheetName());
+			
+			  // step 4. 엑셀 파일 만들기 
+			  var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+			
+			  // step 5. 엑셀 파일 내보내기 
+			  saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), excelHandler.getExcelFileName());
+			}
+			
+			var excelHandler = {
+			    getExcelFileName : function(){
+			        return [[${sTitle}]]+'.xlsx';	//파일명
+			    },
+			    getSheetName : function(){
+			        return 'Table Test Sheet';	//시트명
+			    },
+			    getExcelData : function(){
+			        return document.getElementById('tableData'); 	//TABLE id
+			    },
+			    getWorksheet : function(){
+			        return XLSX.utils.table_to_sheet(this.getExcelData());
+			    }
+			}
+			
+			function s2ab(s) { 
+			  var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+			  var view = new Uint8Array(buf);  //create uint8array as viewer
+			  for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+			  return buf;    
+			}
+			
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">지원통계</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">채용</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">지원통계
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="content-body">
+                <!-- Analytics card section -->
+                <section id="analytics-card">
+					 <div class="row">
+						<!-- 지원자 리스트 -->
+						<div class="col-md-12 col-12">
+							<div class="card">
+								<div class="card-body" >
+									<div class="row mb-1">
+										<div class="col-md-2 col-12">채용종류를 선택하세요</div>
+										<div class="col-md-4 col-12">
+                                            <select class="form-select" id="recruitList" onchange="if(this.value) window.location.href=(this.value);">
+                                            	<th:block th:if="${recruitList !=null}" th:each="recruitList : ${recruitList}">
+                                            		<option th:value="${'/admin/recruit/recruitIndex?sTh=' + recruitList.sTh}">[[${recruitList.sTitle}]]</option>
+                                            	</th:block>
+											</select>
+										</div>
+										<div class="col-md-1 col-12">
+											<p class="text-right">공고날짜</p>
+										</div>
+										
+										<th:block th:if="${recruitList !=null}" th:each="recruitList : ${recruitList}">
+										<div class="col-md-3 col-12" th:if="${recruitList.sTh.equals(sTh)}">
+											<input type="text" id="fp-range" class="form-control flatpickr-range" placeholder="YYYY-MM-DD to YYYY-MM-DD" th:value="${recruitList.sStartdate + ' to ' + recruitList.sEnddate}" />
+										</div>
+										</th:block>
+										<div class="col-md-2 col-12">
+											<button type="button" id="excelDownload" class="btn btn-gradient-secondary me-1 btn-sm"><i data-feather="download"></i> 지원통계 엑셀다운로드</button>
+											
+										</div>
+									</div>
+									<hr/>
+									<div class="row mb-1">
+										 <div class="col-sm-12 text-center">
+												<button type="button" class="btn btn-primary me-1">조회</button>
+												<button type="reset" class="btn btn-outline-secondary">초기화</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- //지원자 리스트 -->
+                    </div>
+					<div class="row match-height">
+						 <!-- Medal Card -->
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card card-congratulations">
+                            	<th:block th:if="${recruitList !=null}" th:each="recruitList : ${recruitList}">
+	                                <div class="card-body text-center" th:if="${recruitList.sTh.equals(sTh)}">
+										<!--
+	                                    <img src="../common/images/elements/decore-left.png" class="congratulations-img-left" alt="card-img-left" />
+	                                    <img src="../common/images/elements/decore-right.png" class="congratulations-img-right" alt="card-img-right" />
+										-->
+	                                    <div class="text-center mt-40">
+											<h1 class="mb-1 text-white">[[${recruitList.sTitle}]]</h1>
+<!-- 	                                        <p class=" text-white">${#dates.format(recruitList.sStartdate,'yyyy/MM/dd')} ~ ${#dates.format(recruitList.sEnddate,'yyyy/MM/dd')} <br>채용 마감일 까지 2일 남았습니다.</p> -->
+												<p class="text-white" >[[${ @comUtils.getDateFormat(recruitList.sStartdate) }]] ~ [[${ @comUtils.getDateFormat(recruitList.sEnddate) }]]<br>채용 마감일 까지 2일 남았습니다.</p>
+												 
+	                                    </div>
+										<ul class="ul100-2 ">
+											<li><a th:href="@{/admin/recruit/noticeAdd(sTh=${recruitList.sTh})}" target="_blank" class="text-white">지원공고 바로가기</a></li>
+											<li>
+												<div class="">
+													<div class="avatar-content">
+														<a th:href="@{/admin/recruit/noticeList}" class="text-white"><i data-feather="arrow-right-circle" class="font-large-1"></i></a>
+													</div>
+												</div>
+											</li>
+										</ul>
+	                                </div>
+                                </th:block>
+                            </div>
+                        </div>
+                        <!--/ Medal Card -->
+						 <!-- Statistics Card -->
+                        <div class="col-xl-8 col-md-6 col-12">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <h4 class="card-title">지원자 데이터</h4>
+                                </div>
+                                <div class="card-body statistics-body">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <div class="d-flex flex-row">
+                                                <div class="avatar bg-light-primary me-2">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="globe" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto ">
+													<p class="card-text font-small-3 mb-0">총 지원자</p>
+                                                    <h4 class="fw-bolder mb-0">[[${volunteerdata.totalCount}]]</h4>                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <div class="d-flex flex-row">
+                                                <div class="avatar bg-light-info me-2">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="user" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+													<p class="card-text font-small-3 mb-0">남자</p>
+                                                    <h4 class="fw-bolder mb-0">[[${volunteerdata.maleCount}]]</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                            <div class="d-flex flex-row">
+                                                <div class="avatar bg-light-danger me-2">
+                                                    <div class="avatar-content">
+                                                       <i data-feather="user" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <p class="card-text font-small-3 mb-0">여자</p>
+                                                    <h4 class="fw-bolder mb-0">[[${volunteerdata.femaleCount}]]</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12">
+                                            <div class="d-flex flex-row">
+                                                <div class="avatar bg-light-success me-2">
+                                                     <div class="avatar-content">
+                                                        <i data-feather="user" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <h4 class="fw-bolder mb-0">[[${volunteerdata.juniorCount}]] / [[${volunteerdata.seniorCount}]]</h4> 
+                                                    <p class="card-text font-small-3 mb-0">신입 / 경력</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Statistics Card -->
+                        <!-- Sales Polygon Chart Card -->
+                         <div class="col-lg-6 col-12">
+							<div class="card">
+								<div class="card-header align-items-start">
+									<h4 class="card-title">일별 지원자 수</h4>
+								</div>
+								<div class="card-body pb-0">
+									<div class="me-2">
+										<p class="card-text mb-50">총 지원자</p>
+										<h3 class="fw-bolder">
+											<span class="text-primary">[[${volunteerdata.totalCount}]]</span>
+											<span class="font-medium-1 fw-bold">명</span>
+										</h3>
+									</div>
+									<div id="sales-line-chart" class="mt-30"></div>
+								</div>
+							</div>
+						</div>
+                        <!--/ Sales Polygon Chart Card -->
+						<!-- Product Order Card -->
+						<div class="col-lg-6 col-12">
+							<div class="card">
+								<div class="card-header d-flex justify-content-between">
+									<h4 class="card-title">지원회사 통계</h4>
+									<div class="dropdown chart-dropdown">
+										<button class="btn btn-sm border-0 dropdown-toggle px-50" type="button" id="dropdownItem2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											2022.12.01~2022.12.07
+										</button>
+										<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownItem2">
+											<a class="dropdown-item" href="#">Last 28 Days</a>
+											<a class="dropdown-item" href="#">Last Month</a>
+											<a class="dropdown-item" href="#">Last Year</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div id="product-order-chart"></div>
+									<!-- 시작 -->
+									<div class="row">
+										<div class="col-lg-4">
+											<div class="mb-1">
+												<i data-feather="target" class="vertical-bottom font-medium-1 text-dcf "></i>
+												<span class="fw-bold ms-75">정식품</span>
+												<span class="ml-10" id="chungTot"></span>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="mb-1">
+												<i data-feather="target" class="vertical-bottom font-medium-1 text-nnp"></i>
+												<span class="fw-bold ms-75">자연과사람들</span>
+												<span class="ml-10" id="nnpTot"></span>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="mb-1">
+												<i data-feather="target" class="vertical-bottom font-medium-1 text-osse"></i>
+												<span class="fw-bold ms-75">오쎄</span>
+												<span class="ml-10" id="osseTot"></span>
+											</div>
+										</div>
+										<!--
+										<div class="col-lg-6">
+											<div class="mb-1">
+												<i data-feather="target" class="vertical-bottom font-medium-1 text-nel"></i>
+												<span class="fw-bold ms-75">넬보스코</span>
+												<span class="ml-10">758명</span>
+											</div>
+										</div>
+										-->
+									</div>
+									<!-- // 시작 -->
+								</div>
+							</div>
+						</div>
+						<!--/ Product Order Card -->
+                    </div>
+					
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <div class="row match-height">
+                                
+                                <!-- Sessions Card -->
+                                <div class="col-md-4 col-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex justify-content-between align-items-end">
+                                            <h4>지원부문</h4>
+                                            <!-- 
+                                            <div class="dropdown chart-dropdown">
+                                                <button class="btn btn-sm border-0 dropdown-toggle px-50" type="button" id="dropdownItem1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    2022.12.01~2022.12.07
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownItem1">
+                                                    <a class="dropdown-item" href="#">Last 28 Days</a>
+                                                    <a class="dropdown-item" href="#">Last Month</a>
+                                                    <a class="dropdown-item" href="#">Last Year</a>
+                                                </div>
+                                            </div>
+                                             -->
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="session-chart" class="my-1"></div>
+                                            
+											
+											 
+											 <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mb-1">
+														<i data-feather="target" class="vertical-bottom font-medium-1 text-dcf "></i>
+														<span class="fw-bold ms-75">정식품</span>
+														<span class="ml-10" id="chungRatio"></span>
+													</div>
+                                                </div>
+                                            </div>
+											 <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mb-1">
+														<i data-feather="target" class="vertical-bottom font-medium-1 text-nnp "></i>
+														<span class="fw-bold ms-75">자연과사람들</span>
+														<span class="ml-10" id="nnpRatio"></span>
+													</div>
+                                                </div>
+                                            </div>
+											 <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mb-1">
+														<i data-feather="target" class="vertical-bottom font-medium-1 text-osse "></i>
+														<span class="fw-bold ms-75">오쎄</span>
+														<span class="ml-10" id="osseRatio"></span>
+													</div>
+                                                </div>
+                                            </div>
+											
+											
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/ Sessions Card -->
+
+								 <!-- Company Table Card -->
+								<div class="col-lg-8 col-12">
+									<div class="card card-company-table">
+										<div class="card-body p-0">
+											<div class="table-responsive">
+												<table class="table" id="tableData">
+													
+													<thead>
+														
+														<tr>	
+															<th>번호</th>
+															<th>지원회사</th>
+															<th>지원부문</th>
+<!-- 															<th>지원비율</th> -->
+															<th>총 지원자</th>
+															<th>신입/경력</th>
+															<th>지원 리스트</th>
+														</tr>
+													</thead>
+													<tbody>
+														<th:block th:if="${fielddata !=null}" th:each="fieldData : ${fielddata}">
+															<tr>
+																<td>[[${fieldDataStat.index+1}]]</td>
+																<td>
+																	<span class="text-dcf" th:if="${fieldData?.joinCompany1.equals('정식품')}">[[${fieldData.joinCompany1}]]</span>
+																	<span class="text-nnp" th:if="${fieldData?.joinCompany1.equals('자연과사람들')}">[[${fieldData.joinCompany1}]]</span>
+																	<span class="text-osse" th:if="${fieldData?.joinCompany1.equals('오쎄')}">[[${fieldData.joinCompany1}]]</span>
+																	<span  th:if="${fieldData?.joinCompany1.equals('기타')}">[[${fieldData.joinCompany1}]]</span>
+																</td>
+																<td>[[${fieldData.joinField1}]]</td>
+<!-- 																<td> -->
+<!-- 																	<ul class="ul100"> -->
+<!-- 																		<li><p class="mb-50" th:text="${#numbers.formatPercent(fieldData.fieldCount/volunteerdata.totalCount,3,2) + '%'}"></p></li> -->
+<!-- 																		<li> -->
+<!-- 																			<div class="progress progress-bar-primary" style="height: 6px"> -->
+<!-- 																				<div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="80" aria-valuemax="100" style="width: 30%"></div> -->
+<!-- 																			</div> -->
+<!-- 																		</li> -->
+<!-- 																	</ul> -->
+<!-- 																</td> -->
+																<td>[[${#numbers.formatInteger(fieldData.fieldCount, 1, 'COMMA') + '명'}]]</td>
+																<td>[[${fieldData.joinCareer}]]</td>
+																<td><button type="button" class="btn btn-sm btn-outline-primary round" onclick="javascript:window.open('/admin/recruit/volunteerList')">바로가기</button></td>
+															</tr>
+														</th:block>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--/ Company Table Card -->
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </section>
+                <!--/ Analytics Card section -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

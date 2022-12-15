@@ -18,6 +18,7 @@ public class QnaDTO extends CommonDTO {
 	private String rUpdateDate;
 	private String rDeleteDate;
 	private String rDeleteYn;
+	private String memName;
 	
 	private String rEmail;
 	private String rPhoneNo;

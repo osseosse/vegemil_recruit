@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
+	<th:block layout:fragment="title">
+		<title>지원자 이력서</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+	    <link rel="shortcut icon" type="image/x-icon" th:href="@{/app-assets/images/ico/favicon.ico}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/subRecruit.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:inline="javascript">
+		    function FIRST_SET(){
+				alert("1. 인쇄 미리보기 - 실행 (파일메뉴 or 오른쪽 마우스버튼)\n\n"+
+				"2. 페이지 설정 - 실행\n"+
+				"   - 배경색 및 이미지 인쇄 - 체크\n"+
+				"   - 크기에 맞게 축소 사용 - 체크\n"+
+				"   - 머릿글/바닥글 - 모두 비어있음 선택\n"+
+				"   - 여백 - 모든 방향 10~15정도 지정\n\n"+
+				"3. 페이지 - 총 3페이지 인쇄 되도록 설정 변경\n\n"+
+				"4. 인쇄 시작");
+				
+				var var_forState = "";
+					var var_licName = "";
+					var var_status = "";
+						
+					for(var i=1; i<=4;i++){
+					
+						var_forState = $("#lab_forState" + i ).text(); 
+						
+						if(var_forState == ""){
+							$("#tr_forState" + i ).css("display", "none");
+						}
+						else{	
+							$("#tr_forState" + i ).css("display", "");
+						}
+					}
+					
+					for(var i=1; i<=6;i++){
+					
+						var_licName =  $("#lab_licName" + i).text();
+						
+						if(var_licName == ""){
+							$("#tr_licName" + i ).css("display", "none");
+						}else{	
+							$("#tr_licName" + i ).css("display", "");
+						}
+					}
+					
+			}
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content" th:if="${recruitList !=null}" th:each="recruit : ${recruitList}">
+    <!-- BEGIN: Content-->
+    	<div id="wrap750">
+				<p class="printTitle">입사지원서</p>
+				<!-- 1.지원사항 ########################################-->
+				<div id="field">
+					<div class="title">지원사항</div>
+					<table width="100%" class="tbViewType2" summary="1.지원사항">
+						<colgroup>
+							<col width="18%" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="hool" rowspan=6>
+									<div class="imgPhotoBack">
+										<img id="img_memPhoto" class="imgPhotoView" src="https://www.vegemil.co.kr:10001/upload/RECRUIT/42th/20211213132838609131395441.jpg" />
+									</div>
+								</td>
+								<th rowspan=3><div class="hool">성명</div></th>
+								<td class="hool">한글</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameK" th:text="${recruit.memName}"></span></td>
+							</tr>
+							<tr>
+								<td class="hool">한자</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameH" th:text="${recruit.nameHan}"></span></td>
+							</tr>
+							<tr>
+								<td class="hool">영문</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameE" th:text="${recruit.nameEng}"></span></td>
+							</tr>
+							<tr>
+								<th><div class="hool">생일/성별</div></th>
+								<td colspan="3" class="hool">
+									<span id="lab_memJumin" th:text="${recruit.birthday}"></span>
+									&nbsp;/&nbsp;
+									<th:block th:if="${recruit.sex} == 1">남자</th:block>
+									<th:block th:unless="${recruit.sex} == 1">여자</th:block>
+								</td>
+								<th><div class="hool">연령</div></th>
+								<td class="bora4">만 <span id="lab_memAge" th:with="birth=${recruit.birthday}">[[${ @comUtils.getAge( {birth} ) }]]</span>세</td>
+							</tr>
+							<tr>
+								<th rowspan="2"><div class="hool">응시분야</div></th>
+								<td colspan="1" class="hool">지원 구분</td>
+								<td colspan="2" class="hool">1 지망</td>
+								<td colspan="2" class="bora6">2 지망</td>
+							</tr>
+							<tr>
+								<td colspan="1" class="hool"> 
+									<span id="lab_career"></span> </td>
+								<td colspan="2" class="hool">
+									<span id="lab_joinField1" th:text="${recruit.joinField1}">경영지원</span>
+									(희망근무지: <span id="lab_joinArea1" th:text="${recruit.joinArea1}">서울</span>)</td>
+								<td colspan="2" class="bora6">
+									<!-- 
+									<span id="lab_joinField2">경영지원</span>
+									(희망근무지: <span id="lab_joinArea2">선택</span>)</td>
+									 -->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 1.지원사항 ########################################-->
+				
+				<!-- 2.인적사항 ########################################-->
+				<div id="man">
+					<div class="title">인적사항</div>
+					<table width="100%" class="tbViewType2" summary="1.지원사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="17%" >
+							<col width="10%" >
+							<col width="17%" >
+							<col width="10%" >
+							<col width="26%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="para"><strong>현 주소</strong></div></th>
+								<td colspan="5" class="bora4">
+									<span id="lab_memAddr21" th:text="${recruit.addr11}"></span>
+									<span id="lab_memAddr22" th:text="${recruit.addr12}"></span>
+									&nbsp;(우:<span id="lab_memZip2" th:text="${recruit.zip1}"></span>)
+								</td>
+							</tr>
+							<tr>
+								<th><div class="hool">휴대전화</div></th>
+								<td class="bora5"><span id="lab_memHp" th:text="${recruit.phoneNo}"></span></td>
+								<th><div class="hool">이메일</div></th>
+								<td class="bora4" colspan="4"><span id="lab_memEmail" th:text="${recruit.emailAddr}"></span></td>
+							</tr>
+							<tr>
+								<th><div class="para"><strong>보훈여부</strong></div></th>
+								<td class="bora5">
+									<span id="lab_memBohun">
+									<th:block th:if="${recruit.bohun} == 0">비대상</th:block>
+									<th:block th:unless="${recruit.bohun} == 0">대상</th:block>
+									</span>
+								</td>
+							
+								<!-- 보훈번호 -->
+								<th><div class="hool">보훈번호</div></th>
+								<td class="bora3">
+									<span id="lab_memFamMemd" maxlength="15" th:text="${recruit.bohunNo}">22222</span>
+								</td>
+								
+								<th><div class="hool">형제관계</div></th>
+								<td class="bora4">
+									<span id="lab_memFamMem1"></span>
+									<span id="lab_memFamMem2"></span>
+									<span id="lab_memFamMem3"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 2.인적사항 ########################################-->
+				
+				<!-- 11.가족사항(본인제외) ########################################-->
+				<div id="fam">
+					<div class="title">가족사항(본인제외)</div>
+					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
+						<colgroup>
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+							</tr>
+							<!-- 가족구성 1~3 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_famCon1" th:text="${recruit.famCon1}">부</span></td>
+								<td class="hool"><span id="lab_famName1" th:text="${recruit.famName1}">홍길동</span></td>
+								<td class="hool"><span id="lab_famAge1" th:text="${recruit.famAge1}">64</span></td>
+							
+								<td class="hool"><span id="lab_famCon2" th:text="${recruit.famCon2}"></span></td>
+								<td class="hool"><span id="lab_famName2" th:text="${recruit.famName2}"></span></td>
+								<td class="hool"><span id="lab_famAge2" th:text="${recruit.famAge2}"></span></td>
+							
+								<td class="hool"><span id="lab_famCon3" th:text="${recruit.famCon3}"></span></td>
+								<td class="hool"><span id="lab_famName3" th:text="${recruit.famName3}"></span></td>
+								<td class="hool"><span id="lab_famAge3" th:text="${recruit.famAge3}"></span></td>
+								
+							</tr>
+							<!-- 가족구성 4~6 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_famCon4" th:text="${recruit.famCon4}"></span></td>
+								<td class="hool"><span id="lab_famName4" th:text="${recruit.famName4}"></span></td>
+								<td class="hool"><span id="lab_famAge4" th:text="${recruit.famAge4}"></span></td>
+								
+							
+								<td class="hool"><span id="lab_famCon5">&nbsp</span></td>
+								<td class="hool"><span id="lab_famName5"></span></td>
+								<td class="hool"><span id="lab_famAge5"></span></td>
+								
+								<td class="hool"><span id="lab_famCon6"></span></td>
+								<td class="hool"><span id="lab_famName6"></span></td>
+								<td class="hool"><span id="lab_famAge6"></span></td>
+						
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 11.가족사항(본인제외) ########################################-->
+				
+				<!-- 10.병역사항 ########################################-->
+				<div id="military">
+					<div class="title">병역사항</div>
+					<table width="100%" class="tbViewType2" summary="10.병역사항">
+						<colgroup>
+							<col width="20%">
+							<col width="17%" >
+							<col width="12%" >
+							<col width="8%" >
+							<col width="8%" >
+							<col width="8%" >
+							<col width="12%" >
+							<col width="15%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>병역구분</strong></div></th>
+								<td class="bora3"><span id="lab_milClass"  th:text="${recruit.milClass}"></span></td>
+								<th width=110><div class="hool"><strong>면제사유</strong></div></th>
+								<td colspan="5" class="bora2"><span id="lab_milReason"  th:text="${recruit.milReason}"></span></td>
+							</tr>
+							<tr>
+								<th><div class="hool"><strong>군별</strong></div></th>
+								<td class="bora3"><span id="lab_milType"  th:text="${recruit.milArm}"></span></td>
+								<th><div class="hool"><strong>계급</strong></div></th>
+								<td class="hool"><span id="lab_milLv"  th:text="${recruit.milLv}"></span></td>
+								<th width=110><div class="hool"><strong>병과</strong></div></th>
+								<td class="hool"><span id="lab_milArm"  th:text="${recruit.milType}"></span></td>
+								<th width=110><div class="hool"><strong>복무월수</strong></div></th>
+								<td class="bora"><span id="lab_milMCount" ></span></td>
+							</tr>
+							<tr>
+								<th><div class="hool"><strong>제대구분</strong></div></th>
+								<td class="bora3"><span id="lab_milTicket">만기제대(병장,부사관,장교)</span></td>
+								<th><div class="hool"><strong>복무기간</strong></div></th>
+								<td colspan="5" class="bora2">
+									<span id="lab_milSDate1"  th:text="${recruit.milSDate}"></span>
+									&nbsp;~&nbsp;
+									<span id="lab_milEDate1" th:text="${recruit.milEDate}"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 10.병역사항 ########################################-->
+
+				<!-- 12.개인신상 ########################################-->
+				<div id="hobby">
+					<div class="title">개인신상</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<tbody>
+							<tr>
+								<!-- 2022-12-08 -->
+								<th><div class="hool"><strong>장애 여부</strong></div></th>
+								<!-- //2022-12-08 -->
+							</tr>
+							<tr>
+							
+								<td class="hool">
+								<span id="lab_memHandicap">
+									<th:block th:if="${recruit.handicap} == 0">비대상</th:block>
+									<th:block th:unless="${recruit.handicap} == 0">대상</th:block>
+								</span>
+								
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 12.개인신상 ########################################-->
+				
+				<!--  3.학력사항 ########################################-->
+				<div id="school" clear="all" style="PAGE-BREAK-BEFORE:always; MARGIN-TOP:20px">
+					<div class="title">학력사항</div>
+					<table width="100%" class="tbViewType2" summary="3.학력사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="10%" >
+							<col width="10%" >
+							<col width="10%" >
+							<col width="9%" >
+							<col width="*" >
+							<col width="7%" >
+							<col width="7%" >
+							<col width="10%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="para"><strong>구분</strong></div></th>
+								<th><div class="hool">학교명</div></th>
+								<th><div class="hool">입학년월</div></th>
+								<th><div class="hool">졸업년월</div></th>
+								<th><div class="hool">졸업유무</div></th>
+								<th><div class="hool">계열 / 전공</div></th>
+								<th><div class="hool">소재지</div></th>
+								<th><div class="hool">주/야</div></th>
+								<th><div class="hool">평점/만점</div></th>
+							</tr>
+							<tr><!-- 고등학교 -->
+								<th><div class="para"><strong>고등학교</strong></div></th>
+								<td class="hool"><span id="lab_schName1" th:text="${recruit.schName1}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM1" th:text="${recruit.schEnterYm1}"></span></td>
+								<td class="hool"><span id="lab_schGradYM1" th:text="${recruit.schGradYm1}"></span></td>
+								<td class="hool"><span id="lab_schGrad1" th:text="${recruit.schGrad1}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis1" th:text="${recruit.schAdmis1}"></span>/
+									<span id="lab_schMajor1" th:text="${recruit.schMajor1}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite1" th:text="${recruit.schSite1}"></span></td>
+								<td class="hool"><span id="lab_schNight1" th:text="${recruit.schNight1}"></span></td>
+								<td class="bora"></td>
+							</tr><!-- 고등학교 //-->
+							<tr><!-- 편입전대학(교) -->
+								<th><div class="para"><strong>편입전 대학(교)</strong></div></th>
+								<td class="hool"><span id="lab_schName2" th:text="${recruit.schName2}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM2" th:text="${recruit.schEnterYm2}"></span></td>
+								<td class="hool"><span id="lab_schGradYM2" th:text="${recruit.schGradYm2}"></span></td>
+								<td class="hool"><span id="lab_schGrad2" th:text="${recruit.schGrad2}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis1" th:text="${recruit.schAdmis2}"></span>/
+									<span id="lab_schMajor1" th:text="${recruit.schMajor2}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite2" th:text="${recruit.schSite2}"></span></td>
+								<td class="hool"><span id="lab_schNight2" th:text="${recruit.schNight2}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg2" th:text="${recruit.schPointEvg2}"></span> / <span id="lab_schPointMax2" th:text="${recruit.schPointMax2}"></span></td>
+							</tr><!-- 편입전대학(교) // -->
+							<tr><!-- 대학(2~3년제) -->
+								<th><div class="para"><strong>대학(2~3년제)</strong></div></th>
+								<td class="hool"><span id="lab_schName3" th:text="${recruit.schName3}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM3" th:text="${recruit.schEnterYm3}"></span></td>
+								<td class="hool"><span id="lab_schGradYM3"  th:text="${recruit.schGradYm3}"></span></td>
+								<td class="hool"><span id="lab_schGrad3"  th:text="${recruit.schGrad3}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis3" th:text="${recruit.schAdmis3}"></span>/
+									<span id="lab_schMajor3" th:text="${recruit.schMajor3}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite3" th:text="${recruit.schSite3}"></span></td>
+								<td class="hool"><span id="lab_schNight3" th:text="${recruit.schNight3}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg3" th:text="${recruit.schPointEvg3}"></span> / <span id="lab_schPointMax3" >4.5</span></td>
+							</tr><!-- 대학(2~3년제) //-->
+							<tr><!-- 대학(2~3년제) -->
+								<th><div class="para"><strong>대학(해외)</strong></div></th>
+								<td class="hool"><span id="lab_schNameAB"></span></td>
+								<td class="hool"><span id="lab_schEnterYMAB"></span></td>
+								<td class="hool"><span id="lab_schGradYMAB"></span></td>
+								<td class="hool"><span id="lab_schGradAB"></span></td>
+								<td class="hool"><span id="lab_schAdmisAB"></span>/<span id="lab_schMajorAB"></span></td>
+								<td class="hool"><span id="lab_schSiteAB"></span></td>
+								<td class="hool"><span id="lab_schNightAB"></span></td>
+								<td class="bora"><span id="lab_schPointEvgAB"></span> / <span id="lab_schPointMaxAB"></span></td>
+							</tr><!-- 대학(2~3년제) //-->
+							<tr><!-- 대학교(4~6년제) -->
+								<th><div class="para"><strong>대학교(4~6년제)</strong></div></th>
+								<td class="hool"><span id="lab_schName4" th:text="${recruit.schName4}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM4" th:text="${recruit.schEnterYm4}"></span></td>
+								<td class="hool"><span id="lab_schGradYM4"  th:text="${recruit.schGradYm4}"></span></td>
+								<td class="hool"><span id="lab_schGrad4"  th:text="${recruit.schGrad4}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis4" th:text="${recruit.schAdmis4}"></span>/
+									<span id="lab_schMajor4" th:text="${recruit.schMajor4}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite4" th:text="${recruit.schSite4}"></span></td>
+								<td class="hool"><span id="lab_schNight4" th:text="${recruit.schNight4}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg4" th:text="${recruit.schPointEvg4}"></span> / <span id="lab_schPointMax4" th:text="${recruit.schPointMax4}"5</span></td>
+							</tr><!-- 대학교(4~6년제) //-->
+
+
+							<tr><!--  부/이중/복수 전공1 -->
+								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
+								<td class="hool"><span id="lab_sub1schName4">없음</span></td>
+								<td colspan="3"></td>
+								<td class="hool"><span id="lab_sub1schAdmis4" th:text="${recruit.schSubAdmis4}"></span>/<span id="lab_sub1schMajor4" th:text="${recruit.schSubMajor4}"> 선택 </span></td>
+								<td class="hool"><span id="lab_sub1schSite4"></span></td>
+								<td class="hool"><span id="lab_sub1schNight4"></span></td>
+								<td class="bora">  </td>
+							</tr><!--  부/이중/복수 전공1 //  -->
+								<tr><!--  부/이중/복수 전공2 -->
+								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
+								<td class="hool"><span id="lab_sub2schName4">없음 </span></td>
+								<td colspan="3"></td>
+								<td class="hool"><span id="lab_sub2schAdmis4"></span>/<span id="lab_sub2schMajor4">  </span></td>
+								<td class="hool"><span id="lab_sub2schSite4"></span></td>
+								<td class="hool"><span id="lab_sub2schNight4"></span></td>
+								<td class="bora">  </td>
+							</tr><!--  부/이중/복수 전공2 //  -->
+
+							<tr><!-- 대학원(석사) -->
+								<th><div class="para"><strong>대학원(석사)</strong></div></th>
+								<td class="hool"><span id="lab_schName5" th:text="${recruit.schName5}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM5" th:text="${recruit.schEnterYm5}"></span></td>
+								<td class="hool"><span id="lab_schGradYM5"  th:text="${recruit.schGradYm5}"></span></td>
+								<td class="hool"><span id="lab_schGrad5"  th:text="${recruit.schGrad5}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis5" th:text="${recruit.schAdmis5}"></span>/
+									<span id="lab_schMajor5" th:text="${recruit.schMajor5}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite5" th:text="${recruit.schSite5}"></span></td>
+								<td class="hool"><span id="lab_schNight5" th:text="${recruit.schNight5}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg5" th:text="${recruit.schPointEvg5}"></span> / <span id="lab_schPointMax5" th:text="${recruit.schPointMax5}"></span></td>
+							</tr><!-- 대학원(석사) // -->
+							<tr><!-- 대학원(박사) -->
+								<th><div class="para"><strong>대학원(박사)</strong></div></th>
+								<td class="hool"><span id="lab_schName6" th:text="${recruit.schName6}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM6" th:text="${recruit.schEnterYm6}"></span></td>
+								<td class="hool"><span id="lab_schGradYM6"  th:text="${recruit.schGradYm6}"></span></td>
+								<td class="hool"><span id="lab_schGrad6"  th:text="${recruit.schGrad6}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis6" th:text="${recruit.schAdmis6}"></span>/
+									<span id="lab_schMajor6" th:text="${recruit.schMajor6}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite6" th:text="${recruit.schSite6}"></span></td>
+								<td class="hool"><span id="lab_schNight6" th:text="${recruit.schNight6}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg6" th:text="${recruit.schPointEvg6}"></span> / <span id="lab_schPointMax6" th:text="${recruit.schPointMax6}"></span></td>
+							</tr><!-- 대학원(박사) // -->
+							<tr>
+								<th><div class="para" ><strong>회계관련 이수내역</strong></div></th>
+								<td class="hool" colspan="8" >
+								<span id="lab_schAccount" style="text-align:left; padding:6px 10px"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- // 3.학력사항 ############################################ -->
+				<div id="anguage" style="margin-top:20px"><!-- 4.외국어사항 -->
+					<div class="title">외국어사항</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="15%" >
+							<col width="9%" >
+							<col width="7%" >
+							<col width="*" >
+							<col width="15%" >
+							<col width="6%" >
+							<col width="6%" >
+							<col width="6%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool">외국어</div></th>
+								<th><div class="hool">점수</div></th>
+								<th><div class="hool">등급</div></th>
+								<th><div class="hool">발급번호</div></th>
+								<th><div class="hool">취득일자</div></th>
+								<th><div class="hool">회화</div></th>
+								<th><div class="hool">작문</div></th>
+								<th><div class="hool">독해</div></th>
+							</tr>
+							<tr><!-- 외국어 1 -->
+								<td class="hool"><span id="lab_langName1"  th:text="${recruit.langName1}"></span></td>
+								<td class="hool"><span id="lab_langPoint1" th:text="${recruit.langPoint1}"></span></td>
+								<td class="hool"><span id="lab_langLv1" th:text="${recruit.langLv1}"></span></td>
+								<td class="hool"><span id="lab_langLic1" th:text="${recruit.langLicNum1}"></span></td>
+								<td class="hool"><span id="lab_langGet1" th:text="${recruit.langGet1}"></span></td>
+								<td class="hool"><span id="lab_langTalk1" th:text="${recruit.langTalk1}"></span></td>
+								<td class="hool"><span id="lab_langMake1" th:text="${recruit.langMake1}"></span></td>
+								<td class="bora"><span id="lab_langRead1" th:text="${recruit.langRead1}"></span></td>
+							</tr>
+							<tr> <!-- 외국어 2 -->
+								<td class="hool"><span id="lab_langName2"  th:text="${recruit.langName2}"></span></td>
+								<td class="hool"><span id="lab_langPoint2" th:text="${recruit.langPoint2}"></span></td>
+								<td class="hool"><span id="lab_langLv2" th:text="${recruit.langLv2}"></span></td>
+								<td class="hool"><span id="lab_langLic2" th:text="${recruit.langLicNum2}"></span></td>
+								<td class="hool"><span id="lab_langGet2" th:text="${recruit.langGet2}"></span></td>
+								<td class="hool"><span id="lab_langTalk2" th:text="${recruit.langTalk2}"></span></td>
+								<td class="hool"><span id="lab_langMake2" th:text="${recruit.langMake2}"></span></td>
+								<td class="bora"><span id="lab_langRead2" th:text="${recruit.langRead2}"></span></td>
+							</tr>
+							<tr> <!-- 외국어 3 -->
+								<td class="hool"><span id="lab_langName3"  th:text="${recruit.langName3}"></span></td>
+								<td class="hool"><span id="lab_langPoint3" th:text="${recruit.langPoint3}"></span></td>
+								<td class="hool"><span id="lab_langLv3" th:text="${recruit.langLv3}"></span></td>
+								<td class="hool"><span id="lab_langLic3" th:text="${recruit.langLicNum3}"></span></td>
+								<td class="hool"><span id="lab_langGet3" th:text="${recruit.langGet3}"></span></td>
+								<td class="hool"><span id="lab_langTalk3" th:text="${recruit.langTalk3}"></span></td>
+								<td class="hool"><span id="lab_langMake3" th:text="${recruit.langMake3}"></span></td>
+								<td class="bora"><span id="lab_langRead3" th:text="${recruit.langRead3}"></span></td>
+							</tr>
+							<tr> <!-- 외국어 4 -->
+								<td class="hool"><span id="lab_langName4"  th:text="${recruit.langName4}"></span></td>
+								<td class="hool"><span id="lab_langPoint4" th:text="${recruit.langPoint4}"></span></td>
+								<td class="hool"><span id="lab_langLv4" th:text="${recruit.langLv4}"></span></td>
+								<td class="hool"><span id="lab_langLic4" th:text="${recruit.langLicNum4}"></span></td>
+								<td class="hool"><span id="lab_langGet4" th:text="${recruit.langGet4}"></span></td>
+								<td class="hool"><span id="lab_langTalk4" th:text="${recruit.langTalk4}"></span></td>
+								<td class="hool"><span id="lab_langMake4" th:text="${recruit.langMake4}"></span></td>
+								<td class="bora"><span id="lab_langRead4" th:text="${recruit.langRead4}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- 4.외국어사항 //-->
+
+				<div id="it"style="margin-top:20px"><!-- 5.IT능력 -->
+					<div class="title">IT능력</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="13%" >
+							<col width="20%" >
+							<col width="13%" >
+							<col width="20%" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+							</tr>
+							<tr>
+								<td class="bora"><span id="lab_swName1" th:text="${recruit.swName1}"></span></td>
+								<td class="hool"><span id="lab_swLv1" th:text="${recruit.swLv1}"></span></td>
+								<td class="bora"><span id="lab_swName2" th:text="${recruit.swName2}"></span></td>
+								<td class="hool"><span id="lab_swLv2" th:text="${recruit.swLv2}"></span></td>
+								<td class="bora"><span id="lab_swName3" th:text="${recruit.swName3}"></span></td>
+								<td class="bora"><span id="lab_swLv3" th:text="${recruit.swLv3}"></span></td>
+							</tr>
+							<tr>
+								<td class="bora"><span id="lab_swName4" th:text="${recruit.swName4}"></span></td>
+								<td class="hool"><span id="lab_swLv4" th:text="${recruit.swLv4}"></span></td>
+								<td class="bora"><span id="lab_swName5" th:text="${recruit.swName5}"></span></td>
+								<td class="hool"><span id="lab_swLv5" th:text="${recruit.swLv5}"></span></td>
+								<td class="bora"><span id="lab_swName6" th:text="${recruit.swName6}"></span></td>
+								<td class="bora"><span id="lab_swLv6" th:text="${recruit.swLv6}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- 5.IT능력 //-->
+				
+				<!-- 8.경력/인턴 ########################################-->
+				<div id="career">
+					<div class="title">경력/인턴</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+							<col width="15%" >
+							<col width="10%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>회사명</strong></div></th>
+								<th><div class="hool"><strong>기간</strong></div></th>
+								<th><div class="hool"><strong>직무</strong></div></th>
+								<th><div class="hool"><strong>평균급여/월</strong></div></th>
+								<th><div class="hool"><strong>재직여부</strong></div></th>
+							</tr>
+							<!-- 경력 1 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName1" th:text="${recruit.hisCoName1}"></span></td>
+								<td class="hool"><span id="lab_hisSDate1" th:text="${recruit.hisSDate1}"></span> ~ <span id="lab_hisEDate1" th:text="${recruit.hisEDate1}"></span></td>
+								<td class="hool"><span id="lab_hisDuty1" th:text="${recruit.hisDuty1}"></span></td>
+								<td class="hool"><span id="lab_hisPay1" th:text="${recruit.hisPay1}"></span></td>
+								<td class="bora"><span id="lab_hisLv1" ></span></td>
+							</tr>
+							<!-- 경력 2 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName2" th:text="${recruit.hisCoName2}"></span></td>
+								<td class="hool"><span id="lab_hisSDate2" th:text="${recruit.hisSDate2}"></span> ~ <span id="lab_hisEDate2" th:text="${recruit.hisEDate2}"></span></td>
+								<td class="hool"><span id="lab_hisDuty2" th:text="${recruit.hisDuty2}"></span></td>
+								<td class="hool"><span id="lab_hisPay2" th:text="${recruit.hisPay2}"></span></td>
+								<td class="bora"><span id="lab_hisLv2" ></span></td>
+							</tr>
+							<!-- 경력 3 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName3" th:text="${recruit.hisCoName3}"></span></td>
+								<td class="hool"><span id="lab_hisSDate3" th:text="${recruit.hisSDate3}"></span> ~ <span id="lab_hisEDate3" th:text="${recruit.hisEDate3}"></span></td>
+								<td class="hool"><span id="lab_hisDuty3" th:text="${recruit.hisDuty3}"></span></td>
+								<td class="hool"><span id="lab_hisPay3" th:text="${recruit.hisPay3}"></span></td>
+								<td class="bora"><span id="lab_hisLv3" ></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 8.경력/인턴 ########################################-->
+				
+				<!-- 7.해외연수활동 ########################################-->
+				<div id="country">
+					<div class="title">해외연수/대외활동</div>
+					<table width="100%" class="tbViewType2" >
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+							<col width="30%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>국가명/활동명</strong></div></th>
+								<th><div class="hool"><strong>연수/활동기간</strong></div></th>
+								<th><div class="hool"><strong>연수/활동기관</strong></div></th>
+								<th class="thbora"><strong>내용</strong></th>
+							</tr>
+							<!-- 연수 1 -->
+							<tr  id="tr_forState1"   >
+								<td class="hool"><span id="lab_forState1" th:text="${recruit.forState1}"></span></td>
+								<td class="hool"><span id="lab_forSDate1" th:text="${recruit.forSDate1}"></span> ~ <span id="lab_forEDate1" th:text="${recruit.forEDate1}"></span></td>
+								<td class="hool"><span id="lab_forName1" th:text="${recruit.forName1}"></span></td>
+								<td class="bora"><span id="lab_forContent1" th:text="${recruit.forContent1}"></span></td>
+							</tr>
+							
+							<!-- 연수 2 -->
+							
+							<tr id="tr_forState2"  >
+								<td class="hool"><span id="lab_forState2" th:text="${recruit.forState2}"></span></td>
+								<td class="hool"><span id="lab_forSDate2" th:text="${recruit.forSDate2}"></span> ~ <span id="lab_forEDate2" th:text="${recruit.forEDate2}"></span></td>
+								<td class="hool"><span id="lab_forName2" th:text="${recruit.forName2}"></span></td>
+								<td class="bora"><span id="lab_forContent2" th:text="${recruit.forContent2}"></span></td>
+							</tr>
+							
+							<!-- 연수 3 -->
+							
+							<tr  id="tr_forState3"  >
+								<td class="hool"><span id="lab_forState3" th:text="${recruit.forState3}"></span></td>
+								<td class="hool"><span id="lab_forSDate3" th:text="${recruit.forSDate3}"></span> ~ <span id="lab_forEDate3" th:text="${recruit.forEDate3}"></span></td>
+								<td class="hool"><span id="lab_forName3" th:text="${recruit.forName3}"></span></td>
+								<td class="bora"><span id="lab_forContent3" th:text="${recruit.forContent3}"></span></td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+				<!-- // 7.해외연수활동 ########################################-->
+				
+				<!-- 6.수상경력 -->
+				<div id="prize" style="margin-top:50px">
+					<div class="title">수상경력</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>수상단체</strong></div></th>
+								<th><div class="hool"><strong>수상일자</strong></div></th>
+								<th><div class="hool"><strong>수상내용</strong></div></th>
+							</tr>
+							<tr><!-- 수상 1 -->
+								<td class="hool"><span id="lab_medalName1" th:text="${recruit.medalName1}"></span></td>
+								<td class="hool"><span id="lab_medalDate1" th:text="${recruit.medalDate1}"></span></td>
+								<td class="bora"><span id="lab_medalContent1" th:text="${recruit.medalContent1}"></span></td>
+							</tr>
+							<tr><!-- 수상 2 -->
+								<td class="hool"><span id="lab_medalName2" th:text="${recruit.medalName2}"></span></td>
+								<td class="hool"><span id="lab_medalDate2" th:text="${recruit.medalDate2}"></span></td>
+								<td class="bora"><span id="lab_medalContent2" th:text="${recruit.medalContent2}"></span></td>
+							</tr>
+							<tr><!-- 수상 3 -->
+								<td class="hool"><span id="lab_medalName3" th:text="${recruit.medalName3}"></span></td>
+								<td class="hool"><span id="lab_medalDate3" th:text="${recruit.medalDate3}"></span></td>
+								<td class="bora"><span id="lab_medalContent3" th:text="${recruit.medalContent3}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- // 6.수상경력 ########################################-->
+				
+				<!-- 9.자격 및 면허 ########################################-->
+				<div id="license">
+					<div class="title">자격 및 면허</div>
+					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="25%" >
+							<col width="25%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>종류</strong></div></th>
+								<th><div class="hool"><strong>자격번호</strong></div></th>
+								<th><div class="hool"><strong>취득일자</strong></div></th>
+								<th class="thbora"><strong>발행처</strong></th>
+							</tr>
+							<tr id="tr_licName1">
+								<!-- 면허 1(운전면허)---------------------->
+								<td class="hool"><span id="lab_licName1" th:text="${recruit.licName1}"></span></td>
+								<td class="hool"><span id="lab_licNum1" th:text="${recruit.licNum1}"></span></td>
+								<td class="hool"><span id="lab_licGetDate1" th:text="${recruit.licGetDate1}"></span></td>
+								<td class="bora"><span id="lab_licPub1" th:text="${recruit.licPub1}"></span></td>
+								<!-- 면허 2 ---------------------->
+							</tr>
+							<tr id="tr_licName2">
+								<td class="hool"><span id="lab_licName2" th:text="${recruit.licName2}"></span></td>
+								<td class="hool"><span id="lab_licNum2" th:text="${recruit.licNum2}"></span></td>
+								<td class="hool"><span id="lab_licGetDate2" th:text="${recruit.licGetDate2}"></span></td>
+								<td class="bora"><span id="lab_licPub2" th:text="${recruit.licPub2}"></span></td>
+							</tr>
+							<tr id="tr_licName3">
+								<!-- 면허 3 ---------------------->
+								<td class="hool"><span id="lab_licName3" th:text="${recruit.licName3}"></span></td>
+								<td class="hool"><span id="lab_licNum3" th:text="${recruit.licNum3}"></span></td>
+								<td class="hool"><span id="lab_licGetDate3" th:text="${recruit.licGetDate3}"></span></td>
+								<td class="bora"><span id="lab_licPub3" th:text="${recruit.licPub3}"></span></td>
+							</tr>
+							<tr id="tr_licName4" >
+								<!-- 면허 4 ---------------------->
+								<td class="hool"><span id="lab_licName4" th:text="${recruit.licName4}"></span></td>
+								<td class="hool"><span id="lab_licNum4" th:text="${recruit.licNum4}"></span></td>
+								<td class="hool"><span id="lab_licGetDate4" th:text="${recruit.licGetDate4}"></span></td>
+								<td class="bora"><span id="lab_licPub4" th:text="${recruit.licPub4}"></span></td>
+							</tr>
+							<tr id="tr_licName5" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName5" th:text="${recruit.licName5}"></span></td>
+								<td class="hool"><span id="lab_licNum5" th:text="${recruit.licNum5}"></span></td>
+								<td class="hool"><span id="lab_licGetDate5" th:text="${recruit.licGetDate5}"></span></td>
+								<td class="bora"><span id="lab_licPub5" th:text="${recruit.licPub5}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 9.자격 및 면허 ########################################-->
+
+				<!-- 14.자기소개서 ########################################-->
+				<div id="Div1" clear="all" style="PAGE-BREAK-BEFORE:always">
+					<div class="title">자기소개서</div>
+					<table width="100%" class="tbViewType2" summary="14.자기소개서">
+						<tbody>
+							<tr>
+								<th class="thbora2"><strong>1. 성장과정을 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce1" th:text="${recruit.introduce1}"></span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>2. 성격의 장,단점을 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="para"><strong></strong></div>
+									<div class="Print_title_introduce1"><span id="lab_introduce2" th:text="${recruit.introduce2}"></span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>3. 차별화되는 본인만의 핵심역량은 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce3" th:text="${recruit.introduce3}"></span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>4. 도전했던 경험과 이를 통해 얻은 성취는 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce4" th:text="${recruit.introduce4}"></span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>5. 협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce5" th:text="${recruit.introduce5}"></span></div>
+								</td>
+							</tr>
+						
+							<tr>
+								<th class="thbora2"><strong>6. 지원동기 및 입사 후 포부는 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+						
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce6" th:text="${recruit.introduce6}"></span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 14.자기소개서 ########################################-->
+
+                <!-- 15.업무상 강점 ########################################
+				<div id="strength">
+					<div class="title">업무상 강점</div>
+					<table width="100%" class="tbViewType2" summary="15.업무상 강점">
+						<colgroup>
+							<col width="30%" >
+							<col width="70%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>구분</strong></div></th>
+								<th class="thbora"><strong>관련내용</strong></th>
+							</tr>
+							<tr id="tr1" >
+								<td class="hool"><span id="lab_strength1"></span></td>
+								<td class="bora"><span id="lab_strengthName1"></span></td>
+							</tr>
+							<tr id="tr2" >
+								<td class="hool"><span id="lab_strength2"></span></td>
+								<td class="bora"><span id="lab_strengthName2"></span></td>
+							</tr>
+							<tr id="tr3" >
+								<td class="hool"><span id="lab_strength3"></span></td>
+								<td class="bora"><span id="lab_strengthName3"></span></td>
+							</tr>
+							<tr id="tr4" >
+								<td class="hool"><span id="lab_strength4"></span></td>
+								<td class="bora"><span id="lab_strengthName4"></span></td>
+							</tr>
+							<tr id="tr5" >
+								<td class="hool"><span id="lab_strength5"></span></td>
+								<td class="bora"><span id="lab_strengthName5"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 15.업무상 강점 ########################################-->
+                
+                <!-- 16.주요 경력 ########################################
+				<div id="workhitory" clear="all" style="PAGE-BREAK-BEFORE:always">
+					<div class="title">주요 경력</div>
+					<table width="100%" class="tbViewType2" summary="16.주요 경력">
+						<tbody>
+							<tr>
+								<th class="thbora2"><strong>상세 주요 경력</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_history1"></span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 16.주요경력 ########################################-->
+				
+			</div><!-- wrap750 // -->
+    <!-- END: Content-->
+    </th:block>
+    
+</html>
