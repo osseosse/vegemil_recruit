@@ -84,7 +84,8 @@
 							<tr>
 								<td class="hool" rowspan=6>
 									<div class="imgPhotoBack">
-										<img id="img_memPhoto" class="imgPhotoView" src="https://www.vegemil.co.kr:10001/upload/RECRUIT/42th/20211213132838609131395441.jpg" />
+										<img th:if="*{recruit.photo != null and recruit.photo != ''}" id="resumePhoto" th:src="|/display?filename=*{recruit.photo}|" />
+										<img th:unless="*{recruit.photo != null and recruit.photo != ''}" th:src="@{/img/ico_photo.png}" id="recruitPhoto" />
 									</div>
 								</td>
 								<th rowspan=3><div class="hool">성명</div></th>

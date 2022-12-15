@@ -4,96 +4,114 @@
 <mapper namespace="com.vegemil.mapper.AdminMapper">
 
 	<sql id="adminColumns">
-		  a_id
-		, a_pwd
-		, a_name
-		, a_class
-		, a_location
-		, a_auth
-		, a_active
+		  mem_no
+		, mem_name
+		, sex
+		, birthday
+		, password
+		, active
+		, auth
+		, email_addr
+		, phone_no
+		, sleep_yn
+		, join_date
+		, pwd_modify_date
+		, last_login_date
+		, active_date
+		, ad_agree_date
+		, sleep_date
+		, location
 	</sql>
 
-	<insert id="insertAdmin" parameterType="com.vegemil.domain.AdminDTO">
+	<insert id="insertAdmin" parameterType="com.vegemil.domain.MemberDTO">
 		/* insertAdmin by AdminMapper.xml */
-		INSERT INTO M_Admin (
-			<include refid="adminColumns" />
+		INSERT INTO m_recruit_member (
+			  mem_name
+			, password
+			, auth
+			, active
+			, email_addr
+			, sleep_yn
+			, join_date
+			, location
 		) VALUES (
-			  #{aId}
-			, #{aPwd}
-			, #{aName}
-			, '임직원'
-			, #{aLocation}
+			  #{memName}
+			, #{password}
 			, 'ADMIN'
 			, 0
+			, #{emailAddr}
+			, 0
+			, NOW()
+			, #{location}
 		)
 	</insert>
 
-	<select id="findAdminById" parameterType="string" resultType="com.vegemil.domain.AdminDTO">
+	<select id="findAdminById" parameterType="string" resultType="com.vegemil.domain.MemberDTO">
 		/* findAdminById by AdminMapper.xml */
 		SELECT 
 			<include refid="adminColumns" />
-		  FROM M_Admin
-		 WHERE a_id = #{aId}
-		   AND a_active = 1
+		  FROM m_recruit_member
+		 WHERE email_addr = #{emailAddr}
+		   AND active = 1
 	</select>
 
-	<update id="updateAdminPwd" parameterType="com.vegemil.domain.AdminDTO">
+	<update id="updateAdminPwd" parameterType="com.vegemil.domain.MemberDTO">
 		/* updateAdminPwd by AdminMapper.xml */
-		UPDATE M_Admin
+		UPDATE m_recruit_member
 		SET
-			a_pwd = #{aPwd}
+			password = #{password}
 		WHERE
-			a_id = #{aId}
+			email_addr = #{emailAddr}
 	</update>
 
-	<select id="selectAdminList" parameterType="com.vegemil.domain.MemberDTO" resultType="com.vegemil.domain.AdminDTO">
+	<select id="selectAdminList" parameterType="com.vegemil.domain.MemberDTO" resultType="com.vegemil.domain.MemberDTO">
 	    /* selectAdminList by AdminMapper.xml */
 		SELECT
 			<include refid="adminColumns" />
 		FROM
-			M_Admin
+			m_recruit_member
 		WHERE
 		<include refid="CommonMapper.search" />
 		ORDER BY
 		<include refid="CommonMapper.paging" />
 	</select>
 	
-	<select id="selectAdminCount" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+	<select id="selectAdminCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
-			M_Admin
+			m_recruit_member
 		WHERE
-			a_id = #{aId, jdbcType=VARCHAR}
+			email_addr = #{emailAddr, jdbcType=VARCHAR}
 		AND
-		    a_name = #{aName, jdbcType=VARCHAR}
+		    memName = #{memName, jdbcType=VARCHAR}
 	</select>
 
-	<select id="selectAdminTotalCount" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+	<select id="selectAdminTotalCount" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
 		/* selectAdminTotalCount by AdminMapper.xml */
 		SELECT
 			COUNT(*)
 		FROM
-			M_Admin
+			m_recruit_member
 		WHERE
 		<include refid="CommonMapper.search" />
 	</select>
 	
-	<select id="checkMember" parameterType="com.vegemil.domain.AdminDTO" resultType="int">
+	<select id="checkMember" parameterType="com.vegemil.domain.MemberDTO" resultType="int">
 		/* checkMember by AdminMapper.xml */
 		SELECT COUNT(*)
-		  FROM M_Admin
-		 WHERE a_id = #{aId, jdbcType=VARCHAR}
+		  FROM m_recruit_member
+		 WHERE email_addr = #{emailAddr, jdbcType=VARCHAR}
 	</select>
 	
-	<update id="activeAdmin" parameterType="com.vegemil.domain.AdminDTO">
-		UPDATE M_Admin
+	<update id="activeAdmin" parameterType="com.vegemil.domain.MemberDTO">
+		UPDATE m_recruit_member
 		SET
 			 a_active 	  = 1
 		WHERE
-			a_id = #{aId, jdbcType=VARCHAR}
+			email_addr = #{emailAddr, jdbcType=VARCHAR}
 	    AND
-	        a_name = #{aName, jdbcType=VARCHAR}
+	        memName = #{memName, jdbcType=VARCHAR}
 	</update>
 
 </mapper>

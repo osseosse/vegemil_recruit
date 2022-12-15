@@ -47,14 +47,14 @@ public class MailService {
      * 관리자 회원인증
      * @param adminDto
      */
-    public void mailSend(AdminDTO adminDto) {
+    public void adminMailSend(MemberDTO memberDto) {
     	
     	try {
 	    	MimeMessage message = mailSender.createMimeMessage();
 	    	message.setFrom(MailService.FROM_ADDRESS);
-			message.addRecipients(MimeMessage.RecipientType.TO, adminDto.getAId());
+			message.addRecipients(MimeMessage.RecipientType.TO, memberDto.getEmailAddr());
 	        message.setSubject("관리자 회원인증");
-	        message.setText(setAuthContext(adminDto), "utf-8", "html");
+	        message.setText(setAuthContext(memberDto), "utf-8", "html");
 	        mailSender.send(message);
     	}catch(MessagingException e) {
     		e.printStackTrace();
@@ -105,14 +105,22 @@ public class MailService {
 			
     		UUID uuid = UUID.randomUUID();
             // redis에 링크 정보 저장
-            redisUtil.setDataExpire(uuid.toString(),member.getEmailAddr(), 7);
+    		if(!"ADMIN".equals(member.getAuth())) {
+    			redisUtil.setDataExpire(uuid.toString(),member.getEmailAddr(), 7);
+    		}
             context.setVariable("member", member);
             context.setVariable("authToken", uuid.toString());
     		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return templateEngine.process("email/confirmMail", context);
+    	
+    	if(!"ADMIN".equals(member.getAuth())) {
+    		return templateEngine.process("email/confirmMail", context);
+    	}else {
+    		return templateEngine.process("email/confirmAdminMail", context);
+    	}
+    	
         
     }
     
@@ -163,11 +171,11 @@ public class MailService {
      * @return
      * @throws NotFoundException
      */
-    public boolean verifyEmail(AdminDTO adminDto) throws NotFoundException {
-    	int queryResult = adminMapper.selectAdminCount(adminDto);
+    public boolean verifyAdminEmail(MemberDTO memberDto) throws NotFoundException {
+    	int queryResult = adminMapper.selectAdminCount(memberDto);
     		
 		if (queryResult != 0) {
-			queryResult = adminMapper.activeAdmin(adminDto);
+			queryResult = adminMapper.activeAdmin(memberDto);
 		}
 
 		return (queryResult == 1) ? true : false;

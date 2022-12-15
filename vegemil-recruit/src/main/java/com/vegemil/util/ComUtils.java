@@ -39,14 +39,9 @@ public class ComUtils {
 		int birthMonth = Integer.parseInt(birthDayArr[1]);
 		int birthDay = Integer.parseInt(birthDayArr[2]);
 				
-        
         int currentYear  = current.get(Calendar.YEAR);
         int currentMonth = current.get(Calendar.MONTH) + 1;
         int currentDay   = current.get(Calendar.DAY_OF_MONTH);
-        
-        System.out.println("현재 년 : "+currentYear);
-        System.out.println("현재 월 : "+currentMonth);
-        System.out.println("현재 일 : "+currentDay);
         
         // 만 나이 구하기 2022-1995=27 (현재년-태어난년)
         int age = currentYear - birthYear;

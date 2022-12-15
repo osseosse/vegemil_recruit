@@ -26,7 +26,26 @@
     <script th:src="@{/app-assets/js/core/app-menu.js}"></script>
     <script th:src="@{/app-assets/js/core/app.js}"></script>
     <!-- END: Theme JS-->
-    
+    <script th:inline="javascript">
+	/*<![CDATA[*/
+		if (window.location.protocol == "http:") {
+			if(window.location.hostname == 'vegemil.co.kr' || window.location.hostname == "recruit.vegemil.co.kr") {
+				window.location.href = window.location.href.replace('http:', 'https:');
+			}
+		}
+	
+		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+		
+	      function(json) {
+	        if(json.ip != '211.204.41.41' && json.ip != '115.88.198.133') {
+	        	alert("관리자만 접속 가능한 페이지입니다. 현재 IP:"+ json.ip);
+	        	window.location.href = '/';
+	        }
+	      }
+	    );
+	
+	/*]]>*/
+	</script>
     <!-- BEGIN: Page JS-->
     <th:block layout:fragment="add-script"></th:block>
     <!-- END: Page JS-->
