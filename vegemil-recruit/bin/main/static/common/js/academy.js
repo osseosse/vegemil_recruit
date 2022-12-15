@@ -473,9 +473,27 @@ $("#schPointEvg").keydown(function(){
     
 });
 
+$("#shName").on("keyup",function(key){
+    if(key.keyCode==13) {
+        fnSchool();
+    }
+});
+
+$("#majorName").on("keyup",function(key){
+    if(key.keyCode==13) {
+        fnMajor('main');
+    }
+});
+
+$("#subMajorName").on("keyup",function(key){
+    if(key.keyCode==13) {
+        fnMajor('sub');
+    }
+});
+
 function registerAcademy() {
 
-	var uri = "/application/updateAcademy";
+	var uri = "/app/updateAcademy";
 	var headers = {"Content-Type" : "application/json", "X-HTTP-Method-Override" : "POST"};
 	var idx = Number($("#idx").val());
 	var selectAcademy = $("#selectAcademy option:selected").val();
@@ -788,7 +806,7 @@ function registerAcademy() {
 
 function deleteAcademy(selectAcademy) {
 
-	var uri = "/application/updateAcademy";
+	var uri = "/app/updateAcademy";
 	const headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
 	const idx = $("#idx").val();
 	const lastAcademy = $("#lastAcademy").val();

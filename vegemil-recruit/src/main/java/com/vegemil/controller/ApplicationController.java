@@ -310,7 +310,7 @@ public class ApplicationController extends UiUtils {
 		return showMessageWithRedirect("지원서 저장이 완료되었습니다.", "/application/qualification?idx="+application.getIdx(), Method.GET, null, model);
 	}
 	
-	@RequestMapping(value = { "/application/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = { "/app/updateAcademy" }, method = { RequestMethod.POST, RequestMethod.PATCH }, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public JsonObject updateAcademy(@RequestBody Map<String, Object> academyInfoMap, Authentication authentication) {
 

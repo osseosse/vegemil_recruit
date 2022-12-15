@@ -66,11 +66,13 @@
     
     function sendAuthEmail() {
 
-   		const uri = "email/sendAuthEmailJson";
+   		const uri = "/email/sendAuthEmailJson";
+   		const headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
    		
    		$.ajax({
    			url: uri,
    			type: "POST",
+   			headers: headers,
    			dataType: "json",
    			contentType: false,
       		processData: false,

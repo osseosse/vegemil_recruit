@@ -140,7 +140,7 @@
 												<li class="f14">주요업무</li>
 												<li>
 													<textarea type="text" class="areaType01" th:id="hisContent" th:name="hisContent"  placeholder="200자 이내로 작성해 주세요." ></textarea>
-													<div class="mt10 f14 gray f_right mr40">(0/200)</div>
+													<div class="mt10 f14 gray f_right mr40" name="cnt" id="cnt">(0/200)</div>
 												</li>
 											</ul>
 										</div>
@@ -306,6 +306,33 @@ $(document).ready(function(){
 		$("input[name='hisDuty3']").val(/*[[ ${app.hisDuty3} ]]*/);
 		$("input[name='hisPay3']").val(/*[[ ${app.hisPay3} ]]*/);
 	}
+	
+	$('#hisContent1').on('keyup', function() {
+		$('#cnt1').html("("+$(this).val().length+" / 200)");
+		 
+		if($(this).val().length > 200) {
+			$(this).val($(this).val().substring(0, 200));
+			$('#cnt1').html("(500 / 500)");
+		}
+	});
+
+	$('#hisContent2').on('keyup', function() {
+		$('#cnt2').html("("+$(this).val().length+" / 200)");
+		 
+		if($(this).val().length > 200) {
+			$(this).val($(this).val().substring(0, 200));
+			$('#cnt2').html("(500 / 500)");
+		}
+	});
+
+	$('#hisContent3').on('keyup', function() {
+		$('#cnt3').html("("+$(this).val().length+" / 200)");
+		 
+		if($(this).val().length > 200) {
+			$(this).val($(this).val().substring(0, 200));
+			$('#cnt3').html("(500 / 500)");
+		}
+	});
 		
 });
 /*]]>*/
