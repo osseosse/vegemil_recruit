@@ -69,7 +69,7 @@
 											<ul class="s-d-2">
 												<li class="f14">직장명</li>
 												<li>
-													<input type="text" th:id="internName" th:name="internName"  class="inType01 w180"  >
+													<input type="text" th:id="internName" th:name="internName"  class="inType01 w180" maxlength="5" >
 												</li>
 											</ul>
 										</div>
@@ -308,30 +308,62 @@ $(document).ready(function(){
 	}
 	
 	$('#hisContent1').on('keyup', function() {
-		$('#cnt1').html("("+$(this).val().length+" / 200)");
+		$('#cnt1').html("("+$(this).val().length+" / 100)");
 		 
-		if($(this).val().length > 200) {
-			$(this).val($(this).val().substring(0, 200));
-			$('#cnt1').html("(500 / 500)");
+		if($(this).val().length > 100) {
+			$(this).val($(this).val().substring(0, 100));
+			$('#cnt1').html("(100 / 100)");
 		}
 	});
 
 	$('#hisContent2').on('keyup', function() {
-		$('#cnt2').html("("+$(this).val().length+" / 200)");
+		$('#cnt2').html("("+$(this).val().length+" / 100)");
 		 
-		if($(this).val().length > 200) {
-			$(this).val($(this).val().substring(0, 200));
-			$('#cnt2').html("(500 / 500)");
+		if($(this).val().length > 100) {
+			$(this).val($(this).val().substring(0, 100));
+			$('#cnt2').html("(100 / 100)");
 		}
 	});
 
 	$('#hisContent3').on('keyup', function() {
-		$('#cnt3').html("("+$(this).val().length+" / 200)");
+		$('#cnt3').html("("+$(this).val().length+" / 100)");
 		 
-		if($(this).val().length > 200) {
-			$(this).val($(this).val().substring(0, 200));
-			$('#cnt3').html("(500 / 500)");
+		if($(this).val().length > 100) {
+			$(this).val($(this).val().substring(0, 100));
+			$('#cnt3').html("(100 / 100)");
 		}
+	});
+	
+	$("#internIng").change(function(){
+	    if($("#internIng").is(":checked")){
+	        $('#internEDate').prop("disabled", true); 
+	    }else{
+	        $('#internEDate').prop("disabled", false); 
+	    }
+	});
+	
+	$("#hisIng1").change(function(){
+	    if($("#hisIng1").is(":checked")){
+	        $('#hisEDate1').prop("disabled", true); 
+	    }else{
+	        $('#hisEDate1').prop("disabled", false); 
+	    }
+	});
+
+	$("#hisIng2").change(function(){
+	    if($("#hisIng2").is(":checked")){
+	        $('#hisEDate2').prop("disabled", true); 
+	    }else{
+	        $('#hisEDate2').prop("disabled", false); 
+	    }
+	});
+
+	$("#hisIng3").change(function(){
+	    if($("#hisIng3").is(":checked")){
+	        $('#hisEDate3').prop("disabled", true); 
+	    }else{
+	        $('#hisEDate3').prop("disabled", false); 
+	    }
 	});
 		
 });
