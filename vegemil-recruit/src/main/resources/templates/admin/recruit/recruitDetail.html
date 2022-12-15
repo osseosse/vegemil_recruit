@@ -304,19 +304,22 @@
 						<tbody>
 							<tr>
 								<!-- 2022-12-08 -->
+								<th><div class="hool"><strong>종교</strong></div></th>
 								<th><div class="hool"><strong>장애 여부</strong></div></th>
+								<th><div class="hool"><strong>특기</strong></div></th>
+								<th class="thbora"><strong>취미</strong></th>
 								<!-- //2022-12-08 -->
 							</tr>
 							<tr>
-							
+								<td class="hool"><span id="lab_memReligion" th:text="${recruit.religoin}">무교</span></td>
 								<td class="hool">
 								<span id="lab_memHandicap">
 									<th:block th:if="${recruit.handicap} == 0">비대상</th:block>
 									<th:block th:unless="${recruit.handicap} == 0">대상</th:block>
 								</span>
-								
 								</td>
-								
+								<td class="hool"><span id="lab_memAbility" th:text="${recruit.ability}">수영</span></td>
+								<td class="bora"><span id="lab_memLike"  th:text="${recruit.hobby}">사이클</span></td>
 							</tr>
 						</tbody>
 					</table>
@@ -405,7 +408,7 @@
 							</tr><!-- 대학(2~3년제) //-->
 							<tr><!-- 대학교(4~6년제) -->
 								<th><div class="para"><strong>대학교(4~6년제)</strong></div></th>
-								<td class="hool"><span id="lab_schName4" th:text="${recruit.schName4}"></span></td>
+								<td class="hool"><span id="lab_schName4" th:text="|${recruit.schName4} (${recruit.schTransfer3})| "></span></td>
 								<td class="hool"><span id="lab_schEnterYM4" th:text="${recruit.schEnterYm4}"></span></td>
 								<td class="hool"><span id="lab_schGradYM4"  th:text="${recruit.schGradYm4}"></span></td>
 								<td class="hool"><span id="lab_schGrad4"  th:text="${recruit.schGrad4}"></span></td>
