@@ -1,22 +1,12 @@
 package com.vegemil.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +14,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vegemil.constant.Method;
 import com.vegemil.domain.AdminDTO;
-import com.vegemil.domain.MemberDTO;
 import com.vegemil.service.AdminService;
 import com.vegemil.service.MailService;
 import com.vegemil.util.UiUtils;
@@ -87,14 +75,6 @@ public class AdminController extends UiUtils {
 		model.addAttribute("exception", exception);
 		return "admin/auth/login";
     }
-	
-//	@GetMapping("/admin/auth/loginProc")
-//    public String userAccess(Model model, Authentication authentication) {
-//        //Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-//        AdminDTO adminDto = (AdminDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴
-//        model.addAttribute("info", adminDto.getAId() +"의 "+ adminDto.getAName()+ "님");      //유저 아이디
-//        return "admin/recruit/volunteerList";
-//    }
 	
     // 회원가입 처리
     @PostMapping("/admin/auth/signUp")
@@ -150,17 +130,6 @@ public class AdminController extends UiUtils {
     	
     }
     
-//    @GetMapping("/admin/auth/login")
-//    public String moveAdminLogin(HttpServletRequest req, Model model) {
-//    	
-//    	if(req.getParameter("msg") != null) {
-//	    	if(req.getParameter("msg").equals("session")) {
-//	    		return showMessageWithRedirect("세션이만료되어 \n로그인 페이지로 이동 합니다.", "/admin/auth/login", Method.GET, null, model);
-//	    	}
-//    	}
-//        return "/admin/auth/login";
-//    }
-
     @PostMapping("/admin/passChange" )
 	public String adminPassChange(AdminDTO adminDto, Model model , HttpServletRequest req, RedirectAttributes rttr 
 			,Authentication authentication) {
