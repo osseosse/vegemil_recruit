@@ -3,13 +3,11 @@
 <head th:fragment="headFragment">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-	<meta name="description" content="정식품">
-	<meta name="Keywords" content="정식품채용공고" />
-	<meta property="og:title" content="정식품 채용사이트"> 
-	<meta property="og:url" content="https://www.vegemil.co.kr/main/images/recruit/"> 
-	<meta property="og:image" content="https://www.vegemil.co.kr/main/images/recruit/og.jpg" /> 
-	<meta property="og:description" content="정식품은 급변하는 경영환경에 능동적으로 대응하고, 창의적이고 자율적인 인재를 양성하기 위해 공정한 인사제도를도입하고 있습니다."/> 
-	<meta name="author" content="OSSE">
+	<meta name="description" content="정식품 채용">
+	<meta name="Keywords" content="정식품 채용, 정식품 채용공고, recruit, 채용" />
+	<meta property="og:title" content="정식품 채용사이트에 오신것을 환영합니다."> 
+	<meta property="og:url" content="https://recruit.vegemil.co.kr/"> 
+	<meta property="og:image" content="https://recruit.vegemil.co.kr/img/og.jpg" /> 
 	<!-- Bootstrap core CSS -->
 	<link th:href="@{/common/css/bootstrap.css}" rel="stylesheet">
 	<!-- css -->
@@ -21,16 +19,9 @@
 	<script th:src="@{/common/js/jquery.1.11.1.min.js}"></script>
 	<script th:src="@{/common/js/common.js}"></script>
 	
-	<script th:inline="javascript">
-	/*<![CDATA[*/
-		if (window.location.protocol == "http:") {
-			if(window.location.hostname == 'vegemil.co.kr' || window.location.hostname == "recruit.vegemil.co.kr") {
-				window.location.href = window.location.href.replace('http:', 'https:');
-			}
-		}
-	
-	/*]]>*/
-	</script>
+	<!-- Google tag (gtag.js) --> 
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VVM9QKFQ80"></script>
+	<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-VVM9QKFQ80'); </script>
 	
 	<th:block layout:fragment="add-script"></th:block>
 	<th:block layout:fragment="add-css"></th:block>
