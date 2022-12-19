@@ -128,7 +128,8 @@
 });
 /*[- end of function -]*/
 
-$(".ls1").on("keyup", function(e){
+//$(".ls1").on("keyup", function(e){
+$(document).on('keyup', '.ls1',function(e) {
 		
     if( this.value.length > 10){
          this.value = this.value.substr(0, 10);
@@ -152,7 +153,8 @@ $(".ls1").on("keyup", function(e){
  });
  /*[- end of function -]*/
 
- $(".ls2").on("keyup", function(e){
+ //$(".ls2").on("keyup", function(e){
+ $(document).on('keyup', '.ls2',function(e) {
 		
     if( this.value.length > 8){
          this.value = this.value.substr(0, 8);

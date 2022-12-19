@@ -97,11 +97,11 @@
 											<ul class="s-d-2">
 												<li class="f14">근무기간</li>
 												<li>
-													<input type="text" th:id="hisSDate" th:name="hisSDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+													<input type="text" th:id="hisSDate" th:name="hisSDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" maxlength="7">
 												</li>
 												<li class="ml20 mr20"> ~ </li>
 												<li>
-													<input type="text" th:id="hisEDate" th:name="hisEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+													<input type="text" th:id="hisEDate" th:name="hisEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" maxlength="7">
 												</li>
 												<li class="ml30">
 													<label><input type="checkbox" th:id="hisIng" th:name="hisIng"> 재직중</label>
@@ -112,7 +112,7 @@
 											<ul class="s-d-2">
 												<li class="f14">직장명</li>
 												<li>
-													<input type="text" th:id="hisCoName" th:name="hisCoName" class="inType01 w180" maxlength="20">
+													<input type="text" th:id="hisCoName" th:name="hisCoName" class="inType01 w180" maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -120,7 +120,7 @@
 											<ul class="s-d-2">
 												<li class="f14">담당업무</li>
 												<li>
-													<input type="text" th:id="hisDuty" th:name="hisDuty" class="inType01 w180" maxlength="20">
+													<input type="text" th:id="hisDuty" th:name="hisDuty" class="inType01 w180" maxlength="10">
 												</li>
 											</ul>
 										</div>
@@ -128,7 +128,7 @@
 											<ul class="s-d-2">
 												<li class="f14">(월)평균급여</li>
 												<li>
-													<input type="text" th:id="hisPay" th:name="hisPay" class="inType01 w180 text-right"> <span class="gray f14">만원</span>
+													<input type="text" th:id="hisPay" th:name="hisPay" class="inType01 w180 text-right" maxlength="4"> <span class="gray f14">만원</span>
 												</li>
 											</ul>
 										</div>

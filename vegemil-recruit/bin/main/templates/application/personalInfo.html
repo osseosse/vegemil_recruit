@@ -136,13 +136,13 @@
 										<ul class="s-d-2 mt10">
 											<li class="f14 "><span class="red"></span>한문이름</li>
 											<li>
-												<input class="inType01 w180" th:field="*{nameHan}" />
+												<input class="inType01 w180" th:field="*{nameHan}" maxlength="5"/>
 											</li>
 										</ul>
 										<ul class="s-d-2 mt10">
 											<li class="f14"><span class="red">*</span>영문이름</li>
 											<li>
-												<input class="inType01 w180" th:field="*{nameEng}" />
+												<input class="inType01 w180" th:field="*{nameEng}" maxlength="26"/>
 											</li>
 										</ul>
 										<ul class="s-d-2 mt10">
@@ -181,7 +181,7 @@
 											<li>
 												<input class="inType01 w80" readonly  type="text" th:field="*{zip1}" alt="우편번호" ><span class="btn_type04 "><a href="javascript:execPostcode();">우편번호찾기</a> </span>
 												<input class="inType01 w400 ml6 add" readonly  type="text" th:field="*{addr11}" alt="주소" /><span id="extraAddress"></span>
-												<input class="inType01 mt10 w600" type="text" th:field="*{addr12}" />
+												<input class="inType01 mt10 w600" type="text" th:field="*{addr12}" maxlength="40"/>
 											</li>
 										</ul>
 										<ul class="s-d-2 mt10">
@@ -227,13 +227,13 @@
 										<div class="col-lg-3">
 											<ul class="s-d-2s">
 												<li class="f14">성명</li>
-												<li><input type="text" id="famName" name="famName" class="inType01 w110" ></li>
+												<li><input type="text" id="famName" name="famName" class="inType01 w110" maxlength="6"></li>
 											</ul>
 										</div>
 										<div class="col-lg-6" >
 											<ul class="s-d-2s">
 												<li class="f14">연령(만)</li>
-												<li class="ml10"><input type="text" id="famAge" name="famAge" class="inType01 w80" ></li>
+												<li class="ml10"><input type="text" id="famAge" name="famAge" class="inType01 w80" maxlength="3"></li>
 											</ul>
 											<button type="button" class="inputDel" value="삭제"  data-repeater-delete ><img th:src="@{/img/ico_inputDel.png}" alt="삭제"/></button>
 										</div>
@@ -261,7 +261,7 @@
 										<ul class="s-d-2">
 											<li class="f14">보훈대상번호</li>
 											<li>
-												<input type="text" class="inType01 w180"  th:field="*{bohunNo}">
+												<input type="text" class="inType01 w180"  th:field="*{bohunNo}" maxlength="14">
 											</li>
 										</ul>
 									</div>
@@ -299,7 +299,7 @@
 										<ul class="s-d-2 mt20" id="milReasonSapce" style="display:none;">
 											<li class="f14"><span class="red">*</span>미필사유</li>
 											<li class="radioStyle3 " >
-												<input type="text" class="inType01 w180" th:field="*{milReason}" placeholder="ex)병역특례">
+												<input type="text" class="inType01 w180" th:field="*{milReason}" placeholder="ex)병역특례" maxlength="20">
 											</li>
 										</ul>
 									</div>

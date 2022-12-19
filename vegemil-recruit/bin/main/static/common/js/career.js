@@ -30,7 +30,7 @@
 });
 /*[- end of function -]*/
 
- $(".ls2").keyup(function() {
+ $(document).on('keyup', '.ls2',function() {
 		
     if( this.value.length > 8){
          this.value = this.value.substr(0, 8);
@@ -53,6 +53,10 @@
      
  });
  /*[- end of function -]*/
+ 
+ $(document).on('keyup', '.text-right',function() {
+      $(this).val($(this).val().replace(/[^0-9]/g,""));
+ });
  
 function endDateChange(e) {
 

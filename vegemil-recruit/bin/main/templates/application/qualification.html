@@ -98,7 +98,7 @@
 											<ul class="s-d-2">
 												<li class="f14">점수</li>
 												<li>
-													<input type="text" th:id="langPoint" th:name="langPoint" class="inType01 w180"  >
+													<input type="text" th:id="langPoint" th:name="langPoint" class="inType01 w180"  maxlength="5">
 												</li>
 											</ul>
 										</div>
@@ -106,7 +106,7 @@
 											<ul class="s-d-2">
 												<li class="f14">등급</li>
 												<li>
-													<input type="text" th:id="langLv" th:name="langLv" class="inType01 w180"  >
+													<input type="text" th:id="langLv" th:name="langLv" class="inType01 w180" maxlength="10">
 												</li>
 											</ul>
 										</div>
@@ -116,7 +116,7 @@
 											<ul class="s-d-2">
 												<li class="f14">발급번호</li>
 												<li>
-													<input type="text" th:id="langLicNum" th:name="langLicNum" class="inType01 w180"  >
+													<input type="text" th:id="langLicNum" th:name="langLicNum" class="inType01 w180"  maxlength="20">
 												</li>
 											</ul>
 										</div>
@@ -124,56 +124,11 @@
 											<ul class="s-d-2">
 												<li class="f14">취득일</li>
 												<li>
-													<input type="text" th:id="langGet" th:name="langGet"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+													<input type="text" th:id="langGet" th:name="langGet"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" maxlength="12">
 												</li>
 											</ul>
 										</div>
 									</div>
-									<!-- 의미없는 상중하 
-									<div class="row mt10">
-										<div class="col-lg-6">
-											<ul class="s-d-2">
-												<li class="f14">회화</li>
-												<li class="radioStyle3 i60">
-													<input type="radio" id="r12" th:name="langTalk" th:attr="checked=*{langTalk1 == '상' ? 'true' : 'false'}" value="상" />
-													<label for="r12"><span></span>상</label>
-													<input type="radio" id="r13" th:name="langTalk" th:attr="checked=*{langTalk1 == '중' ? 'true' : 'false'}" value="중" />
-													<label for="r13"><span></span>중</label>
-													<input type="radio" id="r14" th:name="langTalk" th:attr="checked=*{langTalk1 == '하' ? 'true' : 'false'}" value="하" />
-													<label for="r14"><span></span>하</label>
-												</li>
-											</ul>
-										</div>
-										<div class="col-lg-6">
-											<ul class="s-d-2">
-												<li class="f14">작문</li>
-												<li class="radioStyle3 i60">
-													<input type="radio" id="r15" th:name="langMake" th:attr="checked=*{langMake1 == '상' ? 'true' : 'false'}" value="상" />
-													<label for="r15"><span></span>상</label>
-													<input type="radio" id="r16" th:name="langMake" th:attr="checked=*{langMake1 == '중' ? 'true' : 'false'}" value="중" />
-													<label for="r16"><span></span>중</label>
-													<input type="radio" id="r17" th:name="langMake" th:attr="checked=*{langMake1 == '하' ? 'true' : 'false'}" value="하" />
-													<label for="r17"><span></span>하</label>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="row mt10">
-										<div class="col-lg-6">
-											<ul class="s-d-2">
-												<li class="f14">독해</li>
-												<li class="radioStyle3 i60">
-													<input type="radio" id="r18" th:name="langRead" th:attr="checked=*{langRead1 == '상' ? 'true' : 'false'}" value="상" />
-													<label for="r18"><span></span>상</label>
-													<input type="radio" id="r19" th:name="langRead" th:attr="checked=*{langRead1 == '중' ? 'true' : 'false'}" value="중" />
-													<label for="r19"><span></span>중</label>
-													<input type="radio" id="r20" th:name="langRead" th:attr="checked=*{langRead1 == '하' ? 'true' : 'false'}" value="하" />
-													<label for="r20"><span></span>하</label>
-												</li>
-											</ul>
-										</div>
-									</div>
-									 -->
 								</div>
 								<button class="inputDel3" type="button" value="삭제" data-repeater-delete><img th:src="@{/img/ico_inputDel2.png}" alt="삭제"/></button>
 								</div>
@@ -193,7 +148,7 @@
 											<ul class="s-d-2">
 												<li class="f14">S/W명</li>
 												<li>
-													<input type="text" id="swName" name="swName" class="inType01 w180"  >
+													<input type="text" id="swName" name="swName" class="inType01 w180" maxlength="14">
 												</li>
 												<li>
 													<div class="scroll w180">
@@ -227,7 +182,7 @@
 											<ul class="s-d-2">
 												<li class="f14">자격증 명</li>
 												<li>
-													<input type="text" id="licName" name="licName" class="inType01 w180"  >
+													<input type="text" id="licName" name="licName" class="inType01 w180"  maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -235,7 +190,7 @@
 											<ul class="s-d-2">
 												<li class="f14">발급기관</li>
 												<li>
-													<input type="text" id="licPub" name="licPub" class="inType01 w180"  >
+													<input type="text" id="licPub" name="licPub" class="inType01 w180" maxlength="14">
 												</li>
 											</ul>
 										</div>
@@ -243,7 +198,7 @@
 											<ul class="s-d-2">
 												<li class="f14">발급번호</li>
 												<li>
-													<input type="text" id="licNum" name="licNum" class="inType01 w180"  >
+													<input type="text" id="licNum" name="licNum" class="inType01 w180" maxlength="20">
 												</li>
 											</ul>
 										</div>
@@ -251,7 +206,7 @@
 											<ul class="s-d-2 day">
 												<li class="f14">취득일</li>
 												<li>
-													<input type="text" th:id="licGetDate" th:name="licGetDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+													<input type="text" th:id="licGetDate" th:name="licGetDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" maxlength="12">
 												</li>	
 											</ul>
 										</div>
@@ -274,7 +229,7 @@
 											<ul class="s-d-2">
 												<li class="f14">수상단체</li>
 												<li>
-													<input type="text" id="medalName" name="medalName" class="inType01 w180"  >
+													<input type="text" id="medalName" name="medalName" class="inType01 w180" maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -282,7 +237,7 @@
 											<ul class="s-d-2">
 												<li class="f14">수상일자</li>
 												<li>
-													<input type="text" th:id="medalDate" th:name="medalDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" >
+													<input type="text" th:id="medalDate" th:name="medalDate"  class="inType01 w180 ls1" placeholder="YYYY-MM-DD" maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -290,7 +245,7 @@
 											<ul class="s-d-2">
 												<li class="f14">수상내용</li>
 												<li>
-													<input type="text" id="medalContent" name="medalContent"  class="inType01 w631" >
+													<input type="text" id="medalContent" name="medalContent"  class="inType01 w631" maxlength="40">
 												</li>
 											</ul>
 										</div>
@@ -313,7 +268,7 @@
 											<ul class="s-d-2">
 												<li class="f14">국가명/활동명</li>
 												<li>
-													<input type="text" id="forState" name="forState" class="inType01 w180"  >
+													<input type="text" id="forState" name="forState" class="inType01 w180" maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -321,11 +276,11 @@
 											<ul class="s-d-2 day">
 												<li class="f14">연수기간</li>
 												<li>
-													<input type="text" th:id="forSDate" th:name="forSDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+													<input type="text" th:id="forSDate" th:name="forSDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" maxlength="12">
 												</li>
 												<li class="ml20 mr20"> ~ </li>
 												<li>
-													<input type="text" th:id="forEDate" th:name="forEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" >
+													<input type="text" th:id="forEDate" th:name="forEDate"  class="inType01 w180 ls2" placeholder="YYYY-MM" maxlength="12">
 												</li>
 											</ul>
 										</div>
@@ -333,7 +288,7 @@
 											<ul class="s-d-2">
 												<li class="f14">내용</li>
 												<li>
-													<input type="text" id="forName" name="forName" class="inType01 w631"  >
+													<input type="text" id="forName" name="forName" class="inType01 w631" maxlength="40">
 												</li>
 											</ul>
 										</div>

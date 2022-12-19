@@ -153,7 +153,7 @@ function execPostcode() {
         //라디오 버튼 값
         var clickVal = this.value;
         
-        if(clickVal == '비대상') {
+        if(clickVal == '비대상' || clickVal == '미필') {
         	$("#milSapce").hide();
         } else {
         	$("#milSapce").show();
