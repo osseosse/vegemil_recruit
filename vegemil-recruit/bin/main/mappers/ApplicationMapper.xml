@@ -14,10 +14,11 @@
 		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date, last_academy
 		, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
     	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+    	, trans_grad, trans_enter_ym, trans_grad_ym, trans_name, trans_admis, trans_major, trans_site, trans_night, trans_point_evg
     	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
     	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
     	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
-    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
+    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5
     	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3
 	</sql>
 	
@@ -100,6 +101,11 @@
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
 			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}
 			</if>
+			<if test="selectAcademy == 'trans_list'">
+			, trans_grad = #{transGrad}, trans_dep_type=#{transDepType}
+			, trans_enter_ym = #{transEnterYm}, trans_grad_ym = #{transGradYm}, trans_name = #{transName}, trans_major = #{transMajor}
+			, trans_site = #{transSite}, trans_night = #{transNight}, trans_point_evg = #{transPointEvg}, trans_admis=#{transAdmis}
+			</if>
 			<if test="selectAcademy == 'univ_list'">
 			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
 			, sch_enter_ym3 = #{schEnterYm3}, sch_grad_ym3 = #{schGradYm3}, sch_name3 = #{schName3}, sch_major3 = #{schMajor3}, sch_transfer3=#{schTransfer3}
@@ -131,6 +137,11 @@
 			<if test="selectAcademy == 'colg_list'">
 			, sch_grad2 = #{schGrad2}, sch_enter_ym2 = #{schEnterYm2}, sch_grad_ym2 = #{schGradYm2}, sch_name2 = #{schName2}, sch_admis2 = #{schAdmis2}, sch_dep_type2=#{schDepType2}
 			, sch_major2 = #{schMajor2}, sch_site2 = #{schSite2}, sch_night2 = #{schNight2}, sch_point_evg2 = #{schPointEvg2}
+			</if>
+			<if test="selectAcademy == 'trans_list'">
+			, trans_grad = #{transGrad}, trans_dep_type=#{transDepType}
+			, trans_enter_ym = #{transEnterYm}, trans_grad_ym = #{transGradYm}, trans_name = #{transName}, trans_major = #{transMajor}
+			, trans_site = #{transSite}, trans_night = #{transNight}, trans_point_evg = #{transPointEvg}, trans_admis=#{transAdmis}
 			</if>
 			<if test="selectAcademy == 'univ_list'">
 			, sch_grad3 = #{schGrad3}, sch_dep_type3=#{schDepType3}
@@ -267,10 +278,11 @@
 				, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
 				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
 		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+		    	, trans_grad, trans_enter_ym, trans_grad_ym, trans_name, trans_admis, trans_major, trans_site, trans_night, trans_point_evg
 		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
 		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
 		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
-		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
+		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5
 		    	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3
 				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
@@ -307,10 +319,11 @@
 				, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, last_academy
 				, sch_grad1, sch_enter_ym1, sch_grad_ym1, sch_name1, sch_admis1, sch_major1, sch_site1, sch_night1, sch_point_evg1
 		    	, sch_grad2, sch_enter_ym2, sch_grad_ym2, sch_name2, sch_admis2, sch_major2, sch_site2, sch_night2, sch_point_evg2
+		    	, trans_grad, trans_enter_ym, trans_grad_ym, trans_name, trans_admis, trans_major, trans_site, trans_night, trans_point_evg
 		    	, sch_grad3, sch_enter_ym3, sch_grad_ym3, sch_name3, sch_admis3, sch_major3, sch_site3, sch_night3, sch_point_evg3, sch_transfer3
 		    	, sch_grad4, sch_enter_ym4, sch_grad_ym4, sch_name4, sch_admis4, sch_major4, sch_site4, sch_night4, sch_point_evg4
 		    	, sch_grad5, sch_enter_ym5, sch_grad_ym5, sch_name5, sch_admis5, sch_major5, sch_site5, sch_night5, sch_point_evg5
-		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5, sch_transfer3
+		    	, sch_dep_type2, sch_dep_type3, sch_dep_type4, sch_dep_type5
 		    	, sch_sub_admis3, sch_sub_major3, sch_sub_point_evg3
 				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3

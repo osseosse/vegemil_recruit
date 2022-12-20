@@ -67,6 +67,7 @@
 												<option value="">구분</option>
 												<option value="high_list">고등학교</option>
 												<option value="colg_list">전문대학</option>
+												<option value="trans_list">편입전 대학교</option>
 												<option value="univ_list">대학교</option>
 												<option value="mast_list">석사</option>
 												<option value="doct_list">박사</option>
@@ -292,6 +293,29 @@
 										</dd><br class="clear">
 									</dl>									
 								</li>
+								
+								<!-- 편입전 대학교 -->
+								<li th:if="*{transName != null and transName != ''}" id="trans_list">
+									<dl>
+										<dt>
+											<span class="gray3">편입전 대학교</span>
+										</dt>
+										<dd>
+											<span class="sublist" th:if="*{transName != null and transName != ''}" th:text="*{transName}" id="transName"></span>
+											<span class="sublist" th:if="*{transSite != null and transSite != ''}" th:text="*{transSite}" id="transSite"></span>
+											<span class="sublist" th:if="*{transNight != null and transNight != ''}" th:text="*{transNight}" id="transNight"></span>
+											<span class="sublist" th:if="*{transAdmis != null and transAdmis != ''}" th:text="*{transAdmis}"></span>
+											<span class="sublist" th:if="*{transMajor != null and transMajor != ''}" th:text="*{transMajor}" id="transMajor"></span>
+											<span class="sublist" th:if="*{transPointEvg != null and transPointEvg != ''}" th:text="*{transPointEvg}" id="transPointEvg"></span>
+											<span class="sublist" th:if="*{transEnterYm != null and transEnterYm != '' and transGradYm != null and transGradYm != ''}" th:text="|*{transEnterYm} ~ *{transGradYm}|"></span>
+										</dd>
+										<dd>
+											<span><a href="javascript:editAcademy('trans_list');"><img th:src="@{/img/ico_edit.png}" alt="수정"/></a></span> 
+											<span><a href="javascript:deleteAcademy('trans_list');"><img th:src="@{/img/ico_delete.png}" alt="삭제"/></a></span> 
+										</dd><br class="clear">
+									</dl>									
+								</li>
+								
 								<!-- 학사 -->
 								<li th:if="*{schName3 != null and schName3 != ''}" id="univ_list">
 									<dl>
@@ -308,6 +332,7 @@
 											<span class="sublist" th:if="*{schDepType3 != null and schDepType3 != ''}" th:text="*{schDepType3}" id="schDepType3"></span>
 											<span class="sublist" th:if="*{schSubMajor3 != null and schSubMajor3 != ''}" th:text="*{schSubMajor3}" id="schSubMajor3"></span>
 											<span class="sublist" th:if="*{schSubPointEvg3 != null and schSubPointEvg3 != ''}" th:text="*{schSubPointEvg3}" id="schSubPointEvg3"></span>
+											<span class="sublist" th:if="*{schTransfer3 != null and schTransfer3 != ''}" th:text="*{schTransfer3}"></span>
 											<span class="sublist" th:if="*{schEnterYm3 != null and schEnterYm3 != '' and schGradYm3 != null and schGradYm3 != ''}" th:text="|*{schEnterYm3} ~ *{schGradYm3} *{schGrad3}|"></span>
 										</dd>
 										<dd>
@@ -369,9 +394,14 @@
 								<input type="hidden" th:if="*{schGrad2 != null and schGrad2 != ''}" th:value="*{schGrad2}" id="schGrad2">
 								<input type="hidden" th:if="*{schEnterYm2 != null and schEnterYm2 != ''}" th:value="*{schEnterYm2}" id="schEnterYm2">
 								<input type="hidden" th:if="*{schGradYm2 != null and schGradYm2 != ''}" th:value="*{schGradYm2}" id="schGradYm2">
+								<!-- 편입전 대학교 -->
+								<input type="hidden" th:if="*{transAdmis != null and transAdmis != ''}" th:value="*{transAdmis}" id="transAdmis">
+								<input type="hidden" th:if="*{transEnterYm != null and transEnterYm != ''}" th:value="*{transEnterYm}" id="transEnterYm">
+								<input type="hidden" th:if="*{transGradYm != null and transGradYm != ''}" th:value="*{transGradYm}" id="transGradYm">
 								<!-- 학사 -->
 								<input type="hidden" th:if="*{schAdmis3 != null and schAdmis3 != ''}" th:value="*{schAdmis3}" id="schAdmis3">
 								<input type="hidden" th:if="*{schGrad3 != null and schGrad3 != ''}" th:value="*{schGrad3}" id="schGrad3">
+								<input type="hidden" th:if="*{schTransfer3 != null and schTransfer3 != ''}" th:value="*{schTransfer3}" id="schTransfer3">
 								<input type="hidden" th:if="*{schEnterYm3 != null and schEnterYm3 != ''}" th:value="*{schEnterYm3}" id="schEnterYm3">
 								<input type="hidden" th:if="*{schGradYm3 != null and schGradYm3 != ''}" th:value="*{schGradYm3}" id="schGradYm3">
 								<!-- 석사 -->

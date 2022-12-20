@@ -82,6 +82,8 @@ $("#selectAcademy").change( function() {
 
 	const selectAcademy = $("#selectAcademy option:selected").val();
 	
+	$("#gradArea").show();
+	
 	if(selectAcademy == "high_list") {
 		$("#majorArea").hide();
 		$("#schChangeArea").hide();
@@ -90,6 +92,12 @@ $("#selectAcademy").change( function() {
 		$("#schChangeArea").hide();
 		$("#majorAddArea1").hide();
 		$("#majorAddArea2").hide();
+	} else if(selectAcademy == "trans_list") {
+		$("#majorArea").show();
+		$("#schChangeArea").hide();
+		$("#majorAddArea1").hide();
+		$("#majorAddArea2").hide();
+		$("#gradArea").hide();
 	} else if(selectAcademy == "univ_list") {
 		$("#majorArea").show();
 		$("#schChangeArea").show();
@@ -111,7 +119,6 @@ $("#selectAcademy").change( function() {
 	$("#schNight").val('');
 	$("#schAdmis").val('');
 	$("#searchArea").show();
-	$("#gradArea").show();
 	$("#schArea").show();
 	$("#schAdmisArea").show();
 	$("#nightArea").show();
@@ -154,6 +161,23 @@ function editAcademy(schType) {
    		$("#schChangeArea").hide();
 		$("#majorAddArea1").hide();
 		$("#majorAddArea2").hide();
+	
+	} else if(schType == 'trans_list') {
+	
+		$("#selectAcademy").val('trans_list').prop("selected", true);
+		$("#schName").val($("#transName").text());
+   		$("#schSite").val($("#transSite").text());
+   		$("#schNight").val($("#transNight").text()).prop("selected", true);
+   		$("#schAdmis").val($("#transAdmis").val());
+   		$("#schMajor").val($("#transMajor").text());
+   		$("#schPointEvg").val($("#transPointEvg").text());
+   		$("#schEnterYm").val($("#transEnterYm").val());
+   		$("#schGradYm").val($("#transGradYm").val());
+		
+		$("#majorArea").show();
+		$("#schChangeArea").show();
+		$("#majorAddArea1").show();
+		$("#majorAddArea2").show();
 		
 	} else if(schType == 'univ_list') {
 	
@@ -230,7 +254,7 @@ function fnSchool() {
  
     var selectAcademy = $("#selectAcademy option:selected").val();
     
-    if(selectAcademy == 'mast_list' || selectAcademy == 'doct_list') {
+    if(selectAcademy == 'mast_list' || selectAcademy == 'doct_list' || selectAcademy == 'trans_list') {
     	selectAcademy = 'univ_list';
     }
     
@@ -329,6 +353,8 @@ $("#schName").change(function(){
 		$('#schName1').val($(this).val());
 	} else if(selectAcademy == 'colg_list') {
 		$('#schName2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transName').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schName3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -365,6 +391,8 @@ $("#schNight").change(function(){
 		$('#schNight1').val($(this).val());
 	} else if(selectAcademy == 'colg_list') {
 		$('#schNight2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transNight').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schNight3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -383,24 +411,8 @@ $("#schSite").keydown(function(){
 		$('#schSite1').val($(this).val());
 	} else if(selectAcademy == 'colg_list') {
 		$('#schSite2').val($(this).val());
-	} else if(selectAcademy == 'univ_list') {
-		$('#schSite3').val($(this).val());
-	} else if(selectAcademy == 'mast_list') {
-		$('#schSite4').val($(this).val());
-	} else if(selectAcademy == 'doct_list') {
-		$('#schSite5').val($(this).val());
-	}
-    
-});
-
-$("#schSite").keydown(function(){
-	
-	const selectAcademy = $("#selectAcademy option:selected").val();
-	
-	if(selectAcademy == 'high_list') {
-		$('#schSite1').val($(this).val());
-	} else if(selectAcademy == 'colg_list') {
-		$('#schSite2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transSite').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schSite3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -419,6 +431,8 @@ $("#schEnterYm").keydown(function(){
 		$('#schEnterYm1').val($(this).val());
 	} else if(selectAcademy == 'colg_list') {
 		$('#schEnterYm2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transEnterYm').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schEnterYm3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -437,6 +451,8 @@ $("#schGradYm").keydown(function(){
 		$('#schGradYm1').val($(this).val());
 	} else if(selectAcademy == 'colg_list') {
 		$('#schGradYm2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transGradYm').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schGradYm3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -453,6 +469,8 @@ $("#schMajor").change(function(){
 	
 	if(selectAcademy == 'colg_list') {
 		$('#schMajor2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transMajor').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schMajor3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -469,6 +487,8 @@ $("#schPointEvg").keydown(function(){
 	
 	if(selectAcademy == 'colg_list') {
 		$('#schPointEvg2').val($(this).val());
+	} else if(selectAcademy == 'trans_list') {
+		$('#transPointEvg').val($(this).val());
 	} else if(selectAcademy == 'univ_list') {
 		$('#schPointEvg3').val($(this).val());
 	} else if(selectAcademy == 'mast_list') {
@@ -551,7 +571,38 @@ function registerAcademy() {
    		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
 			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schGrad2": schGrad2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
 			};
-   		
+   	
+   	} else if(selectAcademy == 'trans_list') {
+		var transName = "";
+   		var transSite = "";
+   		var transNight = "";
+   		var transAdmis = "";
+   		var transMajor = "";
+   		var transPointEvg = "";
+   		var transEnterYm = "";
+   		var transGradYm = "";
+		transName = $("#schName").val();
+   		transSite = $("#schSite").val();
+   		transNight = $("#schNight option:selected").val();
+   		transAdmis = $("#schAdmis option:selected").val();
+   		transMajor = $("#schMajor").val();
+   		transPointEvg = $("#schPointEvg").val();
+   		transEnterYm = $("#schEnterYm").val();
+   		transGradYm = $("#schGradYm").val();
+   		academyInfoDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy
+			, "transName": transName, "transSite": transSite, "transNight": transNight, "transAdmis": transAdmis, "transMajor": transMajor, "transPointEvg": transPointEvg
+			, "transEnterYm": transEnterYm, "transGradYm": transGradYm
+			};
+			
+		//필수입력 검증
+		if(	$("#schMajor").val().length < 1
+		 || $("#schAdmis option:selected").val() < 1
+		 || $("#schPointEvg").val().length < 1)
+		{
+			alert("필수입력값을 모두 입력해 주세요");
+			return false;
+		}
+   	
 	} else if(selectAcademy == 'univ_list') {
 		var schName3 = "";
    		var schSite3 = "";
@@ -660,7 +711,6 @@ function registerAcademy() {
 	if(	$("#schName").val().length < 1
 	 || $("#schSite").val().length < 1
 	 || $("#schNight").val().length < 1
-	 || $("#schGrad").val().length < 1
 	 || $("#schEnterYm").val().length < 1
 	 || $("#schGradYm").val().length < 1)
 	{
@@ -729,6 +779,29 @@ function registerAcademy() {
 				htmlString+= "	</dl>";									
 				htmlString+= "</li>";
 			
+			} else if(selectAcademy == 'trans_list') {
+			
+				$('#trans_list').remove();
+				htmlString+= "<li id='trans_list'>";
+            	htmlString+= "	<dl>";
+            	htmlString+= "		<dt>";
+            	htmlString+= "			<span class='gray3'>편입전 대학교</span>";
+				htmlString+= "		</dt>";
+				htmlString+= "		<dd>";						
+				htmlString+= "			<span class='sublist' id='transName'>"+transName+"</span>";
+				htmlString+= "			<span class='sublist' id='transSite'>"+transSite+"</span>";
+				htmlString+= "			<span class='sublist' id='transAdmis'>"+transAdmis+"</span>";
+				htmlString+= "			<span class='sublist' id='transMajor'>"+transMajor+"</span>";
+				htmlString+= "			<span class='sublist' id='transPointEvg'>"+transPointEvg+"</span>";
+				htmlString+= "			<span class='sublist'>"+transEnterYm+" ~ "+transGradYm+"</span>";
+				htmlString+= "		</dd>";
+				htmlString+= "		<dd>";
+				htmlString+= '			<span><a href="javascript:editAcademy(\'trans_list\');"><img src="/img/ico_edit.png" alt="수정"/></a></span>';
+				htmlString+= '			<span><a href="javascript:deleteAcademy(\'trans_list\');"><img src="/img/ico_delete.png" alt="삭제"/></a></span>'; 
+				htmlString+= "		</dd><br class='clear'>";
+				htmlString+= "	</dl>";									
+				htmlString+= "</li>";
+			
 			} else if(selectAcademy == 'univ_list') {
 			
 				$('#univ_list').remove();
@@ -745,6 +818,7 @@ function registerAcademy() {
 				htmlString+= "			<span class='sublist' id='schPointEvg3'>"+schPointEvg3+"</span>";
 				htmlString+= "			<span class='sublist' id='schDepType3'>"+schDepType3+"</span>";
 				htmlString+= "			<span class='sublist' id='schSubMajor3'>"+schSubMajor3+"</span>";
+				htmlString+= "			<span class='sublist' id='schTransfer3'>"+schTransfer3+"</span>";
 				htmlString+= "			<span class='sublist'>"+schEnterYm3+" ~ "+schGradYm3+" "+schGrad3+"</span>";
 				htmlString+= "		</dd>";
 				htmlString+= "		<dd>";
@@ -849,6 +923,20 @@ function deleteAcademy(selectAcademy) {
    		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy, "schAdmis2": schAdmis2
 			, "schName2": schName2, "schSite2": schSite2, "schNight2": schNight2, "schGrad2": schGrad2, "schPointEvg2": schPointEvg2, "schMajor2": schMajor2, "schEnterYm2": schEnterYm2, "schGradYm2": schGradYm2
 			};
+   	
+   	} else if(selectAcademy == 'trans_list') {
+		const transName = "";
+   		const transSite = "";
+   		const transNight = "";
+   		const transAdmis = "";
+   		const transMajor = "";
+   		const transPointEvg = "";
+   		const transEnterYm = "";
+   		const transGradYm = "";
+   		academyDTO = {"idx": idx, "lastAcademy": lastAcademy, "selectAcademy" : selectAcademy
+			, "transName": transName, "transSite": transSite, "transNight": transNight, "transAdmis": transAdmis, "transMajor": transMajor, "transPointEvg": transPointEvg
+			, "transEnterYm": transEnterYm, "transGradYm": transGradYm
+			};
    		
 	} else if(selectAcademy == 'univ_list') {
 		const schName3 = "";
@@ -918,6 +1006,9 @@ function deleteAcademy(selectAcademy) {
 			} else if(selectAcademy == 'colg_list') {
 				$("#colg_list").remove();
 			
+			} else if(selectAcademy == 'trans_list') {
+				$("#trans_list").remove();
+			
 			} else if(selectAcademy == 'univ_list') {
 				$("#univ_list").remove();
 			
@@ -927,7 +1018,6 @@ function deleteAcademy(selectAcademy) {
 			} else if(selectAcademy == 'doct_list') {
 				$("#doct_list").remove();
 			}
-			
 			
 		},
 		error: function(request, status, error) {
@@ -939,21 +1029,4 @@ function deleteAcademy(selectAcademy) {
 }
 /*[- end of function -]*/
    	
-function printSchInfo(selectAcademy) {
-
-	if(selectAcademy == 'high_list') {
-		
-	} else if(selectAcademy == 'colg_list') {
-	
-	} else if(selectAcademy == 'univ_list') {
-	
-	} else if(selectAcademy == 'mast_list') {
-	
-	} else if(selectAcademy == 'doct_list') {
-	
-	}
-
-}
-/*[- end of function -]*/
-     
 /*]]>*/

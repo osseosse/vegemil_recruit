@@ -157,6 +157,18 @@ public class ResumeDTO extends ApplicationDTO {
 		private String schPointEvg2;
 		private String schSubMajor2;
 		private String schSubPointEvg2;
+		//편입전 대학교
+		private String transGrad;
+		private String transEnterYm;
+		private String transGradYm;
+		private String transName;
+		private String transAdmis;
+		private String transDepType;
+		private String transMajor;
+		private String transSite;
+		private String transNight;
+		private String transPointEvg;
+		
 		//학사
 		private String schGrad3;
 		private String schEnterYm3;

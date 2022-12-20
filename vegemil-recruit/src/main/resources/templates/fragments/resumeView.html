@@ -137,12 +137,12 @@
 							<span class="gray3">고등학교</span>
 						</dt>
 						<dd>
-							<span class="sublist" th:if="${resume.schGrad1} != null" th:text="${resume.schGrad1}"></span>
 							<span class="sublist" th:if="${resume.schName1} != null" th:text="${resume.schName1}"></span>
 							<span class="sublist" th:if="${resume.schSite1} != null" th:text="${resume.schSite1}"></span>
 							<span class="sublist" th:if="${resume.schAdmis1} != null" th:text="${resume.schAdmis1}"></span>
 							<span class="sublist" th:if="${resume.schNight1} != null" th:text="${resume.schNight1}"></span>
 							<span class="sublist" th:if="${resume.schEnterYm1} != null and ${resume.schGradYm1} != null" th:text="|${resume.schEnterYm1} ~ ${resume.schGradYm1}|"></span>
+							<span class="sublist" th:if="${resume.schGrad1} != null" th:text="${resume.schGrad1}"></span>
 						</dd><br class="clear">
 					</dl>			
 				</li>
@@ -152,13 +152,28 @@
 							<span class="gray3">전문대학</span>
 						</dt>
 						<dd>
-							<span class="sublist" th:text="${resume.schGrad2}"></span>
 							<span class="sublist" th:text="${resume.schName2}"></span>
 							<span class="sublist" th:text="${resume.schSite2}"></span>
 							<span class="sublist" th:text="${resume.schMajor2}"></span>
 							<span class="sublist" th:text="${resume.schNight2}"></span>
 							<span class="sublist" th:text="|${resume.schEnterYm2} ~ ${resume.schGradYm2}|"></span>
+							<span class="sublist" th:text="${resume.schGrad2}"></span>
 							<span class="sublist" th:text="|${resume.schPointEvg2}/4.5|"></span>
+						</dd>
+					</dl>
+				</li>
+				<li th:if="*{resume.transName != null and resume.transName != ''}">
+					<dl>
+						<dt>
+							<span class="gray3">편입전 대학교</span>
+						</dt>
+						<dd>
+							<span class="sublist" th:text="${resume.transName}"></span>
+							<span class="sublist" th:text="${resume.transSite}"></span>
+							<span class="sublist" th:text="${resume.transMajor}"></span>
+							<span class="sublist" th:text="${resume.transNight}"></span>
+							<span class="sublist" th:text="|${resume.transEnterYm} ~ ${resume.transGradYm}|"></span>
+							<span class="sublist" th:text="|${resume.transPointEvg}/4.5|"></span>
 						</dd>
 					</dl>
 				</li>
@@ -168,13 +183,13 @@
 							<span class="gray3">대학교</span>
 						</dt>
 						<dd>
-							<!-- <span class="sublist">편입</span>  -->
-							<span class="sublist" th:text="${resume.schGrad3}"></span>
 							<span class="sublist" th:text="${resume.schName3}"></span>
 							<span class="sublist" th:text="${resume.schSite3}"></span>
 							<span class="sublist" th:text="${resume.schMajor3}"></span>
 							<span class="sublist" th:text="${resume.schNight3}"></span>
+							<span class="sublist" th:if="${resume.schTransfer3} == '편입'">편입</span>
 							<span class="sublist" th:text="|${resume.schEnterYm3} ~ ${resume.schGradYm3}|"></span>
+							<span class="sublist" th:text="${resume.schGrad3}"></span>
 							<span class="sublist" th:text="|${resume.schPointEvg3}/4.5|"></span>
 							<span class="sublist" th:if="${resume.schSubMajor3} != null" th:text="|(부)${resume.schSubMajor3}|"></span>
 						</dd>
@@ -186,13 +201,12 @@
 							<span class="gray3">석사</span>
 						</dt>
 						<dd>
-							<!-- <span class="sublist">편입</span>  -->
-							<span class="sublist" th:text="${resume.schGrad4}"></span>
 							<span class="sublist" th:text="${resume.schName4}"></span>
 							<span class="sublist" th:text="${resume.schSite4}"></span>
 							<span class="sublist" th:text="${resume.schMajor4}"></span>
 							<span class="sublist" th:text="${resume.schNight4}"></span>
 							<span class="sublist" th:text="|${resume.schEnterYm4} ~ ${resume.schGradYm4}|"></span>
+							<span class="sublist" th:text="${resume.schGrad4}"></span>
 							<span class="sublist" th:text="|${resume.schPointEvg4}/4.5|"></span>
 						</dd>
 					</dl>
@@ -203,13 +217,12 @@
 							<span class="gray3">박사</span>
 						</dt>
 						<dd>
-							<!-- <span class="sublist">편입</span>  -->
-							<span class="sublist" th:text="${resume.schGrad5}"></span>
 							<span class="sublist" th:text="${resume.schName5}"></span>
 							<span class="sublist" th:text="${resume.schSite5}"></span>
 							<span class="sublist" th:text="${resume.schMajor5}"></span>
 							<span class="sublist" th:text="${resume.schNight5}"></span>
 							<span class="sublist" th:text="|${resume.schEnterYm5} ~ ${resume.schGradYm5}|"></span>
+							<span class="sublist" th:text="${resume.schGrad5}"></span>
 							<span class="sublist" th:text="|${resume.schPointEvg5}/4.5|"></span>
 						</dd>
 					</dl>
