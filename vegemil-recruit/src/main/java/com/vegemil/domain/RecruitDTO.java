@@ -128,6 +128,7 @@ public class RecruitDTO extends CommonDTO {
 	private String schSubAdmis3;
 	private String schSubMajor3;
 	private String schSubPointEvg3;
+	private String schDepType3;
 	
 	private String schGrad4;
 	private String schEnterYm4;
@@ -178,6 +179,7 @@ public class RecruitDTO extends CommonDTO {
 	private String langTalk1;
 	private String langMake1;
 	private String langRead1;
+	private String langLicName1;
 	
 	private String langName2;
 	private String langPoint2;
@@ -187,6 +189,7 @@ public class RecruitDTO extends CommonDTO {
 	private String langTalk2;
 	private String langMake2;
 	private String langRead2;
+	private String langLicName2;
 	
 	private String langName3;
 	private String langPoint3;
@@ -196,6 +199,7 @@ public class RecruitDTO extends CommonDTO {
 	private String langTalk3;
 	private String langMake3;
 	private String langRead3;
+	private String langLicName3;
 	
 	private String langName4;
 	private String langPoint4;
@@ -205,6 +209,7 @@ public class RecruitDTO extends CommonDTO {
 	private String langTalk4;
 	private String langMake4;
 	private String langRead4;
+	private String langLicName4;
 	
 	private String swCount;
 	private String swName1;
@@ -325,6 +330,16 @@ public class RecruitDTO extends CommonDTO {
 	private String ability;
 	private String hobby;
 	private String schTransfer3;
+	private String transGrad;
+	private String transEnterYm;
+	private String transGradeYm;
+	private String transName;
+	private String transAdmis;
+	private String transDepType;
+	private String transMajor;
+	private String transSite;
+	private String transNight;
+	private String transPointEvg;
 	
 
 }

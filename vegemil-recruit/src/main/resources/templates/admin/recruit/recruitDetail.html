@@ -369,33 +369,43 @@
 							</tr><!-- 고등학교 //-->
 							<tr><!-- 편입전대학(교) -->
 								<th><div class="para"><strong>편입전 대학(교)</strong></div></th>
-								<td class="hool"><span id="lab_schName2" th:text="${recruit.schName2}"></span></td>
-								<td class="hool"><span id="lab_schEnterYM2" th:text="${recruit.schEnterYm2}"></span></td>
-								<td class="hool"><span id="lab_schGradYM2" th:text="${recruit.schGradYm2}"></span></td>
-								<td class="hool"><span id="lab_schGrad2" th:text="${recruit.schGrad2}"></span></td>
+								<td class="hool"><span id="lab_transName" th:text="${recruit.transName}"></span></td>
+								<td class="hool"><span id="lab_transEnterYM" th:text="${recruit.transEnterYm}"></span></td>
+								<td class="hool"><span id="lab_transGradeYM" th:text="${recruit.transGradeYm}"></span></td>
+								<td class="hool"><span id="lab_transGrad" th:text="${recruit.transGrad}"></span></td>
 								<td class="hool">
-									<span id="lab_schAdmis1" th:text="${recruit.schAdmis2}"></span>/
-									<span id="lab_schMajor1" th:text="${recruit.schMajor2}"></span>
+									<span id="lab_transAdmis" th:text="${recruit.transAdmis}"></span>/
+									<span id="lab_transMajor" th:text="${recruit.transMajor}"></span>
 								</td>
-								<td class="hool"><span id="lab_schSite2" th:text="${recruit.schSite2}"></span></td>
-								<td class="hool"><span id="lab_schNight2" th:text="${recruit.schNight2}"></span></td>
-								<td class="bora"><span id="lab_schPointEvg2" th:text="${recruit.schPointEvg2}"></span> / <span id="lab_schPointMax2" th:text="${recruit.schPointMax2}"></span></td>
+								<td class="hool"><span id="lab_transSite" th:text="${recruit.transSite}"></span></td>
+								<td class="hool"><span id="lab_transNight" th:text="${recruit.transNight}"></span></td>
+								<td class="bora">
+									<span th:if="*{recruit.transPointEvg == '0'}" id="lab_transPointEvg" ></span> 
+									<span th:unless="*{recruit.transPointEvg == '0'}" id="lab_transPointEvg" th:text="${recruit.transPointEvg}"></span>
+									/ <span id="lab_transPointMax" >4.5</span>
+								</td>
 							</tr><!-- 편입전대학(교) // -->
 							<tr><!-- 대학(2~3년제) -->
 								<th><div class="para"><strong>대학(2~3년제)</strong></div></th>
-								<td class="hool"><span id="lab_schName3" th:text="${recruit.schName3}"></span></td>
-								<td class="hool"><span id="lab_schEnterYM3" th:text="${recruit.schEnterYm3}"></span></td>
-								<td class="hool"><span id="lab_schGradYM3"  th:text="${recruit.schGradYm3}"></span></td>
-								<td class="hool"><span id="lab_schGrad3"  th:text="${recruit.schGrad3}"></span></td>
+								<td class="hool"><span id="lab_schName2" th:text="${recruit.schName2}"></span></td>
+								<td class="hool"><span id="lab_schEnterYM2" th:text="${recruit.schEnterYm2}"></span></td>
+								<td class="hool"><span id="lab_schGradYM2"  th:text="${recruit.schGradYm2}"></span></td>
+								<td class="hool"><span id="lab_schGrad2"  th:text="${recruit.schGrad2}"></span></td>
 								<td class="hool">
-									<span id="lab_schAdmis3" th:text="${recruit.schAdmis3}"></span>/
-									<span id="lab_schMajor3" th:text="${recruit.schMajor3}"></span>
+									<span id="lab_schAdmis2" th:text="${recruit.schAdmis2}"></span>/
+									<span id="lab_schMajor2" th:text="${recruit.schMajor2}"></span>
 								</td>
-								<td class="hool"><span id="lab_schSite3" th:text="${recruit.schSite3}"></span></td>
-								<td class="hool"><span id="lab_schNight3" th:text="${recruit.schNight3}"></span></td>
-								<td class="bora"><span id="lab_schPointEvg3" th:text="${recruit.schPointEvg3}"></span> / <span id="lab_schPointMax3" >4.5</span></td>
+								<td class="hool"><span id="lab_schSite2" th:text="${recruit.schSite2}"></span></td>
+								<td class="hool"><span id="lab_schNight2" th:text="${recruit.schNight2}"></span></td>
+								<td class="bora">
+									<span th:if="*{recruit.schPointEvg2 == '0'}" id="lab_schPointEvg2" ></span> 
+									<span th:unless="*{recruit.schPointEvg2 == '0'}" id="lab_schPointEvg2" th:text="${recruit.schPointEvg2}"></span>
+									/ <span id="lab_schPointMax2" >4.5</span>
+								</td>
 							</tr><!-- 대학(2~3년제) //-->
-							<tr><!-- 대학(2~3년제) -->
+							<!-- 대학(2~3년제) -->
+							<!-- 
+							<tr>
 								<th><div class="para"><strong>대학(해외)</strong></div></th>
 								<td class="hool"><span id="lab_schNameAB"></span></td>
 								<td class="hool"><span id="lab_schEnterYMAB"></span></td>
@@ -405,10 +415,46 @@
 								<td class="hool"><span id="lab_schSiteAB"></span></td>
 								<td class="hool"><span id="lab_schNightAB"></span></td>
 								<td class="bora"><span id="lab_schPointEvgAB"></span> / <span id="lab_schPointMaxAB"></span></td>
-							</tr><!-- 대학(2~3년제) //-->
+							</tr>
+							-->
 							<tr><!-- 대학교(4~6년제) -->
 								<th><div class="para"><strong>대학교(4~6년제)</strong></div></th>
-								<td class="hool"><span id="lab_schName4" th:text="|${recruit.schName4} (${recruit.schTransfer3})| "></span></td>
+								<td class="hool"><span id="lab_schName3" th:text="|${recruit.schName3} (${recruit.schTransfer3})| "></span></td>
+								<td class="hool"><span id="lab_schEnterYM3" th:text="${recruit.schEnterYm3}"></span></td>
+								<td class="hool"><span id="lab_schGradYM3"  th:text="${recruit.schGradYm3}"></span></td>
+								<td class="hool"><span id="lab_schGrad3"  th:text="${recruit.schGrad3}"></span></td>
+								<td class="hool">
+									<span id="lab_schAdmis3" th:text="${recruit.schAdmis3}"></span>/
+									<span id="lab_schMajor3" th:text="${recruit.schMajor3}"></span>
+								</td>
+								<td class="hool"><span id="lab_schSite3" th:text="${recruit.schSite3}"></span></td>
+								<td class="hool"><span id="lab_schNight3" th:text="${recruit.schNight3}"></span></td>
+								<td class="bora"><span id="lab_schPointEvg3" th:text="${recruit.schPointEvg3}"></span> / <span id="lab_schPointMax3">4.5</span></td>
+							</tr><!-- 대학교(4~6년제) //-->
+
+
+							<tr><!--  부/이중/복수 전공1 -->
+								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
+								<td class="hool"><span id="lab_schDepType3" th:text="${recruit.schDepType3}"></span></td>
+								<td colspan="3"></td>
+								<td class="hool"><span id="lab_schSubMajor3" th:text="${recruit.schSubMajor3}"></span></td>
+								<td class="hool"><span id="lab_sub1schSite4"></span></td>
+								<td class="hool"><span id="lab_sub1schNight4"></span></td>
+								<td class="bora">  </td>
+							</tr><!--  부/이중/복수 전공1 //  -->
+<!-- 							<tr> 부/이중/복수 전공2 -->
+<!-- 								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th> -->
+<!-- 								<td class="hool"><span id="lab_sub2schName4">없음 </span></td> -->
+<!-- 								<td colspan="3"></td> -->
+<!-- 								<td class="hool"><span id="lab_sub2schAdmis4"></span>/<span id="lab_sub2schMajor4">  </span></td> -->
+<!-- 								<td class="hool"><span id="lab_sub2schSite4"></span></td> -->
+<!-- 								<td class="hool"><span id="lab_sub2schNight4"></span></td> -->
+<!-- 								<td class="bora">  </td> -->
+<!-- 							</tr> 부/이중/복수 전공2 //  -->
+
+							<tr><!-- 대학원(석사) -->
+								<th><div class="para"><strong>대학원(석사)</strong></div></th>
+								<td class="hool"><span id="lab_schName4" th:text="${recruit.schName4}"></span></td>
 								<td class="hool"><span id="lab_schEnterYM4" th:text="${recruit.schEnterYm4}"></span></td>
 								<td class="hool"><span id="lab_schGradYM4"  th:text="${recruit.schGradYm4}"></span></td>
 								<td class="hool"><span id="lab_schGrad4"  th:text="${recruit.schGrad4}"></span></td>
@@ -418,42 +464,11 @@
 								</td>
 								<td class="hool"><span id="lab_schSite4" th:text="${recruit.schSite4}"></span></td>
 								<td class="hool"><span id="lab_schNight4" th:text="${recruit.schNight4}"></span></td>
-								<td class="bora"><span id="lab_schPointEvg4" th:text="${recruit.schPointEvg4}"></span> / <span id="lab_schPointMax4" th:text="${recruit.schPointMax4}"></span></td>
-							</tr><!-- 대학교(4~6년제) //-->
-
-
-							<tr><!--  부/이중/복수 전공1 -->
-								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
-								<td class="hool"><span id="lab_sub1schName4">없음</span></td>
-								<td colspan="3"></td>
-								<td class="hool"><span id="lab_sub1schAdmis4" th:text="${recruit.schSubAdmis4}"></span>/<span id="lab_sub1schMajor4" th:text="${recruit.schSubMajor4}"> 선택 </span></td>
-								<td class="hool"><span id="lab_sub1schSite4"></span></td>
-								<td class="hool"><span id="lab_sub1schNight4"></span></td>
-								<td class="bora">  </td>
-							</tr><!--  부/이중/복수 전공1 //  -->
-								<tr><!--  부/이중/복수 전공2 -->
-								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
-								<td class="hool"><span id="lab_sub2schName4">없음 </span></td>
-								<td colspan="3"></td>
-								<td class="hool"><span id="lab_sub2schAdmis4"></span>/<span id="lab_sub2schMajor4">  </span></td>
-								<td class="hool"><span id="lab_sub2schSite4"></span></td>
-								<td class="hool"><span id="lab_sub2schNight4"></span></td>
-								<td class="bora">  </td>
-							</tr><!--  부/이중/복수 전공2 //  -->
-
-							<tr><!-- 대학원(석사) -->
-								<th><div class="para"><strong>대학원(석사)</strong></div></th>
-								<td class="hool"><span id="lab_schName5" th:text="${recruit.schName5}"></span></td>
-								<td class="hool"><span id="lab_schEnterYM5" th:text="${recruit.schEnterYm5}"></span></td>
-								<td class="hool"><span id="lab_schGradYM5"  th:text="${recruit.schGradYm5}"></span></td>
-								<td class="hool"><span id="lab_schGrad5"  th:text="${recruit.schGrad5}"></span></td>
-								<td class="hool">
-									<span id="lab_schAdmis5" th:text="${recruit.schAdmis5}"></span>/
-									<span id="lab_schMajor5" th:text="${recruit.schMajor5}"></span>
+								<td class="bora">
+									<span th:if="*{recruit.schPointEvg4 == '0'}" id="lab_schPointEvg4" ></span> 
+									<span th:unless="*{recruit.schPointEvg4 == '0'}" id="lab_schPointEvg4" th:text="${recruit.schPointEvg4}"></span>
+									/ <span id="lab_schPointMax4" >4.5</span>
 								</td>
-								<td class="hool"><span id="lab_schSite5" th:text="${recruit.schSite5}"></span></td>
-								<td class="hool"><span id="lab_schNight5" th:text="${recruit.schNight5}"></span></td>
-								<td class="bora"><span id="lab_schPointEvg5" th:text="${recruit.schPointEvg5}"></span> / <span id="lab_schPointMax5" th:text="${recruit.schPointMax5}"></span></td>
 							</tr><!-- 대학원(석사) // -->
 							<tr><!-- 대학원(박사) -->
 								<th><div class="para"><strong>대학원(박사)</strong></div></th>
@@ -467,7 +482,11 @@
 								</td>
 								<td class="hool"><span id="lab_schSite6" th:text="${recruit.schSite6}"></span></td>
 								<td class="hool"><span id="lab_schNight6" th:text="${recruit.schNight6}"></span></td>
-								<td class="bora"><span id="lab_schPointEvg6" th:text="${recruit.schPointEvg6}"></span> / <span id="lab_schPointMax6" th:text="${recruit.schPointMax6}"></span></td>
+								<td class="bora">
+									<span th:if="*{recruit.schPointEvg6 == '0'}" id="lab_schPointEvg6" ></span> 
+									<span th:unless="*{recruit.schPointEvg6 == '0'}" id="lab_schPointEvg6" th:text="${recruit.schPointEvg6}"></span>
+									/ <span id="lab_schPointMax6" >4.5</span>
+								</td>
 							</tr><!-- 대학원(박사) // -->
 							<tr>
 								<th><div class="para" ><strong>회계관련 이수내역</strong></div></th>
@@ -503,7 +522,7 @@
 								<th><div class="hool">독해</div></th>
 							</tr>
 							<tr><!-- 외국어 1 -->
-								<td class="hool"><span id="lab_langName1"  th:text="${recruit.langName1}"></span></td>
+								<td class="hool"><span id="lab_langName1"  th:text="${recruit.langLicName1}"></span></td>
 								<td class="hool"><span id="lab_langPoint1" th:text="${recruit.langPoint1}"></span></td>
 								<td class="hool"><span id="lab_langLv1" th:text="${recruit.langLv1}"></span></td>
 								<td class="hool"><span id="lab_langLic1" th:text="${recruit.langLicNum1}"></span></td>
@@ -513,7 +532,7 @@
 								<td class="bora"><span id="lab_langRead1" th:text="${recruit.langRead1}"></span></td>
 							</tr>
 							<tr> <!-- 외국어 2 -->
-								<td class="hool"><span id="lab_langName2"  th:text="${recruit.langName2}"></span></td>
+								<td class="hool"><span id="lab_langName2"  th:text="${recruit.langLicName2}"></span></td>
 								<td class="hool"><span id="lab_langPoint2" th:text="${recruit.langPoint2}"></span></td>
 								<td class="hool"><span id="lab_langLv2" th:text="${recruit.langLv2}"></span></td>
 								<td class="hool"><span id="lab_langLic2" th:text="${recruit.langLicNum2}"></span></td>
@@ -523,7 +542,7 @@
 								<td class="bora"><span id="lab_langRead2" th:text="${recruit.langRead2}"></span></td>
 							</tr>
 							<tr> <!-- 외국어 3 -->
-								<td class="hool"><span id="lab_langName3"  th:text="${recruit.langName3}"></span></td>
+								<td class="hool"><span id="lab_langName3"  th:text="${recruit.langLicName3}"></span></td>
 								<td class="hool"><span id="lab_langPoint3" th:text="${recruit.langPoint3}"></span></td>
 								<td class="hool"><span id="lab_langLv3" th:text="${recruit.langLv3}"></span></td>
 								<td class="hool"><span id="lab_langLic3" th:text="${recruit.langLicNum3}"></span></td>
@@ -533,7 +552,7 @@
 								<td class="bora"><span id="lab_langRead3" th:text="${recruit.langRead3}"></span></td>
 							</tr>
 							<tr> <!-- 외국어 4 -->
-								<td class="hool"><span id="lab_langName4"  th:text="${recruit.langName4}"></span></td>
+								<td class="hool"><span id="lab_langName4"  th:text="${recruit.langLicName4}"></span></td>
 								<td class="hool"><span id="lab_langPoint4" th:text="${recruit.langPoint4}"></span></td>
 								<td class="hool"><span id="lab_langLv4" th:text="${recruit.langLv4}"></span></td>
 								<td class="hool"><span id="lab_langLic4" th:text="${recruit.langLicNum4}"></span></td>
@@ -633,14 +652,12 @@
 						<colgroup>
 							<col width="20%" >
 							<col width="30%" >
-							<col width="*" >
-							<col width="30%" >
+							<col width="50%" >
 						</colgroup>
 						<tbody>
 							<tr>
 								<th><div class="hool"><strong>국가명/활동명</strong></div></th>
 								<th><div class="hool"><strong>연수/활동기간</strong></div></th>
-								<th><div class="hool"><strong>연수/활동기관</strong></div></th>
 								<th class="thbora"><strong>내용</strong></th>
 							</tr>
 							<!-- 연수 1 -->
@@ -662,12 +679,6 @@
 							
 							<!-- 연수 3 -->
 							
-							<tr  id="tr_forState3"  >
-								<td class="hool"><span id="lab_forState3" th:text="${recruit.forState3}"></span></td>
-								<td class="hool"><span id="lab_forSDate3" th:text="${recruit.forSDate3}"></span> ~ <span id="lab_forEDate3" th:text="${recruit.forEDate3}"></span></td>
-								<td class="hool"><span id="lab_forName3" th:text="${recruit.forName3}"></span></td>
-								<td class="bora"><span id="lab_forContent3" th:text="${recruit.forContent3}"></span></td>
-							</tr>
 							
 						</tbody>
 					</table>
