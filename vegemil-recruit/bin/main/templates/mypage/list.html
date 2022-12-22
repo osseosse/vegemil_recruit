@@ -309,9 +309,11 @@
 												<span class="sublist" th:if="${resume.langLv1} != null" th:text="${resume.langLv1}"></span>
 												<span class="sublist" th:if="${resume.langLicNum1} != null" th:text="${resume.langLicNum1}"></span>
 												<span class="sublist" th:if="${resume.langGet1} != null" th:text="${resume.langGet1}"></span>
+												<!-- 
 												<span class="sublist" th:if="${resume.langTalk1} != null" th:text="|회화 ${resume.langTalk1}|"></span>
 												<span class="sublist" th:if="${resume.langMake1} != null" th:text="|작문 ${resume.langMake1}|"></span>
 												<span class="sublist" th:if="${resume.langRead1} != null" th:text="|독해 ${resume.langRead1}|"></span>
+												 -->
 											</li>
 											<li th:if="${resume.langCount} == '2'
 													or ${resume.langCount} == '3'
@@ -323,9 +325,11 @@
 												<span class="sublist" th:text="${resume.langLv2}"></span>
 												<span class="sublist" th:text="${resume.langLicNum2}"></span>
 												<span class="sublist" th:text="${resume.langGet2}"></span>
+												<!-- 
 												<span class="sublist" th:text="|회화 ${resume.langTalk2}|"></span>
 												<span class="sublist" th:text="|작문 ${resume.langMake2}|"></span>
 												<span class="sublist" th:text="|독해 ${resume.langRead2}|"></span>
+												 -->
 											</li>
 											<li th:if="${resume.langCount} == '3'
 													or ${resume.langCount} == '4'">
@@ -336,9 +340,11 @@
 												<span class="sublist" th:text="${resume.langLv3}"></span>
 												<span class="sublist" th:text="${resume.langLicNum3}"></span>
 												<span class="sublist" th:text="${resume.langGet3}"></span>
+												<!-- 
 												<span class="sublist" th:text="|회화 ${resume.langTalk3}|"></span>
 												<span class="sublist" th:text="|작문 ${resume.langMake3}|"></span>
 												<span class="sublist" th:text="|독해 ${resume.langRead3}|"></span>
+												 -->
 											</li>
 											<li th:if="${resume.langCount} == '4'">
 												<span class="w50">&middot;</span>
