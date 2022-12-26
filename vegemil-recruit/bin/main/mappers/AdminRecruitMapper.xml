@@ -239,8 +239,8 @@
 			, a.join_company1
 			, a.join_field1
 			, a.join_area1
-			, a.sch_name4
-			, a.sch_major4
+			, a.sch_name3
+			, a.sch_major3
 			, a.join_date
 			, s.s_close
 	 	FROM R_Recruit a, m_recruit_member b, R_Setup s

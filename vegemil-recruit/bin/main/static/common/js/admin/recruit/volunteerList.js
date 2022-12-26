@@ -181,8 +181,8 @@ function createTable(){
         { data: 'joinCompany' },
         { data: 'joinField1' },
         { data: 'joinArea1' },
-        { data: 'schName4' },
-        { data: 'schMajor4' },
+        { data: 'schName3' },
+        { data: 'schMajor3' },
         { data: 'idx' },
         { data: 'rPortFile' },
         { data: 'joinDate' },
@@ -297,7 +297,7 @@ function createTable(){
       		targets: 9,
       		orderable: false,
           	render: function (data, type, full, meta) {
-          		if(full['schName4'] == null) return null;
+          		if(full['schName3'] == null) return null;
           		else return data;
 	        }
       	},
@@ -305,7 +305,7 @@ function createTable(){
       		targets: 10,
       		orderable: false,
           	render: function (data, type, full, meta) {
-          		if(full['schMajor4'] == null) return null;
+          		if(full['schMajor3'] == null) return null;
           		else return data
 	        }
       	},
