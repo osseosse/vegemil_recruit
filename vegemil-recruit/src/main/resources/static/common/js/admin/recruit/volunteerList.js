@@ -178,7 +178,7 @@ function createTable(){
         { data: 'joinOk' },
         { data: 'birthday' },
         { data: 'sex' },
-        { data: 'joinCompany' },
+        { data: 'joinCompany1' },
         { data: 'joinField1' },
         { data: 'joinArea1' },
         { data: 'schName3' },
@@ -273,7 +273,7 @@ function createTable(){
       		targets: 6,
       		orderable: true,
       		render: function (data, type, full, meta) {
-          		if(full['joinCompany'] == null) return null;
+          		if(full['joinCompany1'] == null) return null;
           		else return data;
 	        }
       	},
