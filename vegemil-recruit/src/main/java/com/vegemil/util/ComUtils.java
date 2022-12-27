@@ -32,7 +32,17 @@ public class ComUtils {
 		return sb.toString();
 	}
 	
+	/**
+	 * 만나이 체크
+	 * @param birth
+	 * @return
+	 */
 	public int getAge(String birth) {
+		
+		if(birth.length() < 10) {
+			return 0;
+		}
+		
 		Calendar current = Calendar.getInstance();
 		String[] birthDayArr = birth.split("-");
 		int birthYear = Integer.parseInt(birthDayArr[0]);
@@ -53,4 +63,5 @@ public class ComUtils {
         // 두 수를 비교 했을 때 생일이 더 클 경우 생일이 지나지 않은 것이다.
         return age;
 	}
+	
 }
