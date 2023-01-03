@@ -278,6 +278,18 @@
 	<update id="updateVolunteer" parameterType="com.vegemil.domain.RecruitDTO">
 		UPDATE R_Recruit
 		   SET join_ok = #{joinOk, jdbcType=VARCHAR}
+		   <if test="joinOk == 0">
+		       ,pass1 = 0, pass2 = 0		   
+		   </if>
+		   <if test="joinOk == 1">
+		       ,pass1 = 0, pass2 = 0		   
+		   </if>
+		   <if test="joinOk == 2">
+		       ,pass1 = 1, pass2 = 0		   
+		   </if>
+		   <if test="joinOk == 3">
+		   	   ,pass1 = 1, pass2 = 1
+		   </if>
 		 WHERE idx = #{idx, jdbcType=VARCHAR}
 	</update>
 	

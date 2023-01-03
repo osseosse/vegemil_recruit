@@ -146,11 +146,8 @@ public class AdminRecruitServiceImpl implements AdminRecruitService {
     public boolean updateVolunteerList(RecruitDTO recruitDto) { 
         int queryResult = 0;
         queryResult = adminRecruitMapper.updateVolunteer(recruitDto);
-		if(queryResult == 1) {
-			return true;
-		} else {
-			return false;
-		}
+        
+        return (queryResult == 1) ? true : false;
                
     }
 	

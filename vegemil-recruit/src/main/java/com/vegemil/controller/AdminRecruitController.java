@@ -1,5 +1,6 @@
 package com.vegemil.controller;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -232,18 +233,18 @@ public class AdminRecruitController extends UiUtils {
 	 }
 	
 	@RequestMapping("/admin/recruit/updateVolunteerList")
-    public @ResponseBody String updateVolunteerList(@ModelAttribute("params") RecruitDTO params, Model model, HttpServletResponse response, HttpServletRequest request) {
+    public @ResponseBody Map<String, Object> updateVolunteerList(@ModelAttribute("params") RecruitDTO params, Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		
     	try {
 	    	boolean isRegistered = adminRecruitService.updateVolunteerList(params);
-			if (isRegistered == false) {
-				return "false";
-			}
+	    	rtnMap.put("result", isRegistered);
     	} catch (DataAccessException e) {
-    		return "false";
+    		throw new IOException("저장에 실패하였습니다.");
 		} catch (Exception e) {
-			return "false";
+			throw new IOException("저장에 실패하였습니다.");
 		}
-    	return "success";
+    	return rtnMap;
     }
 	
 	@RequestMapping(value = "/admin/recruit/recruitDetail")

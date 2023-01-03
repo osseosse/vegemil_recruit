@@ -254,7 +254,11 @@ function createTable(){
       	},
       	{
       		targets: 4,
-      		orderable: false
+      		orderable: false,
+      		render: function (data, type, full, meta) {
+          		if(full['birthday'] == null) return null;
+          		else return data;
+	        }
       	},
       	{
       		targets: 5,
@@ -382,13 +386,12 @@ function joinOkUpdate(idx, joinOk) {
 		type : "get",
 		dataType : "json",
 		success : function(data) {
-			if(data == "false"){
+			if(!data.result){
 				alert("저장에 실패했습니다.");
 			}
 			else{
 				alert("수정되었습니다.");
-				//window.location.reload();
-				$('.datatables-basic').DataTable().ajax.reload();
+				//$('.datatables-basic').DataTable().ajax.reload();
 			}
 			
 		},
@@ -461,8 +464,7 @@ $('#btnDel').click(function(e){
 				if(data){
 					
 					alert("삭제되었습니다.");
-					//window.location.reload();
-					$('.datatables-basic').DataTable().ajax.reload();
+					//$('.datatables-basic').DataTable().ajax.reload();
 				}
 				else{
 					alert("실패했습니다.");
