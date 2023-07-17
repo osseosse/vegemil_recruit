@@ -14,6 +14,8 @@ public class ApplicationDTO extends MemberDTO {
 	private String setupTitle;
 	private String setupDate;
 	private String joinOk;
+	private String pass1;
+	private String pass2;
 	private String sStartdate;
 	private String sEnddate;
 	private Long   sDday;
