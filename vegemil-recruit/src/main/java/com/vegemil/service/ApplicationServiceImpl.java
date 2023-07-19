@@ -107,6 +107,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	@Transactional
 	public boolean registerPersonalInfo(PersonalInfoDTO params) {
+		
+		if(params.getMilClass().equals("비대상") || params.getMilClass().equals("면제")) {
+			params.setMilArm("");
+			params.setMilType("");
+			params.setMilLv("");
+			params.setMilSDate("");
+			params.setMilEdate("");
+			params.setMilTicket("");
+		}
+		
 		int queryResult = 0;
 		
 		int applicationCount = applicationMapper.selectApplicationCntBySth(params.getMemNo(), params.getSetupTh());

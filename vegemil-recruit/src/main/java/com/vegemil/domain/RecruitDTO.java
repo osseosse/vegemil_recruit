@@ -22,6 +22,7 @@ public class RecruitDTO extends CommonDTO {
 	private String sCategory2;
 	private String sCollect;
 	private Long sDday;
+	private Long sSday;
 	private String sInsertdate;
 	private String sModifydate;
 	private String sYyyy;
@@ -92,7 +93,7 @@ public class RecruitDTO extends CommonDTO {
 	private String milLv;
 	private String milArm;
 	private String milMCount;
-	private String milTickey;
+	private String milTicket;
 	private String milSDate;
 	private String milEDate;
 	private String schGrad1;

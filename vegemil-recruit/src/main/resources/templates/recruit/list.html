@@ -64,6 +64,7 @@
 									<li><input type="radio" name="rr" id="#6" value="생산" > <label for="#6"><span></span>생산</label></li>
 									<li><input type="radio" name="rr" id="#7" value="디자인" > <label for="#7"><span></span>디자인</label></li>
 									<li><input type="radio" name="rr" id="#8" value="전산" > <label for="#8"><span></span>전산</label></li>
+									<li><input type="radio" name="rr" id="#9" value="마케팅" > <label for="#9"><span></span>마케팅</label></li>
 								</ul>
 							</div>
 							
@@ -71,7 +72,7 @@
 							<div class="btn_listBox">
 								<ul class="blbType02 radioStyle1">
 									<li><input type="radio" name="rr" id="#13" value="" > <label for="#13"><span></span>전체</label></li>
-									<li><input type="radio" name="rr" id="#9" value="정식품" > <label for="#9"><span></span>정식품</label></li>
+									<li><input type="radio" name="rr" id="#14" value="정식품" > <label for="#14"><span></span>정식품</label></li>
 									<li><input type="radio" name="rr" id="#10" value="넬보스코" > <label for="#10"><span></span>넬보스코</label></li>
 									<li><input type="radio" name="rr" id="#11" value="자연과사람들" > <label for="#11"><span></span>자연과사람들</label></li>
 									<li><input type="radio" name="rr" id="#12" value="오쎄" > <label for="#12"><span></span>오쎄</label></li>
@@ -90,7 +91,7 @@
 							</div>
 							<div id="recruitList">
 								<th:block th:if="${not #lists.isEmpty( recruitList )}" th:each="recruit : ${recruitList}">
-									<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:if="${recruit.sDday} < 1" th:name="|${recruit.sCompany}/${recruit.sType}/${recruit.sCategory}/${recruit.sCategory2}|" >
+									<a th:href="|@{/recruit/detail}?sTh=${recruit.sTh}|" th:if="${recruit.sDday} < 1 and ${recruit.sSday} > -1" th:name="|${recruit.sCompany}/${recruit.sType}/${recruit.sCategory}/${recruit.sCategory2}|" >
 										<div class="r-box mt20">
 											<input type="hidden"  />
 											<div class="info01">
@@ -109,7 +110,7 @@
 											</div>
 										</div>
 									</a>
-									<div class="r-box mt20" th:unless="${recruit.sDday} < 1">
+									<div class="r-box mt20" th:unless="${recruit.sDday} < 1 and ${recruit.sSday} > -1">
 										<div class="tex-center f16 pt40 pb40 gray">진행중인 채용이 없습니다.</div>
 									</div>
 								</th:block>
