@@ -40,7 +40,7 @@
 		, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
 		, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
 		, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
-		, port_file, port_url
+		, port_file, port_file_saved, port_url
 	</sql>
 	
 	<sql id="introduceColumns">
@@ -194,7 +194,7 @@
 			, his_e_date2=#{hisEDate2}, his_content2=#{hisContent2}, his_duty2=#{hisDuty2}, his_pay2=#{hisPay2}, his_co_name3=#{hisCoName3}, his_ing3=#{hisIng3}
 			, his_s_date3=#{hisSDate3}, his_e_date3=#{hisEDate3}, his_content3=#{hisContent3}, his_duty3=#{hisDuty3}, his_pay3=#{hisPay3}
 			<if test="portFile != null and portFile != ''">
-			, port_file=#{portFile}
+			, port_file=#{portFile} , port_file_saved = #{portFileSaved}
 			</if>
 			, port_url=#{portUrl}, update_date = NOW()
 		WHERE

@@ -1,22 +1,27 @@
 package com.vegemil.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,27 +30,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import com.vegemil.adapter.GsonLocalDateTimeAdapter;
 import com.vegemil.constant.Method;
-import com.vegemil.domain.AdminDTO;
 import com.vegemil.domain.MemberDTO;
 import com.vegemil.domain.QnaDTO;
 import com.vegemil.domain.RecruitDTO;
 import com.vegemil.service.AdminRecruitService;
 import com.vegemil.util.UiUtils;
-
-import lombok.extern.log4j.Log4j2;
 
 @Controller
 public class AdminRecruitController extends UiUtils {
@@ -53,6 +54,12 @@ public class AdminRecruitController extends UiUtils {
 	
 	@Autowired
 	private AdminRecruitService adminRecruitService;
+	
+	@Autowired
+	private ResourceLoader resourceLoader; 
+	
+	@Value("${spring.servlet.multipart.location}")
+    private String uploadPath;
 	
 	@GetMapping(value = "/admin/recruit/{viewName}")
     public String adminRecruit(@PathVariable(value = "viewName", required = false) String viewName, HttpServletRequest req, Model model,
@@ -394,6 +401,39 @@ public class AdminRecruitController extends UiUtils {
 		}
 
 		return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/admin/recruit/qnaList", Method.GET, null, model);
+	}
+	
+	@GetMapping("/admin/recruit/downloadPortfolio/{idx}")
+	public ResponseEntity<Resource> downloadPortfolio(@PathVariable Long idx, @RequestHeader(name = "user-agent") String userAgent){
+		
+		String fileNameSaved =  adminRecruitService.getPortfolioSaveName(idx);
+		
+		try {
+			
+			Resource resource = resourceLoader.getResource(uploadPath + "/port/" +fileNameSaved);
+			System.out.println("resource >>>>> " + resource.exists());
+			String downName = null;
+			
+			// 인터넷 익스플로러 인 경우
+			boolean isMSIE = userAgent.indexOf("MSIE") != -1 || userAgent.indexOf("Trident") != -1;
+			
+			if (isMSIE) { // 익스플로러 대응
+				downName = URLEncoder.encode(fileNameSaved, "UTF-8").replaceAll("/+", "%20");
+			} else {
+				downName = new String(fileNameSaved.getBytes("UTF-8"), "ISO-8859-1"); // 크롬
+			}
+			
+			return ResponseEntity.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\"" + downName + "\"")
+					.header(HttpHeaders.CONTENT_LENGTH, String.valueOf(resource.contentLength()))
+					.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM.toString()).body(resource);
+			
+		}catch(Exception e) {
+			
+		}
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 실패 시 
+		
 	}
 	
 	public boolean getAdminAuth(Authentication authentication) throws Exception {

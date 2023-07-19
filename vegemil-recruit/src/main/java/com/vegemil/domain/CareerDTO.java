@@ -44,5 +44,6 @@ public class CareerDTO extends ApplicationDTO {
 	
 	//포트폴리오
 	private String portFile;
+	private String portFileSaved;
 	private String portUrl;
 }

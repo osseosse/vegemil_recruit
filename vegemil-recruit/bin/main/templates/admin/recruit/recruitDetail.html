@@ -642,7 +642,32 @@
 					</table>
 				</div>
 				<!-- // 8.경력/인턴 ########################################-->
-				
+				<!-- 포트폴리오  -->
+
+				<div id="career">
+					<div class="title">포트폴리오</div>
+					<table width="100%" class="tbViewType2" summary="포트폴리오">
+						<colgroup>
+							<col width="80%" >
+							<col width="20%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>포트폴리오 url</strong></div></th>
+								<th><div class="hool"><strong>첨부파일다운로드</strong></div></th>
+							</tr>
+							<tr>
+								<td class="hool"><span id="lab_hisCoName3" th:text="${recruit.portUrl}"></span></td>
+								<!-- <td class="hool">
+									<a id="lab_hisEDate3" th:href="@{/admin/recruit/downloadPortfolio/{idx}(idx=${recruit.idx})}">다운로드</a>
+									
+								</td> -->
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- //포트폴리오  -->
 				<!-- 7.해외연수활동 ########################################-->
 				<div id="country">
 					<div class="title">해외연수/대외활동</div>

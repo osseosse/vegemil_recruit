@@ -154,6 +154,18 @@ public class ApplicationController extends UiUtils {
 				params.setMemNo(member.getMemNo());
 				params.setPhoneNo(member.getPhoneNo());
 		        
+				if(params.getMilClass()!= null || params.getMilClass() != "") {
+					if(params.getMilClass().equals("비대상") || params.getMilClass().equals("면제")) {
+						params.setMilArm("");
+						params.setMilType("");
+						params.setMilLv("");
+						params.setMilSDate("");
+						params.setMilEdate("");
+						params.setMilTicket("");
+					}
+			
+				}
+				
 		        boolean isRegistered = applicationService.registerPersonalInfo(params);
 				jsonObj.addProperty("result", isRegistered);
 				
@@ -530,7 +542,8 @@ public class ApplicationController extends UiUtils {
 					Path savePath = Paths.get(uploadPath + "/port/" + savefileName);
 					
 					params.getFileName().transferTo(savePath);
-					params.setPortFile(savefileName);
+					params.setPortFile(file);
+					params.setPortFileSaved(savefileName);
 				}
 			}
 			
@@ -578,6 +591,7 @@ public class ApplicationController extends UiUtils {
 				fileName.transferTo(savePath);
 				//포트폴리오
 				application.setPortFile(file);
+				application.setPortFileSaved(savefileName);
 			}
 			
 			MemberDTO member = (MemberDTO) authentication.getPrincipal();  //userDetail 객체를 가져옴

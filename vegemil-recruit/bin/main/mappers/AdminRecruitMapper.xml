@@ -302,13 +302,12 @@
 	
 	<update id="deleteVolunteer" parameterType="hashMap">
 		/* deleteVolunteer by AdminRecruitMapper.xml */
-		UPDATE R_Recruit
-		   SET join_ok = 1
-		 WHERE idx IN 
+		DELETE FROM R_Recruit
+		WHERE idx IN 
 	  <foreach collection='list' index='index' item='idx' open='(' close=')' separator=','> 
 		 #{idx, jdbcType=VARCHAR}
 	  </foreach>
-	       AND setup_th = #{setupTh, jdbcType=VARCHAR} 
+	      <!--  AND setup_th = #{setupTh, jdbcType=VARCHAR}  -->
 	</update>
 	
 	<delete id="deleteNotice" parameterType="hashMap">
@@ -387,5 +386,12 @@
 		   SET r_answer =  #{rAnswer, jdbcType=VARCHAR}, r_answer_yn = 'Y', r_answer_date = now()
 		 WHERE q_id = #{qId, jdbcType=VARCHAR}
 	</update>
+	
+	<select id="selectPortfolioSavedName" parameterType="Long" resultType="String">
+		SELECT port_file_saved /* selectPortfolioSavedName by AdminRecruitMapper.xml */
+		  FROM R_Recruit 
+		 WHERE idx = #{idx, jdbcType=VARCHAR}
+	</select>
+	
 	
 </mapper>

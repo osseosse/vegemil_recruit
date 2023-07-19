@@ -218,5 +218,11 @@ public class AdminRecruitServiceImpl implements AdminRecruitService {
 		}
                
     }
+
+	@Override
+	public String getPortfolioSaveName(Long idx) {
+		
+		return adminRecruitMapper.selectPortfolioSavedName(idx);
+	}
 	
 }
