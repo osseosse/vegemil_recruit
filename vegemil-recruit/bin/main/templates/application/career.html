@@ -46,6 +46,7 @@
 						<form th:action="@{/application/registerCareer}" id="careerForm" th:object="${app}" method="post" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
+							<input type="hidden" th:field="*{memNo}" />
 							<!-- (1)인턴경력 -->
 							<p class="f23 fw600 pr">인턴경력</p>
 							<div id="field1"> 

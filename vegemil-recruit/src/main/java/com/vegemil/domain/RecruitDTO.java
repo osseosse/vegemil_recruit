@@ -9,6 +9,7 @@ public class RecruitDTO extends CommonDTO {
 
 	private String sTh;
 	private String sTitle;
+	private String setupTitle;
 	private String sType;
 	private String sCompany;
 	private String sStartdate;
@@ -306,6 +307,7 @@ public class RecruitDTO extends CommonDTO {
 	private String internDuty;
 	private String portFile;
 	private String portUrl;
+	private String portFileSaved;
 	private String introduce1;
 	private String introduce2;
 	private String introduce3;

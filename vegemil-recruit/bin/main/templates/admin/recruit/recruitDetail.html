@@ -656,17 +656,25 @@
 								<th><div class="hool"><strong>포트폴리오 url</strong></div></th>
 								<th><div class="hool"><strong>첨부파일다운로드</strong></div></th>
 							</tr>
-							<tr>
-								<td class="hool"><span id="lab_hisCoName3" th:text="${recruit.portUrl}"></span></td>
-								<!-- <td class="hool">
+							<tr th:if="${not #strings.isEmpty(recruit.portFileSaved)}">
+								<td class="hool" th:if="${not #strings.isEmpty(recruit.portUrl)}" >
+								<a th:href="|https://${recruit.portUrl}|" onclick="window.open(this.href, '_blank'); return false;"><span id="lab_hisCoName3" th:text="${recruit.portUrl}"></span></a></td>
+								<td class="hool" th:if="${#strings.isEmpty(recruit.portUrl)}"> 포트폴리오 url 기입하지 않음</td>
+								<td class="hool">
 									<a id="lab_hisEDate3" th:href="@{/admin/recruit/downloadPortfolio/{idx}(idx=${recruit.idx})}">다운로드</a>
-									
-								</td> -->
+								</td> 
 								
+							</tr>
+							<tr th:if="${recruit.portFileSaved} == null">
+								<td class="hool text-muted text-center" th:if="${#strings.isEmpty(recruit.portUrl)}">  포트폴리오 url 기입하지 않음</td>
+								<td class="text-muted text-center" th:unless="${#strings.isEmpty(recruit.portUrl)}">
+								 	<a th:href="|https://${recruit.portUrl}|" onclick="window.open(this.href, '_blank'); return false;"><span id="lab_hisCoName3" th:text="${recruit.portUrl}"></span></a></td>
+								</td>
+								<td class="text-muted text-center"> 포트폴리오 첨부 없음</td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div> 
 				<!-- //포트폴리오  -->
 				<!-- 7.해외연수활동 ########################################-->
 				<div id="country">

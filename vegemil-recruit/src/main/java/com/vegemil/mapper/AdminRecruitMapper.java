@@ -54,5 +54,5 @@ public interface AdminRecruitMapper {
 	
 	public int updateQnaDetail(QnaDTO qnaDto);
 	
-	public String selectPortfolioSavedName(Long idx);
+	public RecruitDTO selectPortfolioSavedName(Long idx);
 }

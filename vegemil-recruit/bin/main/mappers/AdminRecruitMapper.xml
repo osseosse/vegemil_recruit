@@ -387,9 +387,9 @@
 		 WHERE q_id = #{qId, jdbcType=VARCHAR}
 	</update>
 	
-	<select id="selectPortfolioSavedName" parameterType="Long" resultType="String">
-		SELECT port_file_saved /* selectPortfolioSavedName by AdminRecruitMapper.xml */
-		  FROM R_Recruit 
+	<select id="selectPortfolioSavedName" parameterType="Long" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT r.port_file_saved, r.setup_title, m.mem_name  /* selectPortfolioSavedName by AdminRecruitMapper.xml */
+		  FROM R_Recruit r join m_recruit_member m on r.mem_no = m.mem_no
 		 WHERE idx = #{idx, jdbcType=VARCHAR}
 	</select>
 	

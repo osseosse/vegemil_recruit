@@ -4,20 +4,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.RecursiveAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vegemil.domain.AdminDTO;
 import com.vegemil.domain.QnaDTO;
 import com.vegemil.domain.RecruitDTO;
 import com.vegemil.mapper.AdminRecruitMapper;
-import com.vegemil.paging.PaginationInfo;
 
 @Service
 public class AdminRecruitServiceImpl implements AdminRecruitService {
@@ -220,7 +216,7 @@ public class AdminRecruitServiceImpl implements AdminRecruitService {
     }
 
 	@Override
-	public String getPortfolioSaveName(Long idx) {
+	public RecruitDTO getPortfolioSaveName(Long idx) {
 		
 		return adminRecruitMapper.selectPortfolioSavedName(idx);
 	}

@@ -1,7 +1,10 @@
 package com.vegemil.controller;
 
+
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.dao.DataAccessException;
@@ -47,6 +51,8 @@ import com.vegemil.domain.QnaDTO;
 import com.vegemil.domain.RecruitDTO;
 import com.vegemil.service.AdminRecruitService;
 import com.vegemil.util.UiUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 public class AdminRecruitController extends UiUtils {
@@ -406,21 +412,26 @@ public class AdminRecruitController extends UiUtils {
 	@GetMapping("/admin/recruit/downloadPortfolio/{idx}")
 	public ResponseEntity<Resource> downloadPortfolio(@PathVariable Long idx, @RequestHeader(name = "user-agent") String userAgent){
 		
-		String fileNameSaved =  adminRecruitService.getPortfolioSaveName(idx);
+		RecruitDTO portfolioInfo =  adminRecruitService.getPortfolioSaveName(idx);
+		
+		String fileNameSaved = portfolioInfo.getPortFileSaved();
 		
 		try {
 			
-			Resource resource = resourceLoader.getResource(uploadPath + "/port/" +fileNameSaved);
-			System.out.println("resource >>>>> " + resource.exists());
-			String downName = null;
+			Resource resource = resourceLoader.getResource("file:" + uploadPath + "/port/" +fileNameSaved);
+			//Resource resource = resourceLoader.getResource(uploadPath + "/port/" +fileNameSaved);
+			//Resource resource = new FileSystemResource(uploadPath + "/port/" + fileNameSaved);
+			
+			String downName = portfolioInfo.getSetupTitle() + "_" 
+						+ portfolioInfo.getMemName() +"지원자_포트폴리오" + fileNameSaved.substring(fileNameSaved.lastIndexOf("."));
 			
 			// 인터넷 익스플로러 인 경우
 			boolean isMSIE = userAgent.indexOf("MSIE") != -1 || userAgent.indexOf("Trident") != -1;
 			
 			if (isMSIE) { // 익스플로러 대응
-				downName = URLEncoder.encode(fileNameSaved, "UTF-8").replaceAll("/+", "%20");
+				downName = URLEncoder.encode(downName, "UTF-8").replaceAll("/+", "%20");
 			} else {
-				downName = new String(fileNameSaved.getBytes("UTF-8"), "ISO-8859-1"); // 크롬
+				downName = new String(downName.getBytes("UTF-8"), "ISO-8859-1"); // 크롬
 			}
 			
 			return ResponseEntity.ok()

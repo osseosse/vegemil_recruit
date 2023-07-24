@@ -44,5 +44,5 @@ public interface AdminRecruitService {
 	
 	public boolean registerQnaDetail(QnaDTO qnaDto);
 	
-	public String getPortfolioSaveName(Long idx);
+	public RecruitDTO getPortfolioSaveName(Long idx);
 }

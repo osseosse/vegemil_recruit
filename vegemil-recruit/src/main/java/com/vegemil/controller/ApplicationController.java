@@ -538,7 +538,20 @@ public class ApplicationController extends UiUtils {
 				if(!"".equals(originalName)) {
 					String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
 					String uuid = UUID.randomUUID().toString();
-					String savefileName = uuid + "_" + file;
+					
+					int dott = file.lastIndexOf( "." );
+					String fileSeparator = file.substring(dott+1);
+					
+					
+					//String savefileName = uuid + "_" + file;
+					
+					String savefileName = uuid + "_";
+					
+					if(params.getMemNo() != null) {
+						savefileName += (params.getMemNo() + "." + fileSeparator);
+					}else {
+						savefileName += ("0000000" + "." + fileSeparator);
+					}
 					Path savePath = Paths.get(uploadPath + "/port/" + savefileName);
 					
 					params.getFileName().transferTo(savePath);
@@ -579,11 +592,27 @@ public class ApplicationController extends UiUtils {
 		
 		try {
 			
+			
 			String originalName = fileName.getOriginalFilename();
 			if(!"".equals(originalName)) {
 				String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
+				
+				int dott = file.lastIndexOf( "." );
+				String fileSeparator = file.substring(dott+1);
+				
+				
 				String uuid = UUID.randomUUID().toString();
-				String savefileName = uuid + "_" + file;
+				//String savefileName = uuid + "_" + file;
+				
+				String savefileName = uuid + "_";
+				
+				if(application.getMemNo() != null) {
+					savefileName += (application.getMemNo() + "." + fileSeparator);
+				}else {
+					savefileName += ("0000000" + "." + fileSeparator);
+				}
+				
+				//System.out.println(">>>>>>>>>>" + savefileName);
 				//테스트경로
 				Path savePath = Paths.get(uploadPath + "/port/" + savefileName);
 				
