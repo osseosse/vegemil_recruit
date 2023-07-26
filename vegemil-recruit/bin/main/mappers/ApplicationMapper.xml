@@ -186,7 +186,7 @@
 	</update>
 	
 	<update id="updateCareer" parameterType="com.vegemil.domain.CareerDTO">
-		UPDATE R_Recruit
+		UPDATE R_Recruit /* updateCareer by ApplicationMapper.xml */
 		SET
 			intern_name=#{internName}, intern_ing=#{internIng}, intern_s_date=#{internSDate}, intern_e_date=#{internEDate}, intern_duty=#{internDuty}
 			, his_count=#{hisCount}, his_co_name1=#{hisCoName1}, his_ing1=#{hisIng1}, his_s_date1=#{hisSDate1}, his_e_date1=#{hisEDate1}
@@ -402,5 +402,14 @@
 		WHERE
 			idx = #{idx}
 	</delete>
-
+	
+	<select id="selectPortSaveName" parameterType="map" resultType="String">
+		SELECT
+			port_file_saved
+		FROM
+			R_Recruit
+		WHERE
+			mem_no= #{memNo} and idx = #{idx}
+	</select>
+	
 </mapper>

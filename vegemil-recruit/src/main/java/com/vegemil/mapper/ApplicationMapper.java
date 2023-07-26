@@ -59,5 +59,8 @@ public interface ApplicationMapper {
 	public int selectIdxCount(@Param("memNo") Long memNo, @Param("sTh") String sTh);
 	
 	public int deleteResume(Long idx);
+	
+	public String selectPortSaveName(@Param("memNo") Long memNo, @Param("idx") Long idx);
+	
 
 }

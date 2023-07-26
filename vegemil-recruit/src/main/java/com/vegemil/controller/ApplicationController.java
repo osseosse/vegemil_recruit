@@ -1,5 +1,6 @@
 package com.vegemil.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -535,15 +536,25 @@ public class ApplicationController extends UiUtils {
 			
 			if(params.getFileName() != null) {
 				String originalName = params.getFileName().getOriginalFilename();
-				if(!"".equals(originalName)) {
+				if(!"".equals(originalName) &&originalName.length()>0) {
+					
+					// 기존 파일 있으면 삭제   
+					String isPortFileNameSaved = applicationService.isPortFileNameSaved(params.getMemNo(), params.getIdx());
+					
+					if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
+						File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
+						System.out.println("fileExists >> " + file.exists());
+						
+						if(file.exists()) {
+							file.delete();
+						}
+					}
+					
 					String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
 					String uuid = UUID.randomUUID().toString();
 					
 					int dott = file.lastIndexOf( "." );
 					String fileSeparator = file.substring(dott+1);
-					
-					
-					//String savefileName = uuid + "_" + file;
 					
 					String savefileName = uuid + "_";
 					
@@ -592,15 +603,29 @@ public class ApplicationController extends UiUtils {
 		
 		try {
 			
-			
 			String originalName = fileName.getOriginalFilename();
-			if(!"".equals(originalName)) {
+			if(!"".equals(originalName) && originalName.length()>0) {
+				
+				// 기존 파일 있으면 삭제   
+				String isPortFileNameSaved = applicationService.isPortFileNameSaved(application.getMemNo(), application.getIdx());
+				
+				if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
+					File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
+					System.out.println("fileExists >> " + file.exists());
+					
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+				
+				// 파일이름과 확장자 분리
 				String file = originalName.substring(originalName.lastIndexOf("\\") + 1);
 				
 				int dott = file.lastIndexOf( "." );
 				String fileSeparator = file.substring(dott+1);
 				
 				
+				// 파일명 랜덤값 세팅 
 				String uuid = UUID.randomUUID().toString();
 				//String savefileName = uuid + "_" + file;
 				
@@ -612,13 +637,11 @@ public class ApplicationController extends UiUtils {
 					savefileName += ("0000000" + "." + fileSeparator);
 				}
 				
-				//System.out.println(">>>>>>>>>>" + savefileName);
-				//테스트경로
+				// 경로 지정 
 				Path savePath = Paths.get(uploadPath + "/port/" + savefileName);
 				
-				//저장
+				// 저장 
 				fileName.transferTo(savePath);
-				//포트폴리오
 				application.setPortFile(file);
 				application.setPortFileSaved(savefileName);
 			}

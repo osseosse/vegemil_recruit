@@ -222,5 +222,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 		return (queryResult == 1) ? true : false;
 	}
+
+	@Override
+	public String isPortFileNameSaved(Long memNo, Long idx) {
+		return applicationMapper.selectPortSaveName(memNo, idx);
+	}
 	
 }

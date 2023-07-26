@@ -51,4 +51,6 @@ public interface ApplicationService {
 	
 	public boolean deleteResume(Long idx);
 	
+	public String isPortFileNameSaved(Long memNo, Long idx);
+	
 }
