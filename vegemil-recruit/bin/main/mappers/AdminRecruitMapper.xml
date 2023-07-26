@@ -233,6 +233,8 @@
 			  a.idx
 			, a.setup_th
 			, a.mem_no
+			, a.port_file_saved
+			, a.port_file
 			, b.mem_name
 			, a.join_ok
 			, b.birthday

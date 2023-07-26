@@ -331,8 +331,8 @@ function createTable(){
           	render: function (data, type, full, meta) {
           		var tag='';
           		
-          		if(full['rPortFile'] == null || full['rPortFile'] == '') tag='-';
-          		else tag='<button type="button" class="btn btn-outline-primary btn-sm">다운로드</button>';
+          		if(full['portFileSaved'] == null || full['portFile'] == '') tag='-';
+          		else tag='<a href="/admin/recruit/downloadPortfolio/'+full['idx']+'"><button type="button" class="btn btn-outline-primary btn-sm">다운로드</button></a>';
           			
 	            return (tag);
 	        }
