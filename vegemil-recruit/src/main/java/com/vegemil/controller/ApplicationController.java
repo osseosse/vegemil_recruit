@@ -541,12 +541,14 @@ public class ApplicationController extends UiUtils {
 					// 기존 파일 있으면 삭제   
 					String isPortFileNameSaved = applicationService.isPortFileNameSaved(params.getMemNo(), params.getIdx());
 					
-					if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
-						File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
-						System.out.println("fileExists >> " + file.exists());
-						
-						if(file.exists()) {
-							file.delete();
+					if(isPortFileNameSaved != null) {
+						if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
+							File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
+							System.out.println("fileExists >> " + file.exists());
+							
+							if(file.exists()) {
+								file.delete();
+							}
 						}
 					}
 					
@@ -609,12 +611,14 @@ public class ApplicationController extends UiUtils {
 				// 기존 파일 있으면 삭제   
 				String isPortFileNameSaved = applicationService.isPortFileNameSaved(application.getMemNo(), application.getIdx());
 				
-				if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
-					File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
-					System.out.println("fileExists >> " + file.exists());
-					
-					if(file.exists()) {
-						file.delete();
+				if(isPortFileNameSaved != null) {
+					if(!"".equals(isPortFileNameSaved) && isPortFileNameSaved.length()>0) {
+						File file = new File(uploadPath + "/port/" + isPortFileNameSaved);
+						System.out.println("fileExists >> " + file.exists());
+						
+						if(file.exists()) {
+							file.delete();
+						}
 					}
 				}
 				
@@ -624,10 +628,8 @@ public class ApplicationController extends UiUtils {
 				int dott = file.lastIndexOf( "." );
 				String fileSeparator = file.substring(dott+1);
 				
-				
 				// 파일명 랜덤값 세팅 
 				String uuid = UUID.randomUUID().toString();
-				//String savefileName = uuid + "_" + file;
 				
 				String savefileName = uuid + "_";
 				
