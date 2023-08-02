@@ -38,8 +38,13 @@
 	<sql id="careerColumns">
 		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
 		, intern_name, intern_ing, intern_s_date, intern_e_date, intern_duty
-		, his_count, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1, his_co_name2, his_ing2, his_s_date2
-		, his_e_date2, his_content2, his_duty2, his_pay2, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
+		, his_count
+		, his_co_name1, his_ing1, his_s_date1, his_e_date1, his_content1, his_duty1, his_pay1
+		, his_co_name2, his_ing2, his_s_date2, his_e_date2, his_content2, his_duty2, his_pay2
+		, his_co_name3, his_ing3, his_s_date3, his_e_date3, his_content3, his_duty3, his_pay3
+		, his_co_name4, his_ing4, his_s_date4, his_e_date4, his_content4, his_duty4, his_pay4
+		, his_co_name5, his_ing5, his_s_date5, his_e_date5, his_content5, his_duty5, his_pay5
+		, his_co_name6, his_ing6, his_s_date6, his_e_date6, his_content6, his_duty6, his_pay6
 		, port_file, port_file_saved, port_url
 	</sql>
 	
@@ -189,10 +194,14 @@
 		UPDATE R_Recruit /* updateCareer by ApplicationMapper.xml */
 		SET
 			intern_name=#{internName}, intern_ing=#{internIng}, intern_s_date=#{internSDate}, intern_e_date=#{internEDate}, intern_duty=#{internDuty}
-			, his_count=#{hisCount}, his_co_name1=#{hisCoName1}, his_ing1=#{hisIng1}, his_s_date1=#{hisSDate1}, his_e_date1=#{hisEDate1}
-			, his_content1=#{hisContent1}, his_duty1=#{hisDuty1}, his_pay1=#{hisPay1}, his_co_name2=#{hisCoName2}, his_ing2=#{hisIng2}, his_s_date2=#{hisSDate2}
-			, his_e_date2=#{hisEDate2}, his_content2=#{hisContent2}, his_duty2=#{hisDuty2}, his_pay2=#{hisPay2}, his_co_name3=#{hisCoName3}, his_ing3=#{hisIng3}
-			, his_s_date3=#{hisSDate3}, his_e_date3=#{hisEDate3}, his_content3=#{hisContent3}, his_duty3=#{hisDuty3}, his_pay3=#{hisPay3}
+			, his_count=#{hisCount}
+			, his_co_name1=#{hisCoName1}, his_ing1=#{hisIng1}, his_s_date1=#{hisSDate1}, his_e_date1=#{hisEDate1}, his_content1=#{hisContent1}, his_duty1=#{hisDuty1}, his_pay1=#{hisPay1}
+			, his_co_name2=#{hisCoName2}, his_ing2=#{hisIng2}, his_s_date2=#{hisSDate2}, his_e_date2=#{hisEDate2}, his_content2=#{hisContent2}, his_duty2=#{hisDuty2}, his_pay2=#{hisPay2}
+			, his_co_name3=#{hisCoName3}, his_ing3=#{hisIng3}, his_s_date3=#{hisSDate3}, his_e_date3=#{hisEDate3}, his_content3=#{hisContent3}, his_duty3=#{hisDuty3}, his_pay3=#{hisPay3}
+			, his_co_name4=#{hisCoName4}, his_ing4=#{hisIng4}, his_s_date4=#{hisSDate4}, his_e_date4=#{hisEDate4}, his_content4=#{hisContent4}, his_duty4=#{hisDuty4}, his_pay4=#{hisPay4}
+			, his_co_name5=#{hisCoName5}, his_ing5=#{hisIng5}, his_s_date5=#{hisSDate5}, his_e_date5=#{hisEDate5}, his_content5=#{hisContent5}, his_duty5=#{hisDuty5}, his_pay5=#{hisPay5}
+			, his_co_name6=#{hisCoName6}, his_ing6=#{hisIng6}, his_s_date6=#{hisSDate6}, his_e_date6=#{hisEDate6}, his_content6=#{hisContent6}, his_duty6=#{hisDuty6}, his_pay6=#{hisPay6}
+			
 			<if test="portFile != null and portFile != ''">
 			, port_file=#{portFile} , port_file_saved = #{portFileSaved}
 			</if>

@@ -300,6 +300,30 @@ public class RecruitDTO extends CommonDTO {
 	private String hisDuty3;
 	private String hisPay3;
 	
+	private String hisCoName4;
+	private String hisIng4;
+	private String hisSDate4;
+	private String hisEDate4;
+	private String hisContent4;
+	private String hisDuty4;
+	private String hisPay4;
+	
+	private String hisCoName5;
+	private String hisIng5;
+	private String hisSDate5;
+	private String hisEDate5;
+	private String hisContent5;
+	private String hisDuty5;
+	private String hisPay5;
+	
+	private String hisCoName6;
+	private String hisIng6;
+	private String hisSDate6;
+	private String hisEDate6;
+	private String hisContent6;
+	private String hisDuty6;
+	private String hisPay6;
+	
 	private String internName;
 	private String internIng;
 	private String internSDate;

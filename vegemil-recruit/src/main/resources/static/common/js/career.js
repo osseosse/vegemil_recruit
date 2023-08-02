@@ -8,12 +8,12 @@
         'id': window.id1,
     },
     show: function () {
-      if(window.id1 < 3) {
+      if(window.id1 < 6) {
    	      $(this).slideDown();
    	      window.id1++;
    	      $('#hisCount').val(window.id1);
       } else {
-      	alert("경력은 3개까지 입력 가능합니다.");
+      	alert("경력은 6개까지 입력 가능합니다.");
       	return false;
       }
     },
