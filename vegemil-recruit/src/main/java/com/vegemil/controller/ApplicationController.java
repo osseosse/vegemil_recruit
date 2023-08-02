@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -154,21 +155,19 @@ public class ApplicationController extends UiUtils {
 				params.setMemName(member.getMemName());
 				params.setMemNo(member.getMemNo());
 				params.setPhoneNo(member.getPhoneNo());
-		        
-				if(params.getMilClass()!= null || params.getMilClass() != "") {
+				 
+				if(StringUtils.hasText(params.getMilClass())) {
+					
 					if(params.getMilClass().equals("비대상") || params.getMilClass().equals("면제")) {
-						params.setMilArm("");
-						params.setMilType("");
-						params.setMilLv("");
-						params.setMilSDate("");
-						params.setMilEdate("");
-						params.setMilTicket("");
+						
+						params.setMilArm(""); params.setMilType(""); params.setMilLv("");
+						params.setMilSDate(""); params.setMilEdate(""); params.setMilTicket(""); 
 					}
-			
 				}
-				
+				 
 		        boolean isRegistered = applicationService.registerPersonalInfo(params);
-				jsonObj.addProperty("result", isRegistered);
+
+		        jsonObj.addProperty("result", isRegistered);
 				
 			}
 			
