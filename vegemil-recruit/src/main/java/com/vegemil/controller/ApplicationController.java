@@ -187,16 +187,15 @@ public class ApplicationController extends UiUtils {
 			HttpServletResponse response, HttpServletRequest request, Authentication authentication) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-//		
-//		if(application.getMilClass().equals("비대상") || application.getMilClass().equals("면제")) {
-//			application.setMilArm("");
-//			application.setMilType("");
-//			application.setMilLv("");
-//			application.setMilSDate("");
-//			application.setMilEdate("");
-//			application.setMilTicket("");
-//		}
-//		
+	
+		if(StringUtils.hasText(application.getMilClass())) {
+			if(application.getMilClass().equals("비대상") || application.getMilClass().equals("면제")) {
+				
+				application.setMilArm(""); application.setMilType(""); application.setMilLv("");
+				application.setMilSDate(""); application.setMilEdate(""); application.setMilTicket(""); 
+			}
+		}
+	 
 		try {
 			
 			String originalName = fileName.getOriginalFilename();
