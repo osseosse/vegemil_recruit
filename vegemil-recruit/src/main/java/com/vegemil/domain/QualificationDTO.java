@@ -65,6 +65,30 @@ public class QualificationDTO extends ApplicationDTO {
 	private String licNum4;
 	private String licGetDate4;
 	private String licPub4;
+	private String licName5;
+	private String licNum5;
+	private String licGetDate5;
+	private String licPub5;
+	private String licName6;
+	private String licNum6;
+	private String licGetDate6;
+	private String licPub6;
+	private String licName7;
+	private String licNum7;
+	private String licGetDate7;
+	private String licPub7;
+	private String licName8;
+	private String licNum8;
+	private String licGetDate8;
+	private String licPub8;
+	private String licName9;
+	private String licNum9;
+	private String licGetDate9;
+	private String licPub9;
+	private String licName10;
+	private String licNum10;
+	private String licGetDate10;
+	private String licPub10;
 	
 	//수상경력
 	private String medalCount;

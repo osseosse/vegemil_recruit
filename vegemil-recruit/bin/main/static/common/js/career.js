@@ -73,6 +73,12 @@ function endDateChange(e) {
 /*[- end of function -]*/
      
  function updateCareer() {
+ 	
+ 	var isValid = portFileCheck();
+ 	
+ 	if(isValid == false) {
+ 		return false;
+ 	}
 
 	const uri = "/application/updateCareer";
 	const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};

@@ -28,8 +28,16 @@
 		, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3
 		, lang_talk3, lang_make3, lang_read3
     	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
-    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
-    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
+    	, lic_name1, lic_num1, lic_get_date1, lic_pub1
+    	, lic_name2, lic_num2, lic_get_date2, lic_pub2
+    	, lic_name3, lic_num3, lic_get_date3, lic_pub3
+    	, lic_name4, lic_num4, lic_get_date4, lic_pub4
+    	, lic_name5, lic_num5, lic_get_date5, lic_pub5
+    	, lic_name6, lic_num6, lic_get_date6, lic_pub6
+    	, lic_name7, lic_num7, lic_get_date7, lic_pub7
+    	, lic_name8, lic_num8, lic_get_date8, lic_pub8
+    	, lic_name9, lic_num9, lic_get_date9, lic_pub9
+    	, lic_name10, lic_num10, lic_get_date10, lic_pub10
     	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
     	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
     	, lang_count, sw_count, lic_count, medal_count, for_count
@@ -177,9 +185,16 @@
 			, lang_name3=#{langName3}, lang_point3=#{langPoint3}, lang_lv3=#{langLv3}, lang_lic_name3=#{langLicName3}, lang_lic_num3=#{langLicNum3}, lang_get3=#{langGet3}, lang_talk3=#{langTalk3}
 	    	, lang_make3=#{langMake3}, lang_read3=#{langRead3}
 	    	, sw_name1=#{swName1}, sw_lv1=#{swLv1}, sw_name2=#{swName2}, sw_lv2=#{swLv2}, sw_name3=#{swName3}, sw_lv3=#{swLv3}
-	    	, lic_name1=#{licName1}, lic_num1=#{licNum1}, lic_get_date1=#{licGetDate1}, lic_pub1=#{licPub1}, lic_name2=#{licName2}, lic_num2=#{licNum2}
-	    	, lic_get_date2=#{licGetDate2}, lic_pub2=#{licPub2}, lic_name3=#{licName3}, lic_num3=#{licNum3}, lic_get_date3=#{licGetDate3}, lic_pub3=#{licPub3}, lic_name4=#{licName4}
-    		, lic_num4=#{licNum4}, lic_get_date4=#{licGetDate4}, lic_pub4=#{licPub4}
+	    	, lic_name1=#{licName1}, lic_num1=#{licNum1}, lic_get_date1=#{licGetDate1}, lic_pub1=#{licPub1}
+	    	, lic_name2=#{licName2}, lic_num2=#{licNum2}, lic_get_date2=#{licGetDate2}, lic_pub2=#{licPub2}
+	    	, lic_name3=#{licName3}, lic_num3=#{licNum3}, lic_get_date3=#{licGetDate3}, lic_pub3=#{licPub3}
+	    	, lic_name4=#{licName4}, lic_num4=#{licNum4}, lic_get_date4=#{licGetDate4}, lic_pub4=#{licPub4}
+	    	, lic_name5=#{licName5}, lic_num5=#{licNum5}, lic_get_date5=#{licGetDate5}, lic_pub5=#{licPub5}
+	    	, lic_name6=#{licName6}, lic_num6=#{licNum6}, lic_get_date6=#{licGetDate6}, lic_pub6=#{licPub6}
+	    	, lic_name7=#{licName7}, lic_num7=#{licNum7}, lic_get_date7=#{licGetDate7}, lic_pub7=#{licPub7}
+	    	, lic_name8=#{licName8}, lic_num8=#{licNum8}, lic_get_date8=#{licGetDate8}, lic_pub8=#{licPub8}
+	    	, lic_name9=#{licName9}, lic_num9=#{licNum9}, lic_get_date9=#{licGetDate9}, lic_pub9=#{licPub9}
+	    	, lic_name10=#{licName10}, lic_num10=#{licNum10}, lic_get_date10=#{licGetDate10},  lic_pub10=#{licPub10}
 			, medal_name1=#{medalName1}, medal_date1=#{medalDate1}, medal_content1=#{medalContent1}, medal_name2=#{medalName2}, medal_date2=#{medalDate2}
 			, medal_content2=#{medalContent2}, medal_name3=#{medalName3}, medal_date3=#{medalDate3}, medal_content3=#{medalContent3}
 			, for_state1=#{forState1}, for_s_date1=#{forSDate1}, for_e_date1=#{forEDate1}, for_name1=#{forName1}, for_content1=#{forContent1}
@@ -297,8 +312,16 @@
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
 		    	, lang_make3, lang_read3
 		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
-		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
-		    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
+		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1
+		    	, lic_name2, lic_num2, lic_get_date2, lic_pub2
+		    	, lic_name3, lic_num3, lic_get_date3, lic_pub3
+		    	, lic_name4, lic_num4, lic_get_date4, lic_pub4
+		    	, lic_name5, lic_num5, lic_get_date5, lic_pub5
+		    	, lic_name6, lic_num6, lic_get_date6, lic_pub6
+		    	, lic_name7, lic_num7, lic_get_date7, lic_pub7
+		    	, lic_name8, lic_num8, lic_get_date8, lic_pub8
+		    	, lic_name9, lic_num9, lic_get_date9, lic_pub9
+		    	, lic_name10, lic_num10, lic_get_date10, lic_pub10
 		    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
 		    	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
 		    	, lang_count, sw_count, lic_count, medal_count, for_count
@@ -338,8 +361,16 @@
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
 		    	, lang_make3, lang_read3
 		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
-		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1, lic_name2, lic_num2, lic_get_date2, lic_pub2, lic_name3, lic_num3, lic_get_date3
-		    	, lic_pub3, lic_name4, lic_num4, lic_get_date4, lic_pub4
+		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1
+		    	, lic_name2, lic_num2, lic_get_date2, lic_pub2
+		    	, lic_name3, lic_num3, lic_get_date3, lic_pub3
+		    	, lic_name4, lic_num4, lic_get_date4, lic_pub4
+		    	, lic_name5, lic_num5, lic_get_date5, lic_pub5
+		    	, lic_name6, lic_num6, lic_get_date6, lic_pub6
+		    	, lic_name7, lic_num7, lic_get_date7, lic_pub7
+		    	, lic_name8, lic_num8, lic_get_date8, lic_pub8
+		    	, lic_name9, lic_num9, lic_get_date9, lic_pub9
+		    	, lic_name10, lic_num10, lic_get_date10, lic_pub10		    	
 		    	, medal_name1, medal_date1, medal_content1, medal_name2, medal_date2, medal_content2, medal_name3, medal_date3, medal_content3
 		    	, for_state1, for_s_date1, for_e_date1, for_name1, for_content1, for_state2, for_s_date2, for_e_date2, for_name2, for_content2
 		    	, lang_count, sw_count, lic_count, medal_count, for_count

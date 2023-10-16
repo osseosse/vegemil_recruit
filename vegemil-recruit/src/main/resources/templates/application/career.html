@@ -43,7 +43,7 @@
 							<p class="btn_type03 mt10"><a onclick="javascript:updateCareer();">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
-						<form th:action="@{/application/registerCareer}" id="careerForm" th:object="${app}" method="post" enctype="multipart/form-data">
+						<form th:action="@{/application/registerCareer}" id="careerForm" onsubmit="return portFileCheck()" th:object="${app}" method="post" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
 							<input type="hidden" th:field="*{memNo}" />
@@ -191,11 +191,12 @@
 								Input File명이 노출되도록
 							================================ -->
 							<script>
-								$("#portFile").on('change',function(){
-								  var fileName = $("#portFile").val();
+								$("#fileName").on('change',function(){
+								  var fileName = $("#fileName").val();
 								  $(".upload-name").val(fileName);
 								});
 							</script>
+
 						</div><!-- //wrap860 -->
 					</div><!-- //memberWrapBase -->
 				</div><!-- //container1300 -->
@@ -548,6 +549,19 @@ $(document).ready(function(){
 	});
 		
 });
+
+function portFileCheck(){
+	
+	var portFileVal =  $(".upload-name").val();
+	var portUrl = $("#portUrl").val();
+	//alert("portUrl = " + portUrl + "|" + portUrl.length);
+	//alert("portFileVal = " + portFileVal);
+	if((portFileVal == null || typeof portFileVal == "undefined" || portFileVal.length<1) && portUrl.length < 1){		
+		alert("포트폴리오 첨부는 필수 입니다");
+		return false;	
+	}
+	
+}
 /*]]>*/
 </script>
 </body>

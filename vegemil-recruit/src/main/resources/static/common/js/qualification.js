@@ -60,12 +60,12 @@
         'id': window.id2,
     },
     show: function () {
-      if(window.id2 < 4) {
+      if(window.id2 < 10) {
    	      $(this).slideDown();
    	      window.id2++;
    	      $('#licCount').val(window.id2);
       } else {
-      	alert("자격 및 면허는 4개까지 입력 가능합니다.");
+      	alert("자격 및 면허는 10개까지 입력 가능합니다.");
       	return false;
       }
     },
