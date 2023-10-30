@@ -241,7 +241,7 @@
 											<h1 class="mb-1 text-white">[[${recruitList.sTitle}]]</h1>
 <!-- 	                                        <p class=" text-white">${#dates.format(recruitList.sStartdate,'yyyy/MM/dd')} ~ ${#dates.format(recruitList.sEnddate,'yyyy/MM/dd')} <br>채용 마감일 까지 2일 남았습니다.</p> -->
 												<p class="text-white" >[[${ @comUtils.getDateFormat(recruitList.sStartdate) }]] ~ [[${ @comUtils.getDateFormat(recruitList.sEnddate) }]]
-													<br>채용 마감일 까지 <span th:text="${#strings.substring(recruitList.sDday, 1)}"></span>일 남았습니다.</p>
+													<br>채용 마감일 까지 <span th:if="${recruitList.sDday} < 1" th:text="${#strings.substring(recruitList.sDday, 1)}"></span>일 남았습니다.</p>
 												 
 	                                    </div>
 										<ul class="ul100-2 ">

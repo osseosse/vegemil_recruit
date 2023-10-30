@@ -70,7 +70,7 @@
 											<li>
 												<div class="custom-sel w230">
 												  <select th:field="*{joinField1}">
-													<option value="선택">선택</option> 
+													<option value="">선택</option> 
 													<option value="제품개발" >제품개발</option>
 													<option value="식품표시법규">식품표시법규</option>
 												  </select>
@@ -406,6 +406,7 @@
 <!-- ================================ Footer ================================ -->
 <footer class="container100 center bgGray" th:replace="fragments/mainFooter :: footerFragment"></footer>
 <!-- ================================ // Footer ================================ -->
+
 <script th:src="@{/common/js/personalInfo.js}"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/

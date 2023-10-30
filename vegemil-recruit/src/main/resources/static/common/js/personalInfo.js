@@ -169,6 +169,11 @@ function execPostcode() {
 	 
 	function registerPersonalInfo() {
 	
+		if( $("#joinField1").val().length < 1){
+			alert("지원부문 값 입력은 필수입니다.");
+			return false;
+		}
+		
 		if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
 		    	alert("보훈 대상자의 경우 보훈번호를 입력해주세요.");
@@ -186,6 +191,12 @@ function execPostcode() {
 	}
      
      function updatePersonalInfo() {
+     	
+     	if( $("#joinField1").val().length < 1){
+			alert("지원부문 값 입력은 필수입니다.");
+			return false;
+		}
+		
      
      	if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
