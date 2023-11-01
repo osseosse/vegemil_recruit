@@ -77,7 +77,7 @@ public class RecruitServiceImpl implements RecruitService {
 		
 		int recruitEndCheck = RecruitMapper.getRecruitEndYn(setupTh);
 		
-		if(recruitEndCheck > 0 ) {
+		if(recruitEndCheck < 0 ) {
 			recruitEndCheck = 0;
 		}
 		

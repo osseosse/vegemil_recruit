@@ -43,7 +43,7 @@
 							<p class="btn_type03 mt10"><a onclick="javascript:updateCareer();">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
-						<form th:action="@{/application/registerCareer}" id="careerForm" onsubmit="return portFileCheck()" th:object="${app}" method="post" enctype="multipart/form-data">
+						<form th:action="@{/application/registerCareer}" id="careerForm" th:object="${app}" method="post" enctype="multipart/form-data">
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
 							<input type="hidden" th:field="*{memNo}" />
