@@ -112,7 +112,7 @@
 	
 	<select id="getRecruitEndYn" resultType="int">
 		SELECT
-			TIMESTAMPDIFF(SECOND, NOW(), s_enddate) as leaveSecond
+			TIMESTAMPDIFF(SECOND, NOW(), s_enddate) as remaningSec
 		FROM
 			R_Setup
 		WHERE
