@@ -59,7 +59,7 @@
 										<ul th:if="${recruit.sDday} < 1">
 											<li>
 												<p class="f15 ac gray fw400" th:text="|${recruit.sStartdate} ~ ${recruit.sEnddate}|" ></p>
-												<p class="mt10 f23 fw700"><span class="ac mr10 blue" th:text="|D${recruit.sDday}|"></span><span th:text="${recruit.sTitle}"></span></p>
+												<p class="mt10 f23 fw700"><span class="ac mr10 blue" th:text="|D-${recruit.sDday}|"></span><span th:text="${recruit.sTitle}"></span></p>
 												<p class="mt20 btn_type11"><a href="/recruit/list">공고 보러가기</a></p>
 												<p class="mt20 f20 fw600 number ml5"><span class="ac" th:text="${recruitCount}"></span> <span class="f16 fw600">건</span></p> 
 											</li>
