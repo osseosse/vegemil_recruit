@@ -15,7 +15,7 @@
 	});
 </script>
 <body>
-	<div class="wrap">
+	<div class="wrap"> 
 		<!-- ================================ Header ================================ -->
 		<header class="subColor" th:replace="fragments/mainHeader :: headerFragment"></header>
 		<!-- ================================ // Header ================================ -->
@@ -30,7 +30,7 @@
 				<div class="container1300 center" >
 					<div class="memberWrapBase" th:object="${recruit}">
 						<div class="sidebar fixedsticky w350 f-left">
-							<p class="f23 fw600 line-height140" ><span th:text="|*{sTitle} |"></span><span class="r-black-line2 f16" th:text="|D-*{sDday}|"></span> </p>
+							<p class="f23 fw600 line-height140" ><span th:text="|*{sTitle} |"></span><span class="r-black-line2 f16" th:text="|D*{sDday}|"></span> </p>
 							<p class="mt20"><span class="f14 fw400" th:text="|*{sStartdate} ~ *{sEnddate}|"></span></p>
 							<p class="mt50"><a href="/info/info"><img th:src="@{/img/infoBanner.png}" alt="채용절차 보러가기"/></a></p>
 						</div>
