@@ -84,8 +84,9 @@
 									</div>
 								</div>
 							</div>
-							<!-- (5)도전했던 경험과 이를 통해 얻는 성취는 무엇인지 서술하여 주시기 바랍니다. -->
-							<p class="f23 fw600 pr mt80">지원 분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</p>
+							<!-- (5)경력 신입 분기 질문 -->							
+							<p class="f23 fw600 pr mt80" th:if="${app.ground1 == '경력'}">지원 분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</p>
+							<p class="f23 fw600 pr mt80" th:if="${app.ground1 == '신입'}">협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</p>
 							<div class="r-box mt20">
 								<div class="row">
 									<div class="col-lg-12 ">
@@ -107,7 +108,8 @@
 
 							<div class="w100 mt30">
 								<a th:href="|@{/application/career}?idx=${app.idx}|">
-								<p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="경력" />경력</p></a>
+									<p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="경력" />경력</p>
+								</a>
 								<button type="submit" class="f_right"><p class="f_right f20"><img th:src="@{/img/btn_send.jpg}" alt="제출" /></p></button>
 							</div>
 							</form>

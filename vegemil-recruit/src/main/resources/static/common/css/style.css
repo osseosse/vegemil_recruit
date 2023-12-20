@@ -7,7 +7,7 @@
 ================================*/
 body {font-family:"Noto Sans KR","gulim","dotum", sans-serif !important; word-break:keep-all; color:#333}
 .ac {font-family: 'Archivo';}
-/* À¥ÆùÆ®*/
+/* ï¿½ï¿½ï¿½ï¿½Æ®*/
 @font-face{
 font-family:'Noto Sans KR';font-style:normal;font-weight:300;
 src:url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),  	
@@ -354,7 +354,7 @@ button.btn_type02 { background:#fff; border:1px solid #E6E6E6; color:#333; font-
 button.btn_type02 {color:#333; padding:23px 0; display:inline-block; width:100% }
 button.btn_type03 { background:#333333;border:1px solid #333333;  color:#fff; font-weight:400; text-align:center; display:inline-block; border-radius:50px; font-size:20px; width:100%}
 button.btn_type03 {color:#fff; padding:23px 0; display:inline-block; width:100% }
-/* ¿ìÆí¹øÈ£Ã£±â */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½È£Ã£ï¿½ï¿½ */
 .btn_type04 { background:#F3F3F3;border:1px solid #E6E6E6;  color:#aaa; font-weight:400; text-align:center; 
 display:inline-block;  font-size:14px; }
 .btn_type04 a {color:#aaa; padding:12px 15px; display:inline-block; }
@@ -467,7 +467,7 @@ button.btn_type15 { background:#333333; color:#fff; font-weight:400; text-align:
 }
 
 /*================================ 
-    ·Î±×ÀÎ
+    ï¿½Î±ï¿½ï¿½ï¿½
 ================================*/
 .memberWrap {position:relative; padding:130px 0; width:400px; margin:0 auto}
 .memberWrapBase {padding:75px 0 200px 0; margin:0 auto}
@@ -602,7 +602,7 @@ input.add-type01 {width:400px}
   max-height:200px;
 	overflow-y:scroll
 }
-/* ½ºÅ©·Ñ »ý¼º */
+/* ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .custom-sel.scroll .select-items{overflow-y:scroll; }
 
 
@@ -645,7 +645,7 @@ select.base option.optionItem:last-child {
 
 .bottom_line {border-bottom:1px solid #E6E6E6}
 /*================================ 
-    ¾×¼Ç¹öÆ°
+    ï¿½×¼Ç¹ï¿½Æ°
 ================================*/
 .btn-acc button {border:1px solid #E6E6E6; margin-left:-1px; width:100px;  text-align:center;  padding: 13px 0px; float:left; background:#fff; outline:0 }
 .btn-acc button:focus { background:#333333; color:#fff}
@@ -653,7 +653,7 @@ select.base option.optionItem:last-child {
 .btn-acc2 button:focus { background:#333333; color:#fff}
 
 /*================================ 
-    °íÁ¤¸Þ´º layout
+    ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ layout
 ================================*/
 .memberWrapBase {
 	margin: 0 auto;position:relative
@@ -677,7 +677,7 @@ https://github.com/filamentgroup/fixed-sticky */
 }
 
 /*================================ 
-    ÀÔ·ÂÀÏ¹Ý
+    ï¿½Ô·ï¿½ï¿½Ï¹ï¿½
 ================================*/
 .pr {position:relative;}
 .selPlus {position:absolute; right:10px; top:0px; }
@@ -711,7 +711,7 @@ https://github.com/filamentgroup/fixed-sticky */
 
 
 /*================================ 
-    ·¹ÀÌ¾îÆË¾÷
+    ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½Ë¾ï¿½
 ================================*/
 .pbb30 {padding-bottom:30px}
 .pbb40 {padding-bottom:40px}
@@ -781,7 +781,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 .divide70 {position:relative; width:82%; margin-top:30px;float:right}
 .clear {clear:both}
 /*================================ 
-    //·¹ÀÌ¾îÆË¾÷
+    //ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½Ë¾ï¿½
 ================================*/
 
 
@@ -820,7 +820,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 	
 }
 
-/* ÀçÁ÷Áß > Ã¼Å©¹Ú½º µðÀÚÀÎ  [Àü»ê ¿äÃ»À¸·Î labelÇÏÀ§¿¡ ÀÎÇ²¿äÃ». ¾Æ·¡ µðÀÚÀÎÃ¼Å©¹Ú½º »ç¿ë¾î·Á¿ò ]*/
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ > Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  [ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ labelï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç²ï¿½ï¿½Ã». ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ]*/
 .checkStyle input[type="checkbox"] {display:none;}
 .checkStyle input[type="checkbox"] + label {color:#343434;}
 .checkStyle input[type="checkbox"] + label span {
@@ -833,7 +833,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
     cursor:pointer;
 }
 .checkStyle input[type="checkbox"]:checked + label span { background:url(https://image.edaymall.com/images/ico/check_brand.png) -17px top no-repeat;}
-/* µ¿ÀÇ > Ã¼Å©¹Ú½º µðÀÚÀÎ */
+/* ï¿½ï¿½ï¿½ï¿½ > Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .checkStyle2 input[type="checkbox"] {display:none;}
 .checkStyle2 input[type="checkbox"] + label {color:#fff;}
 .checkStyle2 input[type="checkbox"] + label span {
@@ -848,7 +848,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 }
 .checkStyle2 input[type="checkbox"]:checked + label span { background:url(../../img/check.png) -22px top no-repeat; }
 
-/* Á÷¹« > Ã¼Å©¹Ú½º µðÀÚÀÎ */
+/* ï¿½ï¿½ï¿½ï¿½ > Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .checkStyle3 input[type="checkbox"] {display:none;}
 .checkStyle3 input[type="checkbox"] + label {color:#aaa; border:1px solid #E6E6E6;padding:10px }
 .checkStyle3 input[type="checkbox"] + label span {
@@ -865,7 +865,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 .blbType02 li {display:inline-block; margin-right:5px; margin-bottom:5px}
 
 
-/* Á÷¹« > ¶óµð¿À µðÀÚÀÎ */
+/* ï¿½ï¿½ï¿½ï¿½ > ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .radioStyle1 input[type="radio"] {
     display:none;
 }
@@ -881,7 +881,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
 }
 
 
-/* Á÷¹« > ¶óµð¿À µðÀÚÀÎ */
+/* ï¿½ï¿½ï¿½ï¿½ > ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .radioStyle2 input[type="radio"] {
     display:none;
 }
@@ -896,7 +896,7 @@ p.txtbox {position:relative; line-height:170%; margin-top:30px; margin-top:30px}
    border:1px solid #F3F3F3; color:#333 ; background:#F3F3F3; border-radius:20px
 }
 
-/* ¼ºº°, ±ºÇÊµî ±âº» ¶óµð¿À µðÀÚÀÎ */
+/* ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Êµï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .radioStyle3 input[type="radio"] {
     display:none;
 }
@@ -1004,12 +1004,12 @@ div.ani03{
 .list_ico_box span { border-radius:20px; padding:4px 6px; margin-left:12px}
 .list_ico_box span:hover {background:#fff;  }
 .list_ico_box span button {padding:0; margin:0}
-/* r-box2  Ã£¾Æ¼­ a »èÁ¦*/
+/* r-box2  Ã£ï¿½Æ¼ï¿½ a ï¿½ï¿½ï¿½ï¿½*/
 a .r-box2 .info02 dl dd ul li.btn_review_arrow {background:url(../../img/ico_arrow_b.png) no-repeat 12px 10px ; padding:0px; height:30px; width:30px }
 a:hover .r-box2 .info02 dl dd ul li.btn_review_arrow {background:#333 url(../../img/ico_arrow_w.png) no-repeat 12px 10px ; padding:0px; height:30px; width:30px }
 a:hover .r-box2 {background:#F3F3F3; bordeR:1px solid #F3F3F3}
 
-/* r-box ¹öÆ°ÀÌ¿Ü¿µ¿ª ¸µÅ© */
+/* r-box ï¿½ï¿½Æ°ï¿½Ì¿Ü¿ï¿½ï¿½ï¿½ ï¿½ï¿½Å© */
 .r-box.bgHover .info02 dl dd ul li.btn_review_arrow {background:url(../../img/ico_arrow_b.png) no-repeat 12px 10px ; padding:0px; height:30px; width:30px }
 .r-box.bgHover:hover .info02 dl dd ul li.btn_review_arrow {background:#333 url(../../img/ico_arrow_w.png) no-repeat 12px 10px ; padding:0px; height:30px; width:30px }
 .r-box.bgHover:hover {background:#F3F3F3;  bordeR:1px solid #F3F3F3;}
@@ -1053,22 +1053,22 @@ a:hover .r-box2 {background:#F3F3F3; bordeR:1px solid #F3F3F3}
 .bene_ani08 {position:absolute; left:0px; top:143px}
 
 
-.work_ani01 {position:absolute; left:-140px; top:280px}/* »¡°£³×¸ð */
-.work_ani02 {position:absolute; left:732px; top:56px}/* ÀÛÀºÆÄ¶û */
+.work_ani01 {position:absolute; left:-140px; top:280px}/* ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ */
+.work_ani02 {position:absolute; left:732px; top:56px}/* ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ */
 .work_ani03 {position:absolute; right:70px; top:123px}
 .work_ani04 {position:absolute; right:-40px; top:270px; }
-.work_ani05 {position:absolute; right:-30px; top:460px; } /* ³ì»ö ¼¼¸ð*/
-.work_ani06 {position:absolute; left:0px; top:380px; } /* ¾÷¹«³»¿ë*/
-.work_ani07 {position:absolute; left:0px; top:140px; } /* ±Û */
+.work_ani05 {position:absolute; right:-30px; top:460px; } /* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
+.work_ani06 {position:absolute; left:0px; top:380px; } /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+.work_ani07 {position:absolute; left:0px; top:140px; } /* ï¿½ï¿½ */
 
 /*================================ 
-    ¸®½ºÆ® 
+    ï¿½ï¿½ï¿½ï¿½Æ® 
 ================================*/
 .btn_listBox {position:relative;}
 .btn-box-2 {position:relative; text-align:center}
 .btn-box-2 li {display:inline-block; margin:0 10px}
 /*================================ 
-    ¾È³» 
+    ï¿½È³ï¿½ 
 ================================*/
 .bell {position:relative;  }
 .bell .title_bell {position:relative;vertical-align:middle; display:inline-block}

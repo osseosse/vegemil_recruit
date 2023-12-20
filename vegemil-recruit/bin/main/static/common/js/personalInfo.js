@@ -43,6 +43,7 @@ function execPostcode() {
         }
         }).open();
     }
+	
     /*[- end of function -]*/
     
     function getImageFiles(e) {
@@ -78,6 +79,193 @@ function execPostcode() {
         });
       }
       /*[- end of function -]*/
+      
+      function madatoryDataCheck(path){
+      
+      	$("#joinCompany1").attr("disabled", false);
+      	$("#joinCompany2").attr("disabled", false);
+      	$("#ground1").attr("disabled", false);
+      	$("#ground2").attr("disabled", false);
+      	$("#joinField1").attr("disabled", false);
+      	$("#joinField2").attr("disabled", false);
+      	$("#joinArea1").attr("disabled", false);
+      	$("#joinArea2").attr("disabled", false);
+      
+      	if( $("#joinCompany1").val().length < 1){
+			alert("지원 회사는 필수입니다.");
+			return false;
+		}
+		
+		if( $("#ground1").val().length < 1){
+			alert("지원부문(신입/경력) 입력은 필수입니다.");
+			return false;
+		}
+     	
+     	if( $("#joinField1").val().length < 1){
+			alert("지원부문(직무) 입력은 필수입니다.");
+			return false;
+		}
+		
+		if( $("#joinArea1").val().length < 1){
+			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}		
+		if( $("#joinCompany2").val().length < 1){
+			alert("지원 회사는 필수입니다.");
+			return false;
+		}
+		
+		if( $("#ground2").val().length < 1){
+			alert("지원부문(신입/경력) 입력은 필수입니다.");
+			return false;
+		}
+     	
+     	if( $("#joinField2").val().length < 1){
+			alert("지원부문(직무) 입력은 필수입니다.");
+			return false;
+		}
+		
+		if( $("#joinArea2").val().length < 1){
+			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}		
+		
+		updatePersonalInfo();
+		
+		location.href=path;
+      }
+
+
+	  function openSelectOpt(standard){
+		let joinCompany1 = $("#joinCompany1").val();
+		let ground1 = $("#ground1").val();
+		let joinField1 = $("#joinField1").val();
+
+		switch (standard){
+
+			case '1':
+
+				$("#ground1").html('');
+				$("#joinField1").html('<option value="">선택</option>');
+				$("#joinArea1").html('<option value="">선택</option>');
+
+				if(joinCompany1 == '정식품'){			
+
+					$("#ground1").append('<option value="">선택</option><option value="신입">신입</option><option value="경력">경력</option>');			
+				}else if(joinCompany1 == '자연과사람들'){					
+
+					$("#ground1").append('<option value="">선택</option><option value="신입">신입</option>');			
+				}
+				$("#ground1").attr("disabled", false);
+				alert("지원부문(신입/경력)을 선택하세요.");
+				return;
+				
+			case '2':
+
+				$("#joinField1").html('<option value="">선택</option>');
+				$("#joinArea1").html('<option value="">선택</option>');
+
+				if(ground1 == '신입' && joinCompany1 == '정식품'){					
+					$("#joinField1").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option>');
+					
+				}else if(ground1 == '경력' && joinCompany1 == '정식품'){
+					$("#joinField1").append('<option value="재무회계">재무회계</option><option value="총무인사">총무인사</option><option value="유통영업">유통영업</option>');			
+
+				}else if(joinCompany1 == '자연과사람들'){
+					$("#joinField1").append('<option value="공무(보건소방)">공무(보건소방)</option>');			
+				}
+				$("#joinField1").attr("disabled", false);
+				alert("지원부문(직무)을 선택하세요.");
+				return;
+		
+			case '3':
+
+				$("#joinArea1").html('<option value="">선택</option>');
+
+				if(joinField1 == '영업관리' && ground1 == '신입' && joinCompany1 == '정식품'){
+					$("#joinArea1").append('<option value="경기">경기(영업관리)</option><option value="대구">대구(영업관리)</option><option value="경남">경남(영업관리)</option><option value="경주">경주(영업관리)</option>');			
+				}else if((joinField1 == '재무회계' || joinField1 == '해외영업')  && ground1 == '신입' && joinCompany1 == '정식품'){
+					$("#joinArea1").append('<option value="서울" selected>서울</option>');
+				}else if(joinField1 == '연구' && joinCompany1 == '정식품'){
+					$("#joinArea1").append('<option value="청주" selected>청주</option>');
+				}else if(ground1 == '경력' && joinCompany1 == '정식품'){
+					$("#joinArea1").append('<option value="서울" selected>서울</option>');
+				}else if(joinCompany1 == '자연과사람들'){
+					$("#joinArea1").append('<option value="담양" selected>담양</option>');
+				}
+
+				$("#joinArea1").attr("disabled", false);
+				alert("근무희망 지역을 선택하세요.");
+				return;						
+		}
+
+	  }
+
+
+	  function openSelectOpt2(standard){
+		let joinCompany2 = $("#joinCompany2").val();
+		let ground2 = $("#ground2").val();
+		let joinField2 = $("#joinField2").val();
+
+		switch (standard){
+
+			case '1':
+
+				$("#ground2").html('');
+				$("#joinField2").html('<option value="">선택</option>');
+				$("#joinArea2").html('<option value="">선택</option>');
+
+				if(joinCompany2 == '정식품'){			
+
+					$("#ground2").append('<option value="">선택</option><option value="신입">신입</option><option value="경력">경력</option>');			
+				}else if(joinCompany2 == '자연과사람들'){					
+
+					$("#ground2").append('<option value="">선택</option><option value="신입">신입</option>');			
+				}
+				$("#ground2").attr("disabled", false);
+				alert("지원부문(신입/경력)을 선택하세요.");
+				return;
+				
+			case '2':
+
+				$("#joinField2").html('<option value="">선택</option>');
+				$("#joinArea2").html('<option value="">선택</option>');
+
+				if(ground2 == '신입' && joinCompany2 == '정식품'){					
+					$("#joinField2").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option>');
+					
+				}else if(ground2 == '경력' && joinCompany2 == '정식품'){
+					$("#joinField2").append('<option value="재무회계">재무회계</option><option value="총무인사">총무인사</option><option value="유통영업">유통영업</option>');			
+
+				}else if(joinCompany2 == '자연과사람들'){
+					$("#joinField2").append('<option value="공무(보건소방)">공무(보건소방)</option>');			
+				}
+				$("#joinField2").attr("disabled", false);
+				alert("지원부문(직무)을 선택하세요.");
+				return;
+		
+			case '3':
+
+				$("#joinArea2").html('<option value="">선택</option>');
+
+				if(joinField2 == '영업관리' && ground2 == '신입' && joinCompany2 == '정식품'){
+					$("#joinArea2").append('<option value="경기">경기(영업관리)</option><option value="대구">대구(영업관리)</option><option value="경남">경남(영업관리)</option><option value="경주">경주(영업관리)</option>');			
+				}else if((joinField2 == '재무회계' || joinField2 == '해외영업')  && ground2== '신입' && joinCompany2 == '정식품'){
+					$("#joinArea2").append('<option value="서울" selected>서울</option>');
+				}else if(joinField2 == '연구' && joinCompany2 == '정식품'){
+					$("#joinArea2").append('<option value="청주" selected>청주</option>');
+				}else if(ground2 == '경력' && joinCompany2 == '정식품'){
+					$("#joinArea2").append('<option value="서울" selected>서울</option>');
+				}else if(joinCompany2 == '자연과사람들'){
+					$("#joinArea2").append('<option value="담양" selected>담양</option>');
+				}
+				
+				$("#joinArea2").attr("disabled", false);
+				alert("근무희망 지역을 선택하세요.");
+				return;						
+		}
+
+	  }
 
       function createElement(e, file) {
         const img = document.createElement('img');
@@ -125,7 +313,7 @@ function execPostcode() {
    	});
    	/*[- end of function -]*/
 
-     $(".ls1").keyup(function() {
+    $(".ls1").keyup(function() {
 		
 	    if( this.value.length > 8){
 	         this.value = this.value.substr(0, 8);
@@ -146,8 +334,8 @@ function execPostcode() {
 	     conversion += val;
 	     this.value = conversion;
 	     
-	 });
-	 /*[- end of function -]*/
+	});
+	/*[- end of function -]*/
 	 
 	 $("input[name='milClass']:radio").change(function () {
         //라디오 버튼 값
@@ -166,13 +354,30 @@ function execPostcode() {
         }
                         
 	});
-	 
+
+
 	function registerPersonalInfo() {
 	
-		if( $("#joinField1").val().length < 1){
-			alert("지원부문 값 입력은 필수입니다.");
+		if( $("#joinCompany1").val().length < 1){
+			alert("지원 회사는 필수입니다.");
 			return false;
 		}
+		
+		if( $("#joinField1").val().length < 1){
+			alert("지원부문(신입/경력) 입력은 필수입니다.");
+			return false;
+		}
+     	
+     	if( $("#joinField2").val().length < 1){
+			alert("지원부문(직무) 입력은 필수입니다.");
+			return false;
+		}
+		
+		if( $("#joinArea2").val().length < 1){
+			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}
+		
 		
 		if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
@@ -188,15 +393,59 @@ function execPostcode() {
 		    }
 		}
 		
+		$("#joinCompany1").attr("disabled", false);
+      	$("#joinCompany2").attr("disabled", false);
+      	$("#ground1").attr("disabled", false);
+      	$("#ground2").attr("disabled", false);
+      	$("#joinField1").attr("disabled", false);
+      	$("#joinField2").attr("disabled", false);
+      	$("#joinArea1").attr("disabled", false);
+      	$("#joinArea2").attr("disabled", false);
+      
+		
 	}
      
      function updatePersonalInfo() {
-     	
-     	if( $("#joinField1").val().length < 1){
-			alert("지원부문 값 입력은 필수입니다.");
+     
+     
+     	if( $("#joinCompany1").val().length < 1){
+			alert("지원 회사는 필수입니다.");
 			return false;
 		}
 		
+		if( $("#ground1").val().length < 1){
+			alert("지원부문(신입/경력) 입력은 필수입니다.");
+			return false;
+		}
+     	
+     	if( $("#joinField1").val().length < 1){
+			alert("지원부문(직무) 입력은 필수입니다.");
+			return false;
+		}
+		
+		if( $("#joinArea1").val().length < 1){
+			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}		
+		if( $("#joinCompany2").val().length < 1){
+			alert("지원 회사는 필수입니다.");
+			return false;
+		}
+		
+		if( $("#ground2").val().length < 1){
+			alert("지원부문(신입/경력) 입력은 필수입니다.");
+			return false;
+		}
+     	
+     	if( $("#joinField2").val().length < 1){
+			alert("지원부문(직무) 입력은 필수입니다.");
+			return false;
+		}
+		
+		if( $("#joinArea2").val().length < 1){
+			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}		
      
      	if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
@@ -211,6 +460,16 @@ function execPostcode() {
 		    	return false;
 		    }
 		}
+		
+		$("#joinCompany1").attr("disabled", false);
+      	$("#joinCompany2").attr("disabled", false);
+      	$("#ground1").attr("disabled", false);
+      	$("#ground2").attr("disabled", false);
+      	$("#joinField1").attr("disabled", false);
+      	$("#joinField2").attr("disabled", false);
+      	$("#joinArea1").attr("disabled", false);
+      	$("#joinArea2").attr("disabled", false);
+      
 
    		const uri = "/application/updatePersonalInfo";
    		const headers = {"Content-Type": "multipart/form-data", "X-HTTP-Method-Override": "POST"};
@@ -231,6 +490,13 @@ function execPostcode() {
    				}
 				//임시저장 토스트
    				//printCommentList();
+   				
+		      	$("#ground1").attr("disabled", true);
+		      	$("#ground2").attr("disabled", true);
+		      	$("#joinField1").attr("disabled", true);
+		      	$("#joinField2").attr("disabled", true);
+		      	$("#joinArea1").attr("disabled", true);
+		      	$("#joinArea2").attr("disabled", true);
    				alert("저장되었습니다.");
    			},
    			error: function(xhr, status, error) {

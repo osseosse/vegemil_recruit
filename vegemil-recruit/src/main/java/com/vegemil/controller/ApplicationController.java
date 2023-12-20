@@ -706,12 +706,13 @@ public class ApplicationController extends UiUtils {
 			}
 			
 			int recruitEndCheck = recruitService.checkRecruitEnd(application.getSetupTh());
+			
 			if(recruitEndCheck == 0) {
 				out.println("<script>alert('종료된 채용입니다.'); history.go(-1);</script>");
 				out.flush();
 				return showMessageWithRedirect("종료된 채용입니다.", "/", Method.GET, null, model);
 			}
-			
+		
 			application.setIdx(idx);
 			application.setEmailAddr(member.getEmailAddr());
 	        application.setMemName(member.getMemName());

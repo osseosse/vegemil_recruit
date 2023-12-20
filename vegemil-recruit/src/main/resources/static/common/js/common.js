@@ -86,6 +86,7 @@ window.onload = function(){
 		  this.classList.toggle("select-arrow-active");
 		});
 	}
+	
 	function closeAllSelect(elmnt) {
 	  /*a function that will close all select boxes in the document,
 	  except the current select box:*/

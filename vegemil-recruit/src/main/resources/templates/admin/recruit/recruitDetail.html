@@ -82,7 +82,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<td class="hool" rowspan=6>
+								<td class="hool" rowspan=8>
 									<div class="imgPhotoBack">
 										<img th:if="*{recruit.photo != null and recruit.photo != ''}" id="resumePhoto" th:src="|/display?filename=*{recruit.photo}|" style="max-width:120px; width:100%" />
 										<img th:unless="*{recruit.photo != null and recruit.photo != ''}" th:src="@{/img/ico_photo.png}" id="recruitPhoto" style="max-width:120px; width:100%" />
@@ -108,23 +108,53 @@
 									<th:block th:if="${recruit.sex} == 1">남자</th:block>
 									<th:block th:unless="${recruit.sex} == 1">여자</th:block>
 								</td>
-								<th><div class="hool">연령</div></th>
-								<td class="bora4">만 <span id="lab_memAge" th:with="birth=${recruit.birthday}">[[${ @comUtils.getAge( {birth} ) }]]</span>세</td>
+								<th ><div class="hool">연령</div></th>
+								<td class="bora4" colspan="2">만 <span id="lab_memAge" th:with="birth=${recruit.birthday}">[[${ @comUtils.getAge( {birth} ) }]]</span>세</td>
 							</tr>
 							<tr>
-								<th rowspan="2"><div class="hool">응시분야</div></th>
-								<td colspan="1" class="hool">지원 구분</td>
-								<td colspan="2" class="hool">1 지망</td>
-								<td colspan="2" class="bora6">2 지망</td>
+								<th rowspan="2"><div class="hool">응시분야(1지망)</div></th>
+								<td colspan="1" class="hool">지원회사</td>
+								<td colspan="2" class="hool">부문</td>
+								<td colspan="1" class="hool">직무</td>
+								<td colspan="1" class="bora6">희망지역</td>
 							</tr>
 							<tr>
 								<td colspan="1" class="hool"> 
-									<span id="lab_career"></span> </td>
+									<span id="lab_career" th:text="${recruit.joinCompany1}"></span> 
+								</td>
 								<td colspan="2" class="hool">
-									<span id="lab_joinField1" th:text="${recruit.joinField1}"></span>
+									<span id="lab_joinField1" th:text="${recruit.ground1}"></span>
+								</td>
 <!-- 									(희망근무지: <span id="lab_joinArea1" th:text="${recruit.joinArea1}"></span>)</td> -->
-								<td colspan="2" class="bora6">
-									<span id="lab_joinField2" th:text="${recruit.joinField2}"></span>
+								<td colspan="1" class="hool">
+									<span id="lab_joinField1" th:text="${recruit.joinField1}"></span>
+								</td>
+<!-- 									(희망근무지: <span id="lab_joinArea1" th:text="${recruit.joinArea1}"></span>)</td> -->
+								<td colspan="1" class="bora6">
+									<span id="lab_joinField2" th:text="${recruit.joinArea1}"></span>
+								</td>
+<!-- 									(희망근무지: <span id="lab_joinArea2" th:text="${recruit.joinArea2}"></span>)</td> -->
+							</tr>
+							<tr>
+								<th rowspan="2"><div class="hool">응시분야(2지망)</div></th>
+								<td colspan="1" class="hool">지원회사</td>
+								<td colspan="2" class="hool">부문</td>
+								<td colspan="1" class="hool">직무</td>
+								<td colspan="1" class="bora6">희망지역</td>
+							</tr>
+							<tr>
+								<td colspan="1" class="hool"> 
+									<span id="lab_career" th:text="${recruit.joinCompany2}"></span> </td>
+								<td colspan="2" class="hool">
+									<span id="lab_joinField1" th:text="${recruit.ground2}"></span>
+<!-- 									(희망근무지: <span id="lab_joinArea1" th:text="${recruit.joinArea1}"></span>)</td> -->
+								<td colspan="1" class="hool">
+									<span id="lab_joinField1" th:text="${recruit.joinField2}"></span>
+								</td>
+<!-- 									(희망근무지: <span id="lab_joinArea1" th:text="${recruit.joinArea1}"></span>)</td> -->
+								<td colspan="1" class="bora6">
+									<span id="lab_joinField2" th:text="${recruit.joinArea2}"></span>
+								</td>
 <!-- 									(희망근무지: <span id="lab_joinArea2" th:text="${recruit.joinArea2}"></span>)</td> -->
 							</tr>
 						</tbody>
@@ -870,7 +900,8 @@
 								</td>
 							</tr>
 							<tr>
-								<th class="thbora2"><strong>5. 지원분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</strong></th>
+								<th class="thbora2" th:if="${recruit.ground1 == '신입'}"><strong>5. 협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</strong></th>
+								<th class="thbora2" th:if="${recruit.ground1 == '경력'}"><strong>5. 지원분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</strong></th>
 							</tr>
 							<tr>
 								<td class="bora4">

@@ -154,8 +154,9 @@
 							</div><!-- field2 -->
 
 							<!-- (3)포트폴리오 -->
-							<p class="f23 fw600 pr mt80">포트폴리오</p> 
-							<div class="r-box mt20" style="">
+							
+							<p class="f23 fw600 pr mt80" th:if="${app.ground1 == '경력'}">포트폴리오</p> 
+							<div class="r-box mt20" th:if="${app.ground1 == '경력'}">
 								<div class="row">
 									<div class="col-lg-12 ">
 										<ul class="s-d-2">

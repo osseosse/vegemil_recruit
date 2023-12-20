@@ -40,6 +40,8 @@ public class RecruitDTO extends CommonDTO {
 	private String joinOk;		/** 사원등급 */
 	private String sex;	/** 부서명 */
 	private String joinType;	/** 부서명 */
+	private String ground1;
+	private String ground2;
 	private String joinField1;	/** 부서명 */
 	private String joinField2;	/** 부서명 */
 	private String joinArea1;	/** 부서명 */

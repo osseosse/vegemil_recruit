@@ -29,4 +29,6 @@ public class ApplicationDTO extends MemberDTO {
 	private String joinArea1;
 	private String joinField2;
 	private String joinArea2;
+	private String ground1;
+	private String ground2;
 }

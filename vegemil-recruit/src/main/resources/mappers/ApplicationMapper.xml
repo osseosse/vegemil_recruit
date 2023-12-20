@@ -8,7 +8,7 @@
 		, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
 		, fam_count, fam_con1, fam_name1, fam_age1
 		, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
-		, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
+		, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, ground1, ground2
 	</sql>
 	<sql id="academyColumns">
 		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date, last_academy
@@ -53,11 +53,11 @@
 		, his_co_name4, his_ing4, his_s_date4, his_e_date4, his_content4, his_duty4, his_pay4
 		, his_co_name5, his_ing5, his_s_date5, his_e_date5, his_content5, his_duty5, his_pay5
 		, his_co_name6, his_ing6, his_s_date6, his_e_date6, his_content6, his_duty6, his_pay6
-		, port_file, port_file_saved, port_url
+		, port_file, port_file_saved, port_url, ground1, ground2
 	</sql>
 	
 	<sql id="introduceColumns">
-		idx, setup_th, mem_no, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
+		idx, setup_th, mem_no, ground1, ground2, setup_title, DATE_FORMAT(join_date,'%Y-%m') as join_date, join_ok, delete_yn, update_date
 		, IFNULL(introduce1, "") as introduce1, IFNULL(introduce2, "") as introduce2, IFNULL(introduce3, "") as introduce3
 		, IFNULL(introduce4, "")  as introduce4, IFNULL(introduce5, "") as introduce5, IFNULL(introduce6, "") as introduce6
 	</sql>
@@ -68,13 +68,13 @@
 			, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no
 			, handicap, religoin, ability, hobby, fam_count, fam_con1, fam_name1, fam_age1
 			, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
-			, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date
+			, mil_class, mil_reason, mil_type, mil_lv, mil_arm, mil_ticket, mil_s_date, mil_e_date, ground1, ground2
 		) VALUES (
 			  #{setupTh}, #{setupTitle}, #{memNo}, NOW(), '접수', '0', #{joinCompany1}, #{joinCompany2}, #{joinField1}, #{joinArea1}, #{joinField2}, #{joinArea2}
 			, #{nameHan}, #{nameEng}, #{photo}, #{zip1}, #{addr11}, #{addr12}, #{bohun}, #{bohunNo}
 			, #{handicap}, #{religoin}, #{ability}, #{hobby}, '1', #{famCon1}, #{famName1}, #{famAge1}
 			, #{famCon2}, #{famName2}, #{famAge2}, #{famCon3}, #{famName3}, #{famAge3}, #{famCon4}, #{famName4}, #{famAge4}
-			, #{milClass}, #{milReason}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate}
+			, #{milClass}, #{milReason}, #{milType}, #{milLv}, #{milArm}, #{milTicket}, #{milSDate}, #{milEdate} , #{ground1}, #{ground2}
 		)
 		<selectKey keyProperty="idx" keyColumn="idx" resultType="long" >
 			SELECT LAST_INSERT_ID()
@@ -84,7 +84,8 @@
 	<update id="updatePersonalInformation" parameterType="com.vegemil.domain.PersonalInfoDTO">
 		UPDATE R_Recruit
 		SET
-			  join_company1= #{joinCompany1}, join_company2= #{joinCompany2}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}
+			  join_company1= #{joinCompany1}, join_company2= #{joinCompany2}
+			, ground1 = #{ground1} , ground2 = #{ground2}, join_field1 = #{joinField1}, join_area1 = #{joinArea1}
 			, join_field2 = #{joinField2}, join_area2 = #{joinArea2}
 			, name_han = #{nameHan}, sex = #{sex}, name_eng = #{nameEng}
 			<if test="photo != null and photo != ''">
