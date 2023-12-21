@@ -99,7 +99,8 @@
 													<span class="r-blue" th:text="${recruit.sCategory}"></span>
 													<!-- <span class="r-blue">신입</span> -->
 												</th:block>
-												<span class="r-black" th:text="|D${recruit.sDday}|"></span>
+												<span class="r-black" th:if="${recruit.sDday < 0}" th:text="|D${recruit.sDday}|"></span>
+												<span class="r-black" th:if="${recruit.sDday == 0}" th:text="|D-Day|"></span>
 											</div>
 											<!-- <div class="r-g-line ac">8</div> -->
 											<div class="info02 mt20 pb0 line-height140">

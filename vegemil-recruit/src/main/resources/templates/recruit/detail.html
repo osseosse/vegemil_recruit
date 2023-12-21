@@ -30,7 +30,10 @@
 				<div class="container1300 center" >
 					<div class="memberWrapBase" th:object="${recruit}">
 						<div class="sidebar fixedsticky w350 f-left">
-							<p class="f23 fw600 line-height140" ><span th:text="|*{sTitle} |"></span><span class="r-black-line2 f16" th:text="|D*{sDday}|"></span> </p>
+							<p class="f23 fw600 line-height140" ><span th:text="|*{sTitle} |"></span>
+								<span class="r-black-line2 f16" th:if="${recruit.sDday < 0}" th:text="|D*{sDday}|"></span>
+								<span class="r-black-line2 f16" th:if="${recruit.sDday == 0}" th:text="|D-Day|"></span>
+							</p>
 							<p class="mt20"><span class="f14 fw400" th:text="|*{sStartdate} ~ *{sEnddate}|"></span></p>
 							<p class="mt50"><a href="/info/info"><img th:src="@{/img/infoBanner.png}" alt="채용절차 보러가기"/></a></p>
 						</div>
@@ -40,7 +43,7 @@
 							</div>
 							<ul class="mt50 btn-box-2">
 								<li class="btn_type09"><a href="javascript:window.history.back();">목록보기</a></li>
-								<li class="btn_type10" th:if="*{sDday} < 0"><a th:href="|@{/recruit/join}?sTh=*{sTh}|">지원하기</a></li>
+								<li class="btn_type10"><a th:href="|@{/recruit/join}?sTh=*{sTh}|">지원하기</a></li>
 							</ul>
 						</div><!-- //wrap860 -->
 					</div><!-- //memberWrapBase -->
