@@ -43,9 +43,14 @@
              conversion += val.substr(0, 4) + '-';
              val         = val.substr(4);
          }
-         else if(original>6 && val.length > 2 && i===1){
-             conversion += val.substr(0, 2) + '-';
-             val         = val.substr(2);
+         else if(original>4 && val.length > 1 && i===1){
+         	
+         	if(Number(val.substr(0, 2)) > 12){
+         	 	this.value = null;
+         	 	alert("월(1~12)을 잘못 기입하였습니다.");
+         	 	return false;
+         	 }
+         
          }
      }
      conversion += val;

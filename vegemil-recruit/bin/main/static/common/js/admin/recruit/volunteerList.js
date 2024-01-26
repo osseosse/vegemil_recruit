@@ -225,29 +225,41 @@ function createTable(){
           		let checked1 = '';
           		let checked2 = '';
           		let checked3 = '';
+          		let checked4 = '';
+          		let checked5 = '';
           		
           		
           		if(full['joinOk'] == '0')   	checked0 = 'checked';
           		if(full['joinOk'] == '1')		checked1 = 'checked';
           		if(full['joinOk'] == '2')		checked2 = 'checked';
           		if(full['joinOk'] == '3')		checked3 = 'checked';
+          		if(full['joinOk'] == '-1')		checked4 = 'checked';
+          		if(full['joinOk'] == '-2')		checked5 = 'checked';
           		
 	            return (
 				  '<div class="form-check form-check-inline">' +
 		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId01' + full['idx'] + '" value="0" ' + checked0 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"0"); />' +
-		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">불합격</label>' +
+		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">서류불합격</label>' +
 	              '</div>' + 
 	              '<div class="form-check form-check-inline">' +
 		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId01' + full['idx'] + '" value="1" ' + checked1 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"1"); />' +
-		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">서류</label>' +
+		              '<label class="form-check-label" for="radioId01' + full['idx'] + '">서류통과</label>' +
 	              '</div>' + 
 	              '<div class="form-check form-check-inline">' +
 		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId02' + full['idx'] + '" value="2" ' + checked2 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"2"); />' +
-		              '<label class="form-check-label" for="radioId02' + full['idx'] + '">1차</label>' +
+		              '<label class="form-check-label" for="radioId02' + full['idx'] + '">1차면접통과</label>' +
+	              '</div>' +
+	              '<div class="form-check form-check-inline">' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId02' + full['idx'] + '" value="-1" ' + checked4 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"-1"); />' +
+		              '<label class="form-check-label" for="radioId02' + full['idx'] + '">1차면접불합격</label>' +
 	              '</div>' +
 	              '<div class="form-check form-check-inline">' +
 		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId03' + full['idx'] + '" value="3" ' + checked3 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"3"); />' +
-		              '<label class="form-check-label" for="radioId03' + full['idx'] + '">2차</label>' +
+		              '<label class="form-check-label" for="radioId03' + full['idx'] + '">2차면접통과(최합)</label>' +
+	              '</div>' + 
+	              '<div class="form-check form-check-inline">' +
+		              '<input class="form-check-input" type="radio" name="radioName' + full['idx'] + '" id="radioId03' + full['idx'] + '" value="-2" ' + checked5 + ' onclick=javascript:joinOkUpdate('+full['idx']+',"-2"); />' +
+		              '<label class="form-check-label" for="radioId03' + full['idx'] + '">2차면접불합격(최탈)</label>' +
 	              '</div>'
 	            );
 	        }
@@ -285,8 +297,11 @@ function createTable(){
       		targets: 7,
       		orderable: false,
       		render: function (data, type, full, meta) {
+      			var info;
           		if(full['joinField1'] == null) return null;
-          		else return data;
+          		else if(full['joinField1'] == '재무회계') info = (full['joinField1'] + "("+ full['ground1'] + ")"); 
+          		else info = full['joinField1'];
+          		return info;
 	        }
       	},
       	{
@@ -380,9 +395,11 @@ function createTable(){
 //});
 
 function joinOkUpdate(idx, joinOk) {
-	console.log('idx', idx + ' ' + joinOk);
+
+	var reqUrl = '/admin/recruit/updateVolunteerList?idx=' + idx+'&joinOk='+joinOk;
+
 	$.ajax({
-		url : '/admin/recruit/updateVolunteerList?idx=' + idx+'&joinOk='+joinOk,
+		url : reqUrl,
 		type : "get",
 		dataType : "json",
 		success : function(data) {
@@ -391,7 +408,7 @@ function joinOkUpdate(idx, joinOk) {
 			}
 			else{
 				alert("수정되었습니다.");
-				//$('.datatables-basic').DataTable().ajax.reload();
+				$('.datatables-basic').DataTable().ajax.reload();
 			}
 			
 		},

@@ -3,10 +3,13 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	
-	<th:block layout:fragment="title">
-		<title>지원자 이력서</title>
+
+	<th:block layout:fragment="title" th:if="${recruitList !=null}" th:each="recruit : ${recruitList}">
+		<title th:text="${recruit.memName}"></title>
 	</th:block>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+	<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 	<th:block layout:fragment="add-css">
 		<!-- BEGIN: Page CSS-->		
 		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
@@ -15,6 +18,7 @@
 		
 		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
 		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+		
 	    <!-- END: Page CSS-->
 	</th:block>
 	
@@ -66,10 +70,15 @@
 
 	<th:block layout:fragment="content" th:if="${recruitList !=null}" th:each="recruit : ${recruitList}">
     <!-- BEGIN: Content-->
-    	<div id="wrap750">
-				<p class="printTitle">입사지원서</p>
+    	<div class="text-center" style="margin-left: 900px; margin-top: 30px;">
+      	 	<button type="button" class="btn btn-secondary" id="pdf">PDF DOWNLOAD</button>
+        </div> 
+    	<div id="wrap750" class="report">
+    			<div  class="pdf_page">
+					<p class="printTitle">입사지원서</p>
+				</div>
 				<!-- 1.지원사항 ########################################-->
-				<div id="field">
+				<div id="field" class="pdf_page">
 					<div class="title">지원사항</div>
 					<table width="100%" class="tbViewType2" summary="1.지원사항">
 						<colgroup>
@@ -163,7 +172,7 @@
 				<!-- // 1.지원사항 ########################################-->
 				
 				<!-- 2.인적사항 ########################################-->
-				<div id="man">
+				<div id="man" class="pdf_page">
 					<div class="title">인적사항</div>
 					<table width="100%" class="tbViewType2" summary="1.지원사항">
 						<colgroup>
@@ -217,7 +226,7 @@
 				<!-- // 2.인적사항 ########################################-->
 				
 				<!-- 11.가족사항(본인제외) ########################################-->
-				<div id="fam">
+				<div id="fam" class="pdf_page">
 					<div class="title">가족사항(본인제외)</div>
 					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
 						<colgroup>
@@ -280,7 +289,7 @@
 				<!-- // 11.가족사항(본인제외) ########################################-->
 				
 				<!-- 10.병역사항 ########################################-->
-				<div id="military">
+				<div id="military" class="pdf_page">
 					<div class="title">병역사항</div>
 					<table width="100%" class="tbViewType2" summary="10.병역사항">
 						<colgroup>
@@ -326,7 +335,7 @@
 				<!-- // 10.병역사항 ########################################-->
 
 				<!-- 12.개인신상 ########################################-->
-				<div id="hobby">
+				<div id="hobby" class="pdf_page">
 					<div class="title">개인신상</div>
 					<table width="100%" class="tbViewType2" summary="4.외국어사항">
 						<tbody>
@@ -355,7 +364,7 @@
 				<!-- // 12.개인신상 ########################################-->
 				
 				<!--  3.학력사항 ########################################-->
-				<div id="school" clear="all" style="PAGE-BREAK-BEFORE:always; MARGIN-TOP:20px">
+				<div id="school" clear="all" class="pdf_page" style="PAGE-BREAK-BEFORE:always; MARGIN-TOP:20px">
 					<div class="title">학력사항</div>
 					<table width="100%" class="tbViewType2" summary="3.학력사항">
 						<colgroup>
@@ -399,7 +408,7 @@
 								<th><div class="para"><strong>편입전 대학(교)</strong></div></th>
 								<td class="hool"><span id="lab_transName" th:text="${recruit.transName}"></span></td>
 								<td class="hool"><span id="lab_transEnterYM" th:text="${recruit.transEnterYm}"></span></td>
-								<td class="hool"><span id="lab_transGradeYM" th:text="${recruit.transGradeYm}"></span></td>
+								<td class="hool"><span id="lab_transGradeYM" th:text="${recruit.transGradYm}"></span></td>
 								<td class="hool"><span id="lab_transGrad" th:text="${recruit.transGrad}"></span></td>
 								<td class="hool">
 									<span id="lab_transAdmis" th:text="${recruit.transAdmis}"></span>/
@@ -525,7 +534,7 @@
 						</tbody>
 					</table>
 				</div><!-- // 3.학력사항 ############################################ -->
-				<div id="anguage" style="margin-top:20px"><!-- 4.외국어사항 -->
+				<div id="anguage" style="margin-top:20px" class="pdf_page"><!-- 4.외국어사항 -->
 					<div class="title">외국어사항</div>
 					<table width="100%" class="tbViewType2" summary="4.외국어사항">
 						<colgroup>
@@ -593,7 +602,7 @@
 					</table>
 				</div><!-- 4.외국어사항 //-->
 
-				<div id="it"style="margin-top:20px"><!-- 5.IT능력 -->
+				<div id="it"style="margin-top:20px" class="pdf_page"><!-- 5.IT능력 -->
 					<div class="title">IT능력</div>
 					<table width="100%" class="tbViewType2" summary="4.외국어사항">
 						<colgroup>
@@ -626,7 +635,7 @@
 				</div><!-- 5.IT능력 //-->
 				
 				<!-- 8.경력/인턴 ########################################-->
-				<div id="career">
+				<div id="career" class="pdf_page">
 					<div class="title">경력/인턴</div>
 					<table width="100%" class="tbViewType2" summary="경력/인턴">
 						<colgroup>
@@ -698,7 +707,7 @@
 				<!-- // 8.경력/인턴 ########################################-->
 				<!-- 포트폴리오  -->
 
-				<div id="career">
+				<div id="portfolio" class="pdf_page">
 					<div class="title">포트폴리오</div>
 					<table width="100%" class="tbViewType2" summary="포트폴리오">
 						<colgroup>
@@ -731,7 +740,7 @@
 				</div> 
 				<!-- //포트폴리오  -->
 				<!-- 7.해외연수활동 ########################################-->
-				<div id="country">
+				<div id="country" class="pdf_page">
 					<div class="title">해외연수/대외활동</div>
 					<table width="100%" class="tbViewType2" >
 						<colgroup>
@@ -771,7 +780,7 @@
 				<!-- // 7.해외연수활동 ########################################-->
 				
 				<!-- 6.수상경력 -->
-				<div id="prize" style="margin-top:50px">
+				<div id="prize" style="margin-top:50px" class="pdf_page">
 					<div class="title">수상경력</div>
 					<table width="100%" class="tbViewType2" summary="4.외국어사항">
 						<colgroup>
@@ -805,7 +814,7 @@
 				</div><!-- // 6.수상경력 ########################################-->
 				
 				<!-- 9.자격 및 면허 ########################################-->
-				<div id="license">
+				<div id="license" class="pdf_page">
 					<div class="title">자격 및 면허</div>
 					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
 						<colgroup>
@@ -856,14 +865,49 @@
 								<td class="hool"><span id="lab_licGetDate5" th:text="${recruit.licGetDate5}"></span></td>
 								<td class="bora"><span id="lab_licPub5" th:text="${recruit.licPub5}"></span></td>
 							</tr>
+							<tr id="tr_licName6" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName6" th:text="${recruit.licName6}"></span></td>
+								<td class="hool"><span id="lab_licNum6" th:text="${recruit.licNum6}"></span></td>
+								<td class="hool"><span id="lab_licGetDate6" th:text="${recruit.licGetDate6}"></span></td>
+								<td class="bora"><span id="lab_licPub6" th:text="${recruit.licPub6}"></span></td>
+							</tr>
+							<tr id="tr_licName7" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName7" th:text="${recruit.licName7}"></span></td>
+								<td class="hool"><span id="lab_licNum7" th:text="${recruit.licNum7}"></span></td>
+								<td class="hool"><span id="lab_licGetDate7" th:text="${recruit.licGetDate7}"></span></td>
+								<td class="bora"><span id="lab_licPub7" th:text="${recruit.licPub7}"></span></td>
+							</tr>
+							<tr id="tr_licName8" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName8" th:text="${recruit.licName8}"></span></td>
+								<td class="hool"><span id="lab_licNum8" th:text="${recruit.licNum8}"></span></td>
+								<td class="hool"><span id="lab_licGetDate8" th:text="${recruit.licGetDate8}"></span></td>
+								<td class="bora"><span id="lab_licPub8" th:text="${recruit.licPub8}"></span></td>
+							</tr>
+							<tr id="tr_licName9" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName9" th:text="${recruit.licName9}"></span></td>
+								<td class="hool"><span id="lab_licNum9" th:text="${recruit.licNum9}"></span></td>
+								<td class="hool"><span id="lab_licGetDate9" th:text="${recruit.licGetDate9}"></span></td>
+								<td class="bora"><span id="lab_licPub9" th:text="${recruit.licPub9}"></span></td>
+							</tr>
+							<tr id="tr_licName10" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName10" th:text="${recruit.licName10}"></span></td>
+								<td class="hool"><span id="lab_licNum10" th:text="${recruit.licNum10}"></span></td>
+								<td class="hool"><span id="lab_licGetDate10" th:text="${recruit.licGetDate10}"></span></td>
+								<td class="bora"><span id="lab_licPub10" th:text="${recruit.licPub10}"></span></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 				<!-- // 9.자격 및 면허 ########################################-->
 
 				<!-- 14.자기소개서 ########################################-->
-				<div id="Div1" clear="all" style="PAGE-BREAK-BEFORE:always">
-					<div class="title">자기소개서</div>
+				<div id="Div1" clear="all" style="PAGE-BREAK-BEFORE:always" class="pdf_page">
+					<div class="title">	자기소개서</div>
 					<table width="100%" class="tbViewType2" summary="14.자기소개서">
 						<tbody>
 							<tr>
@@ -909,6 +953,12 @@
 								</td>
 							</tr>
 						
+						</tbody>
+					</table>
+				</div>
+				<div id="Div2" clear="all" style="PAGE-BREAK-BEFORE:always" class="pdf_page" >
+					<table width="100%" class="tbViewType2" style="border:none;" summary="14.자기소개서2">
+						<tbody>					
 							<tr>
 								<th class="thbora2"><strong>6. 지원동기 및 입사 후 포부는 무엇인지 서술하여 주시기 바랍니다.</strong></th>
 							</tr>
@@ -982,5 +1032,76 @@
 			</div><!-- wrap750 // -->
     <!-- END: Content-->
     </th:block>
-    
+
+	 <script>
+
+		  $("#pdf").click(function() { // pdf저장 button id
+
+		    // setTImeout을 하는 이유는 html2canvas를 불러오는게 너무 빨라서 앞의 js가 먹혀도 반영되지 않은 것처럼 보임
+		    // 따라서 0.1 초 지연 발생 시킴
+		      setTimeout(function() {
+		        createPdf();
+		      }, 100);
+		  });
+
+
+		var renderedImg = new Array;
+		var contWidth = 200, // 너비(mm) (a4에 맞춤)
+		    padding = 5; //상하좌우 여백(mm)
+
+		function createPdf() { //이미지를 pdf로 만들기
+
+		  var lists = document.querySelectorAll('.pdf_page'),
+		      deferreds = [],
+		      doc = new jsPDF("p", "mm", "a4"),
+		      listsLeng = lists.length;
+
+		  for (var i = 0; i < listsLeng; i++) { // pdf_page 적용된 태그 개수만큼 이미지 생성
+		    var deferred = $.Deferred();
+		    deferreds.push(deferred.promise());
+		    generateCanvas(i, doc, deferred, lists[i]);
+		  }
+
+		  $.when.apply($, deferreds).then(function () { // 이미지 렌더링이 끝난 후
+		    var sorted = renderedImg.sort(function(a,b){return a.num < b.num ? -1 : 1;}), // 순서대로 정렬
+		        curHeight = padding, //위 여백 (이미지가 들어가기 시작할 y축)
+		        sortedLeng = sorted.length;
+
+		    for (var i = 0; i < sortedLeng; i++) {
+		      var sortedHeight = sorted[i].height, //이미지 높이
+		          sortedImage = sorted[i].image; //이미지
+
+		      if( curHeight + sortedHeight > 297 - padding * 2 ){ // a4 높이에 맞게 남은 공간이 이미지높이보다 작을 경우 페이지 추가
+		        doc.addPage(); // 페이지를 추가함
+		        curHeight = padding; // 이미지가 들어갈 y축을 초기 여백값으로 초기화
+		        doc.addImage(sortedImage, 'jpeg', padding , curHeight, contWidth, sortedHeight); //이미지 넣기
+		        curHeight += sortedHeight; // y축 = 여백 + 새로 들어간 이미지 높이
+		      } else { // 페이지에 남은 공간보다 이미지가 작으면 페이지 추가하지 않음
+		        doc.addImage(sortedImage, 'jpeg', padding , curHeight, contWidth, sortedHeight); //이미지 넣기
+		        curHeight += sortedHeight; // y축 = 기존y축 + 새로들어간 이미지 높이
+		      }
+		    }
+		    doc.save($("#lab_memNameK").text() + ' 지원서.pdf'); //pdf 저장
+
+		    curHeight = padding; //y축 초기화
+		    renderedImg = new Array; //이미지 배열 초기화
+
+		    document.getElementById("loading").style.display = "none"; // 로딩 이미지 숨기기
+		    
+		  });
+		}
+
+		function generateCanvas(i, doc, deferred, curList){ //페이지를 이미지로 만들기
+		  var pdfWidth = $(curList).outerWidth() * 0.2645, //px -> mm로 변환
+		      pdfHeight = $(curList).outerHeight() * 0.2645,
+		      heightCalc = contWidth * pdfHeight / pdfWidth; //비율에 맞게 높이 조절
+		  html2canvas( curList ).then(
+		    function (canvas) {
+		      var img = canvas.toDataURL('image/jpeg', 1.0); //이미지 형식 지정
+		      renderedImg.push({num:i, image:img, height:heightCalc}); //renderedImg 배열에 이미지 데이터 저장(뒤죽박죽 방지)     
+		      deferred.resolve(); //결과 보내기
+		    }
+		  );
+		}
+	 </script>
 </html>

@@ -166,7 +166,7 @@ function execPostcode() {
 				$("#joinArea1").html('<option value="">선택</option>');
 
 				if(ground1 == '신입' && joinCompany1 == '정식품'){					
-					$("#joinField1").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option>');
+					$("#joinField1").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option><option value="생산관리">생산관리</option>');
 					
 				}else if(ground1 == '경력' && joinCompany1 == '정식품'){
 					$("#joinField1").append('<option value="재무회계">재무회계</option><option value="총무인사">총무인사</option><option value="유통영업">유통영업</option>');			
@@ -186,7 +186,7 @@ function execPostcode() {
 					$("#joinArea1").append('<option value="경기">경기(영업관리)</option><option value="대구">대구(영업관리)</option><option value="경남">경남(영업관리)</option><option value="경주">경주(영업관리)</option>');			
 				}else if((joinField1 == '재무회계' || joinField1 == '해외영업')  && ground1 == '신입' && joinCompany1 == '정식품'){
 					$("#joinArea1").append('<option value="서울" selected>서울</option>');
-				}else if(joinField1 == '연구' && joinCompany1 == '정식품'){
+				}else if((joinField1 == '연구'|| joinField1 == '생산관리') && joinCompany1 == '정식품'){
 					$("#joinArea1").append('<option value="청주" selected>청주</option>');
 				}else if(ground1 == '경력' && joinCompany1 == '정식품'){
 					$("#joinArea1").append('<option value="서울" selected>서울</option>');
@@ -232,7 +232,7 @@ function execPostcode() {
 				$("#joinArea2").html('<option value="">선택</option>');
 
 				if(ground2 == '신입' && joinCompany2 == '정식품'){					
-					$("#joinField2").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option>');
+					$("#joinField2").append('<option value="재무회계">재무회계</option><option value="영업관리">영업관리</option><option value="해외영업">해외영업</option><option value="연구">연구</option><option value="생산관리">생산관리</option>');
 					
 				}else if(ground2 == '경력' && joinCompany2 == '정식품'){
 					$("#joinField2").append('<option value="재무회계">재무회계</option><option value="총무인사">총무인사</option><option value="유통영업">유통영업</option>');			
@@ -252,7 +252,7 @@ function execPostcode() {
 					$("#joinArea2").append('<option value="경기">경기(영업관리)</option><option value="대구">대구(영업관리)</option><option value="경남">경남(영업관리)</option><option value="경주">경주(영업관리)</option>');			
 				}else if((joinField2 == '재무회계' || joinField2 == '해외영업')  && ground2== '신입' && joinCompany2 == '정식품'){
 					$("#joinArea2").append('<option value="서울" selected>서울</option>');
-				}else if(joinField2 == '연구' && joinCompany2 == '정식품'){
+				}else if((joinField2 == '연구' ||joinField2 == '생산관리') && joinCompany2 == '정식품'){
 					$("#joinArea2").append('<option value="청주" selected>청주</option>');
 				}else if(ground2 == '경력' && joinCompany2 == '정식품'){
 					$("#joinArea2").append('<option value="서울" selected>서울</option>');
@@ -378,6 +378,10 @@ function execPostcode() {
 			return false;
 		}
 		
+		if(!$('input[name=sex]:checked').val()){
+			alert("성별 입력은 필수입니다.");
+			return false;
+		}		
 		
 		if($('input[name="bohun"]:checked').val() == '1'){
 		    if( $('#bohunNo').val().length < 1){
@@ -444,6 +448,11 @@ function execPostcode() {
 		
 		if( $("#joinArea2").val().length < 1){
 			alert("희망 근무지 값 입력은 필수입니다.");
+			return false;
+		}
+				
+		if( ! $('input[name=sex]:checked').val()){
+			alert("성별 입력은 필수입니다.");
 			return false;
 		}		
      

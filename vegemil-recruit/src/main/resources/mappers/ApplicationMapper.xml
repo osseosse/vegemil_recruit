@@ -296,7 +296,7 @@
 			        ELSE
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
-		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
+		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no, ground1, ground2
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
 				, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
@@ -345,7 +345,7 @@
 			        ELSE
 				 		 DATE_FORMAT(submit_date,'%Y-%m-%d')
 				END as submit_date
-		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no
+		 		, join_ok, submit_ok, join_company1, join_company2, join_field1, join_area1, join_field2, join_area2, mem_no, ground1, ground2
 				, sex, name_han, name_eng, photo, zip1, addr11, addr12, bohun, bohun_no, handicap, religoin, ability, hobby
 				, fam_count, fam_con1, fam_name1, fam_age1
 				, fam_con2, fam_name2, fam_age2, fam_con3, fam_name3, fam_age3, fam_con4, fam_name4, fam_age4
@@ -361,7 +361,7 @@
 				, lang_name1, lang_point1, lang_lv1, lang_lic_name1, lang_lic_num1, lang_get1, lang_talk1, lang_make1, lang_read1, lang_name2, lang_point2, lang_lv2
 				, lang_lic_name2, lang_lic_num2, lang_get2, lang_talk2, lang_make2, lang_read2, lang_name3, lang_point3, lang_lv3, lang_lic_name3, lang_lic_num3, lang_get3, lang_talk3
 		    	, lang_make3, lang_read3
-		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3
+		    	, sw_name1, sw_lv1, sw_name2, sw_lv2, sw_name3, sw_lv3, sw_count, lic_count
 		    	, lic_name1, lic_num1, lic_get_date1, lic_pub1
 		    	, lic_name2, lic_num2, lic_get_date2, lic_pub2
 		    	, lic_name3, lic_num3, lic_get_date3, lic_pub3

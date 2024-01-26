@@ -181,6 +181,34 @@
 								</div>
 							</div>
 							<!-- 포트폴리오 -->
+							
+							<th:blcok th:if="${app.ground1 == '신입'}">
+								<div class="r-box mt20" style="display:none;">
+									<div class="row">
+										<div class="col-lg-12 ">
+											<ul class="s-d-2">
+												<li class="f14">URL</li>
+												<li>
+													<input type="text" class="inType01 w580" th:field="*{portUrl}" placeholder="http:// 제외한 URL 주소를 입력해 주세요." >
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-12 mt10">
+										
+											<ul class="s-d-2">
+												<li class="f14">파일업로드</li>
+												<li>
+													<div class="filebox w600">
+													<input class="upload-name" th:value="*{portFile}" placeholder="파일용량 10mb이하 / 가능 파일 PDF, ZIP / 파일명에 성명기재">
+													<label for="fileName">파일선택</label><input type="file" accept=".pdf,.zip" id="fileName" name="fileName">
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							
+							</th:blcok>
 
 							<div class="w100 mt30">
 								<a th:href="|@{/application/qualification}?idx=${app.idx}|">

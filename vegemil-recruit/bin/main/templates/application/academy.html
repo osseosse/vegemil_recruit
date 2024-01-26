@@ -38,7 +38,7 @@
 								<li class="w-before"><a th:href="|@{/application/career}?idx=${app.idx}|">경력사항</a></li>
 								<li class="w-before"><a th:href="|@{/application/introduce}?idx=${app.idx}|">자기소개</a></li>
 							</ul>
-							<!-- <p class="btn_type02 mt30"><a href="#pop_view">미리보기</a></p> -->
+							<p class="btn_type03 mt10"><a onclick="javascript:registerAcademy();">임시저장</a></p>
 						</div>
 						<div class="wrap860 f-right" >
 						<form class="fam-repeater" th:action="@{/application/registerAcademyInfo}" th:object="${app}" method="post" >

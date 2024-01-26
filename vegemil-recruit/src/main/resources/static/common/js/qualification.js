@@ -136,17 +136,34 @@ $(document).on('keyup', '.ls1',function(e) {
      }
      var val         = this.value.replace(/\D/g, '');
      var original    = this.value.replace(/\D/g, '').length;
+
      var conversion  = '';
-     for(i=0;i<2;i++){
+     for(i=0;i<3;i++){
          if (val.length > 4 && i===0) {
              conversion += val.substr(0, 4) + '-';
              val         = val.substr(4);
          }
          else if(original>6 && val.length > 2 && i===1){
+         	
+         	 if(Number(val.substr(0, 2)) > 12){
+         	 	this.value = null;
+         	 	alert("월(1~12)을 잘못 기입하였습니다.");
+         	 	return false;
+         	 }
+         	 
              conversion += val.substr(0, 2) + '-';
-             val         = val.substr(2);
-         }
+             val         = val.substr(2);             
+	                          
+         } else if(original > 7 && val.length >= 2  && i===2){
+         	if(Number(val) > 31){
+         	 	this.value = null;
+         	 	alert("일자를 잘못 기입하였습니다.");
+         	 	return false;
+         	 }
+         }         
      }
+     
+     
      conversion += val;
      this.value = conversion;
      
@@ -219,8 +236,20 @@ function categoryChange(e) {
 	}
 }
 /*[- end of function -]*/
+
+ function qualSubWork(){
+	$("#langLicName1").prop('disabled', false);
+ 	$("#langLicName2").prop('disabled', false);
+ 	$("#langLicName3").prop('disabled', false);
+ 	
+ 	return true;	
+ }
      
  function updateQualification() {
+ 
+ 	$("#langLicName1").prop('disabled', false);
+ 	$("#langLicName2").prop('disabled', false);
+ 	$("#langLicName3").prop('disabled', false);
 
 	var uri = "/application/updateQualification";
 	

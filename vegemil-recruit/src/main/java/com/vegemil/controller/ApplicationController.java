@@ -877,7 +877,9 @@ public class ApplicationController extends UiUtils {
 				model.addAttribute("member", member);
 				if(application.getJoinOk().equals("0")) {
 					viewPage = "application/resultUnpass";
-				} else if( application.getJoinOk().equals("3") || application.getJoinOk().equals("1") || application.getJoinOk().equals("2")) {
+				} else if( application.getJoinOk().equals("3") || application.getJoinOk().equals("1") 
+								|| application.getJoinOk().equals("2") || application.getJoinOk().equals("-1") 
+																			|| application.getJoinOk().equals("-2")) {
 					model.addAttribute("joinOk", application.getJoinOk());
 					viewPage = "application/resultPass";
 				} else {

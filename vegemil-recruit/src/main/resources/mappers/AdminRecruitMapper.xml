@@ -241,6 +241,7 @@
 			, a.sex
 			, a.join_company1
 			, a.join_field1
+			, a.ground1
 			, a.join_area1
 			, a.sch_name3
 			, a.sch_major3
@@ -291,6 +292,9 @@
 		       ,pass1 = 1, pass2 = 0		   
 		   </if>
 		   <if test="joinOk == 3">
+		   	   ,pass1 = 1, pass2 = 1
+		   </if>
+		   <if test="joinOk == -1">
 		   	   ,pass1 = 1, pass2 = 1
 		   </if>
 		 WHERE idx = #{idx, jdbcType=VARCHAR}

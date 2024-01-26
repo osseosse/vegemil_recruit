@@ -42,7 +42,7 @@
 							});
 						</script>
 						<div class="wrap860 f-right" >
-						<form th:action="@{/application/registerQualification}" id="qualform" th:object="${app}" method="post" >
+						<form th:action="@{/application/registerQualification}" id="qualform" th:object="${app}" method="post" onsubmit="return qualSubWork();">
 							<input type="hidden" th:field="*{idx}" />
 							<input type="hidden" th:field="*{setupTh}" />
 							<!-- (1)어학 -->
@@ -77,10 +77,10 @@
 										-->
 										<div class="col-lg-6 ">
 											<ul class="s-d-2">
-												<li class="f14">공인시험</li>
+												<li class="f14">공인시험선택</li>
 												<li>
 													<div class="scroll w180">
-														<select th:id="langLicName" th:name="langLicName" class="base w180">
+														<select th:id="langLicSel" th:name="langLicSel" class="base w180">
 															<option value="">선택</option>
 															<option value="토익">토익</option>
 															<option value="오픽">오픽</option>
@@ -89,16 +89,26 @@
 															<option value="텝스">텝스</option>
 															<option value="중국어HSK">중국어HSK</option>
 															<option value="토스">토스</option>
+															<option value="직접입력">직접입력</option>
 														</select>
 													</div>
 												</li>
 											</ul>
 										</div>
+
 										<div class="col-lg-6 mt10">
 											<ul class="s-d-2">
 												<li class="f14">점수</li>
 												<li>
 													<input type="text" th:id="langPoint" th:name="langPoint" class="inType01 w180"  maxlength="5">
+												</li>
+											</ul>
+										</div>
+										<div class="col-lg-6 mt5">
+											<ul class="s-d-2">
+												<li class="f14">공인시험</li>
+												<li>
+													<input type="text" th:id="langLicName" th:name="langLicName" class="inType01 w180" maxlength="10" disabled>
 												</li>
 											</ul>
 										</div>
@@ -302,7 +312,7 @@
 							<div class="w100 mt30">
 								<a th:href="|@{/application/academy}?idx=${app.idx}|">
 								<p class="f_left f20"><img th:src="@{/img/btn_prev.png}" alt="개인정보" />학력정보</p></a>
-								<button type="submit" class="f_right"><p class="f20">경력사항 <img th:src="@{/img/btn_next.png}" alt="경력사항" /></p></button>
+								<button type="submit" class="f_right" ><p class="f20">경력사항 <img th:src="@{/img/btn_next.png}" alt="경력사항" /></p></button>
 							</div>
 						</form>
 						</div><!-- //wrap860 -->
@@ -344,28 +354,25 @@
 		var langLicName3 = /*[[ ${app.langLicName3} ]]*/;
 		
 		if(langCount == 1) {
-			$("select[name='langName1").append("<option value='"+langName1+"'>"+langName1+"</option>");
-			$("select[name='langLicName1").append("<option value='"+langLicName1+"'>"+langLicName1+"</option>");
+			$("select[name='langName1").append("<option value='"+langName1+"'>"+langName1+"</option>");		
+			$("input[name='langLicName1").val(langLicName1);
 			$("select[name='langName1']").val(langName1).prop("selected", true);
-			$("select[name='langLicName1']").val(langLicName1).prop("selected", true);
 			$("input[name='langPoint1']").val(/*[[ ${app.langPoint1} ]]*/);
 			$("input[name='langLv1']").val(/*[[ ${app.langLv1} ]]*/);
 			$("input[name='langLicNum1']").val(/*[[ ${app.langLicNum1} ]]*/);
 			$("input[name='langGet1']").val(/*[[ ${app.langGet1} ]]*/);
 		} else if(langCount == 2) {
-			$("select[name='langName1").append("<option value='"+langName1+"'>"+langName1+"</option>");
-			$("select[name='langLicName1").append("<option value='"+langLicName1+"'>"+langLicName1+"</option>");
+			$("select[name='langName1").append("<option value='"+langName1+"'>"+langName1+"</option>");			
+			$("input[name='langLicName1").val(langLicName1);
 			$("select[name='langName1']").val(langName1).prop("selected", true);
-			$("select[name='langLicName1']").val(langLicName1).prop("selected", true);
 			$("input[name='langPoint1']").val(/*[[ ${app.langPoint1} ]]*/);
 			$("input[name='langLv1']").val(/*[[ ${app.langLv1} ]]*/);
 			$("input[name='langLicNum1']").val(/*[[ ${app.langLicNum1} ]]*/);
 			$("input[name='langGet1']").val(/*[[ ${app.langGet1} ]]*/);
 			
 			$("select[name='langName2").append("<option value='"+langName2+"'>"+langName2+"</option>");
-			$("select[name='langLicName2").append("<option value='"+langLicName2+"'>"+langLicName2+"</option>");
+			$("input[name='langLicName2").val(langLicName2);
 			$("select[name='langName2']").val(langName2).prop("selected", true);
-			$("select[name='langLicName2']").val(langLicName2).prop("selected", true);
 			$("input[name='langPoint2']").val(/*[[ ${app.langPoint2} ]]*/);
 			$("input[name='langLv2']").val(/*[[ ${app.langLv2} ]]*/);
 			$("input[name='langLicNum2']").val(/*[[ ${app.langLicNum2} ]]*/);
@@ -373,23 +380,21 @@
 			
 		} else if(langCount == 3) {
 			$("select[name='langName1']").val(/*[[ ${app.langName1} ]]*/).prop("selected", true);
-			$("select[name='langLicName1']").val(/*[[ ${app.langLicName1} ]]*/).prop("selected", true);
+			$("input[name='langLicName1").val(langLicName1);
 			$("input[name='langPoint1']").val(/*[[ ${app.langPoint1} ]]*/);
 			$("input[name='langLv1']").val(/*[[ ${app.langLv1} ]]*/);
 			$("input[name='langLicNum1']").val(/*[[ ${app.langLicNum1} ]]*/);
 			$("input[name='langGet1']").val(/*[[ ${app.langGet1} ]]*/);
 			$("select[name='langName2").append("<option value='"+langName2+"'>"+langName2+"</option>");
-			$("select[name='langLicName2").append("<option value='"+langLicName2+"'>"+langLicName2+"</option>");
+			$("input[name='langLicName2").val(langLicName2);
 			$("select[name='langName2']").val(langName2).prop("selected", true);
-			$("select[name='langLicName2']").val(langLicName2).prop("selected", true);
 			$("input[name='langPoint2']").val(/*[[ ${app.langPoint2} ]]*/);
 			$("input[name='langLv2']").val(/*[[ ${app.langLv2} ]]*/);
 			$("input[name='langLicNum2']").val(/*[[ ${app.langLicNum2} ]]*/);
 			$("input[name='langGet2']").val(/*[[ ${app.langGet2} ]]*/);
 			$("select[name='langName3").append("<option value='"+langName3+"'>"+langName3+"</option>");
-			$("select[name='langLicName3").append("<option value='"+langLicName3+"'>"+langLicName3+"</option>");
-			$("select[name='langName3']").val(langName3).prop("selected", true);
-			$("select[name='langLicName3']").val(langLicName3).prop("selected", true);
+			$("input[name='langLicName3").val(langLicName3);
+			$("select[name='langName3']").val(langName3).prop("selected", true);			
 			$("input[name='langPoint3']").val(/*[[ ${app.langPoint3} ]]*/);
 			$("input[name='langLv3']").val(/*[[ ${app.langLv3} ]]*/);
 			$("input[name='langLicNum3']").val(/*[[ ${app.langLicNum3} ]]*/);
@@ -685,6 +690,43 @@
 			$("input[name='forEDate2']").val(/*[[ ${app.forEDate2} ]]*/);
 			$("input[name='forName2']").val(/*[[ ${app.forName2} ]]*/);
 		}
+		
+		$("select[name=langLicSel1]").change(function(){
+			  var ctname = $(this).val();
+
+			  if(ctname == '직접입력'){
+				  
+				  $("#langLicName1").prop('disabled', false);
+			  }else{
+				  $("#langLicName1").val(ctname);
+			  }
+			  return true;
+	
+		});
+		
+		$("select[name=langLicSel2]").change(function(){
+			  var ctname = $(this).val();
+
+			  if(ctname == '직접입력'){
+				  
+				  $("#langLicName2").prop('disabled', false);
+			  }else{
+				  $("#langLicName2").val(ctname);
+			  }
+			  return true;
+	
+		});
+		
+		$("select[name=langLicSel3]").change(function(){
+			  var ctname = $(this).val();
+			  if(ctname == '직접입력'){				  
+				  $("#langLicName3").prop('disabled', false);
+			  }else{
+				  $("#langLicName3").val(ctname);
+			  }
+			  return true;
+	
+		});
 
 	});
 /*]]>*/

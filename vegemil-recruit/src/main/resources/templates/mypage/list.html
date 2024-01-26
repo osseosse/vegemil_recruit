@@ -256,7 +256,10 @@
 														<span class="sublist" th:text="|${resume.schEnterYm3} ~ ${resume.schGradYm3}|"></span>
 														<span class="sublist" th:text="${resume.schGrad3}"></span>
 														<span class="sublist" th:text="|${resume.schPointEvg3}/4.5|"></span>
-														<span class="sublist" th:if="${resume.schSubMajor3} != null" th:text="|(부)${resume.schSubMajor3}|"></span>
+														<span class="sublist" th:if="${resume.schDepType3} == '복수전공'" th:text="|(복수)${resume.schSubMajor3}|"></span>
+														<span class="sublist" th:if="${resume.schDepType3} == '부전공'" th:text="|(부)${resume.schSubMajor3}|"></span>
+														<span class="sublist" th:if="${resume.schDepType3} == '심화전공'" th:text="|전공심화|"></span>
+														<span class="sublist" th:if="${resume.schDepType3} == ''" th:text="|(선택없음)${resume.schSubMajor3}|"></span>
 													</dd>
 												</dl>
 											</li>
@@ -393,7 +396,13 @@
 											<li th:if="${resume.licCount} == '1'
 													or ${resume.licCount} == '2'
 													or ${resume.licCount} == '3'
-													or ${resume.licCount} == '4'">
+													or ${resume.licCount} == '4'
+													or ${resume.licCount} == '5'
+													or ${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
 												<span class="w50">&middot;</span>
 												<span class="sublist" th:if="${resume.licName1} != null" th:text="${resume.licName1}"></span>
 												<span class="sublist" th:if="${resume.licPub1} != null" th:text="${resume.licPub1}"></span>
@@ -402,7 +411,13 @@
 											</li>
 											<li th:if="${resume.licCount} == '2'
 													or ${resume.licCount} == '3'
-													or ${resume.licCount} == '4'">
+													or ${resume.licCount} == '4'
+													or ${resume.licCount} == '5'
+													or ${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
 												<span class="w50">&middot;</span>
 												<span class="sublist" th:text="${resume.licName2}"></span>
 												<span class="sublist" th:text="${resume.licPub2}"></span>
@@ -410,19 +425,88 @@
 												<span class="sublist" th:text="${resume.licGetDate2}"></span>
 											</li>
 											<li th:if="${resume.licCount} == '3'
-													or ${resume.licCount} == '4'">
+													or ${resume.licCount} == '4'
+													or ${resume.licCount} == '5'
+													or ${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
 												<span class="w50">&middot;</span>
 												<span class="sublist" th:text="${resume.licName3}"></span>
 												<span class="sublist" th:text="${resume.licPub3}"></span>
 												<span class="sublist" th:text="${resume.licNum3}"></span>
 												<span class="sublist" th:text="${resume.licGetDate3}"></span>
 											</li>
-											<li th:if="${resume.licCount} == '4'">
+											<li th:if="${resume.licCount} == '4'
+													or ${resume.licCount} == '5'
+													or ${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
 												<span class="w50">&middot;</span>
 												<span class="sublist" th:text="${resume.licName4}"></span>
 												<span class="sublist" th:text="${resume.licPub4}"></span>
 												<span class="sublist" th:text="${resume.licNum4}"></span>
 												<span class="sublist" th:text="${resume.licGetDate4}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '5'
+													or ${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName5}"></span>
+												<span class="sublist" th:text="${resume.licPub5}"></span>
+												<span class="sublist" th:text="${resume.licNum5}"></span>
+												<span class="sublist" th:text="${resume.licGetDate5}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '6'
+													or ${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName6}"></span>
+												<span class="sublist" th:text="${resume.licPub6}"></span>
+												<span class="sublist" th:text="${resume.licNum6}"></span>
+												<span class="sublist" th:text="${resume.licGetDate6}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '7'
+													or ${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName7}"></span>
+												<span class="sublist" th:text="${resume.licPub7}"></span>
+												<span class="sublist" th:text="${resume.licNum7}"></span>
+												<span class="sublist" th:text="${resume.licGetDate7}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '8'
+													or ${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName8}"></span>
+												<span class="sublist" th:text="${resume.licPub8}"></span>
+												<span class="sublist" th:text="${resume.licNum8}"></span>
+												<span class="sublist" th:text="${resume.licGetDate8}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '9'
+													or ${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName9}"></span>
+												<span class="sublist" th:text="${resume.licPub9}"></span>
+												<span class="sublist" th:text="${resume.licNum9}"></span>
+												<span class="sublist" th:text="${resume.licGetDate9}"></span>
+											</li>
+											<li th:if="${resume.licCount} == '10'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.licName10}"></span>
+												<span class="sublist" th:text="${resume.licPub10}"></span>
+												<span class="sublist" th:text="${resume.licNum10}"></span>
+												<span class="sublist" th:text="${resume.licGetDate10}"></span>
 											</li>
 										</ul><br class="clear">
 									</div>
@@ -449,6 +533,81 @@
 												<span class="sublist" th:text="${resume.medalName3}"></span>
 												<span class="sublist" th:text="${resume.medalDate3}"></span>
 												<span class="sublist" th:text="${resume.medalContent3}"></span>
+											</li>
+										</ul><br class="clear">
+									</div>
+									<div class="viewBox">
+										<p class="f18 fw600">경력사항</p>
+										<ul class="divide1 ">
+											<li th:if="${resume.hisCount} == '1'
+													or ${resume.hisCount} == '2'
+													or ${resume.hisCount} == '3'
+													or ${resume.hisCount} == '4'
+													or ${resume.hisCount} == '5'
+													or ${resume.hisCount} == '6'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:if="${resume.hisCoName1} != null" 	th:text="${resume.hisCoName1}"></span>
+												<span class="sublist" th:if="${resume.hisSDate1} != null" 	th:text="${resume.hisSDate1}"></span>
+												<span class="sublist" th:if="${resume.hisEDate1} != null" 	th:text="${resume.hisEDate1}"></span>
+												<span class="sublist" th:if="${resume.hisContent1} != null" th:text="${resume.hisContent1}"></span>
+												<span class="sublist" th:if="${resume.hisDuty1} != null" 	th:text="${resume.hisDuty1}"></span>
+												<span class="sublist" th:if="${resume.hisPay1} != null" 	th:text="${resume.hisPay1}"></span>
+											</li>
+											<li th:if="${resume.hisCount} == '2'
+													or ${resume.hisCount} == '3'
+													or ${resume.hisCount} == '4'
+													or ${resume.hisCount} == '5'
+													or ${resume.hisCount} == '6'">
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.hisCoName2}"></span>
+												<span class="sublist" th:text="${resume.hisSDate2}"></span>
+												<span class="sublist" th:text="${resume.hisEDate2}"></span>
+												<span class="sublist" th:text="${resume.hisContent2}"></span>
+												<span class="sublist" th:text="${resume.hisDuty2}"></span>
+												<span class="sublist" th:text="${resume.hisPay2}"></span>
+											</li>
+											</li>
+											<li th:if="${resume.hisCount} == '3'
+													or ${resume.hisCount} == '4'
+													or ${resume.hisCount} == '5'
+													or ${resume.hisCount} == '6'" >
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.hisCoName3}"></span>
+												<span class="sublist" th:text="${resume.hisSDate3}"></span>
+												<span class="sublist" th:text="${resume.hisEDate3}"></span>
+												<span class="sublist" th:text="${resume.hisContent3}"></span>
+												<span class="sublist" th:text="${resume.hisDuty3}"></span>
+												<span class="sublist" th:text="${resume.hisPay3}"></span>
+											</li>
+											<li th:if="${resume.hisCount} == '4'
+													or ${resume.hisCount} == '5'
+													or ${resume.hisCount} == '6'" >
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.hisCoName4}"></span>
+												<span class="sublist" th:text="${resume.hisSDate4}"></span>
+												<span class="sublist" th:text="${resume.hisEDate4}"></span>
+												<span class="sublist" th:text="${resume.hisContent4}"></span>
+												<span class="sublist" th:text="${resume.hisDuty4}"></span>
+												<span class="sublist" th:text="${resume.hisPay4}"></span>
+											</li>
+											<li th:if="${resume.hisCount} == '5'
+													or ${resume.hisCount} == '6'" >
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.hisCoName5}"></span>
+												<span class="sublist" th:text="${resume.hisSDate5}"></span>
+												<span class="sublist" th:text="${resume.hisEDate5}"></span>
+												<span class="sublist" th:text="${resume.hisContent5}"></span>
+												<span class="sublist" th:text="${resume.hisDuty5}"></span>
+												<span class="sublist" th:text="${resume.hisPay5}"></span>
+											</li>
+											<li th:if="${resume.hisCount} == '6'" >
+												<span class="w50">&middot;</span>
+												<span class="sublist" th:text="${resume.hisCoName6}"></span>
+												<span class="sublist" th:text="${resume.hisSDate6}"></span>
+												<span class="sublist" th:text="${resume.hisEDate6}"></span>
+												<span class="sublist" th:text="${resume.hisContent6}"></span>
+												<span class="sublist" th:text="${resume.hisDuty6}"></span>
+												<span class="sublist" th:text="${resume.hisPay6}"></span>
 											</li>
 										</ul><br class="clear">
 									</div>
@@ -492,7 +651,8 @@
 												<p class="txtbox" th:text="${resume.introduce4}"></p>
 											</li>
 											<li class="mt50" th:if="${resume.introduce5} != null and ${resume.introduce5} != ''">
-												<span class="w50">5. 지원분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</span>
+												<span class="w50"  th:if="${resume.ground1 == '신입'}">5. 협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</span>
+												<span class="w50"  th:if="${resume.ground1 == '경력'}">5. 지원분야에서 근무하면서 달성한 성과를 서술하여 주시기 바랍니다.</span>
 												<p class="txtbox" th:text="${resume.introduce5}"></p>
 											</li>
 											<li class="mt50" th:if="${resume.introduce6} != null and ${resume.introduce6} != ''">
